@@ -33,13 +33,11 @@ Junk2DSprite::Junk2DSprite()
 Junk2DSprite::~Junk2DSprite()
 {}
 
-//=============================================================================
 // Junk2DSprite 객체 초기화
 // 성공하면 true, 실패하면 false 반환
 // Graphics를 가리키는 포인터
 // 이미지의 픽셀 단위 폭, 높이, 텍스처의 행 수(1 ~ n)
 // TextureManager를 가리키는 포인터
-//=============================================================================
 bool Junk2DSprite::initialize(Graphics *g, int width, int height, int ncols,
 	TextureManager *textureM)
 {
