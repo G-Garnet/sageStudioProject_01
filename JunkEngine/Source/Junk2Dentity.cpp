@@ -58,19 +58,19 @@ void Junk2DEntity::ai(float frameTime, Junk2DEntity &ent)
 {}
 
 // ent와의 충돌 여부
-bool Junk2DEntity::collidesWith(Junk2DEntity &ent) {
+bool Junk2DEntity::collidesWith(Junk2DEntity* ent) {
 	// if either Junk2Dentity is not active then no collision may occcur
-	if (!active || !ent.getActive())
+	if (!active || !ent->getActive())
 		return false;
-	if (collisionType == Junk2DentityNS::CIRCLE && ent.getCollisionType() == Junk2DentityNS::CIRCLE)
+	if (collisionType == Junk2DentityNS::CIRCLE && ent->getCollisionType() == Junk2DentityNS::CIRCLE)
 		return collideCircle(ent);
-	if (collisionType == Junk2DentityNS::BOX && ent.getCollisionType() == Junk2DentityNS::BOX)
+	if (collisionType == Junk2DentityNS::BOX && ent->getCollisionType() == Junk2DentityNS::BOX)
 		return collideBox(ent);
-	if (collisionType != Junk2DentityNS::CIRCLE && ent.getCollisionType() != Junk2DentityNS::CIRCLE)
+	if (collisionType != Junk2DentityNS::CIRCLE && ent->getCollisionType() != Junk2DentityNS::CIRCLE)
 		return collideRotatedBox(ent);
 	if (collisionType == Junk2DentityNS::CIRCLE)
 	{
-		bool collide = ent.collideRotatedBoxCircle(*this);
+		bool collide = ent->collideRotatedBoxCircle(this);
 		return collide;
 	}
 	else
@@ -79,129 +79,47 @@ bool Junk2DEntity::collidesWith(Junk2DEntity &ent) {
 }
 
 // 원형 충돌체끼리의 충돌 여부
-bool Junk2DEntity::collideCircle(Junk2DEntity &ent) {
-	distSquared = *getCenter() - *ent.getCenter();
+bool Junk2DEntity::collideCircle(Junk2DEntity* ent) {
+	distSquared = *getCenter() - *ent->getCenter();
 	distSquared.x = distSquared.x * distSquared.x;
 	distSquared.y = distSquared.y * distSquared.y;
 
-	sumRadiiSquared = (radius*getScale()) + (ent.radius*ent.getScale());
+	sumRadiiSquared = (radius*getScale()) + (ent->radius*ent->getScale());
 	sumRadiiSquared *= sumRadiiSquared;
 
 	if (distSquared.x + distSquared.y <= sumRadiiSquared)
 	{
 		return true;
 	}
-	return false;   // not colliding
+	return false;  
 }
 
 // 상자형 충돌체끼리의 충돌 여부
-bool Junk2DEntity::collideBox(Junk2DEntity &ent)
+bool Junk2DEntity::collideBox(Junk2DEntity* ent)
 {
-	// 활성 여부
-	if (!active || !ent.getActive())
-		return false;
+	 // 충돌 활성화 여부
+    if (!active || !ent->getActive())
+        return false;
 
-	if ((getCenterX() + edge.right*getScale() >= ent.getCenterX() + ent.getEdge().left*ent.getScale()) &&
-		(getCenterX() + edge.left*getScale() <= ent.getCenterX() + ent.getEdge().right*ent.getScale()) &&
-		(getCenterY() + edge.bottom*getScale() >= ent.getCenterY() + ent.getEdge().top*ent.getScale()) &&
-		(getCenterY() + edge.top*getScale() <= ent.getCenterY() + ent.getEdge().bottom*ent.getScale()))
-	{
-		if (!isTrigger && !ent.getTrigger()) {
-			printf("Collider ");
-			// 충돌 다시만들어야함
-			// 지금 까지는 충돌체 <-> 충돌체 비교후 충돌하면 서로 밀어내도록 만듬
-			// 충돌체들이 서로 밀어내도록 만들어 내는 것이 아닌 그 방향으로의 이동을 봉쇄해야함
-
-			//printf("%f\n", getCenterX() + edge.right * getScale());
-			//printf("%f\n", ent.getCenterX() + ent.edge.left * ent.getScale());
-
-			int right, left, bottom, top;
-			right = getCenterX() + getWidth()/2;
-			left = getCenterX() - getWidth()/2;
-			top = getCenterY() + getHeight();
-			bottom = getCenterY() - getHeight()/2;
-			/*
-			if (right > ent.getCenterX() + ent.getEdge().left*ent.getScale() &&
-				!(top > ent.getCenterY() + ent.getEdge().bottom*ent.getScale()) &&
-				!(bottom < ent.getCenterY() + ent.getEdge().top*ent.getScale())) {
-				dontMoveRect[0] = 1;
-			}*/
-
-			if (right > ent.getCenterX() - ent.getWidth()/2 &&
-				bottom < ent.getCenterY() + ent.getHeight() / 2 &&
-				top > ent.getCenterY() - ent.getHeight() / 2) {
-				dontMoveRect[0] = 1;
-				isCollid = true;
-			}
-			else {
-				dontMoveRect[0] = 0;
-				isCollid = false;
-			}
-
-			if (left < ent.getCenterX() + ent.getWidth() / 2 &&
-				bottom < ent.getCenterY() + ent.getHeight() / 2 &&
-				top > ent.getCenterY() - ent.getHeight() / 2) {
-				dontMoveRect[1] = 1;
-				isCollid = true;
-			}
-			else {
-				dontMoveRect[1] = 0;
-				isCollid = false;
-			}
-
-			if(bottom < ent.getCenterY() + ent.getHeight() / 2 &&
-				right > ent.getCenterX() - ent.getWidth() / 2 &&
-				left < ent.getCenterX() + ent.getWidth() / 2) {
-				dontMoveRect[3] = 1;
-				isCollid = true;
-			}
-			else {
-				dontMoveRect[3] = 0;
-				isCollid = false;
-			}
-
-			if (top > ent.getCenterY() - ent.getHeight() / 2 &&
-				right > ent.getCenterX() - ent.getWidth() / 2 &&
-				left < ent.getCenterX() + ent.getWidth() / 2) {
-				dontMoveRect[2] = 1;
-				isCollid = true;
-			}
-			else {
-				dontMoveRect[2] = 0;
-				isCollid = false;
-			}
-
-		}
-		else {
-			printf("Trigger ");
-		}
-
-		//std::printf("Collid");
-
+    // 박스 체크
+    if( (getCenterX() + edge.right*getScale() >= ent->getCenterX() + ent->getEdge().left * ent->getScale()) &&
+        (getCenterX() + edge.left*getScale() <= ent->getCenterX() + ent->getEdge().right * ent->getScale()) &&
+        (getCenterY() + edge.bottom*getScale() >= ent->getCenterY() + ent->getEdge().top * ent->getScale()) && 
+        (getCenterY() + edge.top*getScale() <= ent->getCenterY() + ent->getEdge().bottom * ent->getScale()) )
+    {
+        // 충돌 벡터 설정, 재 설정 필요함
+        // collisionVector = *ent->getCenter() - *getCenter();
         return true;
     }
-	
-	else {
-		//isCollid = true;
-		
-	}
-
-	/*
-	if ((getCenterX() + edge.left*getScale() <= ent.getCenterX() + ent.getEdge().right*ent.getScale())) {
-		if (!isTrigger) {
-			setX(getX() - 8.0f);
-		}
-		return true;
-	}*/
     return false;
 }
 
 // 각도가 틀어진 상자끼리의 충돌 여부
-bool Junk2DEntity::collideRotatedBox(Junk2DEntity &ent)
+bool Junk2DEntity::collideRotatedBox(Junk2DEntity* ent)
 {
     computeRotatedBox();                    
-    ent.computeRotatedBox();               
-    if (projectionsOverlap(ent) && ent.projectionsOverlap(*this))
+    ent->computeRotatedBox();
+    if (projectionsOverlap(ent) && ent->projectionsOverlap(this))
     {
         return true;
     }
@@ -209,16 +127,16 @@ bool Junk2DEntity::collideRotatedBox(Junk2DEntity &ent)
 }
 
 // 
-bool Junk2DEntity::projectionsOverlap(Junk2DEntity &ent)
+bool Junk2DEntity::projectionsOverlap(Junk2DEntity* ent)
 {
     float projection, min01, max01, min03, max03;
 
-    projection = graphics->Vector2Dot(&edge01, ent.getCorner(0)); 
+    projection = graphics->Vector2Dot(&edge01, ent->getCorner(0));
     min01 = projection;
     max01 = projection;
     for(int c=1; c<4; c++)
     {
-        projection = graphics->Vector2Dot(&edge01, ent.getCorner(c));
+        projection = graphics->Vector2Dot(&edge01, ent->getCorner(c));
         if (projection < min01)
             min01 = projection;
         else if (projection > max01)
@@ -227,12 +145,12 @@ bool Junk2DEntity::projectionsOverlap(Junk2DEntity &ent)
     if (min01 > edge01Max || max01 < edge01Min) 
         return false;                       
 
-    projection = graphics->Vector2Dot(&edge03, ent.getCorner(0)); // project corner 0
+    projection = graphics->Vector2Dot(&edge03, ent->getCorner(0)); // project corner 0
     min03 = projection;
     max03 = projection;
     for(int c=1; c<4; c++)
     {
-        projection = graphics->Vector2Dot(&edge03, ent.getCorner(c));
+        projection = graphics->Vector2Dot(&edge03, ent->getCorner(c));
         if (projection < min03)
             min03 = projection;
         else if (projection > max03)
@@ -244,21 +162,21 @@ bool Junk2DEntity::projectionsOverlap(Junk2DEntity &ent)
     return true;                            
 }
 
-bool Junk2DEntity::collideRotatedBoxCircle(Junk2DEntity &ent)
+bool Junk2DEntity::collideRotatedBoxCircle(Junk2DEntity* ent)
 {
     float min01, min03, max01, max03, center01, center03;
 
     computeRotatedBox();                   
 
-    center01 = graphics->Vector2Dot(&edge01, ent.getCenter());
-    min01 = center01 - ent.getRadius()*ent.getScale(); 
-    max01 = center01 + ent.getRadius()*ent.getScale();
+    center01 = graphics->Vector2Dot(&edge01, ent->getCenter());
+    min01 = center01 - ent->getRadius()*ent->getScale(); 
+    max01 = center01 + ent->getRadius()*ent->getScale();
     if (min01 > edge01Max || max01 < edge01Min) 
         return false;                       
         
-    center03 = graphics->Vector2Dot(&edge03, ent.getCenter());
-    min03 = center03 - ent.getRadius()*ent.getScale(); 
-    max03 = center03 + ent.getRadius()*ent.getScale();
+    center03 = graphics->Vector2Dot(&edge03, ent->getCenter());
+    min03 = center03 - ent->getRadius()*ent->getScale(); 
+    max03 = center03 + ent->getRadius()*ent->getScale();
     if (min03 > edge03Max || max03 < edge03Min) 
         return false;                       
 
@@ -274,13 +192,13 @@ bool Junk2DEntity::collideRotatedBoxCircle(Junk2DEntity &ent)
     return true;
 }
 
-bool Junk2DEntity::collideCornerCircle(VECTOR2 corner, Junk2DEntity &ent)
+bool Junk2DEntity::collideCornerCircle(VECTOR2 corner, Junk2DEntity* ent)
 {
-    distSquared = corner - *ent.getCenter();            // corner - circle
+    distSquared = corner - *ent->getCenter();            // corner - circle
     distSquared.x = distSquared.x * distSquared.x;      // difference squared
     distSquared.y = distSquared.y * distSquared.y;
 
-    sumRadiiSquared = ent.getRadius()*ent.getScale();   
+    sumRadiiSquared = ent->getRadius()*ent->getScale();
     sumRadiiSquared *= sumRadiiSquared;                 
 
     if(distSquared.x + distSquared.y <= sumRadiiSquared)

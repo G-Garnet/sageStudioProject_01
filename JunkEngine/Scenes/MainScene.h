@@ -11,8 +11,8 @@ private:
 	ObjectManager* objectManager;
 
 	// 게임 요소들
-	Junk2DSprite* player;
-	Junk2DSprite* Ghost;
+	Junk2DEntity* player;
+	Junk2DEntity* Ghost;
 
 	Junk2DSprite* BackGround;
 

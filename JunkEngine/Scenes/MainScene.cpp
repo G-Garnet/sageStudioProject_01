@@ -4,8 +4,8 @@ MainScenes::MainScenes()
 {
 	objectManager = new ObjectManager;
 
-	player = new Junk2DSprite;
-	Ghost = new Junk2DSprite;
+	player = new Junk2DEntity;
+	Ghost = new Junk2DEntity;
 	BackGround = new Junk2DSprite;
 }
 
@@ -21,15 +21,20 @@ void MainScenes::initialize(HWND hwnd)
 	BackGround->settingTexture(graphics, "..\\Resources\\orion.jpg", 640, 480, 1);
 	BackGround->setXY(0, 0);
 
-	Ghost->settingTexture(graphics, "..\\Resources\\m-water002.png", 264, 264, 1);
+	Ghost->initialize(graphics, "..\\Resources\\m-water001.png", 264, 264, 1);
+	Ghost->setCollisionType(Junk2DentityNS::BOX);
+	Ghost->setActive(true);
 	Ghost->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 
-	player->settingTexture(graphics, "..\\Resources\\spritesheet.png", 240, 210, 2);
-	player->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
+	player->initialize(graphics, "..\\Resources\\spritesheet.png", 240, 210, 2);
+	player->setXY(0 , GAME_HEIGHT / 6);
 	player->setLoop(true);
+	player->setActive(true);
+	player->setCollisionType(Junk2DentityNS::BOX);
 	player->setAnimation(0, 3, 0, 3.0f);
 	//player->setFrameDelay(0.1f);
 
+	// 태그 설정
 	objectManager->AddObject(BackGround, "BackGround");
 	objectManager->AddObject(Ghost, "Ghost");
 	objectManager->AddObject(player, "player");
@@ -44,6 +49,12 @@ void MainScenes::Update()
 	if (input->isKeyDown(VK_LEFT))	player->setX(player->getX() - 1);
 	if (input->isKeyDown(VK_DOWN))	player->setY(player->getY() + 1);
 	if (input->isKeyDown(VK_UP))	player->setY(player->getY() - 1);
+
+	if (Ghost != NULL && player->collidesWith(Ghost)) {
+		objectManager->RemoveObject("Ghost");
+
+		Ghost = NULL;
+	}
 
 	player->update(0.1f);
 

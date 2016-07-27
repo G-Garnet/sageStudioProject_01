@@ -43,8 +43,8 @@ class Junk2DEntity : public Junk2DSprite
     
 	// Separating axis collision detection helper functions
     void computeRotatedBox();
-    bool projectionsOverlap(Junk2DEntity &ent);
-    bool collideCornerCircle(VECTOR2 corner, Junk2DEntity &ent);
+    bool projectionsOverlap(Junk2DEntity* ent);
+    bool collideCornerCircle(VECTOR2 corner, Junk2DEntity* ent);
 
   public:
     // 생성자/소멸자
@@ -59,11 +59,11 @@ class Junk2DEntity : public Junk2DSprite
 	// 원형 충돌
 	// Pre: &ent = 다른 충돌체
 	// Post: &collisionVector 충돌체의 백터
-	virtual bool collideCircle(Junk2DEntity &ent);
-	virtual bool collideBox(Junk2DEntity &ent);
+	virtual bool collideCircle(Junk2DEntity* ent);
+	virtual bool collideBox(Junk2DEntity* ent);
 	// 돌려져있는 박스 충돌검사
-	virtual bool collideRotatedBox(Junk2DEntity &ent);
-	virtual bool collideRotatedBoxCircle(Junk2DEntity &ent);
+	virtual bool collideRotatedBox(Junk2DEntity* ent);
+	virtual bool collideRotatedBoxCircle(Junk2DEntity* ent);
 
 	// get/set 함수들
 
@@ -113,11 +113,13 @@ class Junk2DEntity : public Junk2DSprite
     virtual void initialize(Graphics *g, const char * filename, int width, int height, int ncols);
     // 활성화
     virtual void activate();
-	/*
+	
 	virtual void setXY(float newX, float newY) { 
 		center.x = newX;	  center.y = newY;
 		spriteData.x = newX;  spriteData.y = newY; 
-	}*/
+
+
+	}
 
     virtual void ai(float frameTime, Junk2DEntity &ent);
 
@@ -125,7 +127,7 @@ class Junk2DEntity : public Junk2DSprite
     virtual bool outsideRect(RECT rect);
 
     // 이 충돌체가 다른 충돌체와 충돌했는가
-    virtual bool collidesWith(Junk2DEntity &ent);
+    virtual bool collidesWith(Junk2DEntity* ent);
 
 	// 충돌체가 입는 데미지
     virtual void damage(int weapon);
