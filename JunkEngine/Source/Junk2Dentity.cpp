@@ -59,7 +59,6 @@ void Junk2DEntity::ai(float frameTime, Junk2DEntity &ent)
 
 // ent와의 충돌 여부
 bool Junk2DEntity::collidesWith(Junk2DEntity* ent) {
-	// if either Junk2Dentity is not active then no collision may occcur
 	if (!active || !ent->getActive())
 		return false;
 	if (collisionType == Junk2DentityNS::CIRCLE && ent->getCollisionType() == Junk2DentityNS::CIRCLE)
