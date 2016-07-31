@@ -1,8 +1,8 @@
-﻿  MainScene.cpp
+﻿  Junk2Dentity.cpp
   코드를 생성하고 있습니다.
-  0 of 412 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 360 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   JunkEngine.vcxproj -> E:\Github\sageStudioProject_01\JunkEngine\Release\JunkEngine.exe
   JunkEngine.vcxproj -> E:\Github\sageStudioProject_01\JunkEngine\Release\JunkEngine.pdb (Full PDB)

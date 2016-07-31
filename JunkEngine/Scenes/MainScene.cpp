@@ -50,10 +50,11 @@ void MainScenes::Update()
 	if (input->isKeyDown(VK_DOWN))	player->setY(player->getY() + 1);
 	if (input->isKeyDown(VK_UP))	player->setY(player->getY() - 1);
 
-	if (Ghost != NULL && player->collidesWith(Ghost)) {
-		objectManager->RemoveObject("Ghost");
-
-		Ghost = NULL;
+	VECTOR2 CollisionVector;
+	if (Ghost != NULL && player->collidesWith(Ghost, CollisionVector)) {
+		//objectManager->RemoveObject("Ghost");
+		player->bounce(CollisionVector, *Ghost);
+		//Ghost = NULL;
 	}
 
 	player->update(0.1f);
