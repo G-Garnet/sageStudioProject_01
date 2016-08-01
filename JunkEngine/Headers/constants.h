@@ -23,8 +23,8 @@
 const char CLASS_NAME[] = "ExampleGame";
 const char GAME_TITLE[] = "ExampleGame";
 const bool FULLSCREEN = false;
-const UINT GAME_WIDTH = 640;
-const UINT GAME_HEIGHT = 480;
+const UINT GAME_WIDTH = 1920;
+const UINT GAME_HEIGHT = 1080;
 
 // 게임
 const double PI = 3.14159265;
@@ -42,6 +42,11 @@ const UCHAR ENTER_KEY = VK_RETURN;   // 엔터키
 const UINT PlayerAbility = 4;
 
 const UINT MapXY = 300;
-
+	
+// audio files required by audio.cpp
+// WAVE_BANK must be location of .xwb file.
+const char WAVE_BANK[] = "..\\Resources\\Sounds\\Win\\WavesExample1.xwb";
+// SOUND_BANK must be location of .xsb file.
+const char SOUND_BANK[] = "..\\Resources\\Sounds\\Win\\SoundsExample1.xsb";
 
 #endif

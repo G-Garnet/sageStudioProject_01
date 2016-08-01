@@ -82,6 +82,7 @@
     <ClCompile Include="..\Source\input.cpp" />
     <ClCompile Include="..\Source\Junk2DSprite.cpp" />
     <ClCompile Include="..\Source\Scenes.cpp" />
+    <ClCompile Include="..\Source\Sounds.cpp" />
     <ClCompile Include="..\Source\textureManager.cpp" />
     <ClCompile Include="..\Source\winmain.cpp" />
   </ItemGroup>
@@ -96,6 +97,7 @@
     <ClInclude Include="..\Headers\Junk2DFont.h" />
     <ClInclude Include="..\Headers\Junk2DSprite.h" />
     <ClInclude Include="..\Headers\ObjectManager.h" />
+    <ClInclude Include="..\Headers\Sounds.h" />
     <ClInclude Include="..\Headers\textureManager.h" />
     <ClInclude Include="..\Scenes\MainScene.h" />
     <ClInclude Include="..\Scenes\Scenes.h" />

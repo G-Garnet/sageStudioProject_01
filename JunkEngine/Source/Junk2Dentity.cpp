@@ -7,7 +7,7 @@ Junk2DEntity::Junk2DEntity() : Junk2DSprite()
 	edge.top = -1;
 	edge.right = 1;
 	edge.bottom = 1;
-	mass = 1.0;
+	mass = 20.0;
 	velocity.x = 0.0;
 	velocity.y = 0.0;
 	deltaV.x = 0.0;
@@ -273,7 +273,7 @@ void Junk2DEntity::bounce(VECTOR2 &collisionVector, Junk2DEntity &ent)
 	VECTOR2 cUV = collisionVector;
 	Graphics::Vector2Normalize(&cUV);
 	float cUVdotVdiff = Graphics::Vector2Dot(&cUV, &Vdiff);
-	float massRatio = 2.0f;
+	float massRatio = 20.0f;
 	if (getMass() != 0)
 		massRatio *= (ent.getMass() / (getMass() + ent.getMass()));
 

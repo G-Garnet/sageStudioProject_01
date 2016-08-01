@@ -14,6 +14,8 @@
 #include "Junk2DFont.h"
 #include "ObjectManager.h"
 
+#include "Sounds.h"
+
 class Game
 {
 protected:
@@ -29,6 +31,9 @@ protected:
 	DWORD   sleepTime;          // 프레임 사이의 대기 단위 시간
 	bool    paused;             // 게임 일시정지 상태
 	bool    initialized;        // 초기화
+
+
+	Junk2DSound*  audio;		// 사운드 
 
 	int Maps[1000][1000];
 	int mapMaxX, mapMaxY;

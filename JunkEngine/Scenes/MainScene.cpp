@@ -18,7 +18,7 @@ void MainScenes::initialize(HWND hwnd)
 	Game::initialize(hwnd);
 
 	// 이미지 정보름 미리 선언
-	BackGround->settingTexture(graphics, "..\\Resources\\orion.jpg", 640, 480, 1);
+	BackGround->settingTexture(graphics, "..\\Resources\\orion.jpg", 1920, 1080, 1);
 	BackGround->setXY(0, 0);
 
 	Ghost->initialize(graphics, "..\\Resources\\m-water001.png", 264, 264, 1);
@@ -54,6 +54,7 @@ void MainScenes::Update()
 	if (Ghost != NULL && player->collidesWith(Ghost, CollisionVector)) {
 		//objectManager->RemoveObject("Ghost");
 		player->bounce(CollisionVector, *Ghost);
+		audio->playCue("beep4");
 		//Ghost = NULL;
 	}
 

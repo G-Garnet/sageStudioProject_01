@@ -81,6 +81,18 @@ void Game::initialize(HWND hw)
     graphics = new Graphics();											// 그래픽 객체 초기화
     graphics->initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);	// 게임 에러를 뱉는다
 
+	audio = new Junk2DSound();
+	if (*WAVE_BANK != '\0' && *SOUND_BANK != '\0')  // if sound files defined
+	{
+		if (FAILED(hr = audio->initialize()))
+		{
+			if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+				throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize sound system because media file not found."));
+			else
+				throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize sound system."));
+		}
+	}
+
     // Input객체 초기화
     input->initialize(hwnd, false);            
 
@@ -201,7 +213,8 @@ void Game::resetAll()
 
 void Game::deleteAll()
 {
-    releaseAll();               
+    releaseAll();        
+	SAFE_DELETE(audio);
     SAFE_DELETE(graphics);
     SAFE_DELETE(input);
     initialized = false;
