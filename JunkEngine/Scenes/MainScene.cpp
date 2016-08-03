@@ -54,7 +54,7 @@ void MainScenes::Update()
 	if (Ghost != NULL && player->collidesWith(Ghost, CollisionVector)) {
 		//objectManager->RemoveObject("Ghost");
 		player->bounce(CollisionVector, *Ghost);
-		audio->playCue("beep4");
+		audio->playCue("beep2");
 		//Ghost = NULL;
 	}
 
