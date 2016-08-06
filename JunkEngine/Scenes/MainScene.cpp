@@ -11,6 +11,7 @@ MainScenes::MainScenes()
 
 MainScenes::~MainScenes()
 {
+	
 }
 
 void MainScenes::initialize(HWND hwnd)
@@ -51,7 +52,7 @@ void MainScenes::Update()
 	if (input->isKeyDown(VK_UP))	player->setY(player->getY() - 1);
 
 	VECTOR2 CollisionVector;
-	if (Ghost != NULL && player->collidesWith(Ghost, CollisionVector)) {
+	if (Ghost != NULL && player->collidesWith(Ghost, CollisionVector)){
 		//objectManager->RemoveObject("Ghost");
 		player->bounce(CollisionVector, *Ghost);
 		audio->playCue("beep2");

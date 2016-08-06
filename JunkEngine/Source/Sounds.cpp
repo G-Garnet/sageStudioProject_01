@@ -1,8 +1,3 @@
-// Programming 2D Games
-// Copyright (c) 2011 by: 
-// Charles Kelly
-// Junk2DSound.cpp v1.0
-
 #include "..\\Headers\\Sounds.h"
 
 Junk2DSound::Junk2DSound()
@@ -11,7 +6,7 @@ Junk2DSound::Junk2DSound()
 	waveBank = NULL;
 	soundBank = NULL;
 	cueI = 0;
-	mapWaveBank = NULL;         // Call UnmapViewOfFile() to release file
+	mapWaveBank = NULL;         
 	soundBankData = NULL;
 
 	HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
@@ -23,10 +18,10 @@ Junk2DSound::Junk2DSound()
 
 Junk2DSound::~Junk2DSound()
 {
-	// Shutdown XACT
+	// XACT 엔진 종료
 	if (xactEngine)
 	{
-		xactEngine->ShutDown(); // shut down XACT engine and free resources
+		xactEngine->ShutDown(); // 리소스 해제, 엔진 종료
 		xactEngine->Release();
 	}
 
@@ -34,12 +29,12 @@ Junk2DSound::~Junk2DSound()
 		delete[] soundBankData;
 	soundBankData = NULL;
 
-	// After xactEngine->ShutDown() returns, release memory mapped files
+	// 매핑된 메모리를 해제
 	if (mapWaveBank)
 		UnmapViewOfFile(mapWaveBank);
 	mapWaveBank = NULL;
 
-	if (coInitialized)        // if CoInitializeEx succeeded
+	if (coInitialized)       
 		CoUninitialize();
 }
 
@@ -58,15 +53,15 @@ HRESULT Junk2DSound::initialize()
 	if (FAILED(result) || xactEngine == NULL)
 		return E_FAIL;
 
-	// Initialize & create the XACT runtime 
+	// XACT 런타임 초기화 & 생성
 	XACT_RUNTIME_PARAMETERS xactParams = { 0 };
 	xactParams.lookAheadTime = XACT_ENGINE_LOOKAHEAD_DEFAULT;
 	result = xactEngine->Initialize(&xactParams);
 	if (FAILED(result))
 		return result;
 
-	// Create an "in memory" XACT wave bank file using memory mapped file IO
-	result = E_FAIL; // default to failure code, replaced on success
+	// 메모리에 매핑된 파일 IO를 사용해 메모리 내부에서 생성
+	result = E_FAIL; // 기본값은 실패 => 성공시 성공으로 변경
 	hFile = CreateFile(WAVE_BANK, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 	if (hFile != INVALID_HANDLE_VALUE)
 	{
@@ -80,23 +75,23 @@ HRESULT Junk2DSound::initialize()
 				if (mapWaveBank)
 					result = xactEngine->CreateInMemoryWaveBank(mapWaveBank, fileSize, 0, 0, &waveBank);
 
-				CloseHandle(hMapFile);    // mapWaveBank maintains a handle on the file so close this unneeded handle
+				CloseHandle(hMapFile);    // 불필요한 핸들을 닫아줌
 			}
 		}
-		CloseHandle(hFile);    // mapWaveBank maintains a handle on the file so close this unneeded handle
+		CloseHandle(hFile);   
 	}
 	if (FAILED(result))
 		return HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND);
 
-	// Read and register the sound bank file with XACT.
-	result = E_FAIL;    // default to failure code, replaced on success
+	// 사운드 뱅크 파일을 읽고 등록
+	result = E_FAIL;   
 	hFile = CreateFile(SOUND_BANK, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 	if (hFile != INVALID_HANDLE_VALUE)
 	{
 		fileSize = GetFileSize(hFile, NULL);
 		if (fileSize != -1)
 		{
-			soundBankData = new BYTE[fileSize];    // reserve memory for sound bank
+			soundBankData = new BYTE[fileSize];    // 사운드 뱅크를 위해 예약된 메모리
 			if (soundBankData)
 			{
 				if (0 != ReadFile(hFile, soundBankData, fileSize, &bytesRead, NULL))
@@ -122,7 +117,7 @@ void Junk2DSound::playCue(const char cue[])
 {
 	if (soundBank == NULL)
 		return;
-	cueI = soundBank->GetCueIndex(cue);        // get cue index from sound bank
+	cueI = soundBank->GetCueIndex(cue);        // 사운드 뱅크로부터 재생할 사운드의 큐를 가져온다
 	soundBank->Play(cueI, 0, 0, NULL);
 }
 
@@ -130,6 +125,6 @@ void Junk2DSound::stopCue(const char cue[])
 {
 	if (soundBank == NULL)
 		return;
-	cueI = soundBank->GetCueIndex(cue);        // get cue index from sound bank
+	cueI = soundBank->GetCueIndex(cue);        // 사운드 뱅크로부터 멈출 사운드의 큐를 가져온다
 	soundBank->Stop(cueI, XACT_FLAG_SOUNDBANK_STOP_IMMEDIATE);
 }

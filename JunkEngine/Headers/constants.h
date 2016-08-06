@@ -43,10 +43,9 @@ const UINT PlayerAbility = 4;
 
 const UINT MapXY = 300;
 	
-// audio files required by audio.cpp
-// WAVE_BANK must be location of .xwb file.
+// .xwb의 위치
 const char WAVE_BANK[] = "..\\Resources\\Sounds\\Win\\WavesExample1.xwb";
-// SOUND_BANK must be location of .xsb file.
+// .xsb의 위치
 const char SOUND_BANK[] = "..\\Resources\\Sounds\\Win\\SoundsExample1.xsb";
 
 #endif
