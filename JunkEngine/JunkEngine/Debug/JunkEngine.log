@@ -1,26 +1,11 @@
-﻿  Junk2Dentity.cpp
-e:\github\sagestudioproject_01\junkengine\source\junk2dentity.cpp(119): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\github\sagestudioproject_01\junkengine\source\junk2dentity.cpp(120): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\github\sagestudioproject_01\junkengine\source\junk2dentity.cpp(121): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\github\sagestudioproject_01\junkengine\source\junk2dentity.cpp(122): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  winmain.cpp
-  textureManager.cpp
-  graphics.cpp
-  game.cpp
-  Junk2DSprite.cpp
-  SecondScene.cpp
-  MainScene.cpp
-  ObjectManager.cpp
+﻿  winmain.cpp
 Junk2Dentity.obj : error LNK2019: _D3DXVec2Normalize@8 외부 기호(참조 위치: "public: static void __cdecl Graphics::Vector2Normalize(struct D3DXVECTOR2 *)" (?Vector2Normalize@Graphics@@SAXPAUD3DXVECTOR2@@@Z) 함수)에서 확인하지 못했습니다.
 game.obj : error LNK2019: __imp__timeBeginPeriod@4 외부 기호(참조 위치: "public: virtual void __thiscall Game::run(struct HWND__ *)" (?run@Game@@UAEXPAUHWND__@@@Z) 함수)에서 확인하지 못했습니다.
 game.obj : error LNK2019: __imp__timeEndPeriod@4 외부 기호(참조 위치: "public: virtual void __thiscall Game::run(struct HWND__ *)" (?run@Game@@UAEXPAUHWND__@@@Z) 함수)에서 확인하지 못했습니다.
-graphics.obj : error LNK2019: _Direct3DCreate9@4 외부 기호(참조 위치: "public: void __thiscall Graphics::initialize(struct HWND__ *,int,int,bool)" (?initialize@Graphics@@QAEXPAUHWND__@@HH_N@Z) 함수)에서 확인하지 못했습니다.
 graphics.obj : error LNK2019: _D3DXMatrixTransformation2D@28 외부 기호(참조 위치: "public: void __thiscall Graphics::drawSprite(struct SpriteData const &,unsigned long)" (?drawSprite@Graphics@@QAEXABUSpriteData@@K@Z) 함수)에서 확인하지 못했습니다.
 graphics.obj : error LNK2019: _D3DXCreateSprite@8 외부 기호(참조 위치: "public: void __thiscall Graphics::initialize(struct HWND__ *,int,int,bool)" (?initialize@Graphics@@QAEXPAUHWND__@@HH_N@Z) 함수)에서 확인하지 못했습니다.
 graphics.obj : error LNK2019: _D3DXGetImageInfoFromFileA@8 외부 기호(참조 위치: "public: long __thiscall Graphics::loadTexture(char const *,unsigned long,unsigned int &,unsigned int &,struct IDirect3DTexture9 * &)" (?loadTexture@Graphics@@QAEJPBDKAAI1AAPAUIDirect3DTexture9@@@Z) 함수)에서 확인하지 못했습니다.
 graphics.obj : error LNK2019: _D3DXCreateTextureFromFileExA@56 외부 기호(참조 위치: "public: long __thiscall Graphics::loadTexture(char const *,unsigned long,unsigned int &,unsigned int &,struct IDirect3DTexture9 * &)" (?loadTexture@Graphics@@QAEJPBDKAAI1AAPAUIDirect3DTexture9@@@Z) 함수)에서 확인하지 못했습니다.
 input.obj : error LNK2019: _XInputGetState@8 외부 기호(참조 위치: "public: void __thiscall Input::checkControllers(void)" (?checkControllers@Input@@QAEXXZ) 함수)에서 확인하지 못했습니다.
 input.obj : error LNK2019: _XInputSetState@8 외부 기호(참조 위치: "public: void __thiscall Input::vibrateControllers(float)" (?vibrateControllers@Input@@QAEXM@Z) 함수)에서 확인하지 못했습니다.
-E:\Github\sageStudioProject_01\JunkEngine\Debug\JunkEngine.exe : fatal error LNK1120: 10개의 확인할 수 없는 외부 참조입니다.
+E:\Github\sageStudioProject_01\JunkEngine\Debug\JunkEngine.exe : fatal error LNK1120: 9개의 확인할 수 없는 외부 참조입니다.

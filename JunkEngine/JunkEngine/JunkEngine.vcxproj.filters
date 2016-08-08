@@ -48,13 +48,13 @@
     <ClCompile Include="..\Scenes\SecondScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Headers\Junk2DFont.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Headers\ObjectManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Sounds.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Junk2DFont.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ObjectManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

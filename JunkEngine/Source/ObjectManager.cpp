@@ -1,4 +1,4 @@
-#include "ObjectManager.h"
+#include "..\\Headers\ObjectManager.h"
 
 void ObjectManager::AddObject(Junk2DSprite* p_pObject, std::string objecName)
 {
