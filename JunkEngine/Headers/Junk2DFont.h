@@ -5,6 +5,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include "constants.h"
+#include "Junk2DSprite.h"
 #include "gameError.h"
 
 namespace TextStyle
