@@ -58,9 +58,7 @@ public:
 	Junk2DFont();
 	virtual ~Junk2DFont();
 	
-	// Initialize font using file texture image.
 	virtual bool initialize(Graphics *g, const char *file);
-	// disable inherited update()
 	virtual void update(float frameTime) {};
 	virtual void onLostDevice();
 	virtual void onResetDevice();
