@@ -16,7 +16,7 @@ private:
 
 	Junk2DSprite* BackGround;
 
-	Junk2DFont *fontCK;
+	Junk2DFont *fontText;
 
 
 public:

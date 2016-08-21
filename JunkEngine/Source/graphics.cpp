@@ -150,7 +150,7 @@ void Graphics::drawSprite(const SpriteData &spriteData, COLOR_ARGB color){
 }
 
 HRESULT Graphics::loadTexture(const char *filename, COLOR_ARGB transcolor,
-								UINT &width, UINT &height, LP_TEXTURE &texture){
+								UINT &width, UINT &height, LP_TEXTURE &texture, D3DPOOL SystemMemory){
 	
 	// 파일 정보를 읽기 위한 구조체
 	D3DXIMAGE_INFO info;
@@ -179,7 +179,7 @@ HRESULT Graphics::loadTexture(const char *filename, COLOR_ARGB transcolor,
 			1,					// 밉맵 수준(연결하지 않을 시 1사용)
 			0,					// 사용할것 (DWORD Usage)
 			D3DFMT_UNKNOWN,		// 표면형식
-			D3DPOOL_DEFAULT,	// 텍스처를 위한 메모리 클래스
+			SystemMemory,	// 텍스처를 위한 메모리 클래스
 			D3DX_DEFAULT,		// 이미지 필터
 			D3DX_DEFAULT,		// 밉 필터
 			transcolor,			// 투명도를 위한 색상 키

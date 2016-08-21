@@ -42,7 +42,7 @@ bool Junk2DFont::initialize(Graphics *g, const char *file)
 	try {
 		graphics = g;           
 		UINT w, h;
-		HRESULT result = graphics->loadTexture(file, TRANSCOLOR, w, h, textureData);
+		HRESULT result = graphics->loadTexture(file, TRANSCOLOR, w, h, textureData, D3DPOOL_SYSTEMMEM);
 		if (FAILED(result))
 		{
 			SAFE_RELEASE(textureData);

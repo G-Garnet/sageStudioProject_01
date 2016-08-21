@@ -7,6 +7,7 @@ MainScenes::MainScenes()
 	player = new Junk2DEntity;
 	Ghost = new Junk2DEntity;
 	BackGround = new Junk2DSprite;
+	fontText = new Junk2DFont();
 }
 
 MainScenes::~MainScenes()
@@ -19,7 +20,7 @@ void MainScenes::initialize(HWND hwnd)
 	Game::initialize(hwnd);
 
 	// 텍스트 초기화
-	if (!fontCK->initialize(graphics, "..\\Resources\\font.png"))
+	if (!fontText->initialize(graphics, "..\\Resources\\font.png"))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing font"));
 
 	// 이미지 정보름 미리 선언
@@ -65,16 +66,6 @@ void MainScenes::Update()
 
 	player->update(0.1f);
 
-	fontCK->setProportional(false);
-	fontCK->setFontColor(graphicsNS::BLACK);
-	fontCK->setBackColor(TRANSCOLOR);
-	fontCK->setFontHeight(62 * 2);
-	fontCK->print("C", 20, 100);
-	fontCK->setFontHeight(62);
-	fontCK->print("C", 114, 148);
-	fontCK->setFontHeight(62 / 4);
-	fontCK->print("C", 164, 184);
-
 
 	if (input->isKeyUp(VK_RETURN)) {
 		Game *temp = new SecondScene;
@@ -88,6 +79,12 @@ void MainScenes::render()
 	graphics->spriteBegin();
 
 	objectManager->RenderAllObject();
+
+	fontText->setProportional(false);
+	fontText->setFontColor(graphicsNS::BLACK);
+	fontText->setBackColor(TRANSCOLOR);
+	fontText->setFontHeight(62 * 2);
+	fontText->print("C", 100, 100);
 
 	graphics->spriteEnd();
 }

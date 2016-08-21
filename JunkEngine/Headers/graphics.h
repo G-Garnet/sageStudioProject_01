@@ -95,7 +95,9 @@ public:
 
 	// 텍스처를 불러오는 함수
 	HRESULT loadTexture(const char *filename, COLOR_ARGB transcolor,
-		UINT &width, UINT &height, LP_TEXTURE &Texture);
+		UINT &width, UINT &height, LP_TEXTURE &Texture, D3DPOOL SystemMemory = D3DPOOL_DEFAULT);
+
+
 	// SpriteData 구조체의 정보를 토대로 스프라이트 그림
 	void drawSprite(const SpriteData &spriteData, COLOR_ARGB color);
 
