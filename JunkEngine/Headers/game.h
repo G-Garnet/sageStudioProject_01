@@ -13,7 +13,7 @@
 #include "Junk2DSprite.h"
 #include "Junk2DFont.h"
 #include "ObjectManager.h"
-
+#include "Junk2DFont.h"
 #include "Sounds.h"
 
 class Game

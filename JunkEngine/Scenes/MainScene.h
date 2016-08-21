@@ -16,6 +16,8 @@ private:
 
 	Junk2DSprite* BackGround;
 
+	Junk2DFont *fontCK;
+
 
 public:
 	MainScenes();
