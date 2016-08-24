@@ -58,6 +58,7 @@ public:
 	Junk2DFont();
 	virtual ~Junk2DFont();
 	
+	virtual bool settingFontTexture(Graphics *g, const char *file);
 	virtual bool initialize(Graphics *g, const char *file);
 	virtual void update(float frameTime) {};
 	virtual void onLostDevice();

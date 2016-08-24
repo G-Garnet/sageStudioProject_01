@@ -37,6 +37,12 @@ Junk2DFont::~Junk2DFont()
 }
 
 
+bool Junk2DFont::settingFontTexture(Graphics * g, const char * file)
+{
+	if (!this->initialize(g, "..\\Resources\\font.png"))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing font"));
+}
+
 bool Junk2DFont::initialize(Graphics *g, const char *file)
 {
 	try {

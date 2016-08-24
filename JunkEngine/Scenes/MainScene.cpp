@@ -20,8 +20,7 @@ void MainScenes::initialize(HWND hwnd)
 	Game::initialize(hwnd);
 
 	// 텍스트 초기화
-	if (!fontText->initialize(graphics, "..\\Resources\\font.png"))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing font"));
+	fontText->settingFontTexture(graphics, "..\\Resources\\m-water001.png");
 
 	// 이미지 정보름 미리 선언
 	BackGround->settingTexture(graphics, "..\\Resources\\orion.jpg", 1920, 1080, 1);
