@@ -115,6 +115,7 @@
     <ClInclude Include="..\Headers\ObjectManager.h" />
     <ClInclude Include="..\Headers\Sounds.h" />
     <ClInclude Include="..\Headers\textureManager.h" />
+    <ClInclude Include="..\Headers\ViewPoint.h" />
     <ClInclude Include="..\Scenes\MainScene.h" />
     <ClInclude Include="..\Scenes\Scenes.h" />
     <ClInclude Include="..\Scenes\SecondScene.h" />

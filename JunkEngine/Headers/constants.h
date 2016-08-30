@@ -23,8 +23,8 @@
 const char CLASS_NAME[] = "ExampleGame";
 const char GAME_TITLE[] = "ExampleGame";
 const bool FULLSCREEN = false;
-const UINT GAME_WIDTH = 1920;
-const UINT GAME_HEIGHT = 1080;
+const UINT GAME_WIDTH = 1280;
+const UINT GAME_HEIGHT = 720;
 
 // ∞‘¿”
 const double PI = 3.14159265;

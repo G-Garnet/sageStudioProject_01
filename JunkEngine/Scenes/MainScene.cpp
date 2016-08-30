@@ -23,7 +23,7 @@ void MainScenes::initialize(HWND hwnd)
 	fontText->settingFontTexture(graphics, "..\\Resources\\m-water001.png");
 
 	// 이미지 정보름 미리 선언
-	BackGround->settingTexture(graphics, "..\\Resources\\orion.jpg", 1920, 1080, 1);
+	BackGround->settingTexture(graphics, "..\\Resources\\orion.png", 1280, 720, 1);
 	BackGround->setXY(0, 0);
 
 	Ghost->initialize(graphics, "..\\Resources\\m-water001.png", 264, 264, 1);
