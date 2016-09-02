@@ -78,6 +78,8 @@ void Game::initialize(HWND hw)
 {
     hwnd = hw;                                  // 윈도우 핸들 저장
    
+	// 전체화면시 그래픽 객체가 두번 생성되면서 에러가 생기는듯함. 수정필요.
+	// 그래픽 객체 역시 static으로 만들어 줘야 할듯함.
     graphics = new Graphics();											// 그래픽 객체 초기화
     graphics->initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);	// 게임 에러를 뱉는다
 

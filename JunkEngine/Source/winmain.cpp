@@ -19,8 +19,6 @@ Game *game;
 Game* Game::nowScene = NULL;
 HWND hwnd = NULL;
 
-int SceneNum = 0;
-int AfterSceneNum = 0;
 BOOL switchScene = false;
 
 //extern int SceneNum;
@@ -131,9 +129,10 @@ bool CreateMainWindow(HWND &hwnd, HINSTANCE hInstance, int nCmdShow)
     //윈도우 풀스크린 여부
     DWORD style;
     if (FULLSCREEN)
-        style = WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP;
+        style = WS_EX_DLGMODALFRAME | WS_VISIBLE | WS_POPUP;
     else
         style = WS_OVERLAPPEDWINDOW;
+
 
     // 윈도우 생성
     hwnd = CreateWindow(

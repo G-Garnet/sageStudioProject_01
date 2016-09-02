@@ -16,6 +16,18 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{31cf2124-fe56-4873-b2a8-3a5ff60df966}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CustomClass">
+      <UniqueIdentifier>{5a6351b6-99ee-4779-80da-cbad712911ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object">
+      <UniqueIdentifier>{e49e8f95-789f-4963-a382-1b34590c351b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Object">
+      <UniqueIdentifier>{e5080a7c-b40f-4c52-abba-d79939f785db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData">
+      <UniqueIdentifier>{ed67f85a-10a6-4396-8e62-88d179e33546}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\winmain.cpp">
@@ -33,12 +45,6 @@
     <ClCompile Include="..\Source\textureManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Junk2DSprite.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Junk2Dentity.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Scenes.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -51,18 +57,21 @@
     <ClCompile Include="..\Source\Sounds.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Junk2Dentity.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\Junk2DFont.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Junk2DSprite.cpp">
+      <Filter>소스 파일\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ObjectManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\constants.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\game.h">
@@ -80,23 +89,11 @@
     <ClInclude Include="..\Headers\image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Junk2DSprite.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Junk2Dentity.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="..\Scenes\MainScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="..\Scenes\SecondScene.h">
       <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Junk2DFont.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\ObjectManager.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\Scenes\Scenes.h">
       <Filter>Scenes</Filter>
@@ -106,6 +103,21 @@
     </ClInclude>
     <ClInclude Include="..\Headers\ViewPoint.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Junk2Dentity.h">
+      <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Junk2DFont.h">
+      <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Junk2DSprite.h">
+      <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ObjectManager.h">
+      <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\constants.h">
+      <Filter>GameData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
