@@ -111,11 +111,11 @@
     <ClInclude Include="..\Headers\image.h" />
     <ClInclude Include="..\Headers\input.h" />
     <ClInclude Include="..\Headers\Junk2DFont.h" />
+    <ClInclude Include="..\Headers\Junk2DMap.h" />
     <ClInclude Include="..\Headers\Junk2DSprite.h" />
     <ClInclude Include="..\Headers\ObjectManager.h" />
     <ClInclude Include="..\Headers\Sounds.h" />
     <ClInclude Include="..\Headers\textureManager.h" />
-    <ClInclude Include="..\Headers\ViewPoint.h" />
     <ClInclude Include="..\Scenes\MainScene.h" />
     <ClInclude Include="..\Scenes\Scenes.h" />
     <ClInclude Include="..\Scenes\SecondScene.h" />
