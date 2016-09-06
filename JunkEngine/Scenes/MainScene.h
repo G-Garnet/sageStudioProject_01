@@ -10,13 +10,17 @@ class MainScenes : public Game
 private:
 	ObjectManager* objectManager;
 
-	// 게임 요소들
-	Junk2DEntity* player;
-	Junk2DEntity* Ghost;
+	//// 게임 요소들
+	//Junk2DEntity* player;
+	//Junk2DEntity* Ghost;
 
-	Junk2DSprite* BackGround;
+	//Junk2DSprite* BackGround;
 
-	Junk2DFont *fontText;
+	//Junk2DFont *fontText;
+
+	Junk2DMap* map1;
+	Junk2DSprite* Window;
+	Junk2DSprite* Door;
 
 
 public:

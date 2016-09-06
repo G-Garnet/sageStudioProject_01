@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Headers\Junk2DMap.cpp" />
     <ClCompile Include="..\Scenes\MainScene.cpp" />
     <ClCompile Include="..\Scenes\SecondScene.cpp" />
     <ClCompile Include="..\Source\Junk2Dentity.cpp" />

@@ -8,30 +8,35 @@
 #define MAP_MAXWIDTH  80
 #define MAP_MAXHEIGHT 80
 
-class Junk2DMap
+class Junk2DMap 
 {
 private :	
+	Junk2DSprite* MapBG;
 
 	int mapX, mapY;
 	int MAP_HEIGHT, MAP_WIDTH;
 
-	int tileData[MAP_MAXHEIGHT][MAP_MAXWIDTH] = {0,};
-	std::vector<std::pair<Junk2DSprite*, std::string>> ObjectList;
+	//int mapData[MAP_MAXHEIGHT][MAP_MAXWIDTH] = {0,};
+	std::vector<std::pair<Junk2DSprite*, std::string>> MapObjectList;
 
 public :
-	void MapDataInsert(const char *file);
+	Junk2DMap();
+	Junk2DMap(const char *file);
+	virtual ~Junk2DMap() {
+		RemoveAllObject();
+	};
 
-	void settingMapSprite();
-	void settingMapObject();
+	void MapDataInsert(const char *file);
+	void settingBGSprite(Graphics * g, const char * filename);
 
 	void setMapPos(int mapX, int mapY);
-
 
 	void MapAddObject(Junk2DSprite* p_pObject, std::string objecName);
 	void RemoveAllObject();
 	void RemoveObject(std::string objecName);
 
 	Junk2DSprite* getCGameObject(std::string ObjectName);
+	Junk2DSprite* getMapBG();
 };
 
 #endif

@@ -14,6 +14,7 @@
 #include "Junk2DFont.h"
 #include "ObjectManager.h"
 #include "Junk2DFont.h"
+#include "Junk2DMap.h"
 #include "Sounds.h"
 
 class Game
