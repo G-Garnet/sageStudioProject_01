@@ -7,16 +7,25 @@ SecondScene::SecondScene()
 
 SecondScene::~SecondScene()
 {
+	SAFE_DELETE(player);
 }
 
 void SecondScene::initialize(HWND hwnd)
 {
-	Game::initialize(hwnd);
+	//Game::initialize(hwnd);
+
+	// Input객체 초기화
+	input->initialize(hwnd, false);
+	// 타이머 사용
+	if (QueryPerformanceFrequency(&timerFreq) == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
 
 	// 이미지 정보름 미리 선언
 	player->settingTexture(graphics, "..\\Resources\\player.png", 32, 32, 1);
 	player->setDegrees(0);
 	player->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 16);
+
+	initialized = true;
 
 	return;
 }

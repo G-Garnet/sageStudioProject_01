@@ -70,7 +70,7 @@
       <Filter>소스 파일\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Headers\Junk2DMap.cpp">
-      <Filter>소스 파일\Object</Filter>
+      <Filter>CustomClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +87,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\textureManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\Scenes\MainScene.h">
@@ -120,7 +117,10 @@
       <Filter>GameData</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Junk2DMap.h">
-      <Filter>헤더 파일\Object</Filter>
+      <Filter>CustomClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TextWindow.h">
+      <Filter>CustomClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

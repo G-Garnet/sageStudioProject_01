@@ -1,5 +1,7 @@
 #include "..\\Headers\\textureManager.h"
 
+std::vector<std::pair<LP_TEXTURE, const char*>> TextureManager::TextureList;
+
 // 기본 생성자
 TextureManager::TextureManager()
 {
@@ -17,23 +19,43 @@ TextureManager::~TextureManager()
     SAFE_RELEASE(texture);
 }
 
+void TextureManager::AddTextureList(LP_TEXTURE inTexture, const char *file)
+{
+	TextureList.push_back(std::make_pair(inTexture, file));
+}
+
 // 텍스처 로드, 초기화, 실패시 false값 리턴
 bool TextureManager::initialize(Graphics *g, const char *f)
 {
-    try{
-        graphics = g;                       // graphics 객체
-        file = f;                           // 텍스처 파일
+	bool tmpSw = true;
+	/*for (auto i : TextureList) {
+		if (i.second == f) {
+			tmpSw = false;
+			break;
+		}
+	}
+*/
 
-											// 텍스처 로드
-        hr = graphics->loadTexture(file, TRANSCOLOR, width, height, texture); 
-        if (FAILED(hr))
-        {
-            SAFE_RELEASE(texture);
-            return false;
-        }
-    }
-    catch(...) {return false;}
-    initialized = true;                    // 성공적으로 초기화 했을시 true로 설정
+	if (tmpSw) {
+
+		try {
+			graphics = g;                       // graphics 객체
+			file = f;                           // 텍스처 파일
+
+												// 텍스처 로드
+			hr = graphics->loadTexture(file, TRANSCOLOR, width, height, texture);
+			AddTextureList(texture, f);
+
+			if (FAILED(hr))
+			{
+				SAFE_RELEASE(texture);
+				return false;
+			}
+		}
+		catch (...) { return false; }
+		initialized = true;                    // 성공적으로 초기화 했을시 true로 설정
+	}
+
     return true;
 }
 

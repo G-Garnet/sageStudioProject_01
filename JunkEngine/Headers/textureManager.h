@@ -17,7 +17,12 @@ class TextureManager
     bool    initialized;    // 초기화 성공 확인
     HRESULT hr;             // 리턴 타입
 
+
+	static std::vector<std::pair<LP_TEXTURE, const char*>> TextureList;
+
   public:
+	  
+
 	  // 생성자, 소멸자
     TextureManager();
     virtual ~TextureManager();
@@ -27,10 +32,13 @@ class TextureManager
     UINT getWidth() const {return width;}	// 텍스처의 폭을 반환
     UINT getHeight() const {return height;}	// 텍스처의 높이를 반환
 
+	void AddTextureList(LP_TEXTURE inTexture, const char *file);
+
     virtual bool initialize(Graphics *g, const char *file);
     virtual void onLostDevice();
     virtual void onResetDevice();
 };
+
 
 #endif
 

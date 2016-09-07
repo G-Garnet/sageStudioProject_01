@@ -1,16 +1,19 @@
 #include "..\\Headers\\game.h"
 
+Graphics*		Game::graphics = new Graphics();
+Input*			Game::input = new Input();
+Junk2DSound*	Game::audio = new Junk2DSound();
+
 Game::Game()
 {
-    input = new Input();        // 키보드 입력 초기화 이후 Ipnut클래스에서 추가 초기화
-    paused = false;             
-    graphics = NULL;
+    //input = new Input();        // 키보드 입력 초기화 이후 Ipnut클래스에서 추가 초기화
+    paused = false;   
     initialized = false;
 }
 
 Game::~Game()
 {
-    deleteAll();                // 메모리 해제
+    //deleteAll();                // 메모리 해제
     ShowCursor(true);           // 커서 표시
 }
 
@@ -80,10 +83,9 @@ void Game::initialize(HWND hw)
    
 	// 전체화면시 그래픽 객체가 두번 생성되면서 에러가 생기는듯함. 수정필요.
 	// 그래픽 객체 역시 static으로 만들어 줘야 할듯함.
-    graphics = new Graphics();											// 그래픽 객체 초기화
+   
     graphics->initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);	// 게임 에러를 뱉는다
 
-	audio = new Junk2DSound();
 	if (*WAVE_BANK != '\0' && *SOUND_BANK != '\0')  // if sound files defined
 	{
 		if (FAILED(hr = audio->initialize()))
@@ -174,13 +176,14 @@ void Game::run(HWND hwnd)
 
     timeStart = timeEnd;
 
+	renderGame();                   // 모든 요소 렌더링
     if (!paused)                    
     {
         Update();                   // 모든 게임요소 갱신
 		//UpdateEntity();				// 오브젝트들의 충돌 검사
         input->vibrateControllers(frameTime); // 컨트롤러 진동처리
     }
-    renderGame();                   // 모든 요소 렌더링
+   
     input->readControllers();       // 컨트롤러의 상태 읽기
 
     input->clear(inputNS::KEYS_PRESSED); // 입력된것 초기화
@@ -201,23 +204,28 @@ void Game::LoadMap()
 void Game::ChangeScene(Game* var)
 {
 	extern BOOL switchScene;
+	extern Game* beforeScene;
+	extern Game* nextScene;
 
-	Game::nowScene = var;
+	//Game::nowScene = var;
+	beforeScene = this;
+	nextScene = var;
 
 	switchScene = true;
 }
 
 void Game::releaseAll()
-{}
+{
+}
 
 void Game::resetAll()
 {}
 
 void Game::deleteAll()
 {
-    releaseAll();        
+    releaseAll();    
 	SAFE_DELETE(audio);
-    SAFE_DELETE(graphics);
-    SAFE_DELETE(input);
+	SAFE_DELETE(graphics);
+	SAFE_DELETE(input);
     initialized = false;
 }

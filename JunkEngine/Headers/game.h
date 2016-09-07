@@ -4,8 +4,10 @@
 
 #include <windows.h>
 #include <Mmsystem.h>
+#include <memory>
 #include <fstream>
 #include <iostream>
+#include <vfw.h>
 
 #include "gameError.h"
 #include "graphics.h"
@@ -20,8 +22,7 @@
 class Game
 {
 protected:
-	Graphics *graphics;         // Graphics 객체 포인터
-	Input   *input;             // Input 객체 포인터
+
 	HWND    hwnd;               // 윈도우 핸들
 	HRESULT hr;                 // 표준 반환 타입
 	LARGE_INTEGER timeStart;    // 성능 카운터 시작값
@@ -34,7 +35,6 @@ protected:
 	bool    initialized;        // 초기화
 
 
-	Junk2DSound*  audio;		// 사운드 
 
 	int Maps[1000][1000];
 	int mapMaxX, mapMaxY;
@@ -43,6 +43,10 @@ protected:
 public:
 	Game(); // 생성자
 	virtual ~Game(); // 소멸자
+
+	static Graphics		*graphics;  // Graphics 객체 포인터
+	static Input		*input;     // Input 객체 포인터
+	static Junk2DSound	*audio;		// 사운드 
 
 	static Game *nowScene;
 
@@ -83,5 +87,6 @@ public:
 	virtual void releaseAll() { Game::releaseAll(); return; };
 	virtual void resetAll() { Game::resetAll(); return; };*/
 };
+
 
 #endif

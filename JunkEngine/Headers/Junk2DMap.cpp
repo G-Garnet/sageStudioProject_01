@@ -28,7 +28,7 @@ void Junk2DMap::settingBGSprite(Graphics * g, const char * filename)
 	MapBG->settingTexture(g,filename);
 }
 
-void Junk2DMap::setMapPos(int X, int Y)
+void Junk2DMap::mapMove(int X, int Y)
 {
 	MapBG->setXY(MapBG->getX() + X, MapBG->getY() + Y);
 	for (auto i : MapObjectList) {

@@ -18,17 +18,19 @@ private:
 
 	//Junk2DFont *fontText;
 
+	
+
+
+public:
 	Junk2DMap* map1;
 	Junk2DSprite* Window;
 	Junk2DSprite* Door;
 
-
-public:
 	MainScenes();
-	virtual ~MainScenes();
+	~MainScenes();
 
 	// 게임 기본 구성 함수들
-	void initialize(HWND hwnd);
+	virtual void initialize(HWND hwnd);
 
 	void Update();      // Game 클래스로부터 반드시 오버라이딩 해야하는 순수 가상함수
 	void render();      // "

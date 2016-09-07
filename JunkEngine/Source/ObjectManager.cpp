@@ -25,6 +25,10 @@ void ObjectManager::RemoveObject(std::string objectName)
 
 void ObjectManager::RemoveAllObject()
 {
+	/*for (auto i : ObjectList){
+		SAFE_DELETE(i.first);
+	}*/
+
 	ObjectList.clear();
 }
 

@@ -15,8 +15,11 @@ bool CreateMainWindow(HWND &, HINSTANCE, int);
 LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM); 
 
 // 게임 포인터
-Game *game;
-Game* Game::nowScene = NULL;
+Game*			game;
+Game*			beforeScene;
+Game*			nextScene;
+Game* 			Game::nowScene = NULL;
+
 HWND hwnd = NULL;
 
 BOOL switchScene = false;
@@ -36,14 +39,18 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
     // 게임 생성
     game = new MainScenes;
-	Game::nowScene = game;
+	//Game::nowScene = game;
+
+	Game::graphics = new Graphics();
+	Game::input = new Input();
+	Game::audio = new Junk2DSound();
 
     // 윈도우 생성
     if (!CreateMainWindow(hwnd, hInstance, nCmdShow))
         return 1;
 
     try{
-        game->nowScene->initialize(hwnd);
+        game->Game::initialize(hwnd);
 
         // 메인 메세지 루프
         int done = 0;
@@ -63,19 +70,26 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
             } 
 			else {
 
-				game->nowScene->run(hwnd); // 게임 루프 실행
+				game->run(hwnd); // 게임 루프 실행
 
 				//printf("%d", SceneNum);
 			}
 
 			if (switchScene) {
-				game->nowScene->initialize(hwnd);
-				game = game->nowScene;
+
+				game = nextScene;
+		
+				beforeScene->~Game();
+				SAFE_DELETE(beforeScene);
+
+				game->initialize(hwnd);
+
 				switchScene = false;
 			}
         }
 
         SAFE_DELETE (game);     // 종료전 메모리를 비워줌
+
         return msg.wParam;
     }
     catch(const GameError &err)
