@@ -51,6 +51,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
     try{
         game->Game::initialize(hwnd);
+		game->initialize(hwnd);
 
         // 메인 메세지 루프
         int done = 0;
