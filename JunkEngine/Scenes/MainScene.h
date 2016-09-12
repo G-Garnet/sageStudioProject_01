@@ -11,20 +11,16 @@ private:
 	ObjectManager* objectManager;
 
 	//// 게임 요소들
-	//Junk2DEntity* player;
-	//Junk2DEntity* Ghost;
+	Junk2DEntity* player;
 
-	//Junk2DSprite* BackGround;
+	Junk2DMap* Map1;
+	Junk2DSprite* Door1;
+	Junk2DSprite* Door2;
 
+	int Movespeed = 2;
 	//Junk2DFont *fontText;
 
-	
-
-
 public:
-	Junk2DMap* map1;
-	Junk2DSprite* Window;
-	Junk2DSprite* Door;
 
 	MainScenes();
 	~MainScenes();

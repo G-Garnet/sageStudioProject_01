@@ -4,19 +4,17 @@ MainScenes::MainScenes()
 {
 	objectManager = new ObjectManager;
 
-	/*player = new Junk2DEntity;
-	Ghost = new Junk2DEntity;
-	BackGround = new Junk2DSprite;
-	fontText = new Junk2DFont();*/
+	player = new Junk2DEntity;
 
-	map1 = new Junk2DMap();
-	Window = new Junk2DSprite();
-	Door = new Junk2DSprite();
+	Map1 = new Junk2DMap();
+
+	Door1 = new Junk2DSprite();
+	Door2 = new Junk2DSprite();
 }
 
 MainScenes::~MainScenes()
 {
-	SAFE_DELETE(map1);
+	//SAFE_DELETE(map1);
 	objectManager->RemoveAllObject();
 }
 
@@ -31,20 +29,30 @@ void MainScenes::initialize(HWND hwnd)
 
 	QueryPerformanceCounter(&timeStart);        // 시작 시간 가져오기
 
-	map1->settingBGSprite(graphics, "..\\Resources\\ex.png");
+	// 텍스트 초기화
+	// fontText->settingFontTexture(graphics, "..\\Resources\\m-water001.png");
 
-	Window->settingTexture(graphics, "..\\Resources\\Window.png", 305,250, 1);
-	Door->settingTexture(graphics, "..\\Resources\\Door.png", 220, 460, 1);
+	// 이미지 정보름 미리 선언
+	Map1->settingBGSprite(graphics, "..\\Resources\\Room1.png");
 
-	Window->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 300);
-	Door->setXY((GAME_WIDTH / 2) - 600, GAME_HEIGHT / 2 - 300);
+	Door1->settingTexture(graphics, "..\\Resources\\Door.png", 220, 460, 1);
+	Door1->setXY(GAME_WIDTH / 2 - 200, 0+64);
 
-	objectManager->AddObject(map1->getMapBG(), "Map");
-	objectManager->AddObject(Window, "Window");
-	objectManager->AddObject(Door, "Door");
+	player->initialize(graphics, "..\\Resources\\spritesheet.png", 240, 210, 2);
+	player->setXY(GAME_WIDTH/ 2, GAME_HEIGHT / 2);
+	player->setLoop(true);
+	player->setActive(true);
+	player->setCollisionType(Junk2DentityNS::BOX);
+	player->setAnimation(0, 3, 0, 3.0f);
+	//player->setFrameDelay(0.1f);
 
-	map1->MapAddObject(Window, "Window");
-	map1->MapAddObject(Door, "Door");
+	// 태그 설정
+	objectManager->AddObject(Door1, "Door1");
+	objectManager->AddObject(player, "player");
+
+	Map1->MapAddObject(objectManager->getCGameObject("Door1"),"Door1");
+
+	Map1->mapMove(0, 0);
 
 	initialized = true;
 
@@ -53,11 +61,26 @@ void MainScenes::initialize(HWND hwnd)
 
 void MainScenes::Update()
 {
-	// if () 맵이 이동해야 할 경우
-	if (input->isKeyDown(VK_RIGHT)) map1->mapMove(1, 0);
-	if (input->isKeyDown(VK_LEFT))	map1->mapMove(-1, 0);
-	if (input->isKeyDown(VK_DOWN))	map1->mapMove(0, 1);
-	if (input->isKeyDown(VK_UP))	map1->mapMove(0, -1);
+	if ((Map1->getMapX() < -1120 || player->getX() < GAME_WIDTH/2) && input->isKeyDown(VK_RIGHT)) {
+		player->setX(player->getX() + Movespeed);
+	}
+	else if ((Map1->getMapX() >= 0 || player->getX() > GAME_WIDTH/2) && input->isKeyDown(VK_LEFT)) {
+		player->setX(player->getX() - Movespeed);
+	}
+	 
+	// 맵이 이동해야 할 경우
+	else {
+		if (input->isKeyDown(VK_RIGHT)) Map1->mapMove(-Movespeed, 0);
+		if (input->isKeyDown(VK_LEFT))	Map1->mapMove(Movespeed, 0);
+	}
+
+
+	if (input->isKeyDown(VK_DOWN)) {
+		player->setY(player->getY() + Movespeed);
+	}
+	if (input->isKeyDown(VK_UP)) {
+		player->setY(player->getY() - Movespeed);
+	}
 	//}
 
 	//if () {
@@ -74,7 +97,6 @@ void MainScenes::Update()
 
 	//player->update(0.1f);
 
-
 	if (input->isKeyUp(VK_RETURN)) {
 		Game *temp = new SecondScene;
 
@@ -90,6 +112,7 @@ void MainScenes::render()
 {
 	graphics->spriteBegin();
 
+	Map1->getMapBG()->draw();
 	objectManager->RenderAllObject();
 
 	//fontText->print("Hello WORLD!", 100, 100);

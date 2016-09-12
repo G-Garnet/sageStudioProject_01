@@ -30,7 +30,10 @@ void Junk2DMap::settingBGSprite(Graphics * g, const char * filename)
 
 void Junk2DMap::mapMove(int X, int Y)
 {
-	MapBG->setXY(MapBG->getX() + X, MapBG->getY() + Y);
+	mapX = MapBG->getX() + X;
+	mapY = MapBG->getY() + Y;
+
+	MapBG->setXY(mapX, mapY);
 	for (auto i : MapObjectList) {
 		i.first->setXY(i.first->getX() + X, i.first->getY() + Y);
 	}

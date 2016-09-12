@@ -42,6 +42,8 @@ public :
 	void RemoveAllObject();
 	void RemoveObject(std::string objecName);
 
+	int getMapX() { return mapX; };
+
 	Junk2DSprite* getCGameObject(std::string ObjectName);
 	Junk2DSprite* getMapBG();
 };
