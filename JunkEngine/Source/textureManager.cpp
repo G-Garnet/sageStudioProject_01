@@ -28,13 +28,12 @@ void TextureManager::AddTextureList(LP_TEXTURE inTexture, const char *file)
 bool TextureManager::initialize(Graphics *g, const char *f)
 {
 	bool tmpSw = true;
-	/*for (auto i : TextureList) {
-		if (i.second == f) {
-			tmpSw = false;
-			break;
-		}
-	}
-*/
+	//for (auto i : TextureList) {
+	//	if (i.second == f) {
+	//		tmpSw = false;
+	//		break;
+	//	}
+	//}
 
 	if (tmpSw) {
 
@@ -44,7 +43,7 @@ bool TextureManager::initialize(Graphics *g, const char *f)
 
 												// 텍스처 로드
 			hr = graphics->loadTexture(file, TRANSCOLOR, width, height, texture);
-			AddTextureList(texture, f);
+			//AddTextureList(texture, f);
 
 			if (FAILED(hr))
 			{

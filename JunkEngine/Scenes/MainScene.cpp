@@ -40,6 +40,7 @@ void MainScenes::initialize(HWND hwnd)
 
 	player->initialize(graphics, "..\\Resources\\spritesheet.png", 240, 210, 2);
 	player->setXY(GAME_WIDTH/ 2, GAME_HEIGHT / 2);
+	//player->set
 	player->setLoop(true);
 	player->setActive(true);
 	player->setCollisionType(Junk2DentityNS::BOX);
@@ -63,17 +64,24 @@ void MainScenes::Update()
 {
 	if ((Map1->getMapX() < -1120 || player->getX() < GAME_WIDTH/2) && input->isKeyDown(VK_RIGHT)) {
 		player->setX(player->getX() + Movespeed);
+		player->update(0.05f);
 	}
 	else if ((Map1->getMapX() >= 0 || player->getX() > GAME_WIDTH/2) && input->isKeyDown(VK_LEFT)) {
 		player->setX(player->getX() - Movespeed);
+		player->update(0.05f);
 	}
 	 
 	// 맵이 이동해야 할 경우
 	else {
-		if (input->isKeyDown(VK_RIGHT)) Map1->mapMove(-Movespeed, 0);
-		if (input->isKeyDown(VK_LEFT))	Map1->mapMove(Movespeed, 0);
+		if (input->isKeyDown(VK_RIGHT)) {
+			Map1->mapMove(-Movespeed, 0);
+			player->update(0.05f);
+		}
+		if (input->isKeyDown(VK_LEFT)) {
+			Map1->mapMove(Movespeed, 0);
+			player->update(0.05f);
+		}
 	}
-
 
 	if (input->isKeyDown(VK_DOWN)) {
 		player->setY(player->getY() + Movespeed);
@@ -81,6 +89,7 @@ void MainScenes::Update()
 	if (input->isKeyDown(VK_UP)) {
 		player->setY(player->getY() - Movespeed);
 	}
+	
 	//}
 
 	//if () {
