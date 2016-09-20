@@ -61,35 +61,45 @@ void MainScenes::initialize(HWND hwnd)
 }
 
 void MainScenes::Update()
-{
-	if ((Map1->getMapX() < -1120 || player->getX() < GAME_WIDTH/2) && input->isKeyDown(VK_RIGHT)) {
-		player->setX(player->getX() + Movespeed);
-		player->update(0.05f);
-	}
-	else if ((Map1->getMapX() >= 0 || player->getX() > GAME_WIDTH/2) && input->isKeyDown(VK_LEFT)) {
-		player->setX(player->getX() - Movespeed);
-		player->update(0.05f);
-	}
-	 
-	// 맵이 이동해야 할 경우
-	else {
-		if (input->isKeyDown(VK_RIGHT)) {
-			Map1->mapMove(-Movespeed, 0);
-			player->update(0.05f);
-		}
-		if (input->isKeyDown(VK_LEFT)) {
-			Map1->mapMove(Movespeed, 0);
-			player->update(0.05f);
-		}
-	}
+{ 
+	// 플레이어 이동 클래스
+	// 전부 플레이어 클래스로 만들어서 객체화 시켜서 이동할 예정
+
 
 	if (input->isKeyDown(VK_DOWN)) {
 		player->setY(player->getY() + Movespeed);
+		if (player->getY() >= GAME_HEIGHT - 200) {
+			player->setY(player->getY() - Movespeed);
+		}
 	}
 	if (input->isKeyDown(VK_UP)) {
 		player->setY(player->getY() - Movespeed);
+		if (player->getY() <= GAME_HEIGHT / 2 - 24) {
+			player->setY(player->getY() + Movespeed);
+		}
 	}
-	
+
+	if (input->isKeyDown(VK_RIGHT)) {
+		if (Map1->getMapX() < -1120 || player->getX() < GAME_WIDTH / 2) {
+			player->setX(player->getX() + Movespeed);
+		}
+		else {
+			Map1->mapMove(-Movespeed, 0);
+		}
+		player->update(0.05f);
+	}
+	if (input->isKeyDown(VK_LEFT)) {
+		if ((Map1->getMapX() >= 0 || player->getX() > GAME_WIDTH / 2)) {
+			player->setX(player->getX() - Movespeed);
+		}
+		else {
+			Map1->mapMove(Movespeed, 0);
+		}
+		player->update(0.05f);
+	}	
+    
+	////////////////////////////////////////
+
 	//}
 
 	//if () {
@@ -113,7 +123,7 @@ void MainScenes::Update()
 	}
 
 	if (input->isKeyDown(VK_ESCAPE)) {
-		exitGame();
+		exit(0);
 	}
 }
 
