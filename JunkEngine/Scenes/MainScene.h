@@ -18,6 +18,7 @@ private:
 	Junk2DSprite* Door2;
 
 	int Movespeed = 2;
+	int playerSize;
 	//Junk2DFont *fontText;
 
 public:

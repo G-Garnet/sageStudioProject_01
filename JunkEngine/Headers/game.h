@@ -7,7 +7,6 @@
 #include <memory>
 #include <fstream>
 #include <iostream>
-#include <vfw.h>
 
 #include "gameError.h"
 #include "graphics.h"

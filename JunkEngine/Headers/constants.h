@@ -16,6 +16,8 @@
 #define SAFE_RELEASE(ptr)      { if(ptr) { (ptr)->Release(); (ptr)=NULL; } }
 #define SAFE_DELETE_ARRAY(ptr) { if(ptr) { delete [](ptr); (ptr)=NULL; } }
 
+#define VOLUME_FULL     0L
+#define VOLUME_SILENCE  -10000L
 
 //-----------------------------------------------
 //                  상수들
@@ -24,7 +26,7 @@
 // 윈도우
 const char CLASS_NAME[] = "ExampleGame";
 const char GAME_TITLE[] = "ExampleGame";
-const bool FULLSCREEN = TRUE;
+const bool FULLSCREEN = FALSE;
 const UINT GAME_WIDTH = 1280;
 const UINT GAME_HEIGHT = 720;
 

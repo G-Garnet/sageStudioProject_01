@@ -72,6 +72,9 @@
     <ClCompile Include="..\Headers\Junk2DMap.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
+    <ClCompile Include="..\Headers\VideoPlay.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\TextWindow.h">
       <Filter>CustomClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\VideoPlay.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

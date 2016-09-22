@@ -84,11 +84,12 @@
       <SubSystem>Windows</SubSystem>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>vfw32.lib;Xinput.lib;winmm.lib;d3dx9d.lib;d3d9.lib;dxguid.lib;d3dxof.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vfw32.lib;Xinput.lib;winmm.lib;d3dx9d.lib;d3d9.lib;dxguid.lib;d3dxof.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Headers\Junk2DMap.cpp" />
+    <ClCompile Include="..\Headers\VideoPlay.cpp" />
     <ClCompile Include="..\Scenes\MainScene.cpp" />
     <ClCompile Include="..\Scenes\SecondScene.cpp" />
     <ClCompile Include="..\Source\Junk2Dentity.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="..\Headers\Sounds.h" />
     <ClInclude Include="..\Headers\textureManager.h" />
     <ClInclude Include="..\Headers\TextWindow.h" />
+    <ClInclude Include="..\Headers\VideoPlay.h" />
     <ClInclude Include="..\Scenes\MainScene.h" />
     <ClInclude Include="..\Scenes\Scenes.h" />
     <ClInclude Include="..\Scenes\SecondScene.h" />
