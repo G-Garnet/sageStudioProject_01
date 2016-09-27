@@ -9,7 +9,10 @@ MainScenes::MainScenes()
 	Map1 = new Junk2DMap();
 
 	Door1 = new Junk2DSprite();
-	Door2 = new Junk2DSprite();
+	Desk = new Junk2DSprite();
+	Hanger = new Junk2DSprite();
+	Carpet = new Junk2DSprite();
+	Pipe = new Junk2DSprite();
 }
 
 MainScenes::~MainScenes()
@@ -33,10 +36,18 @@ void MainScenes::initialize(HWND hwnd)
 	// fontText->settingFontTexture(graphics, "..\\Resources\\m-water001.png");
 
 	// 이미지 정보름 미리 선언
-	Map1->settingBGSprite(graphics, "..\\Resources\\Room1.png");
+	Map1->settingBGSprite(graphics, "..\\Resources\\\Floor1\\Room1_bg.png");
 
-	Door1->settingTexture(graphics, "..\\Resources\\Door.png", 220, 460, 1);
-	Door1->setXY(GAME_WIDTH / 2 - 200, 0+64);
+	Door1->settingTexture(graphics, "..\\Resources\\Floor1\\room1_door.png", 220, 457, 1);
+	Door1->setXY(370, 68);
+	Desk->settingTexture(graphics, "..\\Resources\\Floor1\\room1_desk.png", 465, 312, 1);
+	Desk->setXY(1180, 244);
+	Hanger->settingTexture(graphics, "..\\Resources\\Floor1\\room1_.png", 155, 462, 1);
+	Hanger->setXY(600, 100);
+	Carpet->settingTexture(graphics, "..\\Resources\\Floor1\\room1_carpet.png", 315, 71, 1);
+	Carpet->setXY(282, 526);
+	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
+	Pipe->setXY(2104, 314);
 
 	player->initialize(graphics, "..\\Resources\\spritesheet.png", 240, 210, 2);
 	player->setXY(GAME_WIDTH/ 2, GAME_HEIGHT / 2);
@@ -49,9 +60,17 @@ void MainScenes::initialize(HWND hwnd)
 
 	// 태그 설정
 	objectManager->AddObject(Door1, "Door1");
+	objectManager->AddObject(Desk, "Desk");
+	objectManager->AddObject(Hanger, "Hanger");
+	objectManager->AddObject(Carpet, "Carpet");
+	objectManager->AddObject(Pipe, "Pipe");
 	objectManager->AddObject(player, "player");
 
 	Map1->MapAddObject(objectManager->getCGameObject("Door1"),"Door1");
+	Map1->MapAddObject(objectManager->getCGameObject("Desk"), "Desk");
+	Map1->MapAddObject(objectManager->getCGameObject("Hanger"), "Hanger");
+	Map1->MapAddObject(objectManager->getCGameObject("Carpet"), "Carpet");
+	Map1->MapAddObject(objectManager->getCGameObject("Pipe"), "Pipe");
 
 	Map1->mapMove(0, 0);
 

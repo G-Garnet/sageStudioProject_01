@@ -15,7 +15,10 @@ private:
 
 	Junk2DMap* Map1;
 	Junk2DSprite* Door1;
-	Junk2DSprite* Door2;
+	Junk2DSprite* Desk;
+	Junk2DSprite* Hanger;
+	Junk2DSprite* Carpet;
+	Junk2DSprite* Pipe;
 
 	int Movespeed = 2;
 	int playerSize;
