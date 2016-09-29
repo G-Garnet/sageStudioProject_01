@@ -14,6 +14,12 @@ private:
 
 	// 게임 요소들
 	Junk2DMap* Map;
+	Junk2DSprite* Door1;
+	Junk2DSprite* Door2;
+	Junk2DSprite* Door3;
+
+	Junk2DSprite* Window1;
+	Junk2DSprite* Window2;
 
 public:
 	SecondScene();
