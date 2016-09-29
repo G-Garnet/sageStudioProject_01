@@ -75,6 +75,9 @@
     <ClCompile Include="..\Headers\VideoPlay.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\Headers\Player.cpp">
+      <Filter>CustomClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\VideoPlay.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Player.h">
+      <Filter>CustomClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

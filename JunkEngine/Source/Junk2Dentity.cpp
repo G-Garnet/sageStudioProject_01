@@ -22,6 +22,7 @@ Junk2DEntity::Junk2DEntity() : Junk2DSprite()
 	isGround  = false;
 	isRigidBody = false;
 	isCollid = false;
+	isZObject = false;
 }
 
 // 충돌체 초기화
@@ -42,6 +43,14 @@ void Junk2DEntity::initialize(Graphics *g, const char * filename, int width, int
 void Junk2DEntity::activate()
 {
 	active = true;
+}
+
+void Junk2DEntity::setEdge(int a, int b, int c, int d)
+{
+	edge.left = a;
+	edge.top = b;
+	edge.right = c;
+	edge.bottom = d;
 }
 
 // 충돌체 업데이트
@@ -100,11 +109,21 @@ bool Junk2DEntity::collideBox(VECTOR2 &collisionVector, Junk2DEntity* ent)
     if (!active || !ent->getActive())
         return false;
 
+	if (isTrigger) {
+		if ((getX() + edge.right*getScale() > ent->getX() + ent->getEdge().left * ent->getScale()) &&
+			(getX() + edge.left*getScale() < ent->getX() + ent->getEdge().right * ent->getScale()) &&
+			(getY() + edge.bottom*getScale() > ent->getY() + ent->getEdge().top * ent->getScale()) &&
+			(getY() + edge.top*getScale() < ent->getY() + ent->getEdge().bottom * ent->getScale())) {
+			return true;
+		}
+		return false;
+	}
+
     // 박스 체크
-    if( (getCenterX() + edge.right*getScale() >= ent->getCenterX() + ent->getEdge().left * ent->getScale()) &&
-        (getCenterX() + edge.left*getScale() <= ent->getCenterX() + ent->getEdge().right * ent->getScale()) &&
-        (getCenterY() + edge.bottom*getScale() >= ent->getCenterY() + ent->getEdge().top * ent->getScale()) && 
-        (getCenterY() + edge.top*getScale() <= ent->getCenterY() + ent->getEdge().bottom * ent->getScale()) )
+    if( (getX() + edge.right*getScale() >= ent->getX() + ent->getEdge().left * ent->getScale()) &&
+        (getX() + edge.left*getScale() <= ent->getX() + ent->getEdge().right * ent->getScale()) &&
+        (getY() + edge.bottom*getScale() >= ent->getY() + ent->getEdge().top * ent->getScale()) && 
+        (getY() + edge.top*getScale() <= ent->getY() + ent->getEdge().bottom * ent->getScale()) )
     {
         // 충돌 벡터 설정, 재 설정 필요함
 		collisionVector = *ent->getCenter() - *getCenter();
@@ -273,7 +292,7 @@ void Junk2DEntity::bounce(VECTOR2 &collisionVector, Junk2DEntity &ent)
 	VECTOR2 cUV = collisionVector;
 	Graphics::Vector2Normalize(&cUV);
 	float cUVdotVdiff = Graphics::Vector2Dot(&cUV, &Vdiff);
-	float massRatio = 20.0f;
+	float massRatio = 10.0f;
 	if (getMass() != 0)
 		massRatio *= (ent.getMass() / (getMass() + ent.getMass()));
 

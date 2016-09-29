@@ -2,12 +2,17 @@
 
 SecondScene::SecondScene()
 {
-	player = new Junk2DSprite;
+	objectManager = new ObjectManager;
+
+	Map = new Junk2DMap;
+
+	player = new Player();
 }
 
 SecondScene::~SecondScene()
 {
-	SAFE_DELETE(player);
+	SAFE_DELETE(Map);
+	objectManager->RemoveAllObject();
 }
 
 void SecondScene::initialize(HWND hwnd)
@@ -21,9 +26,13 @@ void SecondScene::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
 
 	// 이미지 정보름 미리 선언
-	player->settingTexture(graphics, "..\\Resources\\player.png", 32, 32, 1);
-	player->setDegrees(0);
-	player->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 16);
+	Map->settingBGSprite(graphics, "..\\Resources\\\Floor1\\Room2\\Room2_bg.png");
+
+	player->playerSetting(graphics);
+
+	objectManager->AddObject(player, "Player");
+
+	Map->mapMove(0, 0);
 
 	initialized = true;
 
@@ -32,16 +41,13 @@ void SecondScene::initialize(HWND hwnd)
 
 void SecondScene::Update()
 {
+	player->playerInput(input, Map);
+
 	if (input->isKeyUp(VK_RETURN)) {
-		Game *temp = new MainScenes; 
+		Game *temp = new MainScenes;
 
 		ChangeScene(temp);
 	}
-
-	if (input->isKeyDown(VK_RIGHT)) player->setX(player->getX() + 1);
-	if (input->isKeyDown(VK_LEFT))	player->setX(player->getX() - 1);
-	if (input->isKeyDown(VK_DOWN))	player->setY(player->getY() + 1);
-	if (input->isKeyDown(VK_UP))	player->setY(player->getY() - 1);
 
 	//exitGame();
 }
@@ -50,7 +56,8 @@ void SecondScene::render()
 {
 	graphics->spriteBegin();
 
-	player->draw();
+	Map->getMapBG()->draw();
+	objectManager->RenderAllObject();
 
 	graphics->spriteEnd();
 }

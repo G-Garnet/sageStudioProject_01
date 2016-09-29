@@ -8,9 +8,12 @@
 class SecondScene : public Game
 {
 private:
+	ObjectManager* objectManager;
+
+	Player* player;
 
 	// 게임 요소들
-	Junk2DSprite* player;
+	Junk2DMap* Map;
 
 public:
 	SecondScene();
