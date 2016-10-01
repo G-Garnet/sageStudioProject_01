@@ -45,7 +45,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 	}
 
 	if (input->isKeyDown(VK_RIGHT)) {
-		if (Map1->getMapX() < -1120 || this->getX() < GAME_WIDTH / 2) {
+		if (Map1->getMapX() < -mapSize || this->getX() < GAME_WIDTH / 2) {
 			if (this->getX() + playerSize + Movespeed <
 				GAME_WIDTH - (GAME_HEIGHT - this->getY() * 1.5f)) {
 				this->setX(this->getX() + Movespeed);

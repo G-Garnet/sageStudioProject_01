@@ -38,9 +38,9 @@ void SecondScene::initialize(HWND hwnd)
 	Door1->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Room2_LeftDoor.png", 163, 532, 1);
 	Door1->setXY(64, 148);
 	Door2->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Room2_RightDoor.png", 163, 532, 1);
-	Door2->setXY(1664, 148);
+	Door2->setXY(1670, 148);
 	Door3->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Room2_Door.png", 398, 498, 1);
-	Door3->setXY(740, 24);
+	Door3->setXY(750, 24);
 
 	Window1->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Room2_Window2.png", 356, 326, 1);
 	Window1->setXY(350, 30);
@@ -64,6 +64,8 @@ void SecondScene::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Door3"), "Door3");
 	Map->MapAddObject(objectManager->getCGameObject("Window1"), "Window1");
 	Map->MapAddObject(objectManager->getCGameObject("Window2"), "Window2");
+
+	player->setMapszie(618);
 
 	initialized = true;
 

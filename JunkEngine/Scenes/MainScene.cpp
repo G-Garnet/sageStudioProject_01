@@ -79,6 +79,8 @@ void MainScenes::initialize(HWND hwnd)
 
 	Map1->mapMove(0, 0);
 
+	player->setMapszie(1120);
+
 	initialized = true;
 
 	return;

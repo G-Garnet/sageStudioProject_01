@@ -9,12 +9,14 @@ class Player : public Junk2DEntity
 private:
 	int Movespeed = 2;
 	int playerSize;
+	int mapSize;
 
 public:
 	Player();
 	virtual ~Player() {};
 
 	void playerSetting(Graphics* graphics);
+	void setMapszie(int a) { mapSize = a; };
 
 	void playerInput(Input* input, Junk2DMap* Map1);
 	void getplayerWidth() {
