@@ -92,6 +92,9 @@
     <ClCompile Include="..\Headers\Player.cpp" />
     <ClCompile Include="..\Headers\VideoPlay.cpp" />
     <ClCompile Include="..\Scenes\MainScene.cpp" />
+    <ClCompile Include="..\Scenes\Room3.cpp" />
+    <ClCompile Include="..\Scenes\Room4.cpp" />
+    <ClCompile Include="..\Scenes\Room5.cpp" />
     <ClCompile Include="..\Scenes\SecondScene.cpp" />
     <ClCompile Include="..\Source\Junk2Dentity.cpp" />
     <ClCompile Include="..\Source\game.cpp" />
@@ -122,6 +125,9 @@
     <ClInclude Include="..\Headers\TextWindow.h" />
     <ClInclude Include="..\Headers\VideoPlay.h" />
     <ClInclude Include="..\Scenes\MainScene.h" />
+    <ClInclude Include="..\Scenes\Room3.h" />
+    <ClInclude Include="..\Scenes\Room4.h" />
+    <ClInclude Include="..\Scenes\Room5.h" />
     <ClInclude Include="..\Scenes\Scenes.h" />
     <ClInclude Include="..\Scenes\SecondScene.h" />
   </ItemGroup>

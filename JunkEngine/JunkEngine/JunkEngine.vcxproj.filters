@@ -28,6 +28,9 @@
     <Filter Include="GameData">
       <UniqueIdentifier>{ed67f85a-10a6-4396-8e62-88d179e33546}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Floor1">
+      <UniqueIdentifier>{bf701a75-41de-417e-9ef1-9d3dffc68274}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\winmain.cpp">
@@ -47,12 +50,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Scenes.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Scenes\MainScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Scenes\SecondScene.cpp">
-      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Sounds.cpp">
       <Filter>소스 파일</Filter>
@@ -78,6 +75,21 @@
     <ClCompile Include="..\Headers\Player.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
+    <ClCompile Include="..\Scenes\MainScene.cpp">
+      <Filter>Scenes\Floor1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Scenes\SecondScene.cpp">
+      <Filter>Scenes\Floor1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Scenes\Room3.cpp">
+      <Filter>Scenes\Floor1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Scenes\Room4.cpp">
+      <Filter>Scenes\Floor1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Scenes\Room5.cpp">
+      <Filter>Scenes\Floor1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
@@ -94,15 +106,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\textureManager.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Scenes\MainScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Scenes\SecondScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Scenes\Scenes.h">
-      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Sounds.h">
       <Filter>헤더 파일</Filter>
@@ -133,6 +136,24 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Player.h">
       <Filter>CustomClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scenes\MainScene.h">
+      <Filter>Scenes\Floor1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scenes\Scenes.h">
+      <Filter>Scenes\Floor1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scenes\SecondScene.h">
+      <Filter>Scenes\Floor1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scenes\Room3.h">
+      <Filter>Scenes\Floor1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scenes\Room4.h">
+      <Filter>Scenes\Floor1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scenes\Room5.h">
+      <Filter>Scenes\Floor1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

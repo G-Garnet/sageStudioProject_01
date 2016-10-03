@@ -77,7 +77,7 @@ void SecondScene::Update()
 	player->playerInput(input, Map);
 
 	if (input->isKeyUp(VK_RETURN)) {
-		Game *temp = new MainScenes;
+		Game *temp = new Room3;
 
 		ChangeScene(temp);
 	}
