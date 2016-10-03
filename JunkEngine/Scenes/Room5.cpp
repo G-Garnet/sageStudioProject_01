@@ -52,19 +52,18 @@ void Room5::initialize(HWND hwnd)
 
 	// 태그 설정
 	objectManager->AddObject(Door1, "Door1");
-	objectManager->AddObject(cross1, "Door2");
-	objectManager->AddObject(cross2, "Pictures");
-	objectManager->AddObject(light, "Blood");
+	objectManager->AddObject(cross1, "cross1");
+	objectManager->AddObject(cross2, "cross2");
+	objectManager->AddObject(light, "light");
 
 	objectManager->AddObject(player, "Player");
 
 	Map->MapAddObject(objectManager->getCGameObject("Door1"), "Door1");
-	Map->MapAddObject(objectManager->getCGameObject("Door2"), "Door2");
-	Map->MapAddObject(objectManager->getCGameObject("Blood"), "Blood");
-	Map->MapAddObject(objectManager->getCGameObject("Carpet"), "Carpet");
-	Map->MapAddObject(objectManager->getCGameObject("Pictures"), "Pictures");
+	Map->MapAddObject(objectManager->getCGameObject("cross1"), "cross1");
+	Map->MapAddObject(objectManager->getCGameObject("cross2"), "cross2");
+	Map->MapAddObject(objectManager->getCGameObject("light"), "light");
 
-	player->setMapszie(720);
+	player->setMapszie(100);
 
 	initialized = true;
 

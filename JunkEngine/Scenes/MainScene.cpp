@@ -104,9 +104,10 @@ void MainScenes::Update()
 	if (player->collidesWith(Desk, CollisionVector)){
 		player->bounce(CollisionVector, *Desk);
 	}
-
-	if (input->isKeyDown(VK_ESCAPE)) {
-		exit(0);
+	
+	// 아이템 슬롯 클래스 호출
+	// 제작, 테스트 후 플레이어 클래스에서 호출하도록 이동
+	if (input->isKeyUp(1)) {
 	}
 }
 

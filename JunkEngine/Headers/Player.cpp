@@ -69,6 +69,11 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update(0.05f);
 	}
 
+
+	if (input->isKeyDown(VK_ESCAPE)) {
+		exit(0);
+	}
+
 	//////////////////////////////////////////////////////////////////
 	// ㄴ플레이어 클래스로 이동
 }

@@ -96,6 +96,7 @@
     <ClCompile Include="..\Scenes\Room4.cpp" />
     <ClCompile Include="..\Scenes\Room5.cpp" />
     <ClCompile Include="..\Scenes\SecondScene.cpp" />
+    <ClCompile Include="..\Source\ItemSlot.cpp" />
     <ClCompile Include="..\Source\Junk2Dentity.cpp" />
     <ClCompile Include="..\Source\game.cpp" />
     <ClCompile Include="..\Source\graphics.cpp" />

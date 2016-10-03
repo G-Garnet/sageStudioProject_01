@@ -90,6 +90,9 @@
     <ClCompile Include="..\Scenes\Room5.cpp">
       <Filter>Scenes\Floor1</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\ItemSlot.cpp">
+      <Filter>CustomClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
