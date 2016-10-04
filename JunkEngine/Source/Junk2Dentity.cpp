@@ -45,12 +45,12 @@ void Junk2DEntity::activate()
 	active = true;
 }
 
-void Junk2DEntity::setEdge(int a, int b, int c, int d)
+void Junk2DEntity::setEdge(int left, int top, int right, int bottom)
 {
-	edge.left = a;
-	edge.top = b;
-	edge.right = c;
-	edge.bottom = d;
+	edge.left = left;
+	edge.top = top;
+	edge.right = right;
+	edge.bottom = bottom;
 }
 
 // 충돌체 업데이트
@@ -292,14 +292,18 @@ void Junk2DEntity::bounce(VECTOR2 &collisionVector, Junk2DEntity &ent)
 	VECTOR2 cUV = collisionVector;
 	Graphics::Vector2Normalize(&cUV);
 	float cUVdotVdiff = Graphics::Vector2Dot(&cUV, &Vdiff);
-	float massRatio = 10.0f;
+	float massRatio = 30.0f;
 	if (getMass() != 0)
 		massRatio *= (ent.getMass() / (getMass() + ent.getMass()));
 
+	// CollisionVector
+
 	if (cUVdotVdiff >= 0)
 	{
-		setX(getX() - cUV.x * massRatio);
-		setY(getY() - cUV.y * massRatio);
+		if (abs(cUV.x) > abs(cUV.y)) 
+			setX(getX() - cUV.x * massRatio);
+		else 
+			setY(getY() - cUV.y * massRatio);
 	}
 	else
 		deltaV += ((massRatio * cUVdotVdiff) * cUV);

@@ -143,9 +143,6 @@
     <ClInclude Include="..\Scenes\MainScene.h">
       <Filter>Scenes\Floor1</Filter>
     </ClInclude>
-    <ClInclude Include="..\Scenes\Scenes.h">
-      <Filter>Scenes\Floor1</Filter>
-    </ClInclude>
     <ClInclude Include="..\Scenes\SecondScene.h">
       <Filter>Scenes\Floor1</Filter>
     </ClInclude>
@@ -157,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="..\Scenes\Room5.h">
       <Filter>Scenes\Floor1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scenes\Scenes.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ItemSlot.h">
+      <Filter>CustomClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

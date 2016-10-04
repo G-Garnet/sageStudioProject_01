@@ -52,4 +52,12 @@ const char WAVE_BANK[] = "..\\Resources\\Sounds\\Win\\WavesExample1.xwb";
 // .xsb의 위치
 const char SOUND_BANK[] = "..\\Resources\\Sounds\\Win\\SoundsExample1.xsb";
 
+
+
+// 게임 데이터들
+static int inCounter[100] = { 0, };
+static int p_PosX;
+static int p_PosY;
+static int p_PosScene;
+
 #endif

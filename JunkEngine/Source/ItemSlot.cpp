@@ -1,28 +1,79 @@
-#ifndef _ITEMSLOT_H             
-#define _ITEMSLOT_H             
-#define WIN32_LEAN_AND_MEAN
+#include "..\Headers\ItemSlot.h"
 
-#define ITEM_MAX 10
-#define ITEMSLOT_MAX 10
+ItemSlot::ItemSlot()
+{
+	ItemSlotBG = new Junk2DSprite;
 
-#include "..\\Headers\Game.h"
+	for (int i = 0; i < ITEM_MAX; i++) {
+		Item[i] = new Junk2DSprite;
+	}
 
-class ItemSlot {
-private :
+	Effect = new Junk2DSprite;
 
-	Junk2DSprite* ItemSlotBg;
-	Junk2DSprite* ItemSlotSprite;
+	stage = new Junk2DSprite;
+	menu = new Junk2DSprite;
+	upButton = new Junk2DSprite;
+	downButton = new Junk2DSprite;
+}
 
-	Junk2DSprite* Item[ITEM_MAX];
+ItemSlot::~ItemSlot()
+{
+	SAFE_DELETE(ItemSlotBG);
 
-	int Slotarr[ITEMSLOT_MAX] = { 0, };
+	for (int i = 0; i < ITEM_MAX; i++) {
+		SAFE_DELETE(Item[i]);
+	}
 
-public :
+	SAFE_DELETE(stage);
+	SAFE_DELETE(menu);
+	SAFE_DELETE(upButton);
+	SAFE_DELETE(downButton);
 
-	ItemSlot();
-	virtual ~ItemSlot();
+	SAFE_DELETE(Effect);
+}
 
-};
+void ItemSlot::ItemSlotSetting(Graphics * graphics)
+{
+	ItemSlotBG->settingTexture(graphics, "..\\Resources\\UI\\UI_BG.png", 1280, 720, 1);
+	ItemSlotBG->setXY(0,0);
 
+	for (int i = 0; i < ITEM_MAX; i++) {
+		Item[i]->settingTexture(graphics, "..\\Resources\\UI\\Item123.png", 629, 92, 1);
+		Item[i]->setXY(451,239+i*137);
+	}
 
-#endif
+	stage->settingTexture(graphics, "..\\Resources\\UI\\stage.png", 287, 75, 1);
+	stage->setXY(76, 96);
+
+	menu->settingTexture(graphics, "..\\Resources\\UI\\item.png", 419, 38, 1);
+	menu->setXY(556, 162);
+
+	upButton->settingTexture(graphics, "..\\Resources\\UI\\icon.png", 56, 51, 1);
+	upButton->setXY(1163, 352);
+
+	downButton->settingTexture(graphics, "..\\Resources\\UI\\icon.png", 56, 51, 1);
+	downButton->setXY(1163, 487);
+}
+
+void ItemSlot::ItemSlotInput(Input * input)
+{
+	if (input->isKeyUp(VK_ESCAPE)) {
+		ItemSlotvisible = !ItemSlotvisible;
+	}
+}
+
+void ItemSlot::ItemSlotRender()
+{
+	if (ItemSlotvisible){
+		ItemSlotBG->draw();
+
+		stage->draw();
+		menu->draw(); 
+		upButton->draw();
+		downButton->draw();
+
+		for (int i = 0; i < 3; i++) {
+			Item[i]->draw();
+		}
+	}
+}

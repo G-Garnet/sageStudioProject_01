@@ -63,7 +63,7 @@ void Room5::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("cross2"), "cross2");
 	Map->MapAddObject(objectManager->getCGameObject("light"), "light");
 
-	player->setMapszie(100);
+	player->setMapszie(1);
 
 	initialized = true;
 

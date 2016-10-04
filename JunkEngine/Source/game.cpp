@@ -71,6 +71,13 @@ LRESULT Game::messageHandler( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam 
             case WM_DEVICECHANGE:                   // 콘트롤러 확인
                 input->checkControllers();
                 return 0;
+			case WM_SETCURSOR:
+				SetCursor(NULL);
+				graphics->get3Ddevice()->ShowCursor(TRUE);
+				return TRUE; // prevent Windows from setting cursor to window class cursor
+
+				break;
+
         }
     }
     return DefWindowProc( hwnd, msg, wParam, lParam );    // 윈도우가 처리하게 함

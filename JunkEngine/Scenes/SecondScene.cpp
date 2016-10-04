@@ -67,7 +67,10 @@ void SecondScene::initialize(HWND hwnd)
 
 	player->setMapszie(618);
 
+	//Map->mapMove(300, 0);
+
 	initialized = true;
+	//player->setXY(64, 150);
 
 	return;
 }

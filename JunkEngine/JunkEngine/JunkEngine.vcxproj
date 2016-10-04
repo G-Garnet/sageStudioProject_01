@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\constants.h" />
+    <ClInclude Include="..\Headers\ItemSlot.h" />
     <ClInclude Include="..\Headers\Junk2Dentity.h" />
     <ClInclude Include="..\Headers\game.h" />
     <ClInclude Include="..\Headers\gameError.h" />
