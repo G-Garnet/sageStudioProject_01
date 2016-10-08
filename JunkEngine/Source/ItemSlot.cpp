@@ -60,6 +60,10 @@ void ItemSlot::ItemSlotInput(Input * input)
 	if (input->isKeyUp(VK_ESCAPE)) {
 		ItemSlotvisible = !ItemSlotvisible;
 	}
+
+	if (input->getMouseLButton() ) {
+
+	}
 }
 
 void ItemSlot::ItemSlotRender()

@@ -108,9 +108,11 @@
     <ClCompile Include="..\Source\Sounds.cpp" />
     <ClCompile Include="..\Source\textureManager.cpp" />
     <ClCompile Include="..\Source\winmain.cpp" />
+    <ClCompile Include="Cursor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\constants.h" />
+    <ClInclude Include="..\Headers\Cursor.h" />
     <ClInclude Include="..\Headers\ItemSlot.h" />
     <ClInclude Include="..\Headers\Junk2Dentity.h" />
     <ClInclude Include="..\Headers\game.h" />

@@ -1,7 +1,13 @@
 ﻿  MainScene.cpp
-..\Scenes\MainScene.cpp(44): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
-..\Scenes\MainScene.cpp(69): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-..\Scenes\MainScene.cpp(119): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Scenes\MainScene.cpp(43): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+  컴파일하고 있습니다...
+  SecondScene.cpp
+..\Scenes\SecondScene.cpp(36): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+  건너뛰고 있습니다... (관련된 변경 내용 없음)
+  winmain.cpp
+  Room5.cpp
+  Room4.cpp
+  Room3.cpp
 LINK : warning LNK4075: '/INCREMENTAL'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.
   Junk2DMap.obj : /GL로 컴파일한 MSIL .netmodule 또는 모듈이 있습니다. /LTCG를 지정하여 링크를 다시 시작하십시오. /LTCG를 링크 명령줄에 추가하면 링커 성능이 향상됩니다.
 LINK : warning LNK4075: '/INCREMENTAL'이(가) '/LTCG' 사양으로 인해 무시됩니다.

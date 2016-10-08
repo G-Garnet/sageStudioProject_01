@@ -11,6 +11,7 @@ private:
 	ObjectManager* objectManager;
 
 	Player* player;
+	Cursor* cursor;
 
 	// 게임 요소들
 	Junk2DMap* Map;

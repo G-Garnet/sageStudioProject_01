@@ -93,6 +93,9 @@
     <ClCompile Include="..\Source\ItemSlot.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
@@ -159,6 +162,9 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\ItemSlot.h">
+      <Filter>CustomClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Cursor.h">
       <Filter>CustomClass</Filter>
     </ClInclude>
   </ItemGroup>

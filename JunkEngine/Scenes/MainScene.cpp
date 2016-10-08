@@ -6,6 +6,7 @@ MainScenes::MainScenes()
 
 	player = new Player();
 	itemSlot = new ItemSlot();
+	cursor = new Cursor();
 
 	Map1 = new Junk2DMap();
 
@@ -14,8 +15,6 @@ MainScenes::MainScenes()
 	Hanger = new Junk2DEntity();
 	Carpet = new Junk2DEntity();
 	Pipe = new Junk2DSprite();
-
-	Cursor = new Junk2DSprite();
 }
 
 MainScenes::~MainScenes()
@@ -23,7 +22,7 @@ MainScenes::~MainScenes()
 	//SAFE_DELETE(map1);
 	objectManager->RemoveAllObject();
 	SAFE_DELETE(itemSlot);
-	SAFE_DELETE(Cursor);
+	SAFE_DELETE(cursor);
 }
 
 void MainScenes::initialize(HWND hwnd)
@@ -65,9 +64,6 @@ void MainScenes::initialize(HWND hwnd)
 	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
 	Pipe->setXY(2104, 314);
 
-	Cursor->settingTexture(graphics, "..\\Resources\\Etc\\cursor.png", 420, 420, 1);
-	Cursor->setXY(input->getMouseX(), input->getMouseY());
-
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	//player->setXY(720,300);
@@ -100,7 +96,7 @@ void MainScenes::Update()
 { 
 	player->playerInput(input, Map1);
 	itemSlot->ItemSlotInput(input);
-
+	cursor->CursorInput(input);
 
 	if (player->collidesWith(Carpet, CollisionVector) && 
 		input->isKeyUp(VK_RETURN)) {
@@ -115,8 +111,6 @@ void MainScenes::Update()
 	if (player->collidesWith(Desk, CollisionVector)){
 		player->bounce(CollisionVector, *Desk);
 	}
-	
-	Cursor->setXY(input->getMouseX(), input->getMouseY());
 
 	// 아이템 슬롯 클래스 호출
 	// 제작, 테스트 후 플레이어 클래스에서 호출하도록 이동
@@ -132,7 +126,7 @@ void MainScenes::render()
 	objectManager->RenderAllObject();
 	itemSlot->ItemSlotRender();
 
-	Cursor->draw();
+	cursor->draw();
 
 	//fontText->print("Hello WORLD!", 100, 100);
 	//fontText->print("ABCDEFGH", 100, 164);

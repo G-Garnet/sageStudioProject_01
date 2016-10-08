@@ -3,8 +3,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "..\\Headers\Game.h"
-#include "..\\Headers\Player.h"
-#include "..\\Headers\ItemSlot.h"
+#include "Scenes.h"
 
 // 메인 게임 클래스, Game클래스로 부터 상속 받음
 class MainScenes : public Game
@@ -15,6 +14,7 @@ private:
 	//// 게임 요소들
 	Player* player;
 	ItemSlot* itemSlot;
+	Cursor* cursor;
 
 	Junk2DMap* Map1;
 	Junk2DSprite* Door1;
@@ -22,8 +22,6 @@ private:
 	Junk2DEntity* Hanger;
 	Junk2DEntity* Carpet;
 	Junk2DSprite* Pipe;
-
-	Junk2DSprite* Cursor;
 
 	//Junk2DFont *fontText;
 	VECTOR2 CollisionVector;
