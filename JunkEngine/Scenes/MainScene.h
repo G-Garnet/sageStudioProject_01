@@ -23,7 +23,12 @@ private:
 	Junk2DEntity* Carpet;
 	Junk2DSprite* Pipe;
 
-	//Junk2DFont *fontText;
+
+	RECT rc = { 0, 0, 100, 100 };
+
+	Junk2DFont *fontText;
+	LPD3DXFONT	g_pFont;
+	ID3DXSprite*  Sprite;
 	VECTOR2 CollisionVector;
 
 public:

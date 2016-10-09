@@ -12,7 +12,9 @@ public:
 	Cursor();
 	virtual ~Cursor();
 
-	void CursorInput(Input* input);
+	virtual void CursorSetting(Graphics* graphics);
+
+	virtual void CursorInput(Input* input);
 };
 
 

@@ -94,7 +94,7 @@
       <Filter>CustomClass</Filter>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>CustomClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

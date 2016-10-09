@@ -7,6 +7,7 @@ MainScenes::MainScenes()
 	player = new Player();
 	itemSlot = new ItemSlot();
 	cursor = new Cursor();
+	fontText = new Junk2DFont();
 
 	Map1 = new Junk2DMap();
 
@@ -23,6 +24,7 @@ MainScenes::~MainScenes()
 	objectManager->RemoveAllObject();
 	SAFE_DELETE(itemSlot);
 	SAFE_DELETE(cursor);
+	SAFE_DELETE(fontText);
 }
 
 void MainScenes::initialize(HWND hwnd)
@@ -64,8 +66,13 @@ void MainScenes::initialize(HWND hwnd)
 	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
 	Pipe->setXY(2104, 314);
 
+	// SceneÀÇ ±âº» ¿ä¼Òµé
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
+	cursor->CursorSetting(graphics);
+	fontText->initialize(graphics, 15, true, false, "±¼¸²Ã¼");
+	
+
 	//player->setXY(720,300);
 	//player->setFrameDelay(0.1f);
 
@@ -128,7 +135,8 @@ void MainScenes::render()
 
 	cursor->draw();
 
-	//fontText->print("Hello WORLD!", 100, 100);
+
+	fontText->print("Ãò¶óÀÌ ²¿¸®¾È?", 100, 100);
 	//fontText->print("ABCDEFGH", 100, 164);
 
 	graphics->spriteEnd();

@@ -61,7 +61,17 @@ void ItemSlot::ItemSlotInput(Input * input)
 		ItemSlotvisible = !ItemSlotvisible;
 	}
 
-	if (input->getMouseLButton() ) {
+	// 아이템창 위 버튼
+	if (input->getMouseLButton() && 
+		input->getMouseX() >= 1163 && input->getMouseX() <= 1163+56 &&
+		input->getMouseY() >= 352 && input->getMouseY() <= 352 + 51) {
+		
+	}
+
+	// 아이템창 아래 버튼
+	if (input->getMouseLButton() &&
+		input->getMouseX() >= 1163 && input->getMouseX() <= 1163 + 56 &&
+		input->getMouseY() >= 487 && input->getMouseY() <= 487 + 51) {
 
 	}
 }

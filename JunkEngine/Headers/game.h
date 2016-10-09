@@ -12,7 +12,6 @@
 #include "graphics.h"
 #include "input.h"
 #include "Junk2DSprite.h"
-#include "Junk2DFont.h"
 #include "ObjectManager.h"
 #include "Junk2DFont.h"
 #include "Junk2DMap.h"

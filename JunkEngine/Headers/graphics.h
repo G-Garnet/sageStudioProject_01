@@ -117,6 +117,7 @@ public:
 	// get함수들
 	LP_3D   get3D() { return direct3d; } // LP_3D 타입 리턴
 	LP_3DDEVICE get3Ddevice() { return device3d; } // LP_3DDEVICE 타입 리턴
+	LP_SPRITE   getSprite() { return sprite; }
 
 	HDC     getDC() { return GetDC(hwnd); }
 

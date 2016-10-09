@@ -2,11 +2,17 @@
 
 Cursor::Cursor()
 {
-	this->settingTexture(graphics, "..\\Resources\\Etc\\cursor.png", 420, 420, 1);
+	
 }
 
 Cursor::~Cursor()
 {
+	
+}
+
+void Cursor::CursorSetting(Graphics * graphics)
+{
+	this->settingTexture(graphics, "..\\Resources\\Etc\\cursor.png", 32, 32, 1);
 }
 
 void Cursor::CursorInput(Input * input)

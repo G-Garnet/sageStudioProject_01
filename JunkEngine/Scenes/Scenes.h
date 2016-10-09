@@ -3,6 +3,7 @@
 #include "..\Headers\\Cursor.h"
 #include "..\Headers\\Player.h"
 #include "..\Headers\\ItemSlot.h"
+#include "..\Headers\\Junk2DFont.h"
 
 #include "MainScene.h"
 #include "SecondScene.h"
