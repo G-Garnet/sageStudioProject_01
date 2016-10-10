@@ -11,10 +11,11 @@ class MainScenes : public Game
 private:
 	ObjectManager* objectManager;
 
-	//// 게임 요소들
+	//// 씬의 기본 구성 요소들 ////
 	Player* player;
 	ItemSlot* itemSlot;
 	Cursor* cursor;
+	////////////////////////////////
 
 	Junk2DMap* Map1;
 	Junk2DSprite* Door1;

@@ -66,12 +66,12 @@ void MainScenes::initialize(HWND hwnd)
 	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
 	Pipe->setXY(2104, 314);
 
-	// Scene의 기본 요소들
+	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
 	fontText->initialize(graphics, 15, true, false, "굴림체");
-	
+	/////////////////////////
 
 	//player->setXY(720,300);
 	//player->setFrameDelay(0.1f);

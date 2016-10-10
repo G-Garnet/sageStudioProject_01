@@ -50,6 +50,7 @@ LRESULT Game::messageHandler( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam 
                 return 0;
             case WM_LBUTTONUP:                      // 마우스 왼쪽버튼 뗌
                 input->setMouseLButton(false);
+				input->setMouseLButtonDown(true);
                 input->mouseIn(lParam);             
                 return 0;
             case WM_MBUTTONDOWN:                    // 마우스 가운데 버튼 누름
@@ -189,6 +190,7 @@ void Game::run(HWND hwnd)
         Update();                   // 모든 게임요소 갱신
 		//UpdateEntity();				// 오브젝트들의 충돌 검사
         input->vibrateControllers(frameTime); // 컨트롤러 진동처리
+		input->InputEventReset(); // 입력들 리셋
     }
    
     input->readControllers();       // 컨트롤러의 상태 읽기

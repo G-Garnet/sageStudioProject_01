@@ -73,7 +73,10 @@ private:
     int  mouseRawX, mouseRawY;                  // 정밀 마우스 데이터
     RAWINPUTDEVICE Rid[1];                      // 정밀 마우스용
     bool mouseCaptured;                         // 마우스가 캡쳐된 경우 true가 됨
-    bool mouseLButton;                          // 마우스 왼쪽 버튼을 누른 경우 true가 됨
+    bool mouseLButton;                          // 마우스 왼쪽 버튼을 누른 경우 true가 
+
+	bool mouseLButtonDown;                          // 마우스 왼쪽 버튼을 누른 경우 true가 됨
+
     bool mouseMButton;                          // 마우스 가운데 버튼을 누른 경우 true가 됨
     bool mouseRButton;                          // 마우스 오른쪽 버튼을 누른 경우 true가 됨
     bool mouseX1Button;                         // 마우스 X1 버튼을 누른 경우 true가 됨
@@ -107,7 +110,8 @@ public:
     void mouseRawIn(LPARAM);	// 정밀 마우스 좌표값을 mouseRawX, mouseRawY에 저장
 
 	//---- 마우스 버튼 상태 저장 ----//
-    void setMouseLButton(bool b) { mouseLButton = b; } 
+    void setMouseLButton(bool b) { mouseLButton = b; }
+	void setMouseLButtonDown(bool b) { mouseLButtonDown = b; }
     void setMouseMButton(bool b) { mouseMButton = b; } 
     void setMouseRButton(bool b) { mouseRButton = b; } 
     void setMouseXButton(WPARAM wParam) {mouseX1Button = (wParam & MK_XBUTTON1) ? true:false;
@@ -124,6 +128,7 @@ public:
 
     // 버튼 상태 반환
     bool getMouseLButton()  const { return mouseLButton; }
+	bool getMouseLButtonDown()  const { return mouseLButtonDown; }
     bool getMouseMButton()  const { return mouseMButton; }
     bool getMouseRButton()  const { return mouseRButton; }
     bool getMouseX1Button() const { return mouseX1Button; }
@@ -132,6 +137,11 @@ public:
 	
     void checkControllers();	// 컨트롤러 체크
     void readControllers();		// 컨트롤러 읽어옴
+
+	void InputEventReset() {
+		mouseLButtonDown = false;
+
+	};
 
 	// 지정된 컨트롤러의 상태를 반환한다.
     const ControllerState* getControllerState(UINT n)

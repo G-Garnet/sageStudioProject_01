@@ -62,16 +62,25 @@ void ItemSlot::ItemSlotInput(Input * input)
 	}
 
 	// 아이템창 위 버튼
-	if (input->getMouseLButton() && 
-		input->getMouseX() >= 1163 && input->getMouseX() <= 1163+56 &&
-		input->getMouseY() >= 352 && input->getMouseY() <= 352 + 51) {
+	if (input->getMouseLButtonDown() &&
+		input->getMouseX() >= 1163 && input->getMouseX() <= 1163 + 56 &&
+		input->getMouseY() >= 352 && input->getMouseY() <= 352 + 51 &&
+		ItemSlotvisible == true) {
 		
+		for (int i = 0; i < ITEM_MAX; i++) {
+			Item[i]->setXY(Item[i]->getX(), Item[i]->getY() - 137);
+		}
+
 	}
 
 	// 아이템창 아래 버튼
-	if (input->getMouseLButton() &&
+	if (input->getMouseLButtonDown() &&
 		input->getMouseX() >= 1163 && input->getMouseX() <= 1163 + 56 &&
 		input->getMouseY() >= 487 && input->getMouseY() <= 487 + 51) {
+
+		for (int i = 0; i < ITEM_MAX; i++) {
+			Item[i]->setXY(Item[i]->getX(), Item[i]->getY() + 137);
+		}
 
 	}
 }
@@ -86,8 +95,13 @@ void ItemSlot::ItemSlotRender()
 		upButton->draw();
 		downButton->draw();
 
-		for (int i = 0; i < 3; i++) {
-			Item[i]->draw();
+		for (int i = 0; i < ITEM_MAX; i++) {
+			if (Item[i]->getY() == 239 ||
+				Item[i]->getY() == 239 + 1 * 137 || 
+				Item[i]->getY() == 239 + 2 * 137) {
+
+				Item[i]->draw();
+			}
 		}
 	}
 }
