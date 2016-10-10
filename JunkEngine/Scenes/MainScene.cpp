@@ -1,5 +1,7 @@
 #include "Scenes.h"
 
+extern int p_PosScene;
+
 MainScenes::MainScenes()
 {
 	objectManager = new ObjectManager;
@@ -94,6 +96,11 @@ void MainScenes::initialize(HWND hwnd)
 
 	player->setMapszie(1120);
 
+	if (Player::p_PosScene == 5) {
+		player->setX(114);
+	}
+	Player::p_PosScene = 1;
+
 	initialized = true;
 
 	return;
@@ -107,8 +114,6 @@ void MainScenes::Update()
 
 	if (player->collidesWith(Carpet, CollisionVector) && 
 		input->isKeyUp(VK_RETURN)) {
-
-
 		//player->bounce(CollisionVector, *Desk);
 		Game *temp = new SecondScene;
 
@@ -135,8 +140,7 @@ void MainScenes::render()
 
 	cursor->draw();
 
-
-	fontText->print("Ãò¶óÀÌ ²¿¸®¾È?", 100, 100);
+	//fontText->print("Ãò¶óÀÌ ²¿¸®¾È?", 100, 100);
 	//fontText->print("ABCDEFGH", 100, 164);
 
 	graphics->spriteEnd();

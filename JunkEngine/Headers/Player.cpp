@@ -1,5 +1,8 @@
 #include "Player.h"
 
+int Player::p_PosScene = 0;
+int Player::p_PosX = 0;
+
 Player::Player()
 {
 

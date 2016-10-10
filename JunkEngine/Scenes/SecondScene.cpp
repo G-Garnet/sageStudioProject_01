@@ -66,6 +66,13 @@ void SecondScene::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Window2"), "Window2");
 
 	player->setMapszie(618);
+	if (Player::p_PosScene == 1) {
+		player->setX(114);
+	}
+	else if (Player::p_PosScene == 3) {
+		player->setX(1080);
+	}
+	Player::p_PosScene = 2;
 
 	//Map->mapMove(300, 0);
 

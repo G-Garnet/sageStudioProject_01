@@ -12,6 +12,13 @@ private:
 	int mapSize;
 
 public:
+
+	// 게임 데이터들
+	static int inCounter[100];
+	static int p_PosX;
+	static int p_PosY;
+	static int p_PosScene;
+
 	Player();
 	virtual ~Player() {};
 
