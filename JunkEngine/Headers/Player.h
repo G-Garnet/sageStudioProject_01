@@ -10,14 +10,17 @@ private:
 	int Movespeed = 2;
 	int playerSize;
 	int mapSize;
+	int motionSW;
 
 public:
 
 	// 게임 데이터들
 	static int inCounter[100];
+	static int Item[10];
 	static int p_PosX;
 	static int p_PosY;
 	static int p_PosScene;
+	static bool inputSW;
 
 	Player();
 	virtual ~Player() {};
