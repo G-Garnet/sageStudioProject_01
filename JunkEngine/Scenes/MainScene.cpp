@@ -10,6 +10,7 @@ MainScenes::MainScenes()
 	itemSlot = new ItemSlot();
 	cursor = new Cursor();
 	font = new Junk2DFont();
+	fade = new Fade();
 
 	Map1 = new Junk2DMap();
 
@@ -27,6 +28,7 @@ MainScenes::~MainScenes()
 	SAFE_DELETE(itemSlot);
 	SAFE_DELETE(cursor);
 	SAFE_DELETE(font);
+	SAFE_DELETE(fade);
 }
 
 void MainScenes::initialize(HWND hwnd)
@@ -73,6 +75,7 @@ void MainScenes::initialize(HWND hwnd)
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
 	font->initialize(graphics, 15, true, false, "±¼¸²Ã¼");
+	fade->fadeSetting(graphics);
 	/////////////////////////
 
 	//player->setXY(720,300);
@@ -115,6 +118,15 @@ void MainScenes::Update()
 	if (player->collidesWith(Carpet, CollisionVector) && 
 		input->isKeyUp(VK_RETURN)) {
 		//player->bounce(CollisionVector, *Desk);
+		
+		fade->setalphaStart(true);
+	}
+
+	if (fade->getalphaStart()) {
+		fade->setAlpha(fade->getAlpha() + 0.3f);
+	}
+
+	if (fade->getAlpha() >= 255) {
 		Game *temp = new SecondScene;
 
 		ChangeScene(temp);
@@ -135,6 +147,7 @@ void MainScenes::render()
 	Map1->getMapBG()->draw();
 	objectManager->RenderAllObject();
 	itemSlot->ItemSlotRender();
+	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	cursor->draw();
 

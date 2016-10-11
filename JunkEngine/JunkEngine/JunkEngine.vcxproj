@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Headers\Fade.cpp" />
     <ClCompile Include="..\Headers\Junk2DMap.cpp" />
     <ClCompile Include="..\Headers\Player.cpp" />
     <ClCompile Include="..\Headers\VideoPlay.cpp" />
@@ -113,6 +114,7 @@
   <ItemGroup>
     <ClInclude Include="..\Headers\constants.h" />
     <ClInclude Include="..\Headers\Cursor.h" />
+    <ClInclude Include="..\Headers\Fade.h" />
     <ClInclude Include="..\Headers\ItemSlot.h" />
     <ClInclude Include="..\Headers\Junk2Dentity.h" />
     <ClInclude Include="..\Headers\game.h" />

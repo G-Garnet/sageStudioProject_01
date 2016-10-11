@@ -96,6 +96,9 @@
     <ClCompile Include="Cursor.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
+    <ClCompile Include="..\Headers\Fade.cpp">
+      <Filter>CustomClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
@@ -137,9 +140,6 @@
     <ClInclude Include="..\Headers\TextWindow.h">
       <Filter>CustomClass</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\VideoPlay.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Player.h">
       <Filter>CustomClass</Filter>
     </ClInclude>
@@ -166,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Cursor.h">
       <Filter>CustomClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Fade.h">
+      <Filter>CustomClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\VideoPlay.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

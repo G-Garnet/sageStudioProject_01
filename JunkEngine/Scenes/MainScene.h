@@ -25,6 +25,7 @@ private:
 	Junk2DEntity* Carpet;
 	Junk2DSprite* Pipe;
 
+	Fade* fade;
 
 	RECT rc = { 0, 0, 100, 100 };
 
