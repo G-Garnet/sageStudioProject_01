@@ -15,6 +15,7 @@ private:
 	Player* player;
 	ItemSlot* itemSlot;
 	Cursor* cursor;
+	Junk2DFont *font;
 	////////////////////////////////
 
 	Junk2DMap* Map1;
@@ -27,7 +28,6 @@ private:
 
 	RECT rc = { 0, 0, 100, 100 };
 
-	Junk2DFont *fontText;
 	LPD3DXFONT	g_pFont;
 	ID3DXSprite*  Sprite;
 	VECTOR2 CollisionVector;

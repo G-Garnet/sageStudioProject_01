@@ -7,6 +7,9 @@ SecondScene::SecondScene()
 	Map = new Junk2DMap;
 
 	player = new Player();
+	itemSlot = new ItemSlot();
+	cursor = new Cursor();
+	font = new Junk2DFont();
 	
 	Door1 = new Junk2DSprite();
 	Door2 = new Junk2DSprite();
@@ -20,6 +23,9 @@ SecondScene::~SecondScene()
 {
 	SAFE_DELETE(Map);
 	objectManager->RemoveAllObject();
+	SAFE_DELETE(itemSlot);
+	SAFE_DELETE(cursor);
+	SAFE_DELETE(font);
 }
 
 void SecondScene::initialize(HWND hwnd)
@@ -47,7 +53,12 @@ void SecondScene::initialize(HWND hwnd)
 	Window2->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Room2_Window1.png", 365, 206, 1);
 	Window2->setXY(1172, 48);
 
+	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
+	itemSlot->ItemSlotSetting(graphics);
+	cursor->CursorSetting(graphics);
+	font->initialize(graphics, 15, true, false, "굴림체");
+	/////////////////////////
 
 	Map->mapMove(0, 0);
 
@@ -85,6 +96,8 @@ void SecondScene::initialize(HWND hwnd)
 void SecondScene::Update()
 {
 	player->playerInput(input, Map);
+	itemSlot->ItemSlotInput(input);
+	cursor->CursorInput(input);
 
 	if (input->isKeyUp(VK_RETURN)) {
 		Game *temp = new Room3;
@@ -101,6 +114,9 @@ void SecondScene::render()
 
 	Map->getMapBG()->draw();
 	objectManager->RenderAllObject();
+
+	itemSlot->ItemSlotRender();
+	cursor->draw();
 
 	graphics->spriteEnd();
 }

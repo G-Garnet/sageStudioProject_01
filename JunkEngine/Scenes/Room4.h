@@ -10,7 +10,12 @@ class Room4 : public Game
 private:
 	ObjectManager* objectManager;
 
+	//// 씬의 기본 구성 요소들 ////
 	Player* player;
+	ItemSlot* itemSlot;
+	Cursor* cursor;
+	Junk2DFont *font;
+	////////////////////////////////
 
 	Junk2DSprite* Door1;
 	Junk2DSprite* Door2;

@@ -7,6 +7,9 @@ Room3::Room3()
 	Map = new Junk2DMap;
 
 	player = new Player();
+	itemSlot = new ItemSlot();
+	cursor = new Cursor();
+	font = new Junk2DFont();
 
 	Door1 = new Junk2DSprite();
 	Door2 = new Junk2DSprite();
@@ -23,6 +26,9 @@ Room3::~Room3()
 {
 	SAFE_DELETE(Map);
 	objectManager->RemoveAllObject();
+	SAFE_DELETE(itemSlot);
+	SAFE_DELETE(cursor);
+	SAFE_DELETE(font);
 }
 
 void Room3::initialize(HWND hwnd)
@@ -57,7 +63,12 @@ void Room3::initialize(HWND hwnd)
 	Desk->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\Desk.png", 172, 306, 1);
 	Desk->setXY(1230, 240);
 
+	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
+	itemSlot->ItemSlotSetting(graphics);
+	cursor->CursorSetting(graphics);
+	font->initialize(graphics, 15, true, false, "굴림체");
+	/////////////////////////
 
 	Map->mapMove(0, 0);
 
@@ -84,6 +95,14 @@ void Room3::initialize(HWND hwnd)
 
 	player->setMapszie(720);
 
+	if (Player::p_PosScene == 2) {
+		player->setX(114);
+	}
+	else if (Player::p_PosScene == 4) {
+		player->setX(1080);
+	}
+	Player::p_PosScene = 3;
+
 	initialized = true;
 
 	return;
@@ -92,6 +111,8 @@ void Room3::initialize(HWND hwnd)
 void Room3::Update()
 {
 	player->playerInput(input, Map);
+	itemSlot->ItemSlotInput(input);
+	cursor->CursorInput(input);
 
 	if (input->isKeyUp(VK_RETURN)) {
 		Game *temp = new Room4;
@@ -108,6 +129,9 @@ void Room3::render()
 
 	Map->getMapBG()->draw();
 	objectManager->RenderAllObject();
+
+	itemSlot->ItemSlotRender();
+	cursor->draw();
 
 	graphics->spriteEnd();
 }

@@ -140,6 +140,9 @@ public:
 
 	void InputEventReset() {
 		mouseLButtonDown = false;
+		for (int i = 0; i < 256;i++) {
+			keysUp[i] = false;
+		}
 
 	};
 

@@ -7,6 +7,9 @@ Room5::Room5()
 	Map = new Junk2DMap;
 
 	player = new Player();
+	itemSlot = new ItemSlot();
+	cursor = new Cursor();
+	font = new Junk2DFont();
 
 	Door1 = new Junk2DSprite();
 	cross1 = new Junk2DSprite();
@@ -18,6 +21,9 @@ Room5::~Room5()
 {
 	SAFE_DELETE(Map);
 	objectManager->RemoveAllObject();
+	SAFE_DELETE(itemSlot);
+	SAFE_DELETE(cursor);
+	SAFE_DELETE(font);
 }
 
 void Room5::initialize(HWND hwnd)
@@ -45,8 +51,12 @@ void Room5::initialize(HWND hwnd)
 	light->settingTexture(graphics, "..\\Resources\\Floor1\\Room5\\Room5_light.png", 456, 86, 1);
 	light->setXY(410, 88);
 
-
+	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
+	itemSlot->ItemSlotSetting(graphics);
+	cursor->CursorSetting(graphics);
+	font->initialize(graphics, 15, true, false, "굴림체");
+	/////////////////////////
 
 	Map->mapMove(0, 0);
 
@@ -73,12 +83,14 @@ void Room5::initialize(HWND hwnd)
 void Room5::Update()
 {
 	player->playerInput(input, Map);
+	itemSlot->ItemSlotInput(input);
+	cursor->CursorInput(input);
 
-	if (input->isKeyUp(VK_RETURN)) {
+	/*if (input->isKeyUp(VK_RETURN)) {
 		Game *temp = new MainScenes;
 
 		ChangeScene(temp);
-	}
+	}*/
 
 	//exitGame();
 }

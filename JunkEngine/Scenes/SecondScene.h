@@ -10,8 +10,12 @@ class SecondScene : public Game
 private:
 	ObjectManager* objectManager;
 
+	//// 씬의 기본 구성 요소들 ////
 	Player* player;
+	ItemSlot* itemSlot;
 	Cursor* cursor;
+	Junk2DFont *font;
+	////////////////////////////////
 
 	// 게임 요소들
 	Junk2DMap* Map;

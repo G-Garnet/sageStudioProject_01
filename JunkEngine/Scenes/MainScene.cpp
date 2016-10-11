@@ -9,7 +9,7 @@ MainScenes::MainScenes()
 	player = new Player();
 	itemSlot = new ItemSlot();
 	cursor = new Cursor();
-	fontText = new Junk2DFont();
+	font = new Junk2DFont();
 
 	Map1 = new Junk2DMap();
 
@@ -26,7 +26,7 @@ MainScenes::~MainScenes()
 	objectManager->RemoveAllObject();
 	SAFE_DELETE(itemSlot);
 	SAFE_DELETE(cursor);
-	SAFE_DELETE(fontText);
+	SAFE_DELETE(font);
 }
 
 void MainScenes::initialize(HWND hwnd)
@@ -72,7 +72,7 @@ void MainScenes::initialize(HWND hwnd)
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
-	fontText->initialize(graphics, 15, true, false, "±¼¸²Ã¼");
+	font->initialize(graphics, 15, true, false, "±¼¸²Ã¼");
 	/////////////////////////
 
 	//player->setXY(720,300);
