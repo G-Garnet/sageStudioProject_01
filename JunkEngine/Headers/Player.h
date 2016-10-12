@@ -11,6 +11,7 @@ private:
 	int playerSize;
 	int mapSize;
 	int motionSW;
+	bool inputSW;
 
 public:
 
@@ -19,14 +20,14 @@ public:
 	static int Item[10];
 	static int p_PosX;
 	static int p_PosY;
-	static int p_PosScene;
-	static bool inputSW;
+	static int p_PosScene;	
 
 	Player();
 	virtual ~Player() {};
 
 	void playerSetting(Graphics* graphics);
 	void setMapszie(int a) { mapSize = a; };
+	void setInputSW(bool a) { inputSW = a; };
 
 	void playerInput(Input* input, Junk2DMap* Map1);
 	void getplayerWidth() {

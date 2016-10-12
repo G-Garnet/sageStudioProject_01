@@ -76,6 +76,7 @@ void MainScenes::initialize(HWND hwnd)
 	cursor->CursorSetting(graphics);
 	font->initialize(graphics, 15, true, false, "±¼¸²Ã¼");
 	fade->fadeSetting(graphics);
+	fade->setAlpha(255);
 	/////////////////////////
 
 	//player->setXY(720,300);
@@ -123,7 +124,13 @@ void MainScenes::Update()
 	}
 
 	if (fade->getalphaStart()) {
-		fade->setAlpha(fade->getAlpha() + 0.3f);
+		fade->setAlpha(fade->getAlpha() + 1.75f);
+	}
+	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f){
+		fade->setAlpha(fade->getAlpha() - 1.75f);
+	}
+	else if (fade->getAlpha() <= 1.5f) {
+		player->setInputSW(true);
 	}
 
 	if (fade->getAlpha() >= 255) {
