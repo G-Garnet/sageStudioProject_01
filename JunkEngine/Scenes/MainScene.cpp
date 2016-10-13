@@ -19,6 +19,8 @@ MainScenes::MainScenes()
 	Hanger = new Junk2DEntity();
 	Carpet = new Junk2DEntity();
 	Pipe = new Junk2DSprite();
+
+	filter = new Junk2DSprite();
 }
 
 MainScenes::~MainScenes()
@@ -70,6 +72,9 @@ void MainScenes::initialize(HWND hwnd)
 	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
 	Pipe->setXY(2104, 314);
 
+	filter->settingTexture(graphics, "..\\Resources\\Floor1\\1_roomd.png", 2400, 720, 1);
+	filter->setXY(0, 0);
+
 	// SceneÀÇ ±âº» ¿ä¼Òµé //
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
@@ -89,12 +94,14 @@ void MainScenes::initialize(HWND hwnd)
 	objectManager->AddObject(Carpet, "Carpet");
 	objectManager->AddObject(Pipe, "Pipe");
 	objectManager->AddObject(player, "player");
+	objectManager->AddObject(filter, "filter");
 
 	Map1->MapAddObject(objectManager->getCGameObject("Door1"),"Door1");
 	Map1->MapAddObject(objectManager->getCGameObject("Desk"), "Desk");
 	Map1->MapAddObject(objectManager->getCGameObject("Hanger"), "Hanger");
 	Map1->MapAddObject(objectManager->getCGameObject("Carpet"), "Carpet");
 	Map1->MapAddObject(objectManager->getCGameObject("Pipe"), "Pipe");
+	Map1->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
 	Map1->mapMove(0, 0);
 
@@ -158,8 +165,8 @@ void MainScenes::render()
 
 	cursor->draw();
 
-	//fontText->print("Ãò¶óÀÌ ²¿¸®¾È?", 100, 100);
-	//fontText->print("ABCDEFGH", 100, 164);
+	//font->print("Ãò¶óÀÌ Ãò¶óÀÌ", 100, 100);
+	//font->print("ABCDEFGH", 100, 116);
 
 	graphics->spriteEnd();
 }

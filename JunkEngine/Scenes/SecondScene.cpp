@@ -9,6 +9,7 @@ SecondScene::SecondScene()
 	player = new Player();
 	itemSlot = new ItemSlot();
 	cursor = new Cursor();
+	fade = new Fade();
 	font = new Junk2DFont();
 	
 	Door1 = new Junk2DSprite();
@@ -17,6 +18,9 @@ SecondScene::SecondScene()
 
 	Window1 = new Junk2DSprite();
 	Window2 = new Junk2DSprite();
+
+
+	filter = new Junk2DSprite();
 }
 
 SecondScene::~SecondScene()
@@ -53,11 +57,16 @@ void SecondScene::initialize(HWND hwnd)
 	Window2->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Room2_Window1.png", 365, 206, 1);
 	Window2->setXY(1172, 48);
 
+	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\2_roomd.png", 1900, 720, 1);
+	filter->setXY(0, 0);
+
 	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
 	font->initialize(graphics, 15, true, false, "굴림체");
+	fade->fadeSetting(graphics);
+	fade->setAlpha(255);
 	/////////////////////////
 
 	Map->mapMove(0, 0);
@@ -69,12 +78,14 @@ void SecondScene::initialize(HWND hwnd)
 	objectManager->AddObject(Window1, "Window1");
 	objectManager->AddObject(Window2, "Window2");
 	objectManager->AddObject(player, "Player");
+	objectManager->AddObject(filter, "filter");
 
 	Map->MapAddObject(objectManager->getCGameObject("Door1"), "Door1");
 	Map->MapAddObject(objectManager->getCGameObject("Door2"), "Door2");
 	Map->MapAddObject(objectManager->getCGameObject("Door3"), "Door3");
 	Map->MapAddObject(objectManager->getCGameObject("Window1"), "Window1");
 	Map->MapAddObject(objectManager->getCGameObject("Window2"), "Window2");
+	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
 	player->setMapszie(618);
 	if (Player::p_PosScene == 1) {
@@ -99,6 +110,22 @@ void SecondScene::Update()
 	itemSlot->ItemSlotInput(input);
 	cursor->CursorInput(input);
 
+	if (fade->getalphaStart()) {
+		fade->setAlpha(fade->getAlpha() + 1.75f);
+	}
+	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f) {
+		fade->setAlpha(fade->getAlpha() - 1.75f);
+	}
+	else if (fade->getAlpha() <= 1.5f) {
+		player->setInputSW(true);
+	}
+
+	if (fade->getAlpha() >= 255) {
+		Game *temp = new SecondScene;
+
+		ChangeScene(temp);
+	}
+
 	if (input->isKeyUp(VK_RETURN)) {
 		Game *temp = new Room3;
 
@@ -117,6 +144,7 @@ void SecondScene::render()
 
 	itemSlot->ItemSlotRender();
 	cursor->draw();
+	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	graphics->spriteEnd();
 }

@@ -15,6 +15,7 @@ private:
 	ItemSlot* itemSlot;
 	Cursor* cursor;
 	Junk2DFont *font;
+	Fade* fade;
 	////////////////////////////////
 
 	// 게임 요소들
@@ -25,6 +26,8 @@ private:
 
 	Junk2DSprite* Window1;
 	Junk2DSprite* Window2;
+
+	Junk2DSprite* filter;
 
 public:
 	SecondScene();

@@ -10,12 +10,12 @@ Player::Player()
 
 void Player::playerSetting(Graphics* graphics)
 {
-	this->initialize(graphics, "..\\Resources\\Player\\Walk.png", 218, 398, 1);
+	this->initialize(graphics, "..\\Resources\\Player\\Ch_01_standing.png", 250, 400, 7);
 	this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 	this->setLoop(true);
 	this->setActive(true);
 	this->setCollisionType(Junk2DentityNS::BOX);
-	this->setAnimation(0, 0, 0, 3.0f);
+	this->setAnimation(0, 19, 0, 3.0f);
 
 	this->getplayerWidth();
 	this->setEdge(0, 150, 218, 398);
@@ -27,7 +27,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 {
 	// 플레이어 이동 클래스
 	// 전부 플레이어 클래스로 만들어서 객체화 시켜서 이동할 예정
-	if (inputSW) {
+	//if (inputSW) {
 
 		if (input->isKeyDown(VK_DOWN) ||
 			input->isKeyDown(VK_UP) ||
@@ -35,10 +35,11 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 			input->isKeyDown(VK_LEFT)) {
 
 			if (motionSW != 1) {
-				this->settingTexture(graphics, "..\\Resources\\Player\\Walk.png");
+				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_walking.png", 250, 400, 7);
 				this->setLoop(true);
 				this->setActive(true);
-				this->setAnimation(0, 0, 0, 3.0f);
+				this->setAnimation(0, 19, 0, 0.8f);
+				this->setEdge(0, 150, 218, 398);
 			}
 
 			motionSW = 1;
@@ -76,7 +77,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				else {
 					Map1->mapMove(-Movespeed, 0);
 				}
-				this->update(0.05f);
+
 			}
 			if (input->isKeyDown(VK_LEFT)) {
 				if ((Map1->getMapX() >= 0 || this->getX() > GAME_WIDTH / 2)) {
@@ -88,21 +89,23 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				else {
 					Map1->mapMove(Movespeed, 0);
 				}
-				this->update(0.05f);
 			}
 		}
 
 		else {
 			if (motionSW != 0) {
-				this->settingTexture(graphics, "..\\Resources\\Player\\Idle.png");
+				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_standing.png", 250, 400, 7);
 				this->setLoop(true);
 				this->setActive(true);
-				this->setAnimation(0, 0, 0, 3.0f);
+				this->setAnimation(0, 19, 0, 0.8f);
+				this->setEdge(0, 150, 218, 398);
 			}
 
 			motionSW = 0;
 		}
-	}
+	//}
+
+	this->update(0.05f);
 	
 
 	if (input->isKeyDown(VK_F4) && input->isKeyDown(VK_MENU)) {

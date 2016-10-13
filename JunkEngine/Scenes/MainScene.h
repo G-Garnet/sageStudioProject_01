@@ -16,6 +16,7 @@ private:
 	ItemSlot* itemSlot;
 	Cursor* cursor;
 	Junk2DFont *font;
+	Fade* fade;
 	////////////////////////////////
 
 	Junk2DMap* Map1;
@@ -25,11 +26,9 @@ private:
 	Junk2DEntity* Carpet;
 	Junk2DSprite* Pipe;
 
-	Fade* fade;
+	Junk2DSprite* filter;
 
-	RECT rc = { 0, 0, 100, 100 };
 
-	LPD3DXFONT	g_pFont;
 	ID3DXSprite*  Sprite;
 	VECTOR2 CollisionVector;
 
