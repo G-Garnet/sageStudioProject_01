@@ -44,7 +44,6 @@ public:
 	virtual float getScale() { return spriteData.scale; }	// scale 값 반환
 	virtual int   getWidth() { return spriteData.width; }	// 폭을 반환
 	virtual int   getHeight() { return spriteData.height; }	// 높이를 반환
-
 															// X의 중심을 반환
 	virtual float getCenterX() { return spriteData.x + spriteData.width / 2 * getScale(); }
 	// Y의 중심을 반환

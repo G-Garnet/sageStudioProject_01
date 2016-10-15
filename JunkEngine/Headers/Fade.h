@@ -9,6 +9,7 @@ private:
 	float alpha;
 	bool alphaStart;
 
+
 public:
 	Fade();
 	virtual ~Fade();

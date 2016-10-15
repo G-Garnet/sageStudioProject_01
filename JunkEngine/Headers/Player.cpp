@@ -13,6 +13,7 @@ void Player::playerSetting(Graphics* graphics)
 	this->initialize(graphics, "..\\Resources\\Player\\Ch_01_standing.png", 250, 400, 7);
 	this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 	this->setLoop(true);
+	//this->flipVertical(Dir_);
 	this->setActive(true);
 	this->setCollisionType(Junk2DentityNS::BOX);
 	this->setAnimation(0, 19, 0, 3.0f);
@@ -38,7 +39,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_walking.png", 250, 400, 7);
 				this->setLoop(true);
 				this->setActive(true);
-				this->setAnimation(0, 19, 0, 0.8f);
+				this->setAnimation(0, 19, 0, 0.5f);
 				this->setEdge(0, 150, 218, 398);
 			}
 
@@ -78,6 +79,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 					Map1->mapMove(-Movespeed, 0);
 				}
 
+				Dir_ = true;
 			}
 			if (input->isKeyDown(VK_LEFT)) {
 				if ((Map1->getMapX() >= 0 || this->getX() > GAME_WIDTH / 2)) {
@@ -89,6 +91,8 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				else {
 					Map1->mapMove(Movespeed, 0);
 				}
+
+				Dir_ = false;
 			}
 		}
 
@@ -97,15 +101,17 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_standing.png", 250, 400, 7);
 				this->setLoop(true);
 				this->setActive(true);
-				this->setAnimation(0, 19, 0, 0.8f);
+				this->setAnimation(0, 19, 0, 0.5f);
 				this->setEdge(0, 150, 218, 398);
 			}
 
 			motionSW = 0;
 		}
 	//}
+	
+	this->flipHorizontal(Dir_);
 
-	this->update(0.05f);
+	this->update((float)1 / 60);
 	
 
 	if (input->isKeyDown(VK_F4) && input->isKeyDown(VK_MENU)) {

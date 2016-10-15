@@ -15,16 +15,22 @@ private:
 	ItemSlot* itemSlot;
 	Cursor* cursor;
 	Junk2DFont *font;
+	Fade* fade;
+
+	Junk2DSprite* filter;
 	////////////////////////////////
 
 	Junk2DSprite* Door1;
 	Junk2DSprite* Door2;
 	Junk2DSprite* Candle1;
 	Junk2DSprite* Candle2;
-	Junk2DSprite* fire1;
+	Junk2DSprite* fireDeck;
 	Junk2DSprite* Box;
 	Junk2DSprite* Picture;
 	Junk2DSprite* Desk;
+
+	Junk2DSprite* fire1;
+	Junk2DSprite* fire2;
 
 	// 게임 요소들
 	Junk2DMap* Map;

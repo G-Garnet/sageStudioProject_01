@@ -118,7 +118,7 @@ void Graphics::drawSprite(const SpriteData &spriteData, COLOR_ARGB color){
 	}
 
 	// 수직으로 뒤집기
-	if (spriteData.flipHorizontal) {
+	if (spriteData.flipVertical) {
 		scaling.y *= -1;
 		spriteCenter.y -= (float)(spriteData.height / 2 * spriteData.scale);
 		translate.y += (float)(spriteData.height * spriteData.scale);

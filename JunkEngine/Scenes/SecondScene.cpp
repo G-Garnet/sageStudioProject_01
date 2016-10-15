@@ -127,9 +127,10 @@ void SecondScene::Update()
 	}
 
 	if (input->isKeyUp(VK_RETURN)) {
-		Game *temp = new Room3;
+		/*Game *temp = new Room3;
 
-		ChangeScene(temp);
+		ChangeScene(temp);*/
+		fade->setalphaStart(true);
 	}
 
 	//exitGame();

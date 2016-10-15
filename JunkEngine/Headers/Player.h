@@ -13,6 +13,9 @@ private:
 	int motionSW;
 	bool inputSW;
 
+
+	bool Dir_ = true;
+
 public:
 
 	// 게임 데이터들
