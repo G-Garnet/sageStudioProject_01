@@ -80,6 +80,7 @@ void MainScenes::initialize(HWND hwnd)
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
 	textWindow->TextWindowSetting(graphics);
+	textWindow->setActive(false);
 	fade->fadeSetting(graphics);
 	fade->setAlpha(255);
 	/////////////////////////
@@ -149,7 +150,7 @@ void MainScenes::Update()
 		ChangeScene(temp);
 	}
 
-	if (input->getMouseLButtonDown()) {
+	if (input->getMouseLButton() && !textWindow->getActive()) {
 		textWindow->setActive(true);
 	}
 
