@@ -91,6 +91,7 @@
     <ClCompile Include="..\Headers\Fade.cpp" />
     <ClCompile Include="..\Headers\Junk2DMap.cpp" />
     <ClCompile Include="..\Headers\Player.cpp" />
+    <ClCompile Include="..\Headers\TextWindow.cpp" />
     <ClCompile Include="..\Headers\VideoPlay.cpp" />
     <ClCompile Include="..\Scenes\MainScene.cpp" />
     <ClCompile Include="..\Scenes\Room3.cpp" />

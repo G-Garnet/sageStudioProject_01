@@ -99,6 +99,9 @@
     <ClCompile Include="..\Headers\Fade.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
+    <ClCompile Include="..\Headers\TextWindow.cpp">
+      <Filter>CustomClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">

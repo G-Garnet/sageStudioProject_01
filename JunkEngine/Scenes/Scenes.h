@@ -5,6 +5,7 @@
 #include "..\Headers\\ItemSlot.h"
 #include "..\Headers\\Fade.h"
 #include "..\Headers\\Junk2DFont.h"
+#include "..\Headers\\TextWindow.h"
 
 #include "MainScene.h"
 #include "SecondScene.h"

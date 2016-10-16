@@ -15,7 +15,7 @@ private:
 	Player* player;
 	ItemSlot* itemSlot;
 	Cursor* cursor;
-	Junk2DFont *font;
+	TextWindow *textWindow;
 	Fade* fade;
 	////////////////////////////////
 

@@ -9,7 +9,7 @@ MainScenes::MainScenes()
 	player = new Player();
 	itemSlot = new ItemSlot();
 	cursor = new Cursor();
-	font = new Junk2DFont();
+	textWindow = new TextWindow();
 	fade = new Fade();
 
 	Map1 = new Junk2DMap();
@@ -29,7 +29,7 @@ MainScenes::~MainScenes()
 	objectManager->RemoveAllObject();
 	SAFE_DELETE(itemSlot);
 	SAFE_DELETE(cursor);
-	SAFE_DELETE(font);
+	SAFE_DELETE(textWindow);
 	SAFE_DELETE(fade);
 }
 
@@ -79,7 +79,7 @@ void MainScenes::initialize(HWND hwnd)
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
-	font->initialize(graphics, 15, true, false, "굴림체");
+	textWindow->TextWindowSetting(graphics);
 	fade->fadeSetting(graphics);
 	fade->setAlpha(255);
 	/////////////////////////
@@ -119,8 +119,11 @@ void MainScenes::initialize(HWND hwnd)
 
 void MainScenes::Update()
 { 
+	// 텍스트 윈도우가 설정된동안은 비활성화 //
+
 	player->playerInput(input, Map1);
 	itemSlot->ItemSlotInput(input);
+	textWindow->TextWindowInput(input);
 	cursor->CursorInput(input);
 
 	if (player->collidesWith(Carpet, CollisionVector) && 
@@ -146,6 +149,10 @@ void MainScenes::Update()
 		ChangeScene(temp);
 	}
 
+	if (input->getMouseLButtonDown()) {
+		textWindow->setActive(true);
+	}
+
 	if (player->collidesWith(Desk, CollisionVector)){
 		player->bounce(CollisionVector, *Desk);
 	}
@@ -160,6 +167,7 @@ void MainScenes::render()
 
 	Map1->getMapBG()->draw();
 	objectManager->RenderAllObject();
+	textWindow->TextWindowRender("asfasf...??",0);
 	itemSlot->ItemSlotRender();
 	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
