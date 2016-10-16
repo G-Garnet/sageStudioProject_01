@@ -15,6 +15,9 @@ private:
 	ItemSlot* itemSlot;
 	Cursor* cursor;
 	Junk2DFont *font;
+	Fade* fade;
+
+	Junk2DSprite* filter;
 	////////////////////////////////
 
 	Junk2DSprite* Door1;

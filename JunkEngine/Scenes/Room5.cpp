@@ -10,11 +10,14 @@ Room5::Room5()
 	itemSlot = new ItemSlot();
 	cursor = new Cursor();
 	font = new Junk2DFont();
+	fade = new Fade();
 
 	Door1 = new Junk2DSprite();
 	cross1 = new Junk2DSprite();
 	cross2 = new Junk2DSprite();
 	light = new Junk2DSprite();
+
+	filter = new Junk2DSprite();
 }
 
 Room5::~Room5()
@@ -51,11 +54,16 @@ void Room5::initialize(HWND hwnd)
 	light->settingTexture(graphics, "..\\Resources\\Floor1\\Room5\\Room5_light.png", 456, 86, 1);
 	light->setXY(410, 88);
 
+	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room5\\5_roomd.png", 2000, 720, 1);
+	filter->setXY(0, 0);
+
 	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
 	font->initialize(graphics, 15, true, false, "굴림체");
+	fade->fadeSetting(graphics);
+	fade->setAlpha(255);
 	/////////////////////////
 
 	Map->mapMove(0, 0);
@@ -67,11 +75,13 @@ void Room5::initialize(HWND hwnd)
 	objectManager->AddObject(light, "light");
 
 	objectManager->AddObject(player, "Player");
+	objectManager->AddObject(filter, "filter");
 
 	Map->MapAddObject(objectManager->getCGameObject("Door1"), "Door1");
 	Map->MapAddObject(objectManager->getCGameObject("cross1"), "cross1");
 	Map->MapAddObject(objectManager->getCGameObject("cross2"), "cross2");
 	Map->MapAddObject(objectManager->getCGameObject("light"), "light");
+	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
 	player->setMapszie(1);
 
@@ -85,6 +95,17 @@ void Room5::Update()
 	player->playerInput(input, Map);
 	itemSlot->ItemSlotInput(input);
 	cursor->CursorInput(input);
+
+	if (fade->getalphaStart()) {
+		fade->setAlpha(fade->getAlpha() + 1.75f);
+	}
+	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f) {
+		fade->setAlpha(fade->getAlpha() - 1.75f);
+	}
+	else if (fade->getAlpha() <= 1.5f) {
+		player->setInputSW(true);
+	}
+
 
 	/*if (input->isKeyUp(VK_RETURN)) {
 		Game *temp = new MainScenes;
@@ -101,6 +122,10 @@ void Room5::render()
 
 	Map->getMapBG()->draw();
 	objectManager->RenderAllObject();
+
+	itemSlot->ItemSlotRender();
+	cursor->draw();
+	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	graphics->spriteEnd();
 }
