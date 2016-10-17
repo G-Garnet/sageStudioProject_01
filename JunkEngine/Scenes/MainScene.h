@@ -32,6 +32,8 @@ private:
 	ID3DXSprite*  Sprite;
 	VECTOR2 CollisionVector;
 
+	int eventCount = 0;
+
 public:
 
 	MainScenes();

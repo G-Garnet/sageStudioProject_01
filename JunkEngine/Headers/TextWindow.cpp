@@ -53,7 +53,5 @@ void TextWindow::TextWindowRender(const std::string &s, int select)
 
 void TextWindow::TextWindowInput(Input * input)
 {
-	if (input->isKeyUp(VK_RETURN)) {
-		active = false;
-	}
+	
 }

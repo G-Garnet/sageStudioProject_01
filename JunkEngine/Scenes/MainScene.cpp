@@ -127,10 +127,9 @@ void MainScenes::Update()
 	textWindow->TextWindowInput(input);
 	cursor->CursorInput(input);
 
-	if (player->collidesWith(Carpet, CollisionVector) && 
+	// Fade //
+	if (player->collidesWith(Carpet, CollisionVector) &&
 		input->isKeyUp(VK_RETURN)) {
-		//player->bounce(CollisionVector, *Desk);
-		
 		fade->setalphaStart(true);
 	}
 
@@ -149,17 +148,31 @@ void MainScenes::Update()
 
 		ChangeScene(temp);
 	}
+	///////////
 
-	if (input->getMouseLButton() && !textWindow->getActive()) {
-		textWindow->setActive(true);
+	// 클릭 이벤트 //
+	if ((textWindow->getActive() && input->isKeyUp(VK_RETURN)) ||
+		(textWindow->getActive() && input->getMouseLButton())) {
+		textWindow->setActive(false);
 	}
+	if ((input->getMouseX() >= Hanger->getX() && input->getMouseX() <= Hanger->getX() + Hanger->getWidth()) &&
+		(input->getMouseY() >= Hanger->getY() && input->getMouseY() <= Hanger->getY() + Hanger->getHeight()) &&
+		input->getMouseLButton() && !textWindow->getActive()) {
+		textWindow->setActive(true);
+		eventCount = 2;
+	}
+	////////////////
 
+
+	//// 충돌 ////
 	if (player->collidesWith(Desk, CollisionVector)){
 		player->bounce(CollisionVector, *Desk);
 	}
 	/*if (player->collidesWith(Hanger, CollisionVector)) {
 		player->bounce(CollisionVector, *Hanger);
 	}*/
+
+
 }
 
 void MainScenes::render()
@@ -168,7 +181,28 @@ void MainScenes::render()
 
 	Map1->getMapBG()->draw();
 	objectManager->RenderAllObject();
-	textWindow->TextWindowRender("asfasf...??",0);
+
+	switch (eventCount) {
+	case 0 :
+		textWindow->TextWindowRender("녹이슬어서 까칠한 느낌이 난다.", 0);
+		break;
+	case 1:
+		textWindow->TextWindowRender("서랍장은 모두 잠겨있다.", 0);
+		break;
+	case 2:
+		textWindow->TextWindowRender("걸려있는 것들은 모두 삭아서 형태를 알아볼 수 없다.", 0);
+		break;
+	case 3:
+		textWindow->TextWindowRender("가까이 가면 괴상한 소리가 난다.", 0);
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	}
+
 	itemSlot->ItemSlotRender();
 	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
