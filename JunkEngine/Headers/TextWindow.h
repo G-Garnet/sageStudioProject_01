@@ -7,10 +7,13 @@
 class TextWindow {
 private:
 	Junk2DSprite* window1;
+	Junk2DSprite* window2;
 	Junk2DSprite* charImg;
 	Junk2DSprite* select;
 
 	Junk2DFont* font;
+
+	int s = 1;
 
 	bool active = false;
 	bool charActive = false;
@@ -19,12 +22,17 @@ public:
 	TextWindow();
 	virtual ~TextWindow();
 
+	virtual void setSelect(int a) { s = a; };
+	virtual int getSelect() { return s; };
+
 	virtual void setActive(bool a) { active = a; };
 	virtual bool getActive() { return active; };
 
 	virtual void TextWindowSetting(Graphics* graphics);
 
 	virtual void TextWindowRender(const std::string &s, int select);
+	virtual void MiddleTextWindowRender(const std::string &s, int select);
+	virtual void SelectTextWindowRender(int select, const std::string &s1, const std::string &s2);
 	/*const std::string &s, int select = NULL,
 		const std::string &s1 = NULL, const std::string &s2 = NULL*/
 	virtual void TextWindowInput(Input* input);

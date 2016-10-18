@@ -66,7 +66,7 @@ void SecondScene::initialize(HWND hwnd)
 	cursor->CursorSetting(graphics);
 	font->initialize(graphics, 15, true, false, "±¼¸²Ã¼");
 	fade->fadeSetting(graphics);
-	fade->setAlpha(255);
+	fade->setAlpha(254);
 	/////////////////////////
 
 	Map->mapMove(0, 0);
@@ -121,7 +121,7 @@ void SecondScene::Update()
 	}
 
 	if (fade->getAlpha() >= 255) {
-		Game *temp = new SecondScene;
+		Game *temp = new Room3;
 
 		ChangeScene(temp);
 	}

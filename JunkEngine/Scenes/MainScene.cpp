@@ -154,50 +154,49 @@ void MainScenes::Update()
 	textWindow->TextWindowInput(input);
 	cursor->CursorInput(input);
 
-	// Fade & SceneChange //
-	if (player->collidesWith(Carpet, CollisionVector) &&
-		input->isKeyUp(VK_RETURN)) {
-		if (key) {
-			fade->setalphaStart(true);
-		}
-		else if (textWindow->getActive()) {
-			textWindow->setActive(false);
-		}
-		else {
-			textWindow->setActive(true);
-			eventCount = 5;
-		}
-	}
-
-	if (fade->getalphaStart()) {
-		fade->setAlpha(fade->getAlpha() + 1.75f);
-	}
-	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f){
-		fade->setAlpha(fade->getAlpha() - 1.75f);
-	}
-	else if (fade->getAlpha() <= 1.5f) {
-		player->setInputSW(true);
-	}
-
-	if (fade->getAlpha() >= 255) {
-		Game *temp = new SecondScene;
-
-		ChangeScene(temp);
-	}
-	///////////
-
 	// 클릭 이벤트 //
-	if (textWindow->getActive() && 
+	if (eventCount == 6) {
+		if (input->isKeyUp(VK_UP)) {
+			textWindow->setSelect(1);
+		}
+
+		else if (input->isKeyUp(VK_DOWN)) {
+			textWindow->setSelect(2);
+		}
+	}
+
+	if (textWindow->getActive() &&
 		(input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
-		if (eventCount == 6) {
-			eventCount = 7;
-		}
-		else {
+
+		switch (eventCount) {
+		case -1:
+			eventCount = -2;
+			break;
+		case 6:
+			if (textWindow->getSelect() == 1) {
+				eventCount = 7;
+			}
+			else {
+				textWindow->setActive(false);
+				eventCount = 0;
+			}
+			break;
+		default:
 			textWindow->setActive(false);
+			eventCount = 0;
+			break;
 		}
+
 	}
 
 	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
+		// 일지
+		if ((input->getMouseX() >= papers->getX() && input->getMouseX() <= papers->getX() + papers->getWidth()) &&
+			(input->getMouseY() >= papers->getY() && input->getMouseY() <= papers->getY() + papers->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = -1;
+		}
+
 		// 서랍장
 		if ((input->getMouseX() >= Desk->getX() && input->getMouseX() <= Desk->getX() + Desk->getWidth()) &&
 			(input->getMouseY() >= Desk->getY() && input->getMouseY() <= Desk->getY() + Desk->getHeight())) {
@@ -242,6 +241,38 @@ void MainScenes::Update()
 	}
 	////////////////
 
+	// Fade & SceneChange //
+	if (player->collidesWith(Carpet, CollisionVector) &&
+		input->isKeyUp(VK_RETURN)) {
+		if (key) {
+			fade->setalphaStart(true);
+		}
+		else if (textWindow->getActive()) {
+			textWindow->setActive(false);
+		}
+		else {
+			textWindow->setActive(true);
+			eventCount = 5;
+		}
+	}
+
+	if (fade->getalphaStart()) {
+		fade->setAlpha(fade->getAlpha() + 1.75f);
+	}
+	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f){
+		fade->setAlpha(fade->getAlpha() - 1.75f);
+	}
+	else if (fade->getAlpha() <= 1.5f) {
+		player->setInputSW(true);
+	}
+
+	if (fade->getAlpha() >= 255) {
+		Game *temp = new SecondScene;
+
+		ChangeScene(temp);
+	}
+	///////////
+
 
 	//// 충돌 ////
 	/*if (player->collidesWith(Desk, CollisionVector)){
@@ -262,6 +293,13 @@ void MainScenes::render()
 	objectManager->RenderAllObject();
 
 	switch (eventCount) {
+	case -2:
+		textWindow->MiddleTextWindowRender("…이 외에는 종이가 낡아서 알아볼 수 없다.", 0);
+		break;
+	case -1 :
+		textWindow->MiddleTextWindowRender((std::string)"이곳에 처음 발이 닿은 날 맹세한 대로 우리는 그들을 도왔다. \n"
+			 + (std::string)"그러나… 그들의 눈빛이 조금씩 이상해지고 있다.\n" + (std::string)"사형대에 올라선 우리들을 보던 바로 그 눈빛이다.",0);
+		break;
 	case 0 :
 		textWindow->TextWindowRender("녹이슬어서 까칠한 느낌이 난다.", 0);
 		break;
@@ -282,11 +320,13 @@ void MainScenes::render()
 		break;
 	case 6:
 		textWindow->TextWindowRender("올라설 때 마다 구석에서 무언가 밟히는 느낌이 난다.", 0);
+		textWindow->SelectTextWindowRender(2,"들춰본다.","돌아간다.");
 		break;
 	case 7:
 		textWindow->TextWindowRender("열쇠를 찾았다.", 0);
 		key = true;
 		break;
+
 	}
 
 	itemSlot->ItemSlotRender();
