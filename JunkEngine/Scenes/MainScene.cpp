@@ -16,6 +16,11 @@ MainScenes::MainScenes()
 
 	Door1 = new Junk2DSprite();
 	Desk = new Junk2DEntity();
+
+	bottle = new Junk2DEntity();
+	candle = new Junk2DEntity();
+	papers = new Junk2DEntity();
+
 	Hanger = new Junk2DEntity();
 	Carpet = new Junk2DEntity();
 	Pipe = new Junk2DSprite();
@@ -53,11 +58,25 @@ void MainScenes::initialize(HWND hwnd)
 	Door1->settingTexture(graphics, "..\\Resources\\Floor1\\room1_door.png", 220, 457, 1);
 	Door1->setXY(370, 68);
 
-	Desk->initialize(graphics, "..\\Resources\\Floor1\\room1_desk.png", 465, 312, 1);
-	Desk->setXY(1180, 244);
+	Desk->initialize(graphics, "..\\Resources\\Floor1\\room1_desk.png", 463, 202, 1);
+	Desk->setXY(1019, 352);
 	Desk->setActive(true);
 	Desk->setCollisionType(Junk2DentityNS::BOX);
-	Desk->setEdge(0,0,465,128);
+	Desk->setEdge(0,0,463,163);
+
+	bottle->settingTexture(graphics, "..\\Resources\\Floor1\\bottle.png", 34, 77, 1);
+	bottle->setXY(1192, 292);
+	candle->settingTexture(graphics, "..\\Resources\\Floor1\\candle.png", 83, 128, 1);
+	candle->setXY(1102, 242);
+	papers->settingTexture(graphics, "..\\Resources\\Floor1\\papers.png", 156, 51, 1);
+	papers->setXY(1296, 318);
+
+	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
+	Pipe->setXY(2104, 314);
+	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
+	Pipe->setXY(2104, 314);
+	Pipe->settingTexture(graphics, "..\\Resources\\Floor1\\room1_pipe.png", 297, 392, 1);
+	Pipe->setXY(2104, 314);
 
 	Hanger->settingTexture(graphics, "..\\Resources\\Floor1\\room1_.png", 155, 462, 1);
 	Hanger->setXY(600, 100);
@@ -91,6 +110,9 @@ void MainScenes::initialize(HWND hwnd)
 	// 태그 설정
 	objectManager->AddObject(Door1, "Door1");
 	objectManager->AddObject(Desk, "Desk");
+	objectManager->AddObject(bottle, "bottle");
+	objectManager->AddObject(candle, "candle");
+	objectManager->AddObject(papers, "papers");
 	objectManager->AddObject(Hanger, "Hanger");
 	objectManager->AddObject(Carpet, "Carpet");
 	objectManager->AddObject(Pipe, "Pipe");
@@ -99,6 +121,9 @@ void MainScenes::initialize(HWND hwnd)
 
 	Map1->MapAddObject(objectManager->getCGameObject("Door1"),"Door1");
 	Map1->MapAddObject(objectManager->getCGameObject("Desk"), "Desk");
+	Map1->MapAddObject(objectManager->getCGameObject("bottle"), "bottle");
+	Map1->MapAddObject(objectManager->getCGameObject("candle"), "candle");
+	Map1->MapAddObject(objectManager->getCGameObject("papers"), "papers");
 	Map1->MapAddObject(objectManager->getCGameObject("Hanger"), "Hanger");
 	Map1->MapAddObject(objectManager->getCGameObject("Carpet"), "Carpet");
 	Map1->MapAddObject(objectManager->getCGameObject("Pipe"), "Pipe");
@@ -122,15 +147,26 @@ void MainScenes::Update()
 { 
 	// 텍스트 윈도우가 설정된동안은 비활성화 //
 
-	player->playerInput(input, Map1);
+	if(!textWindow->getActive()) {
+		player->playerInput(input, Map1);
+	}
 	itemSlot->ItemSlotInput(input);
 	textWindow->TextWindowInput(input);
 	cursor->CursorInput(input);
 
-	// Fade //
+	// Fade & SceneChange //
 	if (player->collidesWith(Carpet, CollisionVector) &&
 		input->isKeyUp(VK_RETURN)) {
-		fade->setalphaStart(true);
+		if (key) {
+			fade->setalphaStart(true);
+		}
+		else if (textWindow->getActive()) {
+			textWindow->setActive(false);
+		}
+		else {
+			textWindow->setActive(true);
+			eventCount = 5;
+		}
 	}
 
 	if (fade->getalphaStart()) {
@@ -151,23 +187,66 @@ void MainScenes::Update()
 	///////////
 
 	// 클릭 이벤트 //
-	if ((textWindow->getActive() && input->isKeyUp(VK_RETURN)) ||
-		(textWindow->getActive() && input->getMouseLButton())) {
-		textWindow->setActive(false);
+	if (textWindow->getActive() && 
+		(input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
+		if (eventCount == 6) {
+			eventCount = 7;
+		}
+		else {
+			textWindow->setActive(false);
+		}
 	}
-	if ((input->getMouseX() >= Hanger->getX() && input->getMouseX() <= Hanger->getX() + Hanger->getWidth()) &&
-		(input->getMouseY() >= Hanger->getY() && input->getMouseY() <= Hanger->getY() + Hanger->getHeight()) &&
-		input->getMouseLButton() && !textWindow->getActive()) {
-		textWindow->setActive(true);
-		eventCount = 2;
+
+	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
+		// 서랍장
+		if ((input->getMouseX() >= Desk->getX() && input->getMouseX() <= Desk->getX() + Desk->getWidth()) &&
+			(input->getMouseY() >= Desk->getY() && input->getMouseY() <= Desk->getY() + Desk->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 4;
+		}
+
+		// 카펫
+		if ((input->getMouseX() >= Carpet->getX() && input->getMouseX() <= Carpet->getX() + Carpet->getWidth()) &&
+			(input->getMouseY() >= Carpet->getY() && input->getMouseY() <= Carpet->getY() + Carpet->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 6;
+		}
+
+		// 파이프
+		if ((input->getMouseX() >= Pipe->getX() && input->getMouseX() <= Pipe->getX() + Pipe->getWidth()) &&
+			(input->getMouseY() >= Pipe->getY() && input->getMouseY() <= Pipe->getY() + Pipe->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 3;
+		}
+
+		// 촛대
+		if ((input->getMouseX() >= candle->getX() && input->getMouseX() <= candle->getX() + candle->getWidth()) &&
+			(input->getMouseY() >= candle->getY() && input->getMouseY() <= candle->getY() + candle->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 0;
+		}
+
+		// 병
+		if ((input->getMouseX() >= bottle->getX() && input->getMouseX() <= bottle->getX() + bottle->getWidth()) &&
+			(input->getMouseY() >= bottle->getY() && input->getMouseY() <= bottle->getY() + bottle->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 0;
+		}
+
+		// 옷걸이
+		if ((input->getMouseX() >= Hanger->getX() && input->getMouseX() <= Hanger->getX() + Hanger->getWidth()) &&
+			(input->getMouseY() >= Hanger->getY() && input->getMouseY() <= Hanger->getY() + Hanger->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 2;
+		}
 	}
 	////////////////
 
 
 	//// 충돌 ////
-	if (player->collidesWith(Desk, CollisionVector)){
+	/*if (player->collidesWith(Desk, CollisionVector)){
 		player->bounce(CollisionVector, *Desk);
-	}
+	}*/
 	/*if (player->collidesWith(Hanger, CollisionVector)) {
 		player->bounce(CollisionVector, *Hanger);
 	}*/
@@ -196,10 +275,17 @@ void MainScenes::render()
 		textWindow->TextWindowRender("가까이 가면 괴상한 소리가 난다.", 0);
 		break;
 	case 4:
+		textWindow->TextWindowRender("서랍장은 모두 잠겨있다.", 0);
 		break;
 	case 5:
+		textWindow->TextWindowRender("열리지 않는다.", 0);
 		break;
 	case 6:
+		textWindow->TextWindowRender("올라설 때 마다 구석에서 무언가 밟히는 느낌이 난다.", 0);
+		break;
+	case 7:
+		textWindow->TextWindowRender("열쇠를 찾았다.", 0);
+		key = true;
 		break;
 	}
 

@@ -16,7 +16,7 @@ void Player::playerSetting(Graphics* graphics)
 	//this->flipVertical(Dir_);
 	this->setActive(true);
 	this->setCollisionType(Junk2DentityNS::BOX);
-	this->setAnimation(0, 19, 0, 3.0f);
+	this->setAnimation(0, 19, 0, 0.2f);
 
 	this->getplayerWidth();
 	this->setEdge(0, 150, 218, 398);
@@ -39,7 +39,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_walking.png", 250, 400, 7);
 				this->setLoop(true);
 				this->setActive(true);
-				this->setAnimation(0, 19, 0, 0.5f);
+				this->setAnimation(0, 19, 0, 0.2f);
 				this->setEdge(0, 150, 218, 398);
 			}
 
@@ -101,7 +101,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_standing.png", 250, 400, 7);
 				this->setLoop(true);
 				this->setActive(true);
-				this->setAnimation(0, 19, 0, 0.5f);
+				this->setAnimation(0, 19, 0, 0.2f);
 				this->setEdge(0, 150, 218, 398);
 			}
 

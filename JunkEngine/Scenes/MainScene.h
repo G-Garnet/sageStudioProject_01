@@ -22,6 +22,11 @@ private:
 	Junk2DMap* Map1;
 	Junk2DSprite* Door1;
 	Junk2DEntity* Desk;
+
+	Junk2DEntity* bottle;
+	Junk2DEntity* candle;
+	Junk2DEntity* papers;
+
 	Junk2DEntity* Hanger;
 	Junk2DEntity* Carpet;
 	Junk2DSprite* Pipe;
@@ -33,6 +38,7 @@ private:
 	VECTOR2 CollisionVector;
 
 	int eventCount = 0;
+	bool key = false;
 
 public:
 
