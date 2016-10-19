@@ -15,6 +15,7 @@ private:
 	ItemSlot* itemSlot;
 	Cursor* cursor;
 	Junk2DFont *font;
+	TextWindow *textWindow;
 	Fade* fade;
 	////////////////////////////////
 
@@ -28,6 +29,12 @@ private:
 	Junk2DSprite* Window2;
 
 	Junk2DSprite* filter;
+	Junk2DSprite* CutScene;
+
+	bool girl;
+	bool cutSceneActive = false;
+	int eventCount = 0;
+	float dtime = 0;
 
 public:
 	SecondScene();

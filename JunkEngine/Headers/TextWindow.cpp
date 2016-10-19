@@ -32,7 +32,7 @@ void TextWindow::TextWindowSetting(Graphics * graphics)
 	charImg->settingTexture(graphics, "..\\Resources\\UI\\TextWindow_man.png", 1280, 720, 1);
 	charImg->setXY(0, 0);
 
-	select->settingTexture(graphics, "..\\Resources\\UI\\select.png", 395, 27, 1);
+	select->settingTexture(graphics, "..\\Resources\\UI\\select.png", 538, 47, 1);
 	select->setXY(355, 589);
 }
 

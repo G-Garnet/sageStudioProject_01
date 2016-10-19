@@ -11,6 +11,7 @@ SecondScene::SecondScene()
 	cursor = new Cursor();
 	fade = new Fade();
 	font = new Junk2DFont();
+	textWindow = new TextWindow();
 	
 	Door1 = new Junk2DSprite();
 	Door2 = new Junk2DSprite();
@@ -19,8 +20,10 @@ SecondScene::SecondScene()
 	Window1 = new Junk2DSprite();
 	Window2 = new Junk2DSprite();
 
-
 	filter = new Junk2DSprite();
+	CutScene = new Junk2DSprite();
+
+	girl = false;
 }
 
 SecondScene::~SecondScene()
@@ -30,6 +33,8 @@ SecondScene::~SecondScene()
 	SAFE_DELETE(itemSlot);
 	SAFE_DELETE(cursor);
 	SAFE_DELETE(font);
+	SAFE_DELETE(textWindow);
+	SAFE_DELETE(CutScene);
 }
 
 void SecondScene::initialize(HWND hwnd)
@@ -60,12 +65,17 @@ void SecondScene::initialize(HWND hwnd)
 	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\2_roomd.png", 1900, 720, 1);
 	filter->setXY(0, 0);
 
+	CutScene->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\2_roomd.png", 1280, 720, 1);
+	CutScene->setXY(0, 0);
+
 	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
 	font->initialize(graphics, 15, true, false, "굴림체");
 	fade->fadeSetting(graphics);
+	textWindow->TextWindowSetting(graphics);
+	textWindow->setActive(true);
 	fade->setAlpha(254);
 	/////////////////////////
 
@@ -109,7 +119,8 @@ void SecondScene::Update()
 	player->playerInput(input, Map);
 	itemSlot->ItemSlotInput(input);
 	cursor->CursorInput(input);
-
+	 
+	// FADE //
 	if (fade->getalphaStart()) {
 		fade->setAlpha(fade->getAlpha() + 1.75f);
 	}
@@ -118,6 +129,7 @@ void SecondScene::Update()
 	}
 	else if (fade->getAlpha() <= 1.5f) {
 		player->setInputSW(true);
+		eventCount = 1;
 	}
 
 	if (fade->getAlpha() >= 255) {
@@ -125,12 +137,49 @@ void SecondScene::Update()
 
 		ChangeScene(temp);
 	}
+	///////
 
-	if (input->isKeyUp(VK_RETURN)) {
+	// 다음방으로
+	if (input->isKeyUp(VK_RETURN) && player->getX() >= 900 && player->getY() >= 230) {
 		/*Game *temp = new Room3;
 
 		ChangeScene(temp);*/
 		fade->setalphaStart(true);
+	}
+
+	if (player->getX() >= 640 && Map->getMapX() <= -186 && !girl) {
+		girl = true;
+	}
+	if (girl) {
+		dtime += 0.01f;
+		
+		if (dtime >= 0.4f) {
+			cutSceneActive = true;
+		}
+		
+		if (dtime>=0.55f){
+			dtime = 0;
+		}
+		else {
+			cutSceneActive = false;
+		}
+	}
+
+
+	// 클릭 이벤트 //
+	if (textWindow->getActive() &&
+		(input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
+
+		switch (eventCount) {
+		case 2:
+			eventCount = 3;
+			break;
+		default:
+			textWindow->setActive(false);
+			eventCount = 0;
+			break;
+		}
+
 	}
 
 	//exitGame();
@@ -142,6 +191,20 @@ void SecondScene::render()
 
 	Map->getMapBG()->draw();
 	objectManager->RenderAllObject();
+
+	switch (eventCount) {
+	case 1:
+		textWindow->TextWindowRender("어제 그 방이다.", 0);
+		break;
+	case 2:
+		textWindow->TextWindowRender("열리지 않는다.", 0);
+		break;
+
+	}
+
+	if (cutSceneActive) {
+		CutScene->draw();
+	}
 
 	itemSlot->ItemSlotRender();
 	cursor->draw();
