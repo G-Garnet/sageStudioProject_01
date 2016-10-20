@@ -58,20 +58,20 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				}
 
 				if (this->getX() - Movespeed <
-					(GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
-					this->setX(0 + (GAME_HEIGHT - 188 - this->getY() * 1.6f));
+					(GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
+					this->setX(0 + (GAME_HEIGHT - 235 - this->getY() * 1.6f));
 				}
 
 				else if (this->getX() + playerSize + Movespeed >
-					GAME_WIDTH - (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
-					this->setX((GAME_WIDTH - playerSize) - (GAME_HEIGHT - 188 - this->getY() * 1.6f));
+					GAME_WIDTH - (GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
+					this->setX((GAME_WIDTH - playerSize) - (GAME_HEIGHT - 235 - this->getY() * 1.6f));
 				}
 			}
 
 			if (input->isKeyDown(VK_RIGHT)) {
 				if (Map1->getMapX() < -mapSize || this->getX() < GAME_WIDTH / 2) {
 					if (this->getX() + playerSize + Movespeed <
-						GAME_WIDTH - (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
+						GAME_WIDTH - (GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
 						this->setX(this->getX() + Movespeed);
 					}
 				}
@@ -84,7 +84,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 			if (input->isKeyDown(VK_LEFT)) {
 				if ((Map1->getMapX() >= 0 || this->getX() > GAME_WIDTH / 2)) {
 					if (this->getX() - Movespeed >
-						0 + (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
+						0 + (GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
 						this->setX(this->getX() - Movespeed);
 					}
 				}

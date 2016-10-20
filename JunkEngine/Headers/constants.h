@@ -27,7 +27,7 @@
 const char CLASS_NAME[] = "ExampleGame";
 const char GAME_TITLE[] = "ExampleGame";
 const bool FULLSCREEN = FALSE;
-const UINT GAME_WIDTH = 1280;
+const UINT GAME_WIDTH = 1024;
 const UINT GAME_HEIGHT = 720;
 
 // ∞‘¿”
