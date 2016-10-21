@@ -2,6 +2,7 @@
 
 int Player::p_PosScene = 0;
 int Player::p_PosX = 0;
+int Player::Item[10] = {0,};
 
 Player::Player()
 {
@@ -58,20 +59,20 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 				}
 
 				if (this->getX() - Movespeed <
-					(GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
-					this->setX(0 + (GAME_HEIGHT - 235 - this->getY() * 1.6f));
+					(GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
+					this->setX(0 + (GAME_HEIGHT - 188 - this->getY() * 1.6f));
 				}
 
 				else if (this->getX() + playerSize + Movespeed >
-					GAME_WIDTH - (GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
-					this->setX((GAME_WIDTH - playerSize) - (GAME_HEIGHT - 235 - this->getY() * 1.6f));
+					GAME_WIDTH - (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
+					this->setX((GAME_WIDTH - playerSize) - (GAME_HEIGHT - 188 - this->getY() * 1.6f));
 				}
 			}
 
 			if (input->isKeyDown(VK_RIGHT)) {
 				if (Map1->getMapX() < -mapSize || this->getX() < GAME_WIDTH / 2) {
 					if (this->getX() + playerSize + Movespeed <
-						GAME_WIDTH - (GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
+						GAME_WIDTH - (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
 						this->setX(this->getX() + Movespeed);
 					}
 				}
@@ -84,7 +85,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 			if (input->isKeyDown(VK_LEFT)) {
 				if ((Map1->getMapX() >= 0 || this->getX() > GAME_WIDTH / 2)) {
 					if (this->getX() - Movespeed >
-						0 + (GAME_HEIGHT - 235 - this->getY() * 1.6f)) {
+						0 + (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
 						this->setX(this->getX() - Movespeed);
 					}
 				}
@@ -117,4 +118,32 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 	if (input->isKeyDown(VK_F4) && input->isKeyDown(VK_MENU)) {
 		exit(0);
 	}
+}
+
+void Player::playerItemIn(int itemCode)
+{
+	for (int i = 0; i < 10; i++) {
+		if (Player::Item[i] == NULL) {
+			Player::Item[i] = itemCode;
+			break;
+		}
+	}
+}
+
+void Player::playerItemOut(int itemCode)
+{
+	int i = 0;
+	for (i = 0; i < 10; i++) {
+		if (Player::Item[i] == itemCode) {
+			Player::Item[i] = NULL;
+			break;
+		}
+	}
+
+	for (; i < 8; i++) {
+		if (Player::Item[i] != NULL) {
+			Player::Item[i] = Player::Item[i+1];
+		}
+	}
+	Player::Item[9] = NULL;
 }

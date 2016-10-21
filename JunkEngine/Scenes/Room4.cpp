@@ -88,9 +88,9 @@ void Room4::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Pictures"), "Pictures");
 	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
-	player->setMapszie(1076);
+	player->setMapszie(1076-256);
 
-	Map->mapMove(-1076, 0);
+	Map->mapMove(-1076+256, 0);
 
 	if (Player::p_PosScene == 3) {
 		player->setX(495);

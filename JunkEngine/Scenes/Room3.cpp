@@ -78,12 +78,12 @@ void Room3::initialize(HWND hwnd)
 	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\3_roomd.png", 2000, 720, 1);
 	filter->setXY(0, 0);
 
-	fire1->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 50, 150, 5);
+	fire1->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
 	fire1->setXY(507, 160);
 	fire1->setLoop(true);
 	fire1->setAnimation(0,8,0,0.4f);
 
-	fire2->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 50, 150, 5);
+	fire2->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
 	fire2->setXY(1296, 160);
 	fire1->setLoop(true);
 	fire2->setAnimation(0,8, 0, 0.4f);
@@ -130,8 +130,8 @@ void Room3::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Bear"), "Bear");
 	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
-	Map->mapMove(-976, 0);
-	player->setMapszie(976);
+	Map->mapMove(-976+256, 0);
+	player->setMapszie(976-256);
 
 	if (Player::p_PosScene == 2) {
 		player->setX(424);
@@ -172,14 +172,6 @@ void Room3::Update()
 		ChangeScene(temp);
 	}
 
-	if (input->isKeyUp(VK_RETURN)) {
-		/*Game *temp = new Room4;
-
-		ChangeScene(temp);*/
-		fade->setalphaStart(true);
-	}
-
-
 	if (textWindow->getActive() &&
 		(input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
 
@@ -198,13 +190,36 @@ void Room3::Update()
 
 	}
 
-	else if (!textWindow->getActive() && input->getMouseLButtonDown() && Bear !=NULL) {
-		// 일지
-		if ((input->getMouseX() >= Bear->getX() && input->getMouseX() <= Bear->getX() + Bear->getWidth()) &&
-			(input->getMouseY() >= Bear->getY() && input->getMouseY() <= Bear->getY() + Bear->getHeight())) {
-			textWindow->setActive(true);
-			eventCount = 1;
+	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
+		// 곰
+		if (Bear != NULL) {
+			if ((input->getMouseX() >= Bear->getX() && input->getMouseX() <= Bear->getX() + Bear->getWidth()) &&
+				(input->getMouseY() >= Bear->getY() && input->getMouseY() <= Bear->getY() + Bear->getHeight())) {
+				textWindow->setActive(true);
+				eventCount = 1;
+			}
 		}
+
+		// 상자
+		if ((input->getMouseX() >= Box->getX() && input->getMouseX() <= Box->getX() + Box->getWidth()) &&
+			(input->getMouseY() >= Box->getY() && input->getMouseY() <= Box->getY() + Box->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 4;
+		}
+
+		// 벽난로
+		if ((input->getMouseX() >= fireDeck->getX() && input->getMouseX() <= fireDeck->getX() + fireDeck->getWidth()) &&
+			(input->getMouseY() >= fireDeck->getY() && input->getMouseY() <= fireDeck->getY() + fireDeck->getHeight())) {
+			textWindow->setActive(true);
+			eventCount = 5;
+		}
+	}
+
+	if (input->isKeyUp(VK_RETURN) && player->getX() <= 210 && player->getY() >= 120) {
+		/*Game *temp = new Room4;
+
+		ChangeScene(temp);*/
+		fade->setalphaStart(true);
 	}
 
 	//exitGame();
@@ -226,12 +241,22 @@ void Room3::render()
 		textWindow->TextWindowRender("낡은 곰인형이다.\n어딘지 모르게 친근한 느낌이 든다.", 0);
 		break;
 	case 2:
-		textWindow->TextWindowRender("그래도 가장 덜 끔찍하네.", 0);
+		textWindow->TextWindowRender("\"그래도 가장 덜 끔찍하네.\"", 0);
 		break; 
 	case 3:
 		objectManager->RemoveObject("Bear");
 		SAFE_DELETE(Bear);
 		textWindow->TextWindowRender("곰인형을 획득했다.", 0);
+		player->playerItemIn(2);
+		break;
+	case 4:
+		textWindow->TextWindowRender("...덜컹 거리는 것 같다.\n건드리지 않는게 좋을 것 같다.", 0);
+		break;
+	case 5:
+		textWindow->TextWindowRender("벽난로다.\n별로 들여다보고 싶지는 않다.", 0);
+		break;
+	case 6:
+		textWindow->TextWindowRender("도저히 다시 돌아갈 엄두가 나지 않는다.", 0);
 		break;
 	}
 

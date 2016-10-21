@@ -97,7 +97,7 @@ void SecondScene::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Window2"), "Window2");
 	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
-	player->setMapszie(876);
+	player->setMapszie(876-256);
 	if (Player::p_PosScene == 1) {
 		player->setX(114);
 	}
@@ -131,7 +131,10 @@ void SecondScene::Update()
 	}
 	else if (fade->getAlpha() <= 1.5f) {
 		player->setInputSW(true);
-		eventCount = 1;
+		if (StartEvent) {
+			eventCount = 1;
+			StartEvent = false;
+		}
 	}
 
 	if (fade->getAlpha() >= 255) {
@@ -164,32 +167,38 @@ void SecondScene::Update()
 	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
 
 		switch (eventCount) {
-		case 1:
+		case 2:
+			Sleep(1000);
+			textWindow->setActive(false);
+			girl = true;
+			break;
+		default:
 			textWindow->setActive(false);
 			eventCount = 0;
 			break;
-		case 2:
-			eventCount = 3;
-			break;
-			
 		}
 	}
 
 
 	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
-		if ((input->getMouseX() >= Door3->getX() && input->getMouseX() <= Door3->getX() + Door3->getWidth()) &&
-			(input->getMouseY() >= Door3->getY() && input->getMouseY() <= Door3->getY() + Door3->getHeight())) {
-			girl = true;
-		}
-
 		if ((input->getMouseX() >= Window1->getX() && input->getMouseX() <= Window1->getX() + Window1->getWidth()) &&
 			(input->getMouseY() >= Window1->getY() && input->getMouseY() <= Window1->getY() + Window1->getHeight())) {
-			eventCount = 3;
+			eventCount = -1;
+			textWindow->setActive(true);
 		}
 		if ((input->getMouseX() >= Window2->getX() && input->getMouseX() <= Window2->getX() + Window2->getWidth()) &&
 			(input->getMouseY() >= Window2->getY() && input->getMouseY() <= Window2->getY() + Window2->getHeight())) {
-			eventCount = 3;
+			eventCount = -1;
+			textWindow->setActive(true);
 		}
+
+		if ((input->getMouseX() >= Door3->getX() && input->getMouseX() <= Door3->getX() + Door3->getWidth()) &&
+			(input->getMouseY() >= Door3->getY() && input->getMouseY() <= Door3->getY() + Door3->getHeight())) {
+			eventCount = 2;
+			textWindow->setActive(true);
+		}
+
+		
 	}
 
 	// 다음방으로
@@ -211,14 +220,14 @@ void SecondScene::render()
 	objectManager->RenderAllObject();
 
 	switch (eventCount) {
+	case -1:
+		textWindow->TextWindowRender("빨리 나가야해.", 0);
+		break;
 	case 1:
 		textWindow->TextWindowRender("어제 그 방이다.", 0);
 		break;
 	case 2:
 		textWindow->TextWindowRender("열리지 않는다.", 0);
-		break;
-	case 3:
-		textWindow->TextWindowRender("빨리 나가야해.", 0);
 		break;
 	}
 

@@ -32,6 +32,7 @@ private:
 	Junk2DSprite* CutScene;
 
 	bool girl;
+	bool StartEvent = true;
 	bool cutSceneActive = false;
 	int eventCount = 0;
 	float dtime = 0;

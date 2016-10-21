@@ -36,6 +36,9 @@ public:
 	void getplayerWidth() {
 		playerSize = this->getSpriteDataRect().right;
 	};
+
+	void playerItemIn(int itemCode);
+	void playerItemOut(int itemCode);
 };
 
 

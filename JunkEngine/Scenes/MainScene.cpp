@@ -129,9 +129,9 @@ void MainScenes::initialize(HWND hwnd)
 	Map1->MapAddObject(objectManager->getCGameObject("Pipe"), "Pipe");
 	Map1->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
-	Map1->mapMove(-1200, 0);
+	Map1->mapMove(-1200+256, 0);
 
-	player->setMapszie(1376);
+	player->setMapszie(1376-256);
 
 	if (Player::p_PosScene == 5) {
 		player->setX(114);

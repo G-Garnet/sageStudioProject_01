@@ -27,7 +27,7 @@
 const char CLASS_NAME[] = "ExampleGame";
 const char GAME_TITLE[] = "ExampleGame";
 const bool FULLSCREEN = FALSE;
-const UINT GAME_WIDTH = 1024;
+const UINT GAME_WIDTH = 1280;
 const UINT GAME_HEIGHT = 720;
 
 // 게임
@@ -44,6 +44,7 @@ const UCHAR ENTER_KEY = VK_RETURN;   // 엔터키
 
 // 플레이어 어빌리티
 const UINT PlayerAbility = 4;
+//const UINT PlayerItemSlot[10] = {0,};
 
 const UINT MapXY = 300;
 	
