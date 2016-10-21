@@ -97,7 +97,7 @@ void SecondScene::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Window2"), "Window2");
 	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
-	player->setMapszie(618);
+	player->setMapszie(876);
 	if (Player::p_PosScene == 1) {
 		player->setX(114);
 	}
@@ -116,7 +116,9 @@ void SecondScene::initialize(HWND hwnd)
 
 void SecondScene::Update()
 {
-	player->playerInput(input, Map);
+	if (!textWindow->getActive()) {
+		player->playerInput(input, Map);
+	}
 	itemSlot->ItemSlotInput(input);
 	cursor->CursorInput(input);
 	 
@@ -139,17 +141,9 @@ void SecondScene::Update()
 	}
 	///////
 
-	// 다음방으로
-	if (input->isKeyUp(VK_RETURN) && player->getX() >= 900 && player->getY() >= 230) {
-		/*Game *temp = new Room3;
+	
 
-		ChangeScene(temp);*/
-		fade->setalphaStart(true);
-	}
-
-	if (player->getX() >= 640 && Map->getMapX() <= -186 && !girl) {
-		girl = true;
-	}
+	// 등장 이벤트
 	if (girl) {
 		dtime += 0.01f;
 		
@@ -167,19 +161,43 @@ void SecondScene::Update()
 
 
 	// 클릭 이벤트 //
-	if (textWindow->getActive() &&
-		(input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
+	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
 
 		switch (eventCount) {
-		case 2:
-			eventCount = 3;
-			break;
-		default:
+		case 1:
 			textWindow->setActive(false);
 			eventCount = 0;
 			break;
+		case 2:
+			eventCount = 3;
+			break;
+			
+		}
+	}
+
+
+	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
+		if ((input->getMouseX() >= Door3->getX() && input->getMouseX() <= Door3->getX() + Door3->getWidth()) &&
+			(input->getMouseY() >= Door3->getY() && input->getMouseY() <= Door3->getY() + Door3->getHeight())) {
+			girl = true;
 		}
 
+		if ((input->getMouseX() >= Window1->getX() && input->getMouseX() <= Window1->getX() + Window1->getWidth()) &&
+			(input->getMouseY() >= Window1->getY() && input->getMouseY() <= Window1->getY() + Window1->getHeight())) {
+			eventCount = 3;
+		}
+		if ((input->getMouseX() >= Window2->getX() && input->getMouseX() <= Window2->getX() + Window2->getWidth()) &&
+			(input->getMouseY() >= Window2->getY() && input->getMouseY() <= Window2->getY() + Window2->getHeight())) {
+			eventCount = 3;
+		}
+	}
+
+	// 다음방으로
+	if (input->isKeyUp(VK_RETURN) && player->getX() >= 665 && player->getY() >= 230) {
+		/*Game *temp = new Room3;
+
+		ChangeScene(temp);*/
+		fade->setalphaStart(true);
 	}
 
 	//exitGame();
@@ -199,7 +217,9 @@ void SecondScene::render()
 	case 2:
 		textWindow->TextWindowRender("열리지 않는다.", 0);
 		break;
-
+	case 3:
+		textWindow->TextWindowRender("빨리 나가야해.", 0);
+		break;
 	}
 
 	if (cutSceneActive) {

@@ -57,7 +57,7 @@ void Room4::initialize(HWND hwnd)
 	Carpet->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Carpet.png", 1437, 170, 1);
 	Carpet->setXY(360, 533);
 
-	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\4_roomd.png", 2000, 720, 1);
+	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\4_roomd.png", 2100, 720, 1);
 	filter->setXY(0, 0);
 
 	// Scene의 기본 요소들 //
@@ -88,10 +88,13 @@ void Room4::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Pictures"), "Pictures");
 	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
 
-	player->setMapszie(720);
+	player->setMapszie(1076);
+
+	Map->mapMove(-1076, 0);
+
 	if (Player::p_PosScene == 3) {
-		player->setX(370);
-		player->setY(GAME_HEIGHT / 2 - 205);
+		player->setX(495);
+		player->setY(156);
 	}
 	else if (Player::p_PosScene == 5) {
 		player->setX(1080);

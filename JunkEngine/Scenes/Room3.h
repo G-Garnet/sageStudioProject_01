@@ -16,6 +16,7 @@ private:
 	Cursor* cursor;
 	Junk2DFont *font;
 	Fade* fade;
+	TextWindow *textWindow;
 
 	Junk2DSprite* filter;
 	////////////////////////////////
@@ -28,12 +29,15 @@ private:
 	Junk2DSprite* Box;
 	Junk2DSprite* Picture;
 	Junk2DSprite* Desk;
+	Junk2DSprite* Bear;
 
 	Junk2DSprite* fire1;
 	Junk2DSprite* fire2;
 
 	// 게임 요소들
 	Junk2DMap* Map;
+
+	int eventCount = 0;
 
 public:
 	Room3();
