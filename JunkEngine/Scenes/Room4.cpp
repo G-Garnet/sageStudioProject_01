@@ -18,6 +18,7 @@ Room4::Room4()
 	Blood = new Junk2DSprite();
 	Carpet = new Junk2DSprite();
 	Pictures = new Junk2DSprite();
+	CutScene = new Junk2DSprite();
 
 	filter = new Junk2DSprite();
 }
@@ -52,7 +53,7 @@ void Room4::initialize(HWND hwnd)
 	Door2->setXY(1495, 68);
 
 	Pictures->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Pictures.png", 668, 269, 1);
-	Pictures->setXY(700, 48);
+	Pictures->setXY(712, 50);
 
 	Blood->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Blood.png", 650, 480, 7);
 	Blood->setLoop(false);
@@ -61,6 +62,9 @@ void Room4::initialize(HWND hwnd)
 
 	Carpet->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Carpet.png", 1437, 170, 1);
 	Carpet->setXY(360, 533);
+
+	CutScene->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\CutScene.png", 1280, 720, 1);
+	CutScene->setXY(0, 0);
 
 	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\4_roomd.png", 2100, 720, 1);
 	filter->setXY(0, 0);
@@ -100,7 +104,7 @@ void Room4::initialize(HWND hwnd)
 	Map->mapMove(-1076+256, 0);
 
 	if (Player::p_PosScene == 3) {
-		player->setX(495);
+		player->setX(495+256);
 		player->setY(156);
 	}
 	else if (Player::p_PosScene == 5) {
@@ -137,6 +141,12 @@ void Room4::Update()
 		ChangeScene(temp);
 	}
 
+	if (eventCount == 0 && !eventStart) {
+		Sleep(1500);
+		eventCount = 1;
+		eventStart = true;
+	}
+
 	if (eventCount == 2 && eventStart) {
 		Sleep(1500);
 		eventCount = 3;
@@ -148,7 +158,6 @@ void Room4::Update()
 		case 1:
 			eventCount = 2;
 			textWindow->setActive(false);
-			eventStart = true;
 			break;
 		default:
 			textWindow->setActive(false);
@@ -160,7 +169,7 @@ void Room4::Update()
 	
 
 	if (player->getX() >= 630 && Map->getMapX() >= -480 && !eventStart) {
-		eventCount = 1;
+		eventCount = 0;
 		textWindow->setActive(true);
 	}
 
@@ -180,11 +189,16 @@ void Room4::render()
 	objectManager->RenderAllObject();
 
 	switch (eventCount) {
-	case 1:
+	case 0:
 		// 컷신 드로우
-		textWindow->TextWindowRender("기분 나쁘게 생긴 그림들 사이로", 0);
+		CutScene->draw();
+		break;
+	case 1:
+		CutScene->draw();
+		textWindow->TextWindowRender("기분 나쁘게 생긴 그림들 사이로 글귀가 보인다.\nFaith had ended in betrayal.\n믿음은 배신으로 끝나버렸다.", 0);
 		break;
 	case 2:
+		CutScene->draw();
 		break;
 	case 3:
 		Blood->update(1.0f / 60.0f);

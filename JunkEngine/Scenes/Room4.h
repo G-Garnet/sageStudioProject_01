@@ -27,14 +27,14 @@ private:
 	Junk2DSprite* Carpet;
 	Junk2DSprite* Pictures;
 
-	Junk2DSprite* CutScenes;
+	Junk2DSprite* CutScene;
 
 
 	// 게임 요소들
 	Junk2DMap* Map;
 
 	bool eventStart = false;
-	int eventCount = 0;
+	int eventCount = -1;
 
 public:
 	Room4();

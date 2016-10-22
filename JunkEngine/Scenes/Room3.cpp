@@ -134,7 +134,7 @@ void Room3::initialize(HWND hwnd)
 	player->setMapszie(976-256);
 
 	if (Player::p_PosScene == 2) {
-		player->setX(424);
+		player->setX(424+256);
 		player->setY(156);
 	}
 	else if (Player::p_PosScene == 4) {

@@ -30,6 +30,7 @@ private:
 
 	Junk2DSprite* filter;
 	Junk2DSprite* CutScene;
+	Junk2DSprite* EffectScene;
 	Junk2DEntity* Ghost;
 
 	VECTOR2 CollisionVector;
@@ -38,6 +39,7 @@ private:
 	bool StartEvent = true;
 	bool cutSceneActive = false;
 	int eventCount = 0;
+	int girlspeed = 2;
 	float dtime = 0;
 
 public:

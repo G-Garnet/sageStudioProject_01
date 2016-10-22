@@ -20,9 +20,10 @@ SecondScene::SecondScene()
 	Window1 = new Junk2DSprite();
 	Window2 = new Junk2DSprite();
 	Ghost = new Junk2DEntity();
+	CutScene = new Junk2DSprite();
 
 	filter = new Junk2DSprite();
-	CutScene = new Junk2DSprite();
+	EffectScene = new Junk2DSprite();
 
 	girl = false;
 }
@@ -35,9 +36,10 @@ SecondScene::~SecondScene()
 	SAFE_DELETE(cursor);
 	SAFE_DELETE(font);
 	SAFE_DELETE(textWindow);
-	SAFE_DELETE(CutScene);
+	SAFE_DELETE(EffectScene);
 	SAFE_DELETE(Ghost);
 	SAFE_DELETE(filter);
+	SAFE_DELETE(CutScene);
 }
 
 void SecondScene::initialize(HWND hwnd)
@@ -68,6 +70,9 @@ void SecondScene::initialize(HWND hwnd)
 	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\2_roomd.png", 1900, 720, 1);
 	filter->setXY(0, 0);
 
+	CutScene->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\CutScene1.png", 1280, 720, 1);
+	CutScene->setXY(0, 0);
+
 	Ghost->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Ch_02_flying.png", 250, 400, 7);
 	Ghost->setAnimation(0,6,0,0.2f);
 	Ghost->setXY(350, 200);
@@ -76,8 +81,8 @@ void SecondScene::initialize(HWND hwnd)
 	Ghost->setEdge(64, 0, 72, 400);
 	Ghost->flipHorizontal(true);
 
-	CutScene->settingTexture(graphics, "..\\Resources\\Etc\\CutScene1.png", 1280, 720, 1);
-	CutScene->setXY(0, 0);
+	EffectScene->settingTexture(graphics, "..\\Resources\\Etc\\CutScene1.png", 1280, 720, 1);
+	EffectScene->setXY(0, 0);
 
 	// Scene의 기본 요소들 //
 	player->playerSetting(graphics);
@@ -220,12 +225,13 @@ void SecondScene::Update()
 		/*Game *temp = new Room3;
 
 		ChangeScene(temp);*/
+		girlspeed = 0;
 		fade->setalphaStart(true);
 	}
 
 	
 	if (girl) {
-		Ghost->setX(Ghost->getX()+2);
+		Ghost->setX(Ghost->getX()+ girlspeed);
 
 		if (player->collidesWith(Ghost, CollisionVector)) {
 
@@ -258,12 +264,16 @@ void SecondScene::render()
 		textWindow->TextWindowRender("어제 그 방이다.", 0);
 		break;
 	case 2:
+		CutScene->draw();
 		textWindow->TextWindowRender("열리지 않는다.", 0);
+		break;
+	case 3:
+		CutScene->draw();
 		break;
 	}
 
 	if (cutSceneActive) {
-		CutScene->draw();
+		EffectScene->draw();
 	}
 
 	
