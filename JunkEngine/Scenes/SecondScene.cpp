@@ -19,6 +19,7 @@ SecondScene::SecondScene()
 
 	Window1 = new Junk2DSprite();
 	Window2 = new Junk2DSprite();
+	Ghost = new Junk2DEntity();
 
 	filter = new Junk2DSprite();
 	CutScene = new Junk2DSprite();
@@ -35,6 +36,8 @@ SecondScene::~SecondScene()
 	SAFE_DELETE(font);
 	SAFE_DELETE(textWindow);
 	SAFE_DELETE(CutScene);
+	SAFE_DELETE(Ghost);
+	SAFE_DELETE(filter);
 }
 
 void SecondScene::initialize(HWND hwnd)
@@ -65,7 +68,15 @@ void SecondScene::initialize(HWND hwnd)
 	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\2_roomd.png", 1900, 720, 1);
 	filter->setXY(0, 0);
 
-	CutScene->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\2_roomd.png", 1280, 720, 1);
+	Ghost->settingTexture(graphics, "..\\Resources\\Floor1\\Room2\\Ch_02_flying.png", 250, 400, 7);
+	Ghost->setAnimation(0,6,0,0.2f);
+	Ghost->setXY(350, 200);
+	Ghost->setActive(true);
+	Ghost->setCollisionType(Junk2DentityNS::BOX);
+	Ghost->setEdge(64, 0, 72, 400);
+	Ghost->flipHorizontal(true);
+
+	CutScene->settingTexture(graphics, "..\\Resources\\Etc\\CutScene1.png", 1280, 720, 1);
 	CutScene->setXY(0, 0);
 
 	// Scene의 기본 요소들 //
@@ -88,14 +99,14 @@ void SecondScene::initialize(HWND hwnd)
 	objectManager->AddObject(Window1, "Window1");
 	objectManager->AddObject(Window2, "Window2");
 	objectManager->AddObject(player, "Player");
-	objectManager->AddObject(filter, "filter");
 
 	Map->MapAddObject(objectManager->getCGameObject("Door1"), "Door1");
 	Map->MapAddObject(objectManager->getCGameObject("Door2"), "Door2");
 	Map->MapAddObject(objectManager->getCGameObject("Door3"), "Door3");
 	Map->MapAddObject(objectManager->getCGameObject("Window1"), "Window1");
 	Map->MapAddObject(objectManager->getCGameObject("Window2"), "Window2");
-	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
+	Map->MapAddObject(filter, "filter");
+	Map->MapAddObject(Ghost, "Ghost");
 
 	player->setMapszie(876-256);
 	if (Player::p_PosScene == 1) {
@@ -144,8 +155,6 @@ void SecondScene::Update()
 	}
 	///////
 
-	
-
 	// 등장 이벤트
 	if (girl) {
 		dtime += 0.01f;
@@ -162,13 +171,17 @@ void SecondScene::Update()
 		}
 	}
 
+	if (eventCount == 3) {
+		eventCount = 4;
+		Sleep(2000);
+	}
 
 	// 클릭 이벤트 //
 	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
 
 		switch (eventCount) {
 		case 2:
-			Sleep(1000);
+			eventCount = 3;
 			textWindow->setActive(false);
 			girl = true;
 			break;
@@ -179,6 +192,7 @@ void SecondScene::Update()
 		}
 	}
 
+	
 
 	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
 		if ((input->getMouseX() >= Window1->getX() && input->getMouseX() <= Window1->getX() + Window1->getWidth()) &&
@@ -209,6 +223,16 @@ void SecondScene::Update()
 		fade->setalphaStart(true);
 	}
 
+	
+	if (girl) {
+		Ghost->setX(Ghost->getX()+2);
+
+		if (player->collidesWith(Ghost, CollisionVector)) {
+
+			exitGame();
+		}
+	}
+
 	//exitGame();
 }
 
@@ -218,6 +242,13 @@ void SecondScene::render()
 
 	Map->getMapBG()->draw();
 	objectManager->RenderAllObject();
+
+	if (girl) {
+		Ghost->update(1.0f / 60.0f);
+		Ghost->draw();
+	}
+
+	filter->draw();
 
 	switch (eventCount) {
 	case -1:
@@ -234,6 +265,8 @@ void SecondScene::render()
 	if (cutSceneActive) {
 		CutScene->draw();
 	}
+
+	
 
 	itemSlot->ItemSlotRender();
 	cursor->draw();

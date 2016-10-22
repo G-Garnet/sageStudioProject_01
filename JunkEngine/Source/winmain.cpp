@@ -7,7 +7,7 @@
 #include <crtdbg.h>             
 
 #include "..\\Scenes\MainScene.h"
-#include "..\\Scenes\\Room3.h"
+#include "..\\Scenes\\Room4.h"
 
 // 함수 프로토타입
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int); 
@@ -38,7 +38,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
     MSG msg;
 
     // 게임 생성
-    game = new MainScenes;
+    game = new SecondScene;
 	//Game::nowScene = game;
 
 	Game::graphics = new Graphics();

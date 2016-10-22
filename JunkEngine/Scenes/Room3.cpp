@@ -37,6 +37,7 @@ Room3::~Room3()
 	SAFE_DELETE(cursor);
 	SAFE_DELETE(font);
 	SAFE_DELETE(fade);
+	SAFE_DELETE(textWindow);
 }
 
 void Room3::initialize(HWND hwnd)
@@ -73,7 +74,6 @@ void Room3::initialize(HWND hwnd)
 
 	Bear->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\Bear.png", 91, 101, 1);
 	Bear->setXY(1264, 247);
-
 
 	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\3_roomd.png", 2000, 720, 1);
 	filter->setXY(0, 0);

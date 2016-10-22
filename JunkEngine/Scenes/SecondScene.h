@@ -30,6 +30,9 @@ private:
 
 	Junk2DSprite* filter;
 	Junk2DSprite* CutScene;
+	Junk2DEntity* Ghost;
+
+	VECTOR2 CollisionVector;
 
 	bool girl;
 	bool StartEvent = true;

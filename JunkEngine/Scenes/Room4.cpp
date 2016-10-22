@@ -11,6 +11,7 @@ Room4::Room4()
 	cursor = new Cursor();
 	font = new Junk2DFont();
 	fade = new Fade();
+	textWindow = new TextWindow();
 
 	Door1 = new Junk2DSprite();
 	Door2 = new Junk2DSprite();
@@ -29,6 +30,7 @@ Room4::~Room4()
 	SAFE_DELETE(cursor);
 	SAFE_DELETE(font);
 	SAFE_DELETE(fade);
+	SAFE_DELETE(textWindow);
 }
 
 void Room4::initialize(HWND hwnd)
@@ -52,8 +54,11 @@ void Room4::initialize(HWND hwnd)
 	Pictures->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Pictures.png", 668, 269, 1);
 	Pictures->setXY(700, 48);
 
-	Blood->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Blood.png", 352, 327, 1);
-	Blood->setXY(838, 228);
+	Blood->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Blood.png", 650, 480, 7);
+	Blood->setLoop(false);
+	Blood->setAnimation(0, 27, 0, 0.1f);
+	Blood->setXY(731, 91);
+
 	Carpet->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Carpet.png", 1437, 170, 1);
 	Carpet->setXY(360, 533);
 
@@ -64,6 +69,8 @@ void Room4::initialize(HWND hwnd)
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);
+	textWindow->TextWindowSetting(graphics);
+	textWindow->setActive(false);
 	font->initialize(graphics, 15, true, false, "굴림체"); 
 	fade->fadeSetting(graphics);
 	fade->setAlpha(255);
@@ -108,10 +115,11 @@ void Room4::initialize(HWND hwnd)
 
 void Room4::Update()
 {
-	player->playerInput(input, Map);
+	if (!textWindow->getActive()) {
+		player->playerInput(input, Map);
+	}
 	itemSlot->ItemSlotInput(input);
 	cursor->CursorInput(input);
-
 
 	if (fade->getalphaStart()) {
 		fade->setAlpha(fade->getAlpha() + 1.75f);
@@ -129,9 +137,37 @@ void Room4::Update()
 		ChangeScene(temp);
 	}
 
+	if (eventCount == 2 && eventStart) {
+		Sleep(1500);
+		eventCount = 3;
+	}
+
+	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
+
+		switch (eventCount) {
+		case 1:
+			eventCount = 2;
+			textWindow->setActive(false);
+			eventStart = true;
+			break;
+		default:
+			textWindow->setActive(false);
+			eventCount = 0;
+			break;
+		}
+	}
+
+	
+
+	if (player->getX() >= 630 && Map->getMapX() >= -480 && !eventStart) {
+		eventCount = 1;
+		textWindow->setActive(true);
+	}
+
 	if (input->isKeyUp(VK_RETURN)) {
 		fade->setalphaStart(true);
 	}
+
 
 	//exitGame();
 }
@@ -142,6 +178,18 @@ void Room4::render()
 
 	Map->getMapBG()->draw();
 	objectManager->RenderAllObject();
+
+	switch (eventCount) {
+	case 1:
+		// 컷신 드로우
+		textWindow->TextWindowRender("기분 나쁘게 생긴 그림들 사이로", 0);
+		break;
+	case 2:
+		break;
+	case 3:
+		Blood->update(1.0f / 60.0f);
+		break;
+	}
 
 	itemSlot->ItemSlotRender();
 	cursor->draw();
