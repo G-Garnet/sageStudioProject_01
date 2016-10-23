@@ -3,6 +3,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "..\\Headers\Game.h"
+#include "..\Headers\video.h"
 
 // 메인 게임 클래스, Game클래스로 부터 상속 받음
 class SecondScene : public Game
@@ -32,6 +33,8 @@ private:
 	Junk2DSprite* CutScene;
 	Junk2DSprite* EffectScene;
 	Junk2DEntity* Ghost;
+
+	Video* videoPlayer;
 
 	VECTOR2 CollisionVector;
 

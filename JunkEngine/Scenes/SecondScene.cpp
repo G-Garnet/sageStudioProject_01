@@ -24,6 +24,7 @@ SecondScene::SecondScene()
 
 	filter = new Junk2DSprite();
 	EffectScene = new Junk2DSprite();
+	videoPlayer = new Video();
 
 	girl = false;
 }
@@ -40,6 +41,7 @@ SecondScene::~SecondScene()
 	SAFE_DELETE(Ghost);
 	SAFE_DELETE(filter);
 	SAFE_DELETE(CutScene);
+	SAFE_DELETE(videoPlayer);
 }
 
 void SecondScene::initialize(HWND hwnd)
@@ -125,7 +127,6 @@ void SecondScene::initialize(HWND hwnd)
 	//Map->mapMove(300, 0);
 
 	initialized = true;
-	//player->setXY(64, 150);
 
 	return;
 }
@@ -227,6 +228,7 @@ void SecondScene::Update()
 		ChangeScene(temp);*/
 		girlspeed = 0;
 		fade->setalphaStart(true);
+		videoPlayer->play(hwnd);
 	}
 
 	

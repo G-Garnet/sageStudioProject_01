@@ -42,6 +42,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28August 2009%29\Include;$(IncludePath)</IncludePath>
@@ -71,7 +72,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;E:\Github\sageStudioProject_01\JunkEngine\Live2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;E:\Github\sageStudioProject_01\JunkEngine\Live2D\include;..\..\Common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <MinimalRebuild>true</MinimalRebuild>
@@ -84,15 +85,16 @@
       <SubSystem>Windows</SubSystem>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>vfw32.lib;Xinput.lib;winmm.lib;d3dx9d.lib;d3d9.lib;dxguid.lib;d3dxof.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mfuuid.lib;vfw32.lib;Xinput.lib;winmm.lib;d3dx9d.lib;d3d9.lib;dxguid.lib;d3dxof.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;strmiids.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Headers\DShowPlayer.cpp" />
     <ClCompile Include="..\Headers\Fade.cpp" />
     <ClCompile Include="..\Headers\Junk2DMap.cpp" />
     <ClCompile Include="..\Headers\Player.cpp" />
     <ClCompile Include="..\Headers\TextWindow.cpp" />
-    <ClCompile Include="..\Headers\VideoPlay.cpp" />
+    <ClCompile Include="..\Headers\video.cpp" />
     <ClCompile Include="..\Scenes\MainScene.cpp" />
     <ClCompile Include="..\Scenes\Room3.cpp" />
     <ClCompile Include="..\Scenes\Room4.cpp" />
@@ -115,6 +117,8 @@
   <ItemGroup>
     <ClInclude Include="..\Headers\constants.h" />
     <ClInclude Include="..\Headers\Cursor.h" />
+    <ClInclude Include="..\Headers\DShowPlayer.h" />
+    <ClInclude Include="..\Headers\DShowUtill.h" />
     <ClInclude Include="..\Headers\Fade.h" />
     <ClInclude Include="..\Headers\ItemSlot.h" />
     <ClInclude Include="..\Headers\Junk2Dentity.h" />
@@ -130,7 +134,7 @@
     <ClInclude Include="..\Headers\Sounds.h" />
     <ClInclude Include="..\Headers\textureManager.h" />
     <ClInclude Include="..\Headers\TextWindow.h" />
-    <ClInclude Include="..\Headers\VideoPlay.h" />
+    <ClInclude Include="..\Headers\video.h" />
     <ClInclude Include="..\Scenes\MainScene.h" />
     <ClInclude Include="..\Scenes\Room3.h" />
     <ClInclude Include="..\Scenes\Room4.h" />

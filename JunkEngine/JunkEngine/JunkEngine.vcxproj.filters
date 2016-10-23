@@ -69,9 +69,6 @@
     <ClCompile Include="..\Headers\Junk2DMap.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
-    <ClCompile Include="..\Headers\VideoPlay.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="..\Headers\Player.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
@@ -101,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="..\Headers\TextWindow.cpp">
       <Filter>CustomClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Headers\video.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Headers\DShowPlayer.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +176,13 @@
     <ClInclude Include="..\Headers\Fade.h">
       <Filter>CustomClass</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\VideoPlay.h">
+    <ClInclude Include="..\Headers\video.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DShowPlayer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DShowUtill.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
