@@ -34,7 +34,6 @@ private:
 	Junk2DSprite* EffectScene;
 	Junk2DEntity* Ghost;
 
-	Video* videoPlayer;
 
 	VECTOR2 CollisionVector;
 

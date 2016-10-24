@@ -140,6 +140,8 @@ void MainScenes::initialize(HWND hwnd)
 
 	initialized = true;
 
+	audio->playCue("rain bgm");
+
 	return;
 }
 
@@ -245,6 +247,7 @@ void MainScenes::Update()
 	if (player->collidesWith(Carpet, CollisionVector) &&
 		input->isKeyUp(VK_RETURN)) {
 		if (key) {
+			audio->playCue("hit");
 			fade->setalphaStart(true);
 		}
 		else if (textWindow->getActive()) {
@@ -271,8 +274,6 @@ void MainScenes::Update()
 
 		ChangeScene(temp);
 	}
-	///////////
-
 
 	//// Ãæµ¹ ////
 	/*if (player->collidesWith(Desk, CollisionVector)){

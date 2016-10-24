@@ -99,10 +99,10 @@
     <ClCompile Include="..\Headers\TextWindow.cpp">
       <Filter>CustomClass</Filter>
     </ClCompile>
-    <ClCompile Include="..\Headers\video.cpp">
+    <ClCompile Include="..\Headers\DShowPlayer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\Headers\DShowPlayer.cpp">
+    <ClCompile Include="..\Scenes\MainMenu.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,14 +179,14 @@
     <ClInclude Include="..\Headers\video.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\DShowPlayer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\DShowUtill.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\Scenes\MainMenu.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="..\Resources\Sounds\SoundExample1.xap">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

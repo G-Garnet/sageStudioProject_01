@@ -24,7 +24,6 @@ SecondScene::SecondScene()
 
 	filter = new Junk2DSprite();
 	EffectScene = new Junk2DSprite();
-	videoPlayer = new Video();
 
 	girl = false;
 }
@@ -41,7 +40,6 @@ SecondScene::~SecondScene()
 	SAFE_DELETE(Ghost);
 	SAFE_DELETE(filter);
 	SAFE_DELETE(CutScene);
-	SAFE_DELETE(videoPlayer);
 }
 
 void SecondScene::initialize(HWND hwnd)
@@ -228,7 +226,6 @@ void SecondScene::Update()
 		ChangeScene(temp);*/
 		girlspeed = 0;
 		fade->setalphaStart(true);
-		videoPlayer->play(hwnd);
 	}
 
 	

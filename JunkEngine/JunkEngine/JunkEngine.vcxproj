@@ -94,7 +94,7 @@
     <ClCompile Include="..\Headers\Junk2DMap.cpp" />
     <ClCompile Include="..\Headers\Player.cpp" />
     <ClCompile Include="..\Headers\TextWindow.cpp" />
-    <ClCompile Include="..\Headers\video.cpp" />
+    <ClCompile Include="..\Scenes\MainMenu.cpp" />
     <ClCompile Include="..\Scenes\MainScene.cpp" />
     <ClCompile Include="..\Scenes\Room3.cpp" />
     <ClCompile Include="..\Scenes\Room4.cpp" />
@@ -117,8 +117,6 @@
   <ItemGroup>
     <ClInclude Include="..\Headers\constants.h" />
     <ClInclude Include="..\Headers\Cursor.h" />
-    <ClInclude Include="..\Headers\DShowPlayer.h" />
-    <ClInclude Include="..\Headers\DShowUtill.h" />
     <ClInclude Include="..\Headers\Fade.h" />
     <ClInclude Include="..\Headers\ItemSlot.h" />
     <ClInclude Include="..\Headers\Junk2Dentity.h" />
@@ -135,6 +133,7 @@
     <ClInclude Include="..\Headers\textureManager.h" />
     <ClInclude Include="..\Headers\TextWindow.h" />
     <ClInclude Include="..\Headers\video.h" />
+    <ClInclude Include="..\Scenes\MainMenu.h" />
     <ClInclude Include="..\Scenes\MainScene.h" />
     <ClInclude Include="..\Scenes\Room3.h" />
     <ClInclude Include="..\Scenes\Room4.h" />
@@ -143,6 +142,7 @@
     <ClInclude Include="..\Scenes\SecondScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Resources\Sounds\SoundExample1.xap" />
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

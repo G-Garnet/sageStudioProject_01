@@ -25,6 +25,9 @@ private:
 	Junk2DSprite* cross2;
 	Junk2DSprite* light;
 
+	Video* videoPlayer;
+	bool ending = false;
+
 	// 게임 요소들
 	Junk2DMap* Map;
 

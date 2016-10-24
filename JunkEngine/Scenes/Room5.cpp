@@ -16,6 +16,7 @@ Room5::Room5()
 	cross1 = new Junk2DSprite();
 	cross2 = new Junk2DSprite();
 	light = new Junk2DSprite();
+	videoPlayer = new Video();
 
 	filter = new Junk2DSprite();
 }
@@ -27,6 +28,8 @@ Room5::~Room5()
 	SAFE_DELETE(itemSlot);
 	SAFE_DELETE(cursor);
 	SAFE_DELETE(font);
+	SAFE_DELETE(fade);
+	SAFE_DELETE(videoPlayer);
 }
 
 void Room5::initialize(HWND hwnd)
@@ -97,21 +100,27 @@ void Room5::Update()
 	cursor->CursorInput(input);
 
 	if (fade->getalphaStart()) {
-		fade->setAlpha(fade->getAlpha() + 1.75f);
+		fade->setAlpha(fade->getAlpha() + 1.05f);
 	}
 	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f) {
-		fade->setAlpha(fade->getAlpha() - 1.75f);
+		player->setInputSW(false);
+		fade->setAlpha(fade->getAlpha() - 1.05f);
 	}
 	else if (fade->getAlpha() <= 1.5f) {
 		player->setInputSW(true);
 	}
 
+	if (fade->getAlpha() >= 255 && !ending) {
+		ending = true;
+		videoPlayer->play(hwnd, L"..\\Resources\\Video\\openinng1.avi");
+		exit(0);
+	}
 
-	/*if (input->isKeyUp(VK_RETURN)) {
-		Game *temp = new MainScenes;
 
-		ChangeScene(temp);
-	}*/
+	if (input->isKeyUp(VK_RETURN)) {
+
+		fade->setalphaStart(true);
+	}
 
 	//exitGame();
 }

@@ -8,6 +8,7 @@
 #include "..\Headers\\TextWindow.h"
 
 #include "MainScene.h"
+#include "MainMenu.h"
 #include "SecondScene.h"
 #include "Room3.h"
 #include "Room4.h"
