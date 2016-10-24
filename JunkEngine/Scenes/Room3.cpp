@@ -79,12 +79,12 @@ void Room3::initialize(HWND hwnd)
 	filter->setXY(0, 0);
 
 	fire1->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
-	fire1->setXY(507, 160);
+	fire1->setXY(507+12, 135);
 	fire1->setLoop(true);
 	fire1->setAnimation(0,8,0,0.4f);
 
 	fire2->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
-	fire2->setXY(1296, 160);
+	fire2->setXY(1296+12, 135);
 	fire1->setLoop(true);
 	fire2->setAnimation(0,8, 0, 0.4f);
 
@@ -217,23 +217,51 @@ void Room3::Update()
 		}
 	}
 
-	if (input->isKeyUp(VK_RETURN) && player->getX() <= 210 && player->getY() >= 160) {
+	else if (!textWindow->getActive()) {
+		bool sw = false;
+		// °õ
+		if (Bear != NULL) {
+			if ((input->getMouseX() >= Bear->getX() && input->getMouseX() <= Bear->getX() + Bear->getWidth()) &&
+				(input->getMouseY() >= Bear->getY() && input->getMouseY() <= Bear->getY() + Bear->getHeight())) {
+				sw = true;
+			}
+		}
+
+		// »óÀÚ
+		if ((input->getMouseX() >= Box->getX() && input->getMouseX() <= Box->getX() + Box->getWidth()) &&
+			(input->getMouseY() >= Box->getY() && input->getMouseY() <= Box->getY() + Box->getHeight())) {
+			sw = true;
+		}
+
+		// º®³­·Î
+		if ((input->getMouseX() >= fireDeck->getX() && input->getMouseX() <= fireDeck->getX() + fireDeck->getWidth()) &&
+			(input->getMouseY() >= fireDeck->getY() && input->getMouseY() <= fireDeck->getY() + fireDeck->getHeight())) {
+			sw = true;
+		}
+
+		if (sw) {
+			cursor->Cursorchange(true);
+		}
+		else {
+			cursor->Cursorchange(false);
+		}
+	}
+
+	if (input->isKeyUp(VK_RETURN) ) {
 		/*Game *temp = new Room4;
 
 		ChangeScene(temp);*/
-		fade->setalphaStart(true);
-		audio->playCue("open_door_1");
+		if (player->getX() <= 210 && player->getY() >= 160) {
+			fade->setalphaStart(true);
+			audio->playCue("open_door_1");
+
+		}
+		else  if (player->getX() >= 640 && player->getY() >= 160) {
+
+			textWindow->setActive(true);
+			eventCount = 6;
+		}
 	}
-
-
-	if (input->isKeyUp(VK_RETURN) && player->getX() >= 640 && player->getY() <= 250) {
-		/*Game *temp = new Room4;
-
-		ChangeScene(temp);*/
-		textWindow->setActive(true);
-		eventCount = 6;
-	}
-
 	
 	
 
@@ -259,6 +287,9 @@ void Room3::render()
 		textWindow->TextWindowRender("\"±×·¡µµ °¡Àå ´ú ²ûÂïÇÏ³×.\"", 0);
 		break; 
 	case 3:
+		if (Bear) {
+			audio->playCue("beep1");
+		}
 		objectManager->RemoveObject("Bear");
 		Map->RemoveObject("Bear");
 		SAFE_DELETE(Bear);

@@ -152,7 +152,7 @@ void Room4::Update()
 		Sleep(1500);
 		eventCount = 3;
 
-		audio->playCue("whisper ver.3sec");
+		audio->playCue("whispher ver.3sec");
 	}
 
 	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {

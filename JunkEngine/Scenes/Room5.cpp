@@ -18,6 +18,9 @@ Room5::Room5()
 	light = new Junk2DSprite();
 	videoPlayer = new Video();
 
+	fire1 = new Junk2DSprite();
+	fire2 = new Junk2DSprite();
+
 	filter = new Junk2DSprite();
 }
 
@@ -57,6 +60,17 @@ void Room5::initialize(HWND hwnd)
 	light->settingTexture(graphics, "..\\Resources\\Floor1\\Room5\\Room5_light.png", 456, 86, 1);
 	light->setXY(410, 88);
 
+
+	fire1->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
+	fire1->setXY(424, 88-25);
+	fire1->setLoop(true);
+	fire1->setAnimation(0, 8, 0, 0.4f);
+
+	fire2->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
+	fire2->setXY(842, 88-25);
+	fire1->setLoop(true);
+	fire2->setAnimation(0, 8, 0, 0.4f);
+
 	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room5\\5_roomd.png", 2000, 720, 1);
 	filter->setXY(0, 0);
 
@@ -76,6 +90,8 @@ void Room5::initialize(HWND hwnd)
 	objectManager->AddObject(cross1, "cross1");
 	objectManager->AddObject(cross2, "cross2");
 	objectManager->AddObject(light, "light");
+	objectManager->AddObject(fire1, "fire1");
+	objectManager->AddObject(fire2, "fire2");
 
 	objectManager->AddObject(player, "Player");
 	objectManager->AddObject(filter, "filter");
@@ -85,6 +101,8 @@ void Room5::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("cross2"), "cross2");
 	Map->MapAddObject(objectManager->getCGameObject("light"), "light");
 	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
+	Map->MapAddObject(objectManager->getCGameObject("fire1"), "fire1");
+	Map->MapAddObject(objectManager->getCGameObject("fire2"), "fire2");
 
 	player->setMapszie(1);
 
@@ -101,9 +119,12 @@ void Room5::Update()
 	itemSlot->ItemSlotInput(input);
 	cursor->CursorInput(input);
 
+	fire1->update((float)1 / 60);
+	fire2->update((float)1 / 60);
+
 	if (fade->getalphaStart()) {
 		player->setInputSW(false);
-		fade->setAlpha(fade->getAlpha() + 0.9f);
+		fade->setAlpha(fade->getAlpha() + 0.8f);
 	}
 	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f) {
 		player->setInputSW(false);

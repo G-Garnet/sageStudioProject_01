@@ -39,6 +39,7 @@ private:
 
 	int eventCount = 0;
 	bool key = false;
+	bool blockDoor = false;
 
 public:
 

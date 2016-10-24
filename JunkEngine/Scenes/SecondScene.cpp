@@ -205,7 +205,7 @@ void SecondScene::Update()
 	}
 
 	
-
+	
 	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
 		if ((input->getMouseX() >= Window1->getX() && input->getMouseX() <= Window1->getX() + Window1->getWidth()) &&
 			(input->getMouseY() >= Window1->getY() && input->getMouseY() <= Window1->getY() + Window1->getHeight())) {

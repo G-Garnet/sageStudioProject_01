@@ -299,19 +299,22 @@ void MainScenes::Update()
 	////////////////
 
 	// Fade & SceneChange //
-	if (player->collidesWith(Carpet, CollisionVector) &&
-		input->isKeyUp(VK_RETURN)) {
-		if (key) {
-			audio->playCue("open_door_1");
-			fade->setalphaStart(true);
+	if (player->collidesWith(Carpet, CollisionVector)){
+		if (input->isKeyUp(VK_RETURN)) {
+			if (key) {
+				audio->playCue("open_door_1");
+				fade->setalphaStart(true);
+			}
+			else if (textWindow->getActive()) {
+				textWindow->setActive(false);
+			}
+			else {
+				textWindow->setActive(true);
+				eventCount = 5;
+				blockDoor = false;
+			}
 		}
-		else if (textWindow->getActive()) {
-			textWindow->setActive(false);
-		}
-		else {
-			textWindow->setActive(true);
-			eventCount = 5;
-		}
+		
 	}
 
 	if (fade->getalphaStart()) {
@@ -329,14 +332,6 @@ void MainScenes::Update()
 
 		ChangeScene(temp);
 	}
-
-	//// 충돌 ////
-	/*if (player->collidesWith(Desk, CollisionVector)){
-		player->bounce(CollisionVector, *Desk);
-	}*/
-	/*if (player->collidesWith(Hanger, CollisionVector)) {
-		player->bounce(CollisionVector, *Hanger);
-	}*/
 
 
 }
@@ -372,7 +367,10 @@ void MainScenes::render()
 		textWindow->TextWindowRender("서랍장은 모두 잠겨있다.", 0);
 		break;
 	case 5:
-		//audio->playCue("open door 1");
+		if (!blockDoor){
+			audio->playCue("rattle twice");
+			blockDoor = true;
+		}
 		textWindow->TextWindowRender("열리지 않는다.", 0);
 		break;
 	case 6:
@@ -381,6 +379,9 @@ void MainScenes::render()
 		break;
 	case 7:
 		textWindow->TextWindowRender("열쇠를 찾았다.", 0);
+		if (!key) {
+			audio->playCue("beep1");
+		}
 		key = true;
 		break;
 

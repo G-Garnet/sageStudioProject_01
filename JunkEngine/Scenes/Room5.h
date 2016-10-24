@@ -24,6 +24,8 @@ private:
 	Junk2DSprite* cross1;
 	Junk2DSprite* cross2;
 	Junk2DSprite* light;
+	Junk2DSprite* fire1;
+	Junk2DSprite* fire2;
 
 	Video* videoPlayer;
 	bool ending = false;
