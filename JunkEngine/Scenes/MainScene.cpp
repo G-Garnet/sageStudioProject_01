@@ -207,7 +207,8 @@ void MainScenes::Update()
 		}
 
 		// 카펫
-		if ((input->getMouseX() >= Carpet->getX() && input->getMouseX() <= Carpet->getX() + Carpet->getWidth()) &&
+		if (!key &&
+			(input->getMouseX() >= Carpet->getX() && input->getMouseX() <= Carpet->getX() + Carpet->getWidth()) &&
 			(input->getMouseY() >= Carpet->getY() && input->getMouseY() <= Carpet->getY() + Carpet->getHeight())) {
 			textWindow->setActive(true);
 			eventCount = 6;
@@ -241,13 +242,67 @@ void MainScenes::Update()
 			eventCount = 2;
 		}
 	}
+
+	else if (!textWindow->getActive()) {
+
+		bool sw = false;
+		// 일지
+		if ((input->getMouseX() >= papers->getX() && input->getMouseX() <= papers->getX() + papers->getWidth()) &&
+			(input->getMouseY() >= papers->getY() && input->getMouseY() <= papers->getY() + papers->getHeight())) {
+			sw = true;
+		}
+
+		// 서랍장
+		if ((input->getMouseX() >= Desk->getX() && input->getMouseX() <= Desk->getX() + Desk->getWidth()) &&
+			(input->getMouseY() >= Desk->getY() && input->getMouseY() <= Desk->getY() + Desk->getHeight())) {
+			sw = true;
+		}
+
+		// 카펫
+		if (!key &&
+			(input->getMouseX() >= Carpet->getX() && input->getMouseX() <= Carpet->getX() + Carpet->getWidth()) &&
+			(input->getMouseY() >= Carpet->getY() && input->getMouseY() <= Carpet->getY() + Carpet->getHeight())) {
+			sw = true;
+		}
+
+		// 파이프
+		if ((input->getMouseX() >= Pipe->getX() && input->getMouseX() <= Pipe->getX() + Pipe->getWidth()) &&
+			(input->getMouseY() >= Pipe->getY() && input->getMouseY() <= Pipe->getY() + Pipe->getHeight())) {
+			sw = true;
+		}
+
+		// 촛대
+		if ((input->getMouseX() >= candle->getX() && input->getMouseX() <= candle->getX() + candle->getWidth()) &&
+			(input->getMouseY() >= candle->getY() && input->getMouseY() <= candle->getY() + candle->getHeight())) {
+			sw = true;
+		}
+
+		// 병
+		if ((input->getMouseX() >= bottle->getX() && input->getMouseX() <= bottle->getX() + bottle->getWidth()) &&
+			(input->getMouseY() >= bottle->getY() && input->getMouseY() <= bottle->getY() + bottle->getHeight())) {
+			sw = true;
+		}
+
+		// 옷걸이
+		if ((input->getMouseX() >= Hanger->getX() && input->getMouseX() <= Hanger->getX() + Hanger->getWidth()) &&
+			(input->getMouseY() >= Hanger->getY() && input->getMouseY() <= Hanger->getY() + Hanger->getHeight())) {
+			sw = true;
+		}
+
+		if (sw) {
+			cursor->Cursorchange(true);
+		}
+		else {
+			cursor->Cursorchange(false);
+		}
+	}
 	////////////////
 
 	// Fade & SceneChange //
 	if (player->collidesWith(Carpet, CollisionVector) &&
 		input->isKeyUp(VK_RETURN)) {
 		if (key) {
-			audio->playCue("hit");
+			audio->playCue("open_door_1");
 			fade->setalphaStart(true);
 		}
 		else if (textWindow->getActive()) {
@@ -317,6 +372,7 @@ void MainScenes::render()
 		textWindow->TextWindowRender("서랍장은 모두 잠겨있다.", 0);
 		break;
 	case 5:
+		//audio->playCue("open door 1");
 		textWindow->TextWindowRender("열리지 않는다.", 0);
 		break;
 	case 6:

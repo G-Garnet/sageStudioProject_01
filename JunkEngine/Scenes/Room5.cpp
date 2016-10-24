@@ -90,6 +90,8 @@ void Room5::initialize(HWND hwnd)
 
 	initialized = true;
 
+	audio->playCue("door close");
+
 	return;
 }
 
@@ -100,11 +102,12 @@ void Room5::Update()
 	cursor->CursorInput(input);
 
 	if (fade->getalphaStart()) {
-		fade->setAlpha(fade->getAlpha() + 1.05f);
+		player->setInputSW(false);
+		fade->setAlpha(fade->getAlpha() + 0.9f);
 	}
 	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f) {
 		player->setInputSW(false);
-		fade->setAlpha(fade->getAlpha() - 1.05f);
+		fade->setAlpha(fade->getAlpha() - 1.5f);
 	}
 	else if (fade->getAlpha() <= 1.5f) {
 		player->setInputSW(true);

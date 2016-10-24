@@ -114,6 +114,7 @@ void Room4::initialize(HWND hwnd)
 
 	initialized = true;
 
+	audio->playCue("door close");
 	return;
 }
 
@@ -150,6 +151,8 @@ void Room4::Update()
 	if (eventCount == 2 && eventStart) {
 		Sleep(1500);
 		eventCount = 3;
+
+		audio->playCue("whisper ver.3sec");
 	}
 
 	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
@@ -174,6 +177,7 @@ void Room4::Update()
 	}
 
 	if (input->isKeyUp(VK_RETURN)) {
+		audio->playCue("open_door_1");
 		fade->setalphaStart(true);
 	}
 

@@ -124,7 +124,7 @@ void Room3::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("fireDeck"), "fireDeck");
 	Map->MapAddObject(objectManager->getCGameObject("fire1"), "fire1");
 	Map->MapAddObject(objectManager->getCGameObject("fire2"), "fire2");
-	Map->MapAddObject(objectManager->getCGameObject("Box"), "Boxs");
+	Map->MapAddObject(objectManager->getCGameObject("Box"), "Box");
 	Map->MapAddObject(objectManager->getCGameObject("Picture"), "Picture");
 	Map->MapAddObject(objectManager->getCGameObject("Desk"), "Desk");
 	Map->MapAddObject(objectManager->getCGameObject("Bear"), "Bear");
@@ -143,6 +143,8 @@ void Room3::initialize(HWND hwnd)
 	Player::p_PosScene = 3;
 
 	initialized = true;
+
+	audio->playCue("knock and rattle");
 
 	return;
 }
@@ -215,12 +217,25 @@ void Room3::Update()
 		}
 	}
 
-	if (input->isKeyUp(VK_RETURN) && player->getX() <= 210 && player->getY() >= 120) {
+	if (input->isKeyUp(VK_RETURN) && player->getX() <= 210 && player->getY() >= 160) {
 		/*Game *temp = new Room4;
 
 		ChangeScene(temp);*/
 		fade->setalphaStart(true);
+		audio->playCue("open_door_1");
 	}
+
+
+	if (input->isKeyUp(VK_RETURN) && player->getX() >= 640 && player->getY() <= 250) {
+		/*Game *temp = new Room4;
+
+		ChangeScene(temp);*/
+		textWindow->setActive(true);
+		eventCount = 6;
+	}
+
+	
+	
 
 	//exitGame();
 }
@@ -245,6 +260,7 @@ void Room3::render()
 		break; 
 	case 3:
 		objectManager->RemoveObject("Bear");
+		Map->RemoveObject("Bear");
 		SAFE_DELETE(Bear);
 		textWindow->TextWindowRender("°õÀÎÇüÀ» È¹µæÇß´Ù.", 0);
 		player->playerItemIn(2);

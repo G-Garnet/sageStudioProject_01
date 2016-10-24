@@ -124,6 +124,8 @@ void SecondScene::initialize(HWND hwnd)
 
 	//Map->mapMove(300, 0);
 
+	audio->playCue("door close");
+
 	initialized = true;
 
 	return;
@@ -155,6 +157,9 @@ void SecondScene::Update()
 	if (fade->getAlpha() >= 255) {
 		Game *temp = new Room3;
 
+		audio->stopCue("boom!");
+		audio->stopCue("wo_effect");
+		audio->stopCue("wo_bgm");
 		ChangeScene(temp);
 	}
 	///////
@@ -167,7 +172,8 @@ void SecondScene::Update()
 			cutSceneActive = true;
 		}
 		
-		if (dtime>=0.55f){
+		if (dtime>=0.6f){
+			audio->playCue("boom!");
 			dtime = 0;
 		}
 		else {
@@ -188,6 +194,8 @@ void SecondScene::Update()
 			eventCount = 3;
 			textWindow->setActive(false);
 			girl = true;
+			audio->playCue("wo_effect");
+			audio->playCue("wo_bgm");
 			break;
 		default:
 			textWindow->setActive(false);
@@ -210,13 +218,39 @@ void SecondScene::Update()
 			textWindow->setActive(true);
 		}
 
-		if ((input->getMouseX() >= Door3->getX() && input->getMouseX() <= Door3->getX() + Door3->getWidth()) &&
+		if (!girl && 
+			(input->getMouseX() >= Door3->getX() && input->getMouseX() <= Door3->getX() + Door3->getWidth()) &&
 			(input->getMouseY() >= Door3->getY() && input->getMouseY() <= Door3->getY() + Door3->getHeight())) {
 			eventCount = 2;
 			textWindow->setActive(true);
 		}
 
 		
+	}
+
+	else if (!textWindow->getActive()) {
+		bool sw = false;
+		if ((input->getMouseX() >= Window1->getX() && input->getMouseX() <= Window1->getX() + Window1->getWidth()) &&
+			(input->getMouseY() >= Window1->getY() && input->getMouseY() <= Window1->getY() + Window1->getHeight())) {
+			sw = true;
+		}
+		if ((input->getMouseX() >= Window2->getX() && input->getMouseX() <= Window2->getX() + Window2->getWidth()) &&
+			(input->getMouseY() >= Window2->getY() && input->getMouseY() <= Window2->getY() + Window2->getHeight())) {
+			sw = true;
+		}
+
+		if (!girl &&
+			(input->getMouseX() >= Door3->getX() && input->getMouseX() <= Door3->getX() + Door3->getWidth()) &&
+			(input->getMouseY() >= Door3->getY() && input->getMouseY() <= Door3->getY() + Door3->getHeight())) {
+			sw = true;
+		}
+
+		if (sw) {
+			cursor->Cursorchange(true);
+		}
+		else {
+			cursor->Cursorchange(false);
+		}
 	}
 
 	// 다음방으로
@@ -226,15 +260,19 @@ void SecondScene::Update()
 		ChangeScene(temp);*/
 		girlspeed = 0;
 		fade->setalphaStart(true);
+		audio->playCue("open_door_1");
 	}
 
 	
 	if (girl) {
-		Ghost->setX(Ghost->getX()+ girlspeed);
+		if (Ghost->getX() <= player->getX()) {
+			Ghost->setX(Ghost->getX() + girlspeed);
+		}
 
-		if (player->collidesWith(Ghost, CollisionVector)) {
+		if (Ghost->getX() >= player->getX() - 40 &&
+			Ghost->getX() <= player->getX() + 40) {
 
-			exitGame();
+			exit(0);
 		}
 	}
 

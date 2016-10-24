@@ -8,6 +8,9 @@ class Cursor : public Junk2DSprite {
 private:
 	Junk2DSprite* onCursorObj;
 
+	bool cursorSet = false;
+	bool cursorOn = false;
+
 public:
 	Cursor();
 	virtual ~Cursor();
@@ -15,6 +18,7 @@ public:
 	virtual void CursorSetting(Graphics* graphics);
 
 	virtual void CursorInput(Input* input);
+	virtual void Cursorchange(bool a);
 };
 
 
