@@ -16,8 +16,8 @@ Global Settings
     Header File = C:\Programming 2D Games\Object Version\Chapter 7 Sound\SoundExample1\audio\SoundExample1.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 345662851;
-    Last Modified High = 30551589;
+    Last Modified Low = 1257075714;
+    Last Modified High = 30551670;
 
     Category
     {
@@ -227,10 +227,10 @@ Wave Bank
     Compression Preset Name = <none>;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 345662851;
-    PC Bank Last Modified High = 30551589;
-    Bank Last Revised Low = 300517757;
-    Bank Last Revised High = 30551589;
+    PC Bank Last Modified Low = 1257231961;
+    PC Bank Last Modified High = 30551670;
+    Bank Last Revised Low = 1194481235;
+    Bank Last Revised High = 30551670;
 
     Wave
     {
@@ -530,6 +530,29 @@ Wave Bank
             Last Modified High = 30551539;
         }
     }
+
+    Wave
+    {
+        Name = item;
+        File = item.wav;
+        Build Settings Last Modified Low = 1047614830;
+        Build Settings Last Modified High = 30551670;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 44100;
+            Bits Per Sample = 1;
+            Play Region Offset = 44;
+            Play Region Length = 123344;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 857918947;
+            Last Modified High = 30551670;
+        }
+    }
 }
 
 Sound Bank
@@ -539,8 +562,8 @@ Sound Bank
     Windows File = Win\SoundsExample1.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 345975383;
-    Bank Last Modified High = 30551589;
+    Bank Last Modified Low = 1257761006;
+    Bank Last Modified High = 30551670;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -1155,6 +1178,53 @@ Sound Bank
         }
     }
 
+    Sound
+    {
+        Name = item;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = WavesExample1;
+                    Bank Index = 0;
+                    Entry Name = item;
+                    Entry Index = 13;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
     Cue
     {
         Name = beep1;
@@ -1410,6 +1480,26 @@ Sound Bank
         {
             Name = footstep on carpet;
             Index = 12;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = item;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = item;
+            Index = 13;
             Weight Min = 0;
             Weight Max = 255;
         }

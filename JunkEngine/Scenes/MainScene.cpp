@@ -380,7 +380,7 @@ void MainScenes::render()
 	case 7:
 		textWindow->TextWindowRender("열쇠를 찾았다.", 0);
 		if (!key) {
-			audio->playCue("beep1");
+			audio->playCue("item");
 		}
 		key = true;
 		break;

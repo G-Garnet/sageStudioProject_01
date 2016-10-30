@@ -288,7 +288,7 @@ void Room3::render()
 		break; 
 	case 3:
 		if (Bear) {
-			audio->playCue("beep1");
+			audio->playCue("item");
 		}
 		objectManager->RemoveObject("Bear");
 		Map->RemoveObject("Bear");
