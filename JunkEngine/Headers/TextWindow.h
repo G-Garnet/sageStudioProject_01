@@ -14,6 +14,7 @@ private:
 	Junk2DFont* font;
 
 	int s = 1;
+	int s_count = 1;
 
 	bool active = false;
 	bool charActive = false;
@@ -21,6 +22,8 @@ private:
 public:
 	TextWindow();
 	virtual ~TextWindow();
+
+	virtual void resetStrLength() { s_count = 0; };
 
 	virtual void setSelect(int a) { s = a; };
 	virtual int getSelect() { return s; };

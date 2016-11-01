@@ -51,7 +51,7 @@ int Junk2DFont::print(const std::string &str, int x, int y)
 	D3DXVECTOR2 rCenter = D3DXVECTOR2((float)x, (float)y);
 	// Setup matrix to rotate text by angle
 	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, &rCenter, angle, NULL);
-	// Tell the sprite about the matrix "Hello Neo"
+
 	graphics->getSprite()->SetTransform(&matrix);
 	return dxFont->DrawTextA(graphics->getSprite(), str.c_str(), -1, &fontRect, DT_LEFT, color);
 }

@@ -40,11 +40,49 @@ void TextWindow::TextWindowSetting(Graphics * graphics)
 //const std::string &s1, const std::string &s2
 void TextWindow::TextWindowRender(const std::string &s, int select)
 {
+	int i,x = 0,line = 0;
+
 	if (this->active) {
 		window1->draw();
 
 		// 애니메이션 효과 추가 예정
-		font->print(s, 355, 535);
+		for (i = 0; i < s_count ;) {
+
+			if (s[i]=='!' || s[i] == '.' || s[i] == '?' || 
+				s[i] == ',' || s[i] == ' ' || s[i] == '"'){
+				char c = s[i];
+				i++;
+				x++;
+				font->print(&c, 355 + x * 22, 535 + line * 27);
+			}
+			if (s[i]=='\n') {
+				char c = s[i];
+				i++;
+				x = 0;
+				line++;
+				font->print(&c, 355 + x * 22, 535 + line * 27);
+			}
+			else {
+				char c[3];
+				c[0] = s[i];
+				c[1] = s[i+1];
+				c[2] = NULL;
+				i += 2;
+				x++;
+				font->print(&c[0], 355 + x * 22, 535 + line * 27);
+			}
+
+		}
+		if (s_count < s.length()) {
+			if (s[i] == '!' || s[i] == '.' || 
+				s[i] == '?' || s[i] == ',' || s[i] == ' ') {
+				
+				s_count++;
+			}
+			else {
+				s_count+=2;
+			}
+		}
 
 		if (select > 0) {
 			this->select->draw();

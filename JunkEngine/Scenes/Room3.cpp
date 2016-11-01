@@ -179,11 +179,13 @@ void Room3::Update()
 
 		switch (eventCount) {
 		case 1:
+			textWindow->resetStrLength();
 			eventCount = 2;
 			break; 
 		case 2:
-				eventCount = 3;
-				break;
+			textWindow->resetStrLength();
+			eventCount = 3;
+			break;
 		default:
 			textWindow->setActive(false);
 			eventCount = 0;
@@ -198,6 +200,7 @@ void Room3::Update()
 			if ((input->getMouseX() >= Bear->getX() && input->getMouseX() <= Bear->getX() + Bear->getWidth()) &&
 				(input->getMouseY() >= Bear->getY() && input->getMouseY() <= Bear->getY() + Bear->getHeight())) {
 				textWindow->setActive(true);
+				textWindow->resetStrLength();
 				eventCount = 1;
 			}
 		}
@@ -206,6 +209,7 @@ void Room3::Update()
 		if ((input->getMouseX() >= Box->getX() && input->getMouseX() <= Box->getX() + Box->getWidth()) &&
 			(input->getMouseY() >= Box->getY() && input->getMouseY() <= Box->getY() + Box->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 4;
 		}
 
@@ -213,6 +217,7 @@ void Room3::Update()
 		if ((input->getMouseX() >= fireDeck->getX() && input->getMouseX() <= fireDeck->getX() + fireDeck->getWidth()) &&
 			(input->getMouseY() >= fireDeck->getY() && input->getMouseY() <= fireDeck->getY() + fireDeck->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 5;
 		}
 	}
@@ -259,6 +264,7 @@ void Room3::Update()
 		else  if (player->getX() >= 640 && player->getY() >= 160) {
 
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 6;
 		}
 	}
