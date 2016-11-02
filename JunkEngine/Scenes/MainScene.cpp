@@ -172,19 +172,23 @@ void MainScenes::Update()
 
 		switch (eventCount) {
 		case -1:
+			textWindow->resetStrLength();
 			eventCount = -2;
 			break;
 		case 6:
 			if (textWindow->getSelect() == 1) {
+				textWindow->resetStrLength();
 				eventCount = 7;
 			}
 			else {
 				textWindow->setActive(false);
+				textWindow->resetStrLength();
 				eventCount = 0;
 			}
 			break;
 		default:
 			textWindow->setActive(false);
+			textWindow->resetStrLength();
 			eventCount = 0;
 			break;
 		}
@@ -196,6 +200,7 @@ void MainScenes::Update()
 		if ((input->getMouseX() >= papers->getX() && input->getMouseX() <= papers->getX() + papers->getWidth()) &&
 			(input->getMouseY() >= papers->getY() && input->getMouseY() <= papers->getY() + papers->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = -1;
 		}
 
@@ -203,6 +208,7 @@ void MainScenes::Update()
 		if ((input->getMouseX() >= Desk->getX() && input->getMouseX() <= Desk->getX() + Desk->getWidth()) &&
 			(input->getMouseY() >= Desk->getY() && input->getMouseY() <= Desk->getY() + Desk->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 4;
 		}
 
@@ -211,6 +217,7 @@ void MainScenes::Update()
 			(input->getMouseX() >= Carpet->getX() && input->getMouseX() <= Carpet->getX() + Carpet->getWidth()) &&
 			(input->getMouseY() >= Carpet->getY() && input->getMouseY() <= Carpet->getY() + Carpet->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 6;
 		}
 
@@ -218,6 +225,7 @@ void MainScenes::Update()
 		if ((input->getMouseX() >= Pipe->getX() && input->getMouseX() <= Pipe->getX() + Pipe->getWidth()) &&
 			(input->getMouseY() >= Pipe->getY() && input->getMouseY() <= Pipe->getY() + Pipe->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 3;
 		}
 
@@ -225,6 +233,7 @@ void MainScenes::Update()
 		if ((input->getMouseX() >= candle->getX() && input->getMouseX() <= candle->getX() + candle->getWidth()) &&
 			(input->getMouseY() >= candle->getY() && input->getMouseY() <= candle->getY() + candle->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 0;
 		}
 
@@ -232,6 +241,7 @@ void MainScenes::Update()
 		if ((input->getMouseX() >= bottle->getX() && input->getMouseX() <= bottle->getX() + bottle->getWidth()) &&
 			(input->getMouseY() >= bottle->getY() && input->getMouseY() <= bottle->getY() + bottle->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 0;
 		}
 
@@ -239,6 +249,7 @@ void MainScenes::Update()
 		if ((input->getMouseX() >= Hanger->getX() && input->getMouseX() <= Hanger->getX() + Hanger->getWidth()) &&
 			(input->getMouseY() >= Hanger->getY() && input->getMouseY() <= Hanger->getY() + Hanger->getHeight())) {
 			textWindow->setActive(true);
+			textWindow->resetStrLength();
 			eventCount = 2;
 		}
 	}
@@ -310,6 +321,7 @@ void MainScenes::Update()
 			}
 			else {
 				textWindow->setActive(true);
+				textWindow->resetStrLength();
 				eventCount = 5;
 				blockDoor = false;
 			}

@@ -39,7 +39,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
     MSG msg;
 
     // 게임 생성
-    game = new Room3;
+    game = new MainScenes;
 	//Game::nowScene = game;
 
 	Game::graphics = new Graphics();

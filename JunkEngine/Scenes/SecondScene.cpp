@@ -182,6 +182,7 @@ void SecondScene::Update()
 	}
 
 	if (eventCount == 3) {
+		textWindow->resetStrLength();
 		eventCount = 4;
 		Sleep(2000);
 	}
@@ -191,6 +192,7 @@ void SecondScene::Update()
 
 		switch (eventCount) {
 		case 2:
+			textWindow->resetStrLength();
 			eventCount = 3;
 			textWindow->setActive(false);
 			girl = true;
@@ -198,6 +200,7 @@ void SecondScene::Update()
 			audio->playCue("wo_bgm");
 			break;
 		default:
+			textWindow->resetStrLength();
 			textWindow->setActive(false);
 			eventCount = 0;
 			break;
@@ -210,11 +213,13 @@ void SecondScene::Update()
 		if ((input->getMouseX() >= Window1->getX() && input->getMouseX() <= Window1->getX() + Window1->getWidth()) &&
 			(input->getMouseY() >= Window1->getY() && input->getMouseY() <= Window1->getY() + Window1->getHeight())) {
 			eventCount = -1;
+			textWindow->resetStrLength();
 			textWindow->setActive(true);
 		}
 		if ((input->getMouseX() >= Window2->getX() && input->getMouseX() <= Window2->getX() + Window2->getWidth()) &&
 			(input->getMouseY() >= Window2->getY() && input->getMouseY() <= Window2->getY() + Window2->getHeight())) {
 			eventCount = -1;
+			textWindow->resetStrLength();
 			textWindow->setActive(true);
 		}
 
@@ -222,6 +227,7 @@ void SecondScene::Update()
 			(input->getMouseX() >= Door3->getX() && input->getMouseX() <= Door3->getX() + Door3->getWidth()) &&
 			(input->getMouseY() >= Door3->getY() && input->getMouseY() <= Door3->getY() + Door3->getHeight())) {
 			eventCount = 2;
+			textWindow->resetStrLength();
 			textWindow->setActive(true);
 		}
 

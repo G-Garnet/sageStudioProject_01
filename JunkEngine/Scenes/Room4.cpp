@@ -145,12 +145,14 @@ void Room4::Update()
 	if (eventCount == 0 && !eventStart) {
 		Sleep(1500);
 		eventCount = 1;
+		textWindow->resetStrLength();
 		eventStart = true;
 	}
 
 	if (eventCount == 2 && eventStart) {
 		Sleep(1500);
 		eventCount = 3;
+		textWindow->resetStrLength();
 
 		audio->playCue("whispher ver.3sec");
 	}
@@ -160,11 +162,13 @@ void Room4::Update()
 		switch (eventCount) {
 		case 1:
 			eventCount = 2;
+			textWindow->resetStrLength();
 			textWindow->setActive(false);
 			break;
 		default:
 			textWindow->setActive(false);
 			eventCount = 0;
+			textWindow->resetStrLength();
 			break;
 		}
 	}
@@ -173,6 +177,7 @@ void Room4::Update()
 
 	if (player->getX() >= 630 && Map->getMapX() >= -480 && !eventStart) {
 		eventCount = 0;
+		textWindow->resetStrLength();
 		textWindow->setActive(true);
 	}
 

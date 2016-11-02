@@ -50,17 +50,17 @@ void TextWindow::TextWindowRender(const std::string &s, int select)
 
 			if (s[i]=='!' || s[i] == '.' || s[i] == '?' || 
 				s[i] == ',' || s[i] == ' ' || s[i] == '"'){
-				char c = s[i];
+				char c[2] = { s[i],0 };
 				i++;
+				font->print(&c[0], 355 + x * 22, 535 + line * 27);
 				x++;
-				font->print(&c, 355 + x * 22, 535 + line * 27);
 			}
-			if (s[i]=='\n') {
-				char c = s[i];
+			else if (s[i]=='\n') {
+				char c[2] = { s[i],0 };
 				i++;
-				x = 0;
+				font->print(&c[0], 355 + x * 22, 535 + line * 27);
 				line++;
-				font->print(&c, 355 + x * 22, 535 + line * 27);
+				x = 0;
 			}
 			else {
 				char c[3];
@@ -68,14 +68,15 @@ void TextWindow::TextWindowRender(const std::string &s, int select)
 				c[1] = s[i+1];
 				c[2] = NULL;
 				i += 2;
-				x++;
 				font->print(&c[0], 355 + x * 22, 535 + line * 27);
+				x++;
 			}
 
 		}
+		
 		if (s_count < s.length()) {
-			if (s[i] == '!' || s[i] == '.' || 
-				s[i] == '?' || s[i] == ',' || s[i] == ' ') {
+			if (s[i] == '!' || s[i] == '.' || s[i] == '?' ||
+				s[i] == ',' || s[i] == ' ' || s[i] == '"') {
 				
 				s_count++;
 			}
