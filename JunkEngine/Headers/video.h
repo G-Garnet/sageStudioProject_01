@@ -39,6 +39,7 @@ public :
 		pGraph->QueryInterface(IID_IVideoWindow, (void **)&pVidWin);
 		pVidWin->put_Visible(OAFALSE);
 		pVidWin->put_Owner(NULL);
+		pVidWinF->Release();
 
 		pControl->Release();
 		pEvent->Release();
@@ -158,10 +159,16 @@ public :
 		pGraph->RenderFile(file, NULL);
 		pGraph->QueryInterface(IID_IVideoWindow, (void**)&pVidWin);
 
+		//pVidWinF->SetEnabled(OATRUE);
+
 		pVidWin->put_Owner((OAHWND)hwnd);
-		pVidWin->put_WindowStyle(WS_CHILD | WS_CLIPSIBLINGS);
-		pVidWin->SetWindowPosition(0, 0, 1280, 720);
+		pVidWin->put_AutoShow(OAFALSE);
+		pVidWin->put_WindowStyle(WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
+		pVidWin->SetWindowPosition(rc.left, rc.top, rc.right - rc.left + 1, rc.bottom - rc.top + 1);
 		pVidWin->put_MessageDrain((OAHWND)hwnd);
+		pVidWin->put_FullScreenMode(OATRUE);
+
+		pVidWin->SetWindowForeground(0);
 		pVidWin->put_Visible(OATRUE);
 
 		pControl->Run();
@@ -171,6 +178,7 @@ public :
 		long evCode;
 		pEvent->WaitForCompletion(INFINITE, &evCode);
 
+		pVidWin->put_FullScreenMode(OAFALSE);
 		
 	}
 };

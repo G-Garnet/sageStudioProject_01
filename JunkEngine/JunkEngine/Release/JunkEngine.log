@@ -1,7 +1,5 @@
-﻿  winmain.cpp
-  MainScene.cpp
-..\Scenes\MainScene.cpp(56): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
-  Player.cpp
+﻿  Room5.cpp
+..\Scenes\Room5.cpp(49): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
 LINK : warning LNK4075: '/INCREMENTAL'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.
   DShowPlayer.obj : /GL로 컴파일한 MSIL .netmodule 또는 모듈이 있습니다. /LTCG를 지정하여 링크를 다시 시작하십시오. /LTCG를 링크 명령줄에 추가하면 링커 성능이 향상됩니다.
 LINK : warning LNK4075: '/INCREMENTAL'이(가) '/LTCG' 사양으로 인해 무시됩니다.

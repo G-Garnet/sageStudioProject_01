@@ -11,16 +11,14 @@ Player::Player()
 
 void Player::playerSetting(Graphics* graphics)
 {
-	this->initialize(graphics, "..\\Resources\\Player\\Ch_01_standing.png", 250, 400, 7);
+	this->initialize(graphics, "..\\Resources\\Player\\player.png", 32, 48, 4);
 	this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 	this->setLoop(true);
-	//this->flipVertical(Dir_);
 	this->setActive(true);
 	this->setCollisionType(Junk2DentityNS::BOX);
-	this->setAnimation(0, 19, 0, 0.2f);
+	this->setAnimation(0, 3, 0, 0.2f);
 
 	this->getplayerWidth();
-	this->setEdge(0, 150, 218, 398);
 
 	this->setXY(640,270);
 }
@@ -30,84 +28,52 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 	// 플레이어 이동 클래스
 	// 전부 플레이어 클래스로 만들어서 객체화 시켜서 이동할 예정
 	//if (inputSW) {
+	if (input->isKeyDown(VK_UP) ||
+		input->isKeyDown(VK_DOWN) ||
+		input->isKeyDown(VK_LEFT) ||
+		input->isKeyDown(VK_RIGHT)) {
 
-		if (input->isKeyDown(0x53) ||
-			input->isKeyDown(0x57) ||
-			input->isKeyDown(0x44) ||
-			input->isKeyDown(0x41)) {
-
-			if (motionSW != 1) {
-				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_walking.png", 250, 400, 7);
-				this->setLoop(true);
-				this->setActive(true);
-				this->setAnimation(0, 19, 0, 0.2f);
-				this->setEdge(0, 150, 218, 398);
-			}
-
-			motionSW = 1;
-
-			if (input->isKeyDown(0x53)) {
-				this->setY(this->getY() + Movespeed / 2);
-				if (this->getY() >= GAME_HEIGHT - 390) {
-					this->setY(this->getY() - Movespeed / 2);
-				}
-			}
-			if (input->isKeyDown(0x57)) {
-				this->setY(this->getY() - Movespeed / 2);
-				if (this->getY() <= GAME_HEIGHT / 2 - 200) {
-					this->setY(this->getY() + Movespeed / 2);
-				}
-
-				if (this->getX() - Movespeed <
-					(GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
-					this->setX(0 + (GAME_HEIGHT - 188 - this->getY() * 1.6f));
-				}
-
-				else if (this->getX() + playerSize + Movespeed >
-					GAME_WIDTH - (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
-					this->setX((GAME_WIDTH - playerSize) - (GAME_HEIGHT - 188 - this->getY() * 1.6f));
-				}
-			}
-
-			if (input->isKeyDown(0x44)) {
-				if (Map1->getMapX() < -mapSize || this->getX() < GAME_WIDTH / 2) {
-					if (this->getX() + playerSize + Movespeed <
-						GAME_WIDTH - (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
-						this->setX(this->getX() + Movespeed);
-					}
-				}
-				else {
-					Map1->mapMove(-Movespeed, 0);
-				}
-
-				Dir_ = true;
-			}
-			if (input->isKeyDown(0x41)) {
-				if ((Map1->getMapX() >= 0 || this->getX() > GAME_WIDTH / 2)) {
-					if (this->getX() - Movespeed >
-						0 + (GAME_HEIGHT - 188 - this->getY() * 1.6f)) {
-						this->setX(this->getX() - Movespeed);
-					}
-				}
-				else {
-					Map1->mapMove(Movespeed, 0);
-				}
-
-				Dir_ = false;
-			}
+		if (motionSW != 1) {
+			this->initialize(graphics, "..\\Resources\\Player\\player.png", 32, 48, 4);
+			this->setLoop(true);
+			this->setActive(true);
+			this->setCollisionType(Junk2DentityNS::BOX);
+			this->setAnimation(0, 3, 0, 0.2f);
 		}
 
-		else {
-			if (motionSW != 0) {
-				this->initialize(graphics, "..\\Resources\\Player\\Ch_01_standing.png", 250, 400, 7);
-				this->setLoop(true);
-				this->setActive(true);
-				this->setAnimation(0, 19, 0, 0.2f);
-				this->setEdge(0, 150, 218, 398);
-			}
+		motionSW = 1;
 
-			motionSW = 0;
+		if (input->isKeyDown(VK_UP)) {
+			this->setX(this->getX() - Movespeed);
+			this->setY(this->getY() - Movespeed);
 		}
+
+		if (input->isKeyDown(VK_DOWN)) {
+			this->setX(this->getX() + Movespeed);
+			this->setY(this->getY() + Movespeed);
+		}
+
+		if (input->isKeyDown(VK_LEFT)) {
+			this->setX(this->getX() - Movespeed);
+			this->setY(this->getY() + Movespeed);
+		}
+
+		if (input->isKeyDown(VK_RIGHT)) {
+			this->setX(this->getX() + Movespeed);
+			this->setY(this->getY() - Movespeed);
+		}
+	}
+	else {
+		if (motionSW != 0) {
+			this->initialize(graphics, "..\\Resources\\Player\\player.png", 32, 48, 4);
+			this->setLoop(true);
+			this->setActive(true);
+			this->setCollisionType(Junk2DentityNS::BOX);
+			this->setAnimation(0, 3, 0, 0.2f);
+		}
+
+		motionSW = 0;
+	}
 	//}
 	
 	this->flipHorizontal(Dir_);

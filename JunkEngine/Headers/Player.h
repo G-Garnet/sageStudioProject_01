@@ -7,7 +7,7 @@
 class Player : public Junk2DEntity
 {
 private:
-	int Movespeed = 2;
+	int Movespeed = 1;
 	int playerSize;
 	int mapSize;
 	int motionSW;
