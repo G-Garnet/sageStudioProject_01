@@ -21,6 +21,8 @@ void Junk2DMap::MapDataInsert(const char * file)
 	// 오브젝트1 이름 / X위치 / Y위치 / 텍스쳐 설정 항목
 	// 오브젝트2 이름 / X위치 / Y위치 / 텍스쳐 설정 항목
 	// ...
+
+	
 }
 
 void Junk2DMap::settingBGSprite(Graphics * g, const char * filename)
@@ -58,6 +60,19 @@ void Junk2DMap::RemoveObject(std::string objectName)
 			return;
 		}
 	}
+}
+
+bool Junk2DMap::MapCollision(int playerX, int playerY, int dir)
+{
+	if (playerX == 0 && dir == 1) {
+		return false;
+	}
+
+	else if (playerY == 0 && dir == 3) {
+		return false;
+	}
+
+	return true;
 }
 
 Junk2DSprite * Junk2DMap::getCGameObject(std::string ObjectName)

@@ -2,6 +2,7 @@
 
 int Player::p_PosScene = 0;
 int Player::p_PosX = 0;
+int Player::p_PosY = 0;
 int Player::Item[10] = {0,};
 
 Player::Player()
@@ -43,24 +44,36 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		motionSW = 1;
 
-		if (input->isKeyDown(VK_UP)) {
-			this->setX(this->getX() - Movespeed);
-			this->setY(this->getY() - Movespeed);
+		if (moveCounter >= 5) {
+			if (input->isKeyDown(VK_UP) && Map1->MapCollision(p_PosX, p_PosY, 1)) {
+
+				Map1->mapMove(-Movespeed, -Movespeed);
+				p_PosX--;
+			}
+
+			if (input->isKeyDown(VK_DOWN) && Map1->MapCollision(p_PosX, p_PosY, 2)) {
+
+				Map1->mapMove(Movespeed, Movespeed);
+				p_PosX++;
+			}
+
+			if (input->isKeyDown(VK_LEFT) && Map1->MapCollision(p_PosX, p_PosY, 3)) {
+
+				Map1->mapMove(-Movespeed, Movespeed);
+				p_PosY--;
+			}
+
+			if (input->isKeyDown(VK_RIGHT) && Map1->MapCollision(p_PosX, p_PosY, 4)) {
+
+				Map1->mapMove(Movespeed, -Movespeed);
+				p_PosY++;
+			}
+
+			moveCounter = 0;
 		}
 
-		if (input->isKeyDown(VK_DOWN)) {
-			this->setX(this->getX() + Movespeed);
-			this->setY(this->getY() + Movespeed);
-		}
-
-		if (input->isKeyDown(VK_LEFT)) {
-			this->setX(this->getX() - Movespeed);
-			this->setY(this->getY() + Movespeed);
-		}
-
-		if (input->isKeyDown(VK_RIGHT)) {
-			this->setX(this->getX() + Movespeed);
-			this->setY(this->getY() - Movespeed);
+		else {
+			moveCounter++;
 		}
 	}
 	else {

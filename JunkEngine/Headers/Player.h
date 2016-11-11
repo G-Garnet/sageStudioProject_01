@@ -13,6 +13,7 @@ private:
 	int motionSW;
 	bool inputSW;
 
+	int moveCounter = 0;
 
 	bool Dir_ = true;
 
