@@ -12,12 +12,12 @@ Player::Player()
 
 void Player::playerSetting(Graphics* graphics)
 {
-	this->initialize(graphics, "..\\Resources\\Player\\player.png", 32, 48, 4);
+	this->initialize(graphics, "..\\Resources\\Player\\player.png", 128, 256, 1);
 	this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 	this->setLoop(true);
 	this->setActive(true);
 	this->setCollisionType(Junk2DentityNS::BOX);
-	this->setAnimation(0, 3, 0, 0.2f);
+	//this->setAnimation(0, 3, 0, 0.2f);
 
 	this->getplayerWidth();
 
@@ -29,67 +29,92 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 	// 플레이어 이동 클래스
 	// 전부 플레이어 클래스로 만들어서 객체화 시켜서 이동할 예정
 	//if (inputSW) {
-	if (input->isKeyDown(VK_UP) ||
-		input->isKeyDown(VK_DOWN) ||
-		input->isKeyDown(VK_LEFT) ||
-		input->isKeyDown(VK_RIGHT)) {
+	//if (input->isKeyDown(VK_UP) ||
+	//	input->isKeyDown(VK_DOWN) ||
+	//	input->isKeyDown(VK_LEFT) ||
+	//	input->isKeyDown(VK_RIGHT) || moveCounter == 0) {
 
-		if (motionSW != 1) {
-			this->initialize(graphics, "..\\Resources\\Player\\player.png", 32, 48, 4);
-			this->setLoop(true);
-			this->setActive(true);
-			this->setCollisionType(Junk2DentityNS::BOX);
-			this->setAnimation(0, 3, 0, 0.2f);
-		}
+	//	if (motionSW != 1) {
+	//		this->initialize(graphics, "..\\Resources\\Player\\player.png", 128, 256, 1);
+	//		this->setLoop(true);
+	//		this->setActive(true);
+	//		this->setCollisionType(Junk2DentityNS::BOX);
+	//		//this->setAnimation(0, 3, 0, 0.2f);
+	//	}
 
-		motionSW = 1;
+	//else {
+	//	if (motionSW != 0) {
+	//		this->initialize(graphics, "..\\Resources\\Player\\player.png", 128, 256, 1);
+	//		this->setLoop(true);
+	//		this->setActive(true);
+	//		this->setCollisionType(Junk2DentityNS::BOX);
+	//	}
 
-		if (moveCounter >= 5) {
-			if (input->isKeyDown(VK_UP) && Map1->MapCollision(p_PosX, p_PosY, 1)) {
-
-				Map1->mapMove(-Movespeed, -Movespeed);
-				p_PosX--;
-			}
-
-			if (input->isKeyDown(VK_DOWN) && Map1->MapCollision(p_PosX, p_PosY, 2)) {
-
-				Map1->mapMove(Movespeed, Movespeed);
-				p_PosX++;
-			}
-
-			if (input->isKeyDown(VK_LEFT) && Map1->MapCollision(p_PosX, p_PosY, 3)) {
-
-				Map1->mapMove(-Movespeed, Movespeed);
-				p_PosY--;
-			}
-
-			if (input->isKeyDown(VK_RIGHT) && Map1->MapCollision(p_PosX, p_PosY, 4)) {
-
-				Map1->mapMove(Movespeed, -Movespeed);
-				p_PosY++;
-			}
-
-			moveCounter = 0;
-		}
-
-		else {
-			moveCounter++;
-		}
-	}
-	else {
-		if (motionSW != 0) {
-			this->initialize(graphics, "..\\Resources\\Player\\player.png", 32, 48, 4);
-			this->setLoop(true);
-			this->setActive(true);
-			this->setCollisionType(Junk2DentityNS::BOX);
-			this->setAnimation(0, 3, 0, 0.2f);
-		}
-
-		motionSW = 0;
-	}
+	//	motionSW = 0;
 	//}
+
+	if (moveCounter==0) {
+		if (input->isKeyDown(VK_UP) && Map1->MapCollision(p_PosX, p_PosY, 1)) {
+			Dir_ = 1;
+		}
+
+		if (input->isKeyDown(VK_DOWN) && Map1->MapCollision(p_PosX, p_PosY, 2)) {
+			Dir_ = 2;
+		}
+
+		if (input->isKeyDown(VK_LEFT) && Map1->MapCollision(p_PosX, p_PosY, 3)) {
+			Dir_ = 3;
+		}
+
+		if (input->isKeyDown(VK_RIGHT) && Map1->MapCollision(p_PosX, p_PosY, 4)) {
+			Dir_ = 4;
+		}
+	}
+
+	switch(Dir_) {
+	case 1:
+		if (moveCounter >= 64) {
+			p_PosX--;
+			moveCounter = 0;
+			break;
+		}
+		else Map1->mapMove(Movespeed, Movespeed);
+		moveCounter++;
+		break;
+	case 2:
+		if (moveCounter >= 64) {
+			p_PosX++;
+			moveCounter = 0;
+			break;
+		}
+		Map1->mapMove(-Movespeed, -Movespeed);
+		moveCounter++;
+		break;
+	case 3:
+		if (moveCounter >= 64) {
+			p_PosY--;
+			moveCounter = 0;
+			break;
+		}
+		Map1->mapMove(Movespeed, -Movespeed);
+		moveCounter++;
+		break;
+	case 4:
+		if (moveCounter >= 64) {
+			p_PosY++;
+			moveCounter = 0;
+			break;
+		}
+		Map1->mapMove(-Movespeed, Movespeed);
+		moveCounter++;
+		break;
+	}
 	
-	this->flipHorizontal(Dir_);
+	if (moveCounter == 0) {
+		Dir_ = 0;
+	}
+
+	//this->flipHorizontal(Dir_);
 
 	this->update((float)1 / 60);
 	

@@ -2,16 +2,18 @@
 
 Junk2DMap::Junk2DMap()
 {
-	MapBG = new Junk2DSprite;
+	MapBG1 = new Junk2DSprite;
+	MapBG2 = new Junk2DSprite;
+	//MapDataInsert("");
 }
 
-Junk2DMap::Junk2DMap(const char *file)
+Junk2DMap::Junk2DMap(Graphics * g, const char *file)
 {
-	MapBG = new Junk2DSprite;
-	MapDataInsert(file);
+	MapBG1 = new Junk2DSprite;
+	MapBG2 = new Junk2DSprite;
 }
 
-void Junk2DMap::MapDataInsert(const char * file)
+void Junk2DMap::MapDataInsert(Graphics * g, const char * file)
 {
 	// 파일 입력 받을 부분
 
@@ -22,20 +24,25 @@ void Junk2DMap::MapDataInsert(const char * file)
 	// 오브젝트2 이름 / X위치 / Y위치 / 텍스쳐 설정 항목
 	// ...
 
+	MapBG1->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4345, 4345, 1);
+	MapBG2->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4345, 4345, 1);
+	/*MapBG3->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4000, 4200, 1);
+	MapBG4->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4000, 4200, 1);*/
+	//MapBG->setDegrees(45);
 	
 }
 
 void Junk2DMap::settingBGSprite(Graphics * g, const char * filename)
 {
-	MapBG->settingTexture(g,filename);
+	MapBG1->settingTexture(g,filename);
 }
 
 void Junk2DMap::mapMove(int X, int Y)
 {
-	mapX = MapBG->getX() + X;
-	mapY = MapBG->getY() + Y;
+	mapX = MapBG1->getX() + X;
+	mapY = MapBG1->getY() + Y;
 
-	MapBG->setXY(mapX, mapY);
+	MapBG1->setXY(mapX, mapY);
 	for (auto i : MapObjectList) {
 		i.first->setXY(i.first->getX() + X, i.first->getY() + Y);
 	}
@@ -72,6 +79,14 @@ bool Junk2DMap::MapCollision(int playerX, int playerY, int dir)
 		return false;
 	}
 
+	else if (playerX >= 100 && dir == 2) {
+		return false;
+	}
+
+	else if (playerY >= 100 && dir == 4) {
+		return false;
+	}
+
 	return true;
 }
 
@@ -89,5 +104,5 @@ Junk2DSprite * Junk2DMap::getCGameObject(std::string ObjectName)
 
 Junk2DSprite * Junk2DMap::getMapBG()
 {
-	return MapBG;
+	return MapBG1;
 }

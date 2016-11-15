@@ -11,7 +11,10 @@
 class Junk2DMap 
 {
 private :	
-	Junk2DSprite* MapBG;
+	Junk2DSprite* MapBG1;
+	Junk2DSprite* MapBG2;
+	Junk2DSprite* MapBG3;
+	Junk2DSprite* MapBG4;
 
 	// ¸ÊÀÇ À§Ä¡
 	int mapX, mapY;
@@ -32,13 +35,13 @@ private :
 public :
 	// »ý¼ºÀÚ ¼Ò¸êÀÚ
 	Junk2DMap();
-	Junk2DMap(const char *file);
+	Junk2DMap(Graphics * g, const char *file);
 	virtual ~Junk2DMap() {
 		RemoveAllObject();
 	};
 
 	// ¸Êµ¥ÀÌÅÍ ºÒ·¯¿È, ¹Þ¾Æ¿È
-	void MapDataInsert(const char *file);
+	void MapDataInsert(Graphics * g, const char *file);
 
 	// ¸Ê ÀÌ¹ÌÁö ºÒ·¯¿È
 	void settingBGSprite(Graphics * g, const char * filename);
@@ -59,6 +62,8 @@ public :
 
 	Junk2DSprite* getCGameObject(std::string ObjectName);
 	Junk2DSprite* getMapBG();
+
+	//void setMapChange();
 };
 
 #endif

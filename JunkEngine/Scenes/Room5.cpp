@@ -4,7 +4,7 @@ Room5::Room5()
 {
 	objectManager = new ObjectManager;
 
-	Map = new Junk2DMap;
+	Map = new Junk2DMap();
 
 	player = new Player();
 	itemSlot = new ItemSlot();
@@ -46,9 +46,12 @@ void Room5::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
 
 	// 이미지 정보름 미리 선언
-	Map->settingBGSprite(graphics, "..\\Resources\\\Floor1\\Room5\\Room5_bg.png");
+	//Map->settingBGSprite(graphics, "..\\Resources\\\Floor1\\Room5\\Room5_bg.png");
 
 	// Scene의 기본 요소들 //
+	Map->MapDataInsert(graphics,"");
+	Map->mapMove(1280/2 ,720/2 - 2100 + 64);
+
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
 	cursor->CursorSetting(graphics);

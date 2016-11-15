@@ -7,7 +7,8 @@
 class Player : public Junk2DEntity
 {
 private:
-	int Movespeed = 1;
+	const int Movespeed = 1;
+
 	int playerSize;
 	int mapSize;
 	int motionSW;
@@ -15,7 +16,7 @@ private:
 
 	int moveCounter = 0;
 
-	bool Dir_ = true;
+	int Dir_;
 
 public:
 
