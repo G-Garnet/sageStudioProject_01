@@ -16,6 +16,8 @@ private :
 	Junk2DSprite* MapBG3;
 	Junk2DSprite* MapBG4;
 
+	Junk2DSprite* MainMapBG;
+
 	// ¸ÊÀÇ À§Ä¡
 	int mapX, mapY;
 	// ¸ÊÀÇ Å©±â
@@ -63,7 +65,7 @@ public :
 	Junk2DSprite* getCGameObject(std::string ObjectName);
 	Junk2DSprite* getMapBG();
 
-	//void setMapChange();
+	void setMapChange(int tag);
 };
 
 #endif

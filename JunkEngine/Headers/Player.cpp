@@ -16,6 +16,7 @@ void Player::playerSetting(Graphics* graphics)
 	this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 	this->setLoop(true);
 	this->setActive(true);
+	this->setScale(0.5f);
 	this->setCollisionType(Junk2DentityNS::BOX);
 	//this->setAnimation(0, 3, 0, 0.2f);
 

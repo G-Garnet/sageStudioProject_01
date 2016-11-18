@@ -24,12 +24,14 @@ void Junk2DMap::MapDataInsert(Graphics * g, const char * file)
 	// 오브젝트2 이름 / X위치 / Y위치 / 텍스쳐 설정 항목
 	// ...
 
-	MapBG1->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4345, 4345, 1);
-	MapBG2->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4345, 4345, 1);
+	MapBG1->settingTexture(g, "..\\Resources\\Map1\\Map3.jpg", 6400, 6400, 1);
+	MapBG1->setScale(0.5f);
+	//MapBG2->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4345, 4345, 1);
 	/*MapBG3->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4000, 4200, 1);
 	MapBG4->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4000, 4200, 1);*/
 	//MapBG->setDegrees(45);
 	
+	MainMapBG = MapBG1;
 }
 
 void Junk2DMap::settingBGSprite(Graphics * g, const char * filename)
@@ -104,5 +106,17 @@ Junk2DSprite * Junk2DMap::getCGameObject(std::string ObjectName)
 
 Junk2DSprite * Junk2DMap::getMapBG()
 {
-	return MapBG1;
+	return MainMapBG;
+}
+
+void Junk2DMap::setMapChange(int tag)
+{
+	switch (tag) {
+	case 1:
+		MainMapBG = MapBG1;
+		break;
+	case 2:
+		MainMapBG = MapBG2;
+		break;
+	}
 }

@@ -50,7 +50,7 @@ void Room5::initialize(HWND hwnd)
 
 	// Scene의 기본 요소들 //
 	Map->MapDataInsert(graphics,"");
-	Map->mapMove(1280/2 ,720/2 - 2100 + 64);
+	Map->mapMove(1280/2 ,720/2 - 4345 + 256+128);
 
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
@@ -104,7 +104,6 @@ void Room5::Update()
 void Room5::render()
 {
 	graphics->spriteBegin();
-
 	Map->getMapBG()->draw();
 	player->draw();
 
