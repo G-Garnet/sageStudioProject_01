@@ -5,16 +5,13 @@
 #include "Junk2DSprite.h"
 #include "input.h"
 
-#define MAP_MAXWIDTH  100
-#define MAP_MAXHEIGHT 100
+#define MAP_MAXWIDTH  142
+#define MAP_MAXHEIGHT 35
 
 class Junk2DMap 
 {
 private :	
 	Junk2DSprite* MapBG1;
-	Junk2DSprite* MapBG2;
-	Junk2DSprite* MapBG3;
-	Junk2DSprite* MapBG4;
 
 	Junk2DSprite* MainMapBG;
 
@@ -35,6 +32,10 @@ private :
 	std::vector<std::pair<Junk2DSprite*, std::string>> MapObjectList;
 
 public :
+
+	Junk2DSprite* Line1;
+	Junk2DSprite* Line2;
+
 	// 持失切 社瑚切
 	Junk2DMap();
 	Junk2DMap(Graphics * g, const char *file);

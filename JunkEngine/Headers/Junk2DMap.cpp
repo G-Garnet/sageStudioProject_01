@@ -3,14 +3,16 @@
 Junk2DMap::Junk2DMap()
 {
 	MapBG1 = new Junk2DSprite;
-	MapBG2 = new Junk2DSprite;
+	Line1 = new Junk2DSprite;
+	Line2 = new Junk2DSprite;
 	//MapDataInsert("");
 }
 
 Junk2DMap::Junk2DMap(Graphics * g, const char *file)
 {
 	MapBG1 = new Junk2DSprite;
-	MapBG2 = new Junk2DSprite;
+	Line1 = new Junk2DSprite;
+	Line2 = new Junk2DSprite;
 }
 
 void Junk2DMap::MapDataInsert(Graphics * g, const char * file)
@@ -24,14 +26,21 @@ void Junk2DMap::MapDataInsert(Graphics * g, const char * file)
 	// 오브젝트2 이름 / X위치 / Y위치 / 텍스쳐 설정 항목
 	// ...
 
-	MapBG1->settingTexture(g, "..\\Resources\\Map1\\Map3.jpg", 6400, 6400, 1);
-	MapBG1->setScale(0.5f);
+	MapBG1->settingTexture(g, "..\\Resources\\Map1\\Map1.png", 9088, 2240, 1);
+	Line1->settingTexture(g, "..\\Resources\\Map1\\Line.jpg", 2, 720, 1);
+	Line2->settingTexture(g, "..\\Resources\\Map1\\Line.jpg", 1280, 2, 1);
+
+	Line1->setXY(0, 0);
+	Line2->setXY(0, 0);
+	//MapBG1->setScale(0.5f);
 	//MapBG2->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4345, 4345, 1);
 	/*MapBG3->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4000, 4200, 1);
 	MapBG4->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4000, 4200, 1);*/
 	//MapBG->setDegrees(45);
 	
 	MainMapBG = MapBG1;
+
+	mapData[1][1] = 1;
 }
 
 void Junk2DMap::settingBGSprite(Graphics * g, const char * filename)
@@ -73,20 +82,43 @@ void Junk2DMap::RemoveObject(std::string objectName)
 
 bool Junk2DMap::MapCollision(int playerX, int playerY, int dir)
 {
-	if (playerX == 0 && dir == 1) {
+	if (playerY == 0 && dir == 1) {
 		return false;
 	}
 
-	else if (playerY == 0 && dir == 3) {
+	else if (playerY > MAP_MAXHEIGHT - 1 && dir == 2) {
 		return false;
 	}
 
-	else if (playerX >= 100 && dir == 2) {
+	else if (playerX == 0 && dir == 3) {
 		return false;
 	}
 
-	else if (playerY >= 100 && dir == 4) {
+	else if (playerX > MAP_MAXWIDTH - 1 && dir == 4) {
 		return false;
+	}
+
+	switch (dir) {
+	case 1:
+		if (mapData[playerY - 1][playerX] == 1) {
+			return false;
+		}
+		break;
+	case 2:
+		if (mapData[playerY + 1][playerX] == 1) {
+			return false;
+		}
+		break;
+	case 3:
+		if (mapData[playerY][playerX - 1] == 1) {
+			return false;
+		}
+		break;
+	case 4 :
+		if (mapData[playerY][playerX + 1] == 1) {
+			return false;
+		}
+		break;
 	}
 
 	return true;
@@ -114,9 +146,6 @@ void Junk2DMap::setMapChange(int tag)
 	switch (tag) {
 	case 1:
 		MainMapBG = MapBG1;
-		break;
-	case 2:
-		MainMapBG = MapBG2;
 		break;
 	}
 }

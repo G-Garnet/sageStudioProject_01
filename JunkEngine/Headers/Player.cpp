@@ -75,38 +75,38 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 	switch(Dir_) {
 	case 1:
 		if (moveCounter >= 64) {
-			p_PosX--;
-			moveCounter = 0;
-			break;
-		}
-		else Map1->mapMove(Movespeed, Movespeed);
-		moveCounter++;
-		break;
-	case 2:
-		if (moveCounter >= 64) {
-			p_PosX++;
-			moveCounter = 0;
-			break;
-		}
-		Map1->mapMove(-Movespeed, -Movespeed);
-		moveCounter++;
-		break;
-	case 3:
-		if (moveCounter >= 64) {
 			p_PosY--;
 			moveCounter = 0;
 			break;
 		}
-		Map1->mapMove(Movespeed, -Movespeed);
+		else Map1->mapMove(0, Movespeed);
 		moveCounter++;
 		break;
-	case 4:
+	case 2:
 		if (moveCounter >= 64) {
 			p_PosY++;
 			moveCounter = 0;
 			break;
 		}
-		Map1->mapMove(-Movespeed, Movespeed);
+		Map1->mapMove(0, -Movespeed);
+		moveCounter++;
+		break;
+	case 3:
+		if (moveCounter >= 64) {
+			p_PosX--;
+			moveCounter = 0;
+			break;
+		}
+		Map1->mapMove(Movespeed, 0);
+		moveCounter++;
+		break;
+	case 4:
+		if (moveCounter >= 64) {
+			p_PosX++;
+			moveCounter = 0;
+			break;
+		}
+		Map1->mapMove(-Movespeed, 0);
 		moveCounter++;
 		break;
 	}

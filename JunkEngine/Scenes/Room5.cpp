@@ -50,7 +50,7 @@ void Room5::initialize(HWND hwnd)
 
 	// Scene의 기본 요소들 //
 	Map->MapDataInsert(graphics,"");
-	Map->mapMove(1280/2 ,720/2 - 4345 + 256+128);
+	Map->mapMove(0,0);
 
 	player->playerSetting(graphics);
 	itemSlot->ItemSlotSetting(graphics);
@@ -58,6 +58,10 @@ void Room5::initialize(HWND hwnd)
 	font->initialize(graphics, 15, true, false, "굴림체");
 	fade->fadeSetting(graphics);
 	fade->setAlpha(255);
+	
+	player->setXY(64*10,64*4);
+	player->p_PosX = 10;
+	player->p_PosY = 5;
 	/////////////////////////
 
 	Map->mapMove(0, 0);
@@ -105,6 +109,16 @@ void Room5::render()
 {
 	graphics->spriteBegin();
 	Map->getMapBG()->draw();
+
+	for (int i = 0;i<=142;i++) {
+		Map->Line1->draw();
+		Map->Line1->setXY(Map->getMapBG()->getX() + i * 64,0);
+	}
+	for (int i = 0; i<=35; i++) {
+		Map->Line2->draw();
+		Map->Line2->setXY(0, Map->getMapBG()->getY() + i * 64);
+	}
+
 	player->draw();
 
 	itemSlot->ItemSlotRender();
