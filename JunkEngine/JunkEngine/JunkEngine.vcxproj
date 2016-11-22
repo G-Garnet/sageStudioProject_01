@@ -92,6 +92,7 @@
     <ClCompile Include="..\Headers\DShowPlayer.cpp" />
     <ClCompile Include="..\Headers\Fade.cpp" />
     <ClCompile Include="..\Headers\Junk2DMap.cpp" />
+    <ClCompile Include="..\Headers\Monster.cpp" />
     <ClCompile Include="..\Headers\Player.cpp" />
     <ClCompile Include="..\Headers\TextWindow.cpp" />
     <ClCompile Include="..\Scenes\MainMenu.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="..\Source\textureManager.cpp" />
     <ClCompile Include="..\Source\winmain.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\constants.h" />
@@ -127,6 +129,7 @@
     <ClInclude Include="..\Headers\Junk2DFont.h" />
     <ClInclude Include="..\Headers\Junk2DMap.h" />
     <ClInclude Include="..\Headers\Junk2DSprite.h" />
+    <ClInclude Include="..\Headers\Monster.h" />
     <ClInclude Include="..\Headers\ObjectManager.h" />
     <ClInclude Include="..\Headers\Player.h" />
     <ClInclude Include="..\Headers\Sounds.h" />

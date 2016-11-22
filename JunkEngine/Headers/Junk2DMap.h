@@ -20,21 +20,21 @@ private :
 	// 맵의 크기
 	int MAP_HEIGHT, MAP_WIDTH;
 
-	// 맵의 데이터
-	int mapData[MAP_MAXHEIGHT][MAP_MAXWIDTH] = {0,};
-	// 맵의 데이터 규격
-	// 0 = 이동 가능
-	// 1 = 충돌, 이동불가
-	// 2 = 몬스터
-	// 3 = 플레이어
-	// .. = 각 이벤트 코드
-
 	std::vector<std::pair<Junk2DSprite*, std::string>> MapObjectList;
 
 public :
 
 	Junk2DSprite* Line1;
 	Junk2DSprite* Line2;
+
+	// 맵의 데이터
+	int mapData[MAP_MAXHEIGHT][MAP_MAXWIDTH] = { 0, };
+	// 맵의 데이터 규격
+	// 0 = 이동 가능
+	// 1 = 충돌, 이동불가
+	// 2 = 몬스터
+	// 3 = 플레이어
+	// .. = 각 이벤트 코드
 
 	// 생성자 소멸자
 	Junk2DMap();

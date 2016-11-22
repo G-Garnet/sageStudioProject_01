@@ -105,6 +105,12 @@
     <ClCompile Include="..\Scenes\MainMenu.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>CustomClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Headers\Monster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\input.h">
@@ -181,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="..\Scenes\MainMenu.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Monster.h">
+      <Filter>CustomClass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

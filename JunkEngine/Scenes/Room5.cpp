@@ -12,14 +12,7 @@ Room5::Room5()
 	font = new Junk2DFont();
 	fade = new Fade();
 
-	Door1 = new Junk2DSprite();
-	cross1 = new Junk2DSprite();
-	cross2 = new Junk2DSprite();
-	light = new Junk2DSprite();
-	videoPlayer = new Video();
-
-	fire1 = new Junk2DSprite();
-	fire2 = new Junk2DSprite();
+	mop1 = new Monster();
 
 	filter = new Junk2DSprite();
 }
@@ -64,9 +57,17 @@ void Room5::initialize(HWND hwnd)
 	player->p_PosY = 5;
 	/////////////////////////
 
+	mop1->MonseterSetting(graphics);
+	mop1->setXY(64 * 4, 64 * 7);
+	mop1->m_PosX = 4;
+	mop1->m_PosY = 8;
+
 	Map->mapMove(0, 0);
+	mop1->setMap(Map);
 
 	player->setMapszie(1);
+
+	Map->MapAddObject(mop1,"mop1");
 
 	initialized = true;
 
@@ -81,9 +82,6 @@ void Room5::Update()
 	itemSlot->ItemSlotInput(input);
 	cursor->CursorInput(input);
 
-	fire1->update((float)1 / 60);
-	fire2->update((float)1 / 60);
-
 	if (fade->getalphaStart()) {
 		player->setInputSW(false);
 		fade->setAlpha(fade->getAlpha() + 0.8f);
@@ -96,6 +94,8 @@ void Room5::Update()
 		player->setInputSW(true);
 	}
 
+	mop1->update((float)1 / 60);
+	mop1->findPlayer(player->p_PosX,player->p_PosY);
 
 	/*if (input->isKeyUp(VK_RETURN)) {
 
@@ -120,6 +120,7 @@ void Room5::render()
 	}
 
 	player->draw();
+	mop1->draw();
 
 	itemSlot->ItemSlotRender();
 	cursor->draw();

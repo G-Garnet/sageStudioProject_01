@@ -2,6 +2,7 @@
 #define _ROOM5_H             
 #define WIN32_LEAN_AND_MEAN
 
+#include "..\\Headers\Monster.h"
 #include "..\\Headers\Game.h"
 
 // 메인 게임 클래스, Game클래스로 부터 상속 받음
@@ -20,12 +21,7 @@ private:
 	Junk2DSprite* filter;
 	////////////////////////////////
 
-	Junk2DSprite* Door1;
-	Junk2DSprite* cross1;
-	Junk2DSprite* cross2;
-	Junk2DSprite* light;
-	Junk2DSprite* fire1;
-	Junk2DSprite* fire2;
+	Monster* mop1;
 
 	Video* videoPlayer;
 	bool ending = false;
