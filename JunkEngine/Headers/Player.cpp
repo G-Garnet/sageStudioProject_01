@@ -12,13 +12,10 @@ Player::Player()
 
 void Player::playerSetting(Graphics* graphics)
 {
-	this->initialize(graphics, "..\\Resources\\Player\\player.png", 128, 256, 1);
+	this->initialize(graphics, "..\\Resources\\Player\\player.png", 128, 256, 6);
 	this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
-	this->setLoop(true);
 	this->setActive(true);
 	this->setScale(0.5f);
-	this->setCollisionType(Junk2DentityNS::BOX);
-	//this->setAnimation(0, 3, 0, 0.2f);
 
 	this->getplayerWidth();
 
@@ -57,57 +54,70 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 	if (moveCounter==0) {
 		if (input->isKeyDown(VK_UP) && Map1->MapCollision(p_PosX, p_PosY, 1)) {
 			Dir_ = 1;
+
+			this->setLoop(true);
+			this->setAnimation(24, 29, 24, 0.2f);
 		}
 
 		if (input->isKeyDown(VK_DOWN) && Map1->MapCollision(p_PosX, p_PosY, 2)) {
 			Dir_ = 2;
+			this->setLoop(true);
+			this->setAnimation(30, 35, 30, 0.2f);
 		}
 
 		if (input->isKeyDown(VK_LEFT) && Map1->MapCollision(p_PosX, p_PosY, 3)) {
 			Dir_ = 3;
+			this->setLoop(true);
+			this->setAnimation(0, 5, 0, 0.2f);
 		}
 
 		if (input->isKeyDown(VK_RIGHT) && Map1->MapCollision(p_PosX, p_PosY, 4)) {
 			Dir_ = 4;
+			this->setLoop(true);
+			this->setAnimation(6, 11, 6, 0.2f);
 		}
 	}
 
 	switch(Dir_) {
 	case 1:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 32) {
 			p_PosY--;
 			moveCounter = 0;
 			break;
 		}
 		else Map1->mapMove(0, Movespeed);
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	case 2:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 32) {
 			p_PosY++;
 			moveCounter = 0;
 			break;
 		}
 		Map1->mapMove(0, -Movespeed);
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	case 3:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 32) {
 			p_PosX--;
 			moveCounter = 0;
 			break;
 		}
 		Map1->mapMove(Movespeed, 0);
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	case 4:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 32) {
 			p_PosX++;
 			moveCounter = 0;
 			break;
 		}
 		Map1->mapMove(-Movespeed, 0);
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	}
 	
@@ -117,7 +127,6 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 	//this->flipHorizontal(Dir_);
 
-	this->update((float)1 / 60);
 	
 
 	if (input->isKeyDown(VK_F4) && input->isKeyDown(VK_MENU)) {

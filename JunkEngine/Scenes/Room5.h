@@ -23,6 +23,58 @@ private:
 
 	Monster* mop1;
 
+	Junk2DSprite* Lanten1;
+	Junk2DSprite* Tree1;
+	Junk2DSprite* animalDeath1;
+	Junk2DSprite* animalDeath2;
+	Junk2DSprite* animalDeath3;
+	Junk2DSprite* animalDeath4;
+
+	Junk2DSprite* signPost;
+
+	Junk2DSprite* Tree2;
+	Junk2DSprite* Tree3;
+	Junk2DSprite* Tree4;
+
+	Junk2DSprite* Tree5;
+	////////////////////////////////
+
+	////////////////////////////////
+	Junk2DSprite* Monster1;
+	Junk2DSprite* Monster2;
+	Junk2DSprite* Monster3;
+	Junk2DSprite* Tree6;
+
+	Junk2DSprite* House1;
+
+	Junk2DSprite* Tree7;
+	Junk2DSprite* DeadMen;
+	////////////////////////////////
+
+	////////////////////////////////
+	Junk2DSprite* Lanten2;
+	Junk2DSprite* Totem1;
+	Junk2DSprite* Totem2;
+	////////////////////////////////
+
+	////////////////////////////////
+	Junk2DSprite* sign1;
+	Junk2DSprite* sign2;
+	Junk2DSprite* fake1;
+	Junk2DSprite* fake2;
+	Junk2DSprite* sign3;
+
+	Junk2DSprite* graves;
+
+	Junk2DSprite* Lanten3;
+	Junk2DSprite* Lanten4;
+
+	Junk2DSprite* House2;
+	Junk2DSprite* House3;
+
+	Junk2DSprite* knife;
+	////////////////////////////////
+
 	Video* videoPlayer;
 	bool ending = false;
 

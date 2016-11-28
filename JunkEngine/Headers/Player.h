@@ -7,7 +7,7 @@
 class Player : public Junk2DEntity
 {
 private:
-	const int Movespeed = 1;
+	const int Movespeed = 2;
 
 	int playerSize;
 	int mapSize;

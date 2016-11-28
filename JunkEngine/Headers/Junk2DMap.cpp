@@ -3,6 +3,7 @@
 Junk2DMap::Junk2DMap()
 {
 	MapBG1 = new Junk2DSprite;
+	MapBG2 = new Junk2DSprite;
 	Line1 = new Junk2DSprite;
 	Line2 = new Junk2DSprite;
 	//MapDataInsert("");
@@ -11,6 +12,7 @@ Junk2DMap::Junk2DMap()
 Junk2DMap::Junk2DMap(Graphics * g, const char *file)
 {
 	MapBG1 = new Junk2DSprite;
+	MapBG2 = new Junk2DSprite;
 	Line1 = new Junk2DSprite;
 	Line2 = new Junk2DSprite;
 }
@@ -26,12 +28,24 @@ void Junk2DMap::MapDataInsert(Graphics * g, const char * file)
 	// 오브젝트2 이름 / X위치 / Y위치 / 텍스쳐 설정 항목
 	// ...
 
+	/*std::ifstream in("Map.ini");
+	for (int i = 0; i < MAP_MAXHEIGHT;i++) {
+		for (int j = 0; j < MAP_MAXWIDTH;j++) {
+			in >> mapData[i][j];
+		}
+	}*/
+
 	MapBG1->settingTexture(g, "..\\Resources\\Map1\\Map1.png", 4544, 2240, 1);
+	MapBG2->settingTexture(g, "..\\Resources\\Map1\\Map2.png", 4544, 2240, 1);
+
 	Line1->settingTexture(g, "..\\Resources\\Map1\\Line.jpg", 2, 1080, 1);
 	Line2->settingTexture(g, "..\\Resources\\Map1\\Line.jpg", 1980, 2, 1);
 
 	Line1->setXY(0, 0);
 	Line2->setXY(0, 0);
+
+	MapBG2->setXY(4544,0);
+	this->MapAddObject(MapBG2, "Map2");
 	//MapBG1->setScale(0.5f);
 	//MapBG2->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4345, 4345, 1);
 	/*MapBG3->settingTexture(g, "..\\Resources\\Map1\\Map1.jpg", 4000, 4200, 1);
@@ -40,13 +54,7 @@ void Junk2DMap::MapDataInsert(Graphics * g, const char * file)
 	
 	MainMapBG = MapBG1;
 
-	mapData[4][6] = 1;
-	mapData[5][6] = 1;
-	mapData[6][6] = 1;
-	mapData[7][6] = 1;
-	mapData[8][6] = 1;
-	mapData[9][6] = 1;
-	mapData[10][6] = 1;
+	
 }
 
 void Junk2DMap::settingBGSprite(Graphics * g, const char * filename)
