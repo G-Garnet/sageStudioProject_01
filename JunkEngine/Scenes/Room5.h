@@ -16,11 +16,12 @@ private:
 	ItemSlot* itemSlot;
 	Cursor* cursor;
 	Junk2DFont *font;
+	TextWindow *textWindow;
 	Fade* fade;
 
 	Junk2DSprite* filter;
+	Junk2DSprite* shadows;
 	////////////////////////////////
-
 	Monster* mop1;
 
 	Junk2DSprite* Lanten1;
@@ -75,8 +76,14 @@ private:
 	Junk2DSprite* knife;
 	////////////////////////////////
 
-	Video* videoPlayer;
 	bool ending = false;
+
+	int eventCount = 0;
+
+	bool colEvent = false;
+
+	bool ShadowEventStart = false;
+	bool monsterStart = false;
 
 	// 게임 요소들
 	Junk2DMap* Map;

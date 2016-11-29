@@ -18,6 +18,8 @@ private:
 
 	int Dir_;
 
+	Junk2DSprite* lanten;
+
 public:
 
 	// 게임 데이터들
@@ -41,6 +43,8 @@ public:
 
 	void playerItemIn(int itemCode);
 	void playerItemOut(int itemCode);
+
+	void setLanten(Junk2DSprite* lanten);
 };
 
 

@@ -57,24 +57,28 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 			this->setLoop(true);
 			this->setAnimation(24, 29, 24, 0.2f);
+			lanten->setRadians(-90 * D3DX_PI/180);
 		}
 
 		if (input->isKeyDown(VK_DOWN) && Map1->MapCollision(p_PosX, p_PosY, 2)) {
 			Dir_ = 2;
 			this->setLoop(true);
 			this->setAnimation(30, 35, 30, 0.2f);
+			lanten->setRadians(90 * D3DX_PI / 180);
 		}
 
 		if (input->isKeyDown(VK_LEFT) && Map1->MapCollision(p_PosX, p_PosY, 3)) {
 			Dir_ = 3;
 			this->setLoop(true);
 			this->setAnimation(0, 5, 0, 0.2f);
+			lanten->setRadians(-180 * D3DX_PI / 180);
 		}
 
 		if (input->isKeyDown(VK_RIGHT) && Map1->MapCollision(p_PosX, p_PosY, 4)) {
 			Dir_ = 4;
 			this->setLoop(true);
 			this->setAnimation(6, 11, 6, 0.2f);
+			lanten->setRadians(0 * D3DX_PI / 180);
 		}
 	}
 
@@ -146,18 +150,9 @@ void Player::playerItemIn(int itemCode)
 
 void Player::playerItemOut(int itemCode)
 {
-	int i = 0;
-	for (i = 0; i < 10; i++) {
-		if (Player::Item[i] == itemCode) {
-			Player::Item[i] = NULL;
-			break;
-		}
-	}
+}
 
-	for (; i < 8; i++) {
-		if (Player::Item[i] != NULL) {
-			Player::Item[i] = Player::Item[i+1];
-		}
-	}
-	Player::Item[9] = NULL;
+void Player::setLanten(Junk2DSprite * lanten)
+{
+	this->lanten = lanten;
 }

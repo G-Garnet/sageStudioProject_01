@@ -11,6 +11,7 @@ Room5::Room5()
 	cursor = new Cursor();
 	font = new Junk2DFont();
 	fade = new Fade();
+	textWindow = new TextWindow();
 
 	mop1 = new Monster();
 
@@ -56,6 +57,8 @@ Room5::Room5()
 	House2 = new Junk2DSprite();
 	House3 = new Junk2DSprite();
 	knife = new Junk2DSprite();
+
+	shadows = new Junk2DSprite();
 }
 
 Room5::~Room5()
@@ -66,7 +69,6 @@ Room5::~Room5()
 	SAFE_DELETE(cursor);
 	SAFE_DELETE(font);
 	SAFE_DELETE(fade);
-	SAFE_DELETE(videoPlayer);
 }
 
 void Room5::initialize(HWND hwnd)
@@ -86,22 +88,29 @@ void Room5::initialize(HWND hwnd)
 	Map->MapDataInsert(graphics,"");
 	Map->mapMove(0,0);
 
-	player->playerSetting(graphics);
-	itemSlot->ItemSlotSetting(graphics);
+	player->playerSetting(graphics);\
 	cursor->CursorSetting(graphics);
 	font->initialize(graphics, 15, true, false, "굴림체");
 	fade->fadeSetting(graphics);
 	fade->setAlpha(255);
+
+	filter->settingTexture(graphics, "..\\Resources\\Etc\\Lanten.png", 2000, 2000, 1);
 	
 	player->setXY(64*10,64*4);
 	player->p_PosX = 10;
 	player->p_PosY = 5;
+
+	filter->setXY(640 - 1000, 360 - 1000);
+
+	textWindow->TextWindowSetting(graphics);
+	textWindow->setActive(false);
+
 	/////////////////////////
 
 	mop1->MonseterSetting(graphics);
-	mop1->setXY(64 * 4, 64 * 7);
-	mop1->m_PosX = 4;
-	mop1->m_PosY = 8;
+	mop1->setXY(64 * 35, 64 * 21);
+	mop1->m_PosX = 35;
+	mop1->m_PosY = 22;
 
 	Map->mapMove(0, 0);
 	mop1->setMap(Map);
@@ -153,8 +162,12 @@ void Room5::initialize(HWND hwnd)
 	House3->settingTexture(graphics, "..\\Resources\\Object\\gm_storage.png", 64 * 4, 64 * 6, 1);
 	
 	knife->settingTexture(graphics, "..\\Resources\\Object\\knife.png", 64 * 1, 64 * 1, 1);
+	
+	shadows->settingTexture(graphics, "..\\Resources\\Player\\shadow.png", 64 * 1, 64 * 2, 1);
 
 	Lanten1->setXY(64 * 12, 64 * 11);
+	shadows->setXY(64 * 22, 64 * 11);
+
 	Tree1->setXY(64 * 3, 64 * 19);
 	animalDeath1->setXY(64 * 8, 64 * 24);
 	animalDeath2->setXY(64 * 5, 64 * 26);
@@ -286,18 +299,21 @@ void Room5::initialize(HWND hwnd)
 	//////////////
 
 	Map->MapAddObject(mop1,"mop1");
+	Map->MapAddObject(shadows, "shadows");
 
 	initialized = true;
 
 	//audio->playCue("door close");
+	player->setLanten(filter);
 
 	return;
 }
 
 void Room5::Update()
 {
-	player->playerInput(input, Map);
-	itemSlot->ItemSlotInput(input);
+	if (!textWindow->getActive()) {
+		player->playerInput(input, Map);
+	}
 	cursor->CursorInput(input);
 
 	if (fade->getalphaStart()) {
@@ -312,15 +328,88 @@ void Room5::Update()
 		player->setInputSW(true);
 	}
 
-	mop1->update((float)1 / 60);
-	mop1->findPlayer(player->p_PosX,player->p_PosY);
+	if (monsterStart) {
+		mop1->update((float)1 / 60);
+		mop1->findPlayer(player->p_PosX, player->p_PosY);
+	}
 
-	/*if (input->isKeyUp(VK_RETURN)) {
+	if (ShadowEventStart) {
+		shadows->setX(player->getX());
+	}
 
-		fade->setalphaStart(true);
-	}*/
+	////// 이벤트 리스트 //////
 
-	//exitGame();
+	// 대화창 넘김&종료
+	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
+
+		switch (eventCount) {
+		case 3:
+			eventCount = 2; // 다음 이벤트로
+			textWindow->resetStrLength();
+			textWindow->setActive(false);
+			break;
+		default:
+			textWindow->setActive(false);
+			eventCount = 0;
+			textWindow->resetStrLength();
+			break;
+		}
+	}
+
+	// 상호작용 이벤트
+	if (input->isKeyUp(VK_RETURN)) {
+
+		if ((player->p_PosX == 8 && player->p_PosY == 24) || 
+			(player->p_PosX == 5 && player->p_PosY == 26) ||
+			(player->p_PosX == 10 && player->p_PosY == 26) ||
+			(player->p_PosX == 6 && player->p_PosY == 27)) {
+			eventCount = 1;
+			textWindow->setActive(true);
+		}
+	}
+	
+	// 위치 기반 이벤트
+	{
+		if (colEvent == false &&(
+			(player->p_PosX == 18 && player->p_PosY == 25) ||
+			(player->p_PosX == 19 && player->p_PosY == 25) ||
+			(player->p_PosX == 20 && player->p_PosY == 25))) {
+			Sleep(500);
+			eventCount = 2;
+			textWindow->setActive(true);
+			colEvent = true;
+		}
+		
+		else if ((player->p_PosX == 18 && player->p_PosY == 24) ||
+			(player->p_PosX == 19 && player->p_PosY == 24) ||
+			(player->p_PosX == 20 && player->p_PosY == 24)) {
+			colEvent = false;
+		}
+
+		if ((player->p_PosX == 32 && player->p_PosY == 19) && !monsterStart) {
+			monsterStart = true;
+		}
+
+		if (ShadowEventStart == false && (
+			(player->p_PosX == 22 && player->p_PosY == 13) ||
+			(player->p_PosX == 22 && player->p_PosY == 14) ||
+			(player->p_PosX == 22 && player->p_PosY == 15))) {
+			Sleep(200);
+			ShadowEventStart = true;
+		}
+
+		if (ShadowEventStart == true && (
+			(player->p_PosX == 26 && player->p_PosY == 13) ||
+			(player->p_PosX == 26 && player->p_PosY == 14) ||
+			(player->p_PosX == 26 && player->p_PosY == 15))) {
+			Sleep(200);
+			ShadowEventStart = false;
+		}
+	}
+
+	
+
+	///////////////////////////
 }
 
 void Room5::render()
@@ -329,21 +418,30 @@ void Room5::render()
 	Map->getMapBG()->draw();
 	Map->getMapBG2()->draw();
 
-	for (int i = 0;i<=142;i++) {
-		Map->Line1->draw();
-		Map->Line1->setXY(Map->getMapBG()->getX() + i * 64,0);
-	}
-	for (int i = 0; i<=35; i++) {
-		Map->Line2->draw();
-		Map->Line2->setXY(0, Map->getMapBG()->getY() + i * 64);
-	}
-
 	objectManager->RenderAllObject();
 	player->draw();
-	//mop1->draw();
+	mop1->draw();
 
-	itemSlot->ItemSlotRender();
+	if (ShadowEventStart) {
+		shadows->draw();
+	}
+
 	cursor->draw();
+	filter->draw();
+
+	switch (eventCount) {
+	case 0:
+		break;
+	case 1:
+		textWindow->TextWindowRender("지금은 놀때가 아니야.", 0);
+		break;
+	case 2:
+		textWindow->TextWindowRender("(아직못받음)", 0);
+		break;
+	case 3:
+		break;
+	}
+
 	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	graphics->spriteEnd();
