@@ -85,6 +85,9 @@ private:
 	bool ShadowEventStart = false;
 	bool monsterStart = false;
 
+	int shadowMonsterEvent = 0;
+	float MonsterAlpha[3] = { 0, };
+
 	// 게임 요소들
 	Junk2DMap* Map;
 

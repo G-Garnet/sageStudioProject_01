@@ -228,9 +228,9 @@ void Room5::initialize(HWND hwnd)
 	objectManager->AddObject(Tree4, "Tree4");
 	objectManager->AddObject(Tree5, "Tree5");
 
-	objectManager->AddObject(Monster1, "Monster1");
-	objectManager->AddObject(Monster2, "Monster2");
-	objectManager->AddObject(Monster3, "Monster3");
+	//objectManager->AddObject(Monster1, "Monster1");
+	//objectManager->AddObject(Monster2, "Monster2");
+	//objectManager->AddObject(Monster3, "Monster3");
 	objectManager->AddObject(Tree6, "Tree6");
 	objectManager->AddObject(House1, "House1");
 	objectManager->AddObject(Tree7, "Tree7");
@@ -268,9 +268,9 @@ void Room5::initialize(HWND hwnd)
 	Map->MapAddObject(objectManager->getCGameObject("Tree4"), "Tree4");
 	Map->MapAddObject(objectManager->getCGameObject("Tree5"), "Tree5");
 
-	Map->MapAddObject(objectManager->getCGameObject("Monster1"), "Monster1");
-	Map->MapAddObject(objectManager->getCGameObject("Monster2"), "Monster2");
-	Map->MapAddObject(objectManager->getCGameObject("Monster3"), "Monster3");
+	Map->MapAddObject(Monster1, "Monster1");
+	Map->MapAddObject(Monster2, "Monster2");
+	Map->MapAddObject(Monster3, "Monster3");
 	Map->MapAddObject(objectManager->getCGameObject("Tree6"), "Tree6");
 	Map->MapAddObject(objectManager->getCGameObject("House1"), "House1");
 	Map->MapAddObject(objectManager->getCGameObject("Tree7"), "Tree7");
@@ -328,6 +328,7 @@ void Room5::Update()
 		player->setInputSW(true);
 	}
 
+	////// 이벤트 발동문 //////
 	if (monsterStart) {
 		mop1->update((float)1 / 60);
 		mop1->findPlayer(player->p_PosX, player->p_PosY);
@@ -336,6 +337,9 @@ void Room5::Update()
 	if (ShadowEventStart) {
 		shadows->setX(player->getX());
 	}
+
+	
+	///////////////////////////
 
 	////// 이벤트 리스트 //////
 
@@ -405,6 +409,13 @@ void Room5::Update()
 			Sleep(200);
 			ShadowEventStart = false;
 		}
+
+		if (!shadowMonsterEvent && (
+			(player->p_PosX == 47 && player->p_PosY == 21) ||
+			(player->p_PosX == 48 && player->p_PosY == 21) ||
+			(player->p_PosX == 49 && player->p_PosY == 21))) {
+			shadowMonsterEvent = true;
+		}
 	}
 
 	
@@ -422,9 +433,16 @@ void Room5::render()
 	player->draw();
 	mop1->draw();
 
+	// 이벤트 //
 	if (ShadowEventStart) {
 		shadows->draw();
 	}
+
+	if (shadowMonsterEvent) {
+		Monster1->draw(D3DCOLOR_ARGB((int)MonsterAlpha[0], 255, 255, 255));
+		MonsterAlpha[0] += 0.1f;
+	}
+	///////////
 
 	cursor->draw();
 	filter->draw();
