@@ -23,6 +23,10 @@ private:
 	Junk2DSprite* shadows;
 	////////////////////////////////
 	Monster* mop1;
+	Monster* mop2;
+	Monster* mop3;
+	Monster* mop4;
+	Monster* mop5;
 
 	Junk2DSprite* Lanten1;
 	Junk2DSprite* Tree1;
@@ -79,14 +83,17 @@ private:
 	bool ending = false;
 
 	int eventCount = 0;
-
+	 
 	bool colEvent = false;
 
 	bool ShadowEventStart = false;
 	bool monsterStart = false;
+	bool monsterStart2 = false;
 
 	int shadowMonsterEvent = 0;
 	float MonsterAlpha[3] = { 0, };
+
+	float MonsterTime = 0;
 
 	// 게임 요소들
 	Junk2DMap* Map;

@@ -14,6 +14,10 @@ Room5::Room5()
 	textWindow = new TextWindow();
 
 	mop1 = new Monster();
+	mop2 = new Monster();
+	mop3 = new Monster();
+	mop4 = new Monster();
+	mop5 = new Monster();
 
 	filter = new Junk2DSprite();
 
@@ -107,13 +111,38 @@ void Room5::initialize(HWND hwnd)
 
 	/////////////////////////
 
-	mop1->MonseterSetting(graphics);
+	mop1->MonseterSetting(graphics,1);
 	mop1->setXY(64 * 35, 64 * 21);
 	mop1->m_PosX = 35;
 	mop1->m_PosY = 22;
 
 	Map->mapMove(0, 0);
+
+	mop2->MonseterSetting(graphics, 2);
+	mop2->setXY(64 * 65, 64 * 22);
+	mop2->m_PosX = 65;
+	mop2->m_PosY = 23;
+
+	mop3->MonseterSetting(graphics, 2);
+	mop3->setXY(64 * 67, 64 * 23);
+	mop3->m_PosX = 67;
+	mop3->m_PosY = 24;
+
+	mop4->MonseterSetting(graphics, 2);
+	mop4->setXY(64 * 67, 64 * 19);
+	mop4->m_PosX = 67;
+	mop4->m_PosY = 20;
+
+	mop5->MonseterSetting(graphics, 2);
+	mop5->setXY(64 * 69, 64 * 21);
+	mop5->m_PosX = 69;
+	mop5->m_PosY = 22;
+
 	mop1->setMap(Map);
+	mop2->setMap(Map);
+	mop3->setMap(Map);
+	mop4->setMap(Map);
+	mop5->setMap(Map);
 
 	player->setMapszie(1);
 
@@ -299,6 +328,10 @@ void Room5::initialize(HWND hwnd)
 	//////////////
 
 	Map->MapAddObject(mop1,"mop1");
+	Map->MapAddObject(mop2, "mop2");
+	Map->MapAddObject(mop3, "mop3");
+	Map->MapAddObject(mop4, "mop4");
+	Map->MapAddObject(mop5, "mop5");
 	Map->MapAddObject(shadows, "shadows");
 
 	initialized = true;
@@ -332,6 +365,26 @@ void Room5::Update()
 	if (monsterStart) {
 		mop1->update((float)1 / 60);
 		mop1->findPlayer(player->p_PosX, player->p_PosY);
+		MonsterTime += (float)1 / 60;
+	}
+	
+	else if (monsterStart2) {
+		mop2->update((float)1 / 60);
+		mop2->findPlayer(player->p_PosX, player->p_PosY);
+
+		mop3->update((float)1 / 60);
+		mop3->findPlayer(player->p_PosX, player->p_PosY);
+
+		mop4->update((float)1 / 60);
+		mop4->findPlayer(player->p_PosX, player->p_PosY);
+
+		mop5->update((float)1 / 60);
+		mop5->findPlayer(player->p_PosX, player->p_PosY);
+		//MonsterTime += (float)1 / 60;
+	}
+
+	if (MonsterTime >= 4) {
+		monsterStart = false;
 	}
 
 	if (ShadowEventStart) {
@@ -394,6 +447,10 @@ void Room5::Update()
 			monsterStart = true;
 		}
 
+		if ((player->p_PosX == 64 && player->p_PosY == 25) && !monsterStart2) {
+			monsterStart2 = true;
+		}
+
 		if (ShadowEventStart == false && (
 			(player->p_PosX == 22 && player->p_PosY == 13) ||
 			(player->p_PosX == 22 && player->p_PosY == 14) ||
@@ -432,6 +489,10 @@ void Room5::render()
 	objectManager->RenderAllObject();
 	player->draw();
 	mop1->draw();
+	mop2->draw();
+	mop3->draw();
+	mop4->draw();
+	mop5->draw();
 
 	// ÀÌº¥Æ® //
 	if (ShadowEventStart) {
@@ -439,8 +500,16 @@ void Room5::render()
 	}
 
 	if (shadowMonsterEvent) {
-		Monster1->draw(D3DCOLOR_ARGB((int)MonsterAlpha[0], 255, 255, 255));
-		MonsterAlpha[0] += 0.1f;
+		Monster3->draw(D3DCOLOR_ARGB((int)MonsterAlpha[0], 255, 255, 255));
+		if (MonsterAlpha[0]<255) MonsterAlpha[0] += 0.5f;
+		if (MonsterAlpha[0] >= 27.5f) {
+			Monster2->draw(D3DCOLOR_ARGB((int)MonsterAlpha[1], 255, 255, 255));
+			if (MonsterAlpha[1]<255) MonsterAlpha[1] += 0.5f;
+			if (MonsterAlpha[1] >= 27.5f) {
+				Monster1->draw(D3DCOLOR_ARGB((int)MonsterAlpha[2], 255, 255, 255));
+				if (MonsterAlpha[1]<255) MonsterAlpha[2] += 0.5f;
+			}
+		}
 	}
 	///////////
 

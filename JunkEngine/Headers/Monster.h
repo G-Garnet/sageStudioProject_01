@@ -41,7 +41,7 @@ public:
 	void findPlayer(int playerX, int playerY);
 	int FindPath(int xStart, int yStart, int xEnd, int yEnd);
 
-	void MonseterSetting(Graphics* graphics);
+	void MonseterSetting(Graphics* graphics, int tag);
 
 	void setMap(Junk2DMap *map) { this->map = map; };
 };

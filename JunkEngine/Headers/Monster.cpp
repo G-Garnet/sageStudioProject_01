@@ -175,15 +175,26 @@ void Monster::findPlayer(int playerX, int playerY)
 	
 }
 
-void Monster::MonseterSetting(Graphics * graphics)
+void Monster::MonseterSetting(Graphics * graphics, int tag)
 {
-	this->initialize(graphics, "..\\Resources\\char\\enemy1.jpg", 256, 256, 8);
-	this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
-	this->setLoop(true);
-	this->setActive(true);
-	this->setScale(0.5f);
-	this->setCollisionType(Junk2DentityNS::BOX);
-	this->setAnimation(8, 15, 0, 0.2f);
+	if (tag == 1) {
+		this->initialize(graphics, "..\\Resources\\char\\enemy1.jpg", 256, 256, 8);
+		this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
+		this->setLoop(true);
+		this->setActive(true);
+		this->setScale(0.5f);
+		this->setCollisionType(Junk2DentityNS::BOX);
+		this->setAnimation(8, 15, 0, 0.2f);
+	}
+	else if (tag == 2) {
+		this->initialize(graphics, "..\\Resources\\char\\enemy2.png", 64, 64, 9);
+		this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
+		this->setLoop(true);
+		this->setActive(true);
+		this->setScale(2);
+		this->setCollisionType(Junk2DentityNS::BOX);
+		this->setAnimation(0, 9, 0, 0.2f);
+	}
 
 	//this->getplayerWidth();
 
