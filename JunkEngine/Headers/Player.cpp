@@ -57,28 +57,28 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 			this->setLoop(true);
 			this->setAnimation(42, 47, 42, 0.2f);
-			lanten->setRadians(-90 * D3DX_PI / 180);
+			lanten->setRadians(-45 * D3DX_PI / 180);
 		}
 
 		else if (input->isKeyDown(VK_UP) && input->isKeyDown(VK_LEFT) && Map1->MapCollision(p_PosX, p_PosY, 6)) {
 			Dir_ = 6;
 			this->setLoop(true);
 			this->setAnimation(36, 41, 36, 0.2f);
-			lanten->setRadians(90 * D3DX_PI / 180);
+			lanten->setRadians(-135 * D3DX_PI / 180);
 		}
 
 		else if (input->isKeyDown(VK_DOWN) && input->isKeyDown(VK_RIGHT) && Map1->MapCollision(p_PosX, p_PosY, 7)) {
 			Dir_ = 7;
 			this->setLoop(true);
 			this->setAnimation(18, 23, 18, 0.2f);
-			lanten->setRadians(-180 * D3DX_PI / 180);
+			lanten->setRadians(45 * D3DX_PI / 180);
 		}
 
 		else if (input->isKeyDown(VK_DOWN) && input->isKeyDown(VK_LEFT) && Map1->MapCollision(p_PosX, p_PosY, 8)) {
 			Dir_ = 8;
 			this->setLoop(true);
 			this->setAnimation(12, 17, 12, 0.2f);
-			lanten->setRadians(0 * D3DX_PI / 180);
+			lanten->setRadians(135 * D3DX_PI / 180);
 		}
 
 		else if (input->isKeyDown(VK_UP) && Map1->MapCollision(p_PosX, p_PosY, 1)) {

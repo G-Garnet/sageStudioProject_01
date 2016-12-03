@@ -43,7 +43,7 @@ void TextWindow::TextWindowRender(const std::string &s, int select)
 	int i,x = 0,line = 0;
 
 	if (this->active) {
-		window1->draw();
+		//window1->draw();
 
 		// 애니메이션 효과 추가 예정
 		for (i = 0; i < s_count ;) {

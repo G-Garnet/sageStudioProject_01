@@ -19,6 +19,11 @@ Room5::Room5()
 	mop4 = new Monster();
 	mop5 = new Monster();
 
+	mop6 = new Monster();
+	mop7 = new Monster();
+	mop8 = new Monster();
+	mop9 = new Monster();
+
 	filter = new Junk2DSprite();
 
 	Lanten1 = new Junk2DSprite();
@@ -102,7 +107,7 @@ void Room5::initialize(HWND hwnd)
 	
 	player->setXY(64*10,64*4);
 	player->p_PosX = 10;
-	player->p_PosY = 5;
+	player->p_PosY = 9;
 
 	filter->setXY(640 - 1000, 360 - 1000);
 
@@ -113,35 +118,50 @@ void Room5::initialize(HWND hwnd)
 
 	mop1->MonseterSetting(graphics,1);
 	mop1->setXY(64 * 35, 64 * 21);
-	mop1->m_PosX = 35;
-	mop1->m_PosY = 22;
-
-	Map->mapMove(0, 0);
+	mop1->m_PosX = 35; mop1->m_PosY = 22;
 
 	mop2->MonseterSetting(graphics, 2);
 	mop2->setXY(64 * 65, 64 * 22);
-	mop2->m_PosX = 65;
-	mop2->m_PosY = 23;
+	mop2->m_PosX = 65; mop2->m_PosY = 23;
 
 	mop3->MonseterSetting(graphics, 2);
 	mop3->setXY(64 * 67, 64 * 23);
-	mop3->m_PosX = 67;
-	mop3->m_PosY = 24;
+	mop3->m_PosX = 67; mop3->m_PosY = 24;
 
 	mop4->MonseterSetting(graphics, 2);
 	mop4->setXY(64 * 67, 64 * 19);
-	mop4->m_PosX = 67;
-	mop4->m_PosY = 20;
+	mop4->m_PosX = 67; mop4->m_PosY = 20;
 
 	mop5->MonseterSetting(graphics, 2);
 	mop5->setXY(64 * 69, 64 * 21);
-	mop5->m_PosX = 69;
-	mop5->m_PosY = 22;
+	mop5->m_PosX = 69; mop5->m_PosY = 22;
+
+
+	mop6->MonseterSetting(graphics, 2);
+	mop6->setXY(64 * 95, 64 * 13);
+	mop6->m_PosX = 95; mop6->m_PosY = 14;
+
+	mop7->MonseterSetting(graphics, 2);
+	mop7->setXY(64 * 88, 64 * 19);
+	mop7->m_PosX = 88; mop7->m_PosY = 20;
+
+	mop8->MonseterSetting(graphics, 2);
+	mop8->setXY(64 * 97, 64 * 16);
+	mop8->m_PosX = 97; mop4->m_PosY = 17;
+
+	mop9->MonseterSetting(graphics, 2);
+	mop9->setXY(64 * 91, 64 * 21);
+	mop9->m_PosX = 91; mop5->m_PosY = 22;
 
 	mop1->setMap(Map);
 	mop2->setMap(Map);
 	mop3->setMap(Map);
 	mop4->setMap(Map);
+	mop5->setMap(Map); 
+	mop6->setMap(Map);
+	mop7->setMap(Map);
+	mop8->setMap(Map);
+	mop9->setMap(Map);
 	mop5->setMap(Map);
 
 	player->setMapszie(1);
@@ -332,12 +352,26 @@ void Room5::initialize(HWND hwnd)
 	Map->MapAddObject(mop3, "mop3");
 	Map->MapAddObject(mop4, "mop4");
 	Map->MapAddObject(mop5, "mop5");
+	Map->MapAddObject(mop6, "mop6");
+	Map->MapAddObject(mop7, "mop7");
+	Map->MapAddObject(mop8, "mop8");
+	Map->MapAddObject(mop9, "mop9");
 	Map->MapAddObject(shadows, "shadows");
+	
+	std::ifstream in("save.ini", std::ios::in);
+	in >> saveX >> saveY;
+
+	player->p_PosX = saveX;
+	player->p_PosY = saveY;
+	Map->mapMove(-64 * (player->p_PosX - 10), -64 * (player->p_PosY - 5));
+
+	player->setLanten(filter);
 
 	initialized = true;
 
 	//audio->playCue("door close");
-	player->setLanten(filter);
+
+	
 
 	return;
 }
@@ -367,8 +401,22 @@ void Room5::Update()
 		mop1->findPlayer(player->p_PosX, player->p_PosY);
 		MonsterTime += (float)1 / 60;
 	}
+
+	if (monsterStart3 == 2) {
+		mop6->update((float)1 / 60);
+		mop6->findPlayer(player->p_PosX, player->p_PosY);
+
+		mop7->update((float)1 / 60);
+		mop7->findPlayer(player->p_PosX, player->p_PosY);
+
+		mop8->update((float)1 / 60);
+		mop8->findPlayer(player->p_PosX, player->p_PosY);
+
+		mop9->update((float)1 / 60);
+		mop9->findPlayer(player->p_PosX, player->p_PosY);
+	}
 	
-	else if (monsterStart2) {
+	if (monsterStart2) {
 		mop2->update((float)1 / 60);
 		mop2->findPlayer(player->p_PosX, player->p_PosY);
 
@@ -383,14 +431,31 @@ void Room5::Update()
 		//MonsterTime += (float)1 / 60;
 	}
 
+	if (monsterStart3 == 1) {
+		MonsterStartTime += (float)1 / 60;
+	}
+	else if (monsterStart3 == 1) {
+		MonsterStartTime += (float)1 / 60;
+	}
+
 	if (MonsterTime >= 4) {
 		monsterStart = false;
 	}
 
-	if (ShadowEventStart) {
+	if (MonsterStartTime >= 5 && monsterStart3 != 3) {
+		monsterStart3 = 2;
+	}
+
+	if (ShadowEventStart == 1) {
 		shadows->setX(player->getX());
 	}
 
+	if (TotemEvent == 1) {
+		Sleep(2000);
+		Totem1->settingTexture(graphics, "..\\Resources\\Object\\totem_l_N.png", 64 * 3, 64 * 7, 1);
+		Totem2->settingTexture(graphics, "..\\Resources\\Object\\totem_r_N.png", 64 * 3, 64 * 7, 1);
+		TotemEvent = 2;
+	}
 	
 	///////////////////////////
 
@@ -423,6 +488,16 @@ void Room5::Update()
 			eventCount = 1;
 			textWindow->setActive(true);
 		}
+
+		// 세이브 포인트
+		if ((player->p_PosX == 12 && player->p_PosY == 12) ||
+			(player->p_PosX == 34 && player->p_PosY == 19) ||
+			(player->p_PosX == 78 && player->p_PosY == 4) ||
+			(player->p_PosX == 128 && player->p_PosY == 13)) {
+			Save();
+			eventCount = 4;
+			textWindow->setActive(true);
+		}
 	}
 	
 	// 위치 기반 이벤트
@@ -451,20 +526,20 @@ void Room5::Update()
 			monsterStart2 = true;
 		}
 
-		if (ShadowEventStart == false && (
+		if (ShadowEventStart == 0 && (
 			(player->p_PosX == 22 && player->p_PosY == 13) ||
 			(player->p_PosX == 22 && player->p_PosY == 14) ||
 			(player->p_PosX == 22 && player->p_PosY == 15))) {
 			Sleep(200);
-			ShadowEventStart = true;
+			ShadowEventStart = 1;
 		}
 
-		if (ShadowEventStart == true && (
+		if (ShadowEventStart == 1 && (
 			(player->p_PosX == 26 && player->p_PosY == 13) ||
 			(player->p_PosX == 26 && player->p_PosY == 14) ||
 			(player->p_PosX == 26 && player->p_PosY == 15))) {
 			Sleep(200);
-			ShadowEventStart = false;
+			ShadowEventStart = 2;
 		}
 
 		if (!shadowMonsterEvent && (
@@ -473,9 +548,41 @@ void Room5::Update()
 			(player->p_PosX == 49 && player->p_PosY == 21))) {
 			shadowMonsterEvent = true;
 		}
-	}
 
-	
+		// 사냥꾼 집 이벤트
+		if (HouseEvent == false && (
+			(player->p_PosX == 74 && player->p_PosY == 18) ||
+			(player->p_PosX == 74 && player->p_PosY == 19) ||
+			(player->p_PosX == 74 && player->p_PosY == 20))) {
+			Sleep(500);
+			House1->settingTexture(graphics, "..\\Resources\\Object\\hunter_house_n.png", 64 * 14, 64 * 15, 1);
+			HouseEvent = true;
+		}
+
+		// 토템 이벤트
+		if (TotemEvent == 0 && (
+			(player->p_PosX == 86 && player->p_PosY == 11) ||
+			(player->p_PosX == 87 && player->p_PosY == 11) ||
+			(player->p_PosX == 88 && player->p_PosY == 11))) {
+			Totem1->settingTexture(graphics, "..\\Resources\\Object\\totem_l_Y.png", 64 * 3, 64 * 7, 1);
+			Totem2->settingTexture(graphics, "..\\Resources\\Object\\totem_r_Y.png", 64 * 3, 64 * 7, 1); 
+			TotemEvent = 1;
+		}
+
+		// 앞만 보고 가는 길 이벤트
+		if (monsterStart3 == 0 && (
+			(player->p_PosX == 90 && player->p_PosY == 14) ||
+			(player->p_PosX == 89 && player->p_PosY == 15) )) {
+			monsterStart3 = 1;
+		}
+		
+		else if (monsterStart3 == 1 && (
+			(player->p_PosX == 98 && player->p_PosY == 21) ||
+			(player->p_PosX == 98 && player->p_PosY == 22) ||
+			(player->p_PosX == 98 && player->p_PosY == 23))) {
+			monsterStart3 = 3;
+		}
+	}
 
 	///////////////////////////
 }
@@ -493,9 +600,13 @@ void Room5::render()
 	mop3->draw();
 	mop4->draw();
 	mop5->draw();
+	mop6->draw();
+	mop7->draw();
+	mop8->draw();
+	mop9->draw();
 
 	// 이벤트 //
-	if (ShadowEventStart) {
+	if (ShadowEventStart == 1) {
 		shadows->draw();
 	}
 
@@ -527,10 +638,19 @@ void Room5::render()
 		break;
 	case 3:
 		break;
+	case 4:
+		textWindow->TextWindowRender("저장완료", 0);
+		break;
 	}
 
 	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	graphics->spriteEnd();
+}
+
+void Room5::Save()
+{
+	std::ofstream out("save.ini");
+	out << player->p_PosX << " " << player->p_PosY;
 }
 

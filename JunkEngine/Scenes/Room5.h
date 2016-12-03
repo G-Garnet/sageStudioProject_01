@@ -2,6 +2,8 @@
 #define _ROOM5_H             
 #define WIN32_LEAN_AND_MEAN
 
+#include <fstream>
+
 #include "..\\Headers\Monster.h"
 #include "..\\Headers\Game.h"
 
@@ -27,6 +29,11 @@ private:
 	Monster* mop3;
 	Monster* mop4;
 	Monster* mop5;
+
+	Monster* mop6;
+	Monster* mop7;
+	Monster* mop8;
+	Monster* mop9;
 
 	Junk2DSprite* Lanten1;
 	Junk2DSprite* Tree1;
@@ -86,14 +93,24 @@ private:
 	 
 	bool colEvent = false;
 
-	bool ShadowEventStart = false;
 	bool monsterStart = false;
 	bool monsterStart2 = false;
+	bool KeySw = false;
+	bool KnifeSw = false;
+	bool HouseEvent = false;
+	
+	int TotemEvent = 0;
+	int ShadowEventStart = 0;
 
 	int shadowMonsterEvent = 0;
+	int monsterStart3 = 0;
 	float MonsterAlpha[3] = { 0, };
 
 	float MonsterTime = 0;
+	float MonsterStartTime = 0;
+	float TotemTime = 0;
+
+	int saveX, saveY;
 
 	// 게임 요소들
 	Junk2DMap* Map;
@@ -107,6 +124,8 @@ public:
 
 	void Update();      // Game 클래스로부터 반드시 오버라이딩 해야하는 순수 가상함수
 	void render();      // "
+
+	void Save();
 
 						/*void releaseAll();
 						void resetAll();*/
