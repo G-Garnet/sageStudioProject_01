@@ -21,7 +21,7 @@ TextWindow::~TextWindow()
 
 void TextWindow::TextWindowSetting(Graphics * graphics)
 {
-	font->initialize(graphics, 27, true, false, "나눔명조");
+	font->initialize(graphics, 27, true, false, "THE홍차왕자 소년M");
 
 	window1->settingTexture(graphics, "..\\Resources\\UI\\TextWindow_man.png", 1280, 720, 1);
 	window1->setXY(0, 0);
@@ -45,53 +45,8 @@ void TextWindow::TextWindowRender(const std::string &s, int select)
 	if (this->active) {
 		//window1->draw();
 
-		// 애니메이션 효과 추가 예정
-		for (i = 0; i < s_count ;) {
+		font->print(s, (1280/2)-(s.length()*8)/2, 575);
 
-			if (s[i]=='!' || s[i] == '.' || s[i] == '?' || 
-				s[i] == ',' || s[i] == ' ' || s[i] == '"'){
-				char c[2] = { s[i],0 };
-				i++;
-				font->print(&c[0], 355 + x * 22, 535 + line * 27);
-				x++;
-			}
-			else if (s[i]=='\n') {
-				char c[2] = { s[i],0 };
-				i++;
-				font->print(&c[0], 355 + x * 22, 535 + line * 27);
-				line++;
-				x = 0;
-			}
-			else {
-				char c[3];
-				c[0] = s[i];
-				c[1] = s[i+1];
-				c[2] = NULL;
-				i += 2;
-				font->print(&c[0], 355 + x * 22, 535 + line * 27);
-				x++;
-			}
-
-		}
-		
-		if (s_count < s.length()) {
-			if (s[i] == '!' || s[i] == '.' || s[i] == '?' ||
-				s[i] == ',' || s[i] == ' ' || s[i] == '"') {
-				
-				s_count++;
-			}
-			else {
-				s_count+=2;
-			}
-		}
-
-		if (select > 0) {
-			this->select->draw();
-		}
-		if (select >= 2) {
-			/*font->print(s1, 560, 100);
-			font->print(s2, 560, 100);*/
-		}
 	}
 }
 

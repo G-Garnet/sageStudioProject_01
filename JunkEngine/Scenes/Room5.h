@@ -23,6 +23,7 @@ private:
 
 	Junk2DSprite* filter;
 	Junk2DSprite* shadows;
+	Junk2DSprite* gameOver;
 	////////////////////////////////
 	Monster* mop1;
 	Monster* mop2;
@@ -87,17 +88,20 @@ private:
 	Junk2DSprite* knife;
 	////////////////////////////////
 
+	bool start = false;
 	bool ending = false;
 
 	int eventCount = 0;
 	 
 	bool colEvent = false;
 
-	bool monsterStart = false;
-	bool monsterStart2 = false;
+	int monsterStart = 0;
+	int monsterStart2 = false;
 	bool KeySw = false;
 	bool KnifeSw = false;
 	bool HouseEvent = false;
+
+	bool tmpSw = true;
 	
 	int TotemEvent = 0;
 	int ShadowEventStart = 0;
@@ -107,10 +111,19 @@ private:
 	float MonsterAlpha[3] = { 0, };
 
 	float MonsterTime = 0;
+	float MonsterTime2 = 0;
+	float MonsterTime3 = 0;
 	float MonsterStartTime = 0;
 	float TotemTime = 0;
+	
+	int gameOverAl = 0;
+	bool gameOverSw = false;
+
+	float LantenAlpha = 0;
 
 	int saveX, saveY;
+
+	int item[4] = { 0, };
 
 	// 게임 요소들
 	Junk2DMap* Map;
@@ -127,6 +140,7 @@ public:
 
 	void Save();
 
+	//void GameOver();
 						/*void releaseAll();
 						void resetAll();*/
 

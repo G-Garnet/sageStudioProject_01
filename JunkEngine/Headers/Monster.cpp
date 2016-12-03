@@ -50,12 +50,15 @@ int Monster::FindPath(int xStart, int yStart, int xEnd, int yEnd) {
 		// 종료. 결과출력
 		if (x == yEnd && y == xEnd) {
 			i = 0;
+			
 			while (!(x == xStart && y == yStart)) {
 				j = dirMap[x][y];
 
 				moveRoute[i] = dirMap[x][y];
+
 				x += dx[j];
 				y += dy[j];
+
 				i++;
 			}
 
@@ -67,9 +70,11 @@ int Monster::FindPath(int xStart, int yStart, int xEnd, int yEnd) {
 
 		// 이동
 		for (i = 0; i<dir; i++) {
+			
 			xdx = x + dx[i]; ydy = y + dy[i];
-
-			if (!(xdx<0 || xdx>MAP_MAXHEIGHT - 1 || ydy<0 || ydy>MAP_MAXWIDTH - 1 || map->mapData[xdx][ydy] == 1 || cNodeMap[xdx][ydy] == 1)) {
+			
+			if (!(xdx<0 || xdx>MAP_MAXHEIGHT - 1 || ydy<0 || ydy>MAP_MAXWIDTH - 1 || 
+				map->mapData[xdx][ydy] == 1 || cNodeMap[xdx][ydy] == 1  )) {
 				// 자식 노드 생성
 				n = new node(xdx, ydy, m->getLevel(), m->getPriority());
 				n->nextLevel();
@@ -177,6 +182,7 @@ void Monster::findPlayer(int playerX, int playerY)
 
 void Monster::MonseterSetting(Graphics * graphics, int tag)
 {
+	this->tag = tag;
 	if (tag == 1) {
 		this->initialize(graphics, "..\\Resources\\char\\enemy1.jpg", 256, 256, 8);
 		this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);

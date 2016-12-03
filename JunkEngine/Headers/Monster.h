@@ -21,6 +21,8 @@ private:
 	int motionSW;
 	bool inputSW;
 
+	int tag;
+
 	int moveCounter = 0;
 
 	int Dir_;

@@ -113,7 +113,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 	switch(Dir_) {
 	case 1:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosY--;
 			moveCounter = 0;
 			break;
@@ -123,7 +123,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update((float)1 / 60);
 		break;
 	case 2:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosY++;
 			moveCounter = 0;
 			break;
@@ -133,7 +133,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update((float)1 / 60);
 		break;
 	case 3:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosX--;
 			moveCounter = 0;
 			break;
@@ -143,7 +143,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update((float)1 / 60);
 		break;
 	case 4:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosX++;
 			moveCounter = 0;
 			break;
@@ -153,7 +153,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update((float)1 / 60);
 		break;
 	case 5:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosY--;
 			p_PosX++;
 			moveCounter = 0;
@@ -164,7 +164,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update((float)1 / 60);
 		break;
 	case 6:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosY--;
 			p_PosX--;
 			moveCounter = 0;
@@ -175,7 +175,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update((float)1 / 60);
 		break;
 	case 7:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosY++;
 			p_PosX++;
 			moveCounter = 0;
@@ -186,7 +186,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 		this->update((float)1 / 60);
 		break;
 	case 8:
-		if (moveCounter >= 32) {
+		if (moveCounter >= 64) {
 			p_PosY++;
 			p_PosX--;
 			moveCounter = 0;
