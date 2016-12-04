@@ -16,8 +16,11 @@ private:
 	int s = 1;
 	int s_count = 1;
 
+	int fontAlpha = 0;
+
 	bool active = false;
 	bool charActive = false;
+	bool alpha = false;
 
 public:
 	TextWindow();

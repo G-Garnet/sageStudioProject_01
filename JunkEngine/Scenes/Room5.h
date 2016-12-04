@@ -88,7 +88,10 @@ private:
 	Junk2DSprite* knife;
 	////////////////////////////////
 
+	Junk2DSprite* itemSprite[4];
+
 	bool start = false;
+	bool firstlan = false;
 	bool ending = false;
 
 	int eventCount = 0;
@@ -124,6 +127,7 @@ private:
 	int saveX, saveY;
 
 	int item[4] = { 0, };
+	int storyText[10] = {0, };
 
 	// 게임 요소들
 	Junk2DMap* Map;

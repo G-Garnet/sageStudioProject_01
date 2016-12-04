@@ -69,6 +69,11 @@ Room5::Room5()
 
 	shadows = new Junk2DSprite();
 	gameOver = new Junk2DSprite();
+
+	itemSprite[0] = new Junk2DSprite();
+	itemSprite[1] = new Junk2DSprite();
+	itemSprite[2] = new Junk2DSprite();
+	itemSprite[3] = new Junk2DSprite();
 }
 
 Room5::~Room5()
@@ -116,6 +121,19 @@ void Room5::initialize(HWND hwnd)
 	textWindow->setActive(false);
 
 	/////////////////////////
+
+	for (int i = 0; i < 4; i++) {
+		itemSprite[i]->settingTexture(graphics, "..\\Resources\\etc\\item.png", 64, 64, 6);
+		itemSprite[i]->setLoop(true);
+		itemSprite[i]->setAnimation(0, 37, 0, 0.3f);
+	}
+
+
+	itemSprite[0]->setXY(64 * 26, 64 * 12);
+	itemSprite[1]->setXY(64 * 62, 64 * 14);
+	itemSprite[2]->setXY(64 * 118, 64 * 27);
+	itemSprite[3]->setXY(1000, 64);
+
 
 	mop1->MonseterSetting(graphics,1);
 	mop1->setXY(64 * 37 - 32, 64 * 24 - 32);
@@ -358,6 +376,11 @@ void Room5::initialize(HWND hwnd)
 	Map->MapAddObject(mop8, "mop8");
 	Map->MapAddObject(mop9, "mop9");
 	Map->MapAddObject(shadows, "shadows");
+
+	Map->MapAddObject(itemSprite[0], "item0");
+	Map->MapAddObject(itemSprite[1], "item1");
+	Map->MapAddObject(itemSprite[2], "item2");
+	Map->MapAddObject(itemSprite[3], "item3");
 	
 	std::ifstream in("save.ini", std::ios::in);
 	in >> saveX >> saveY;
@@ -401,13 +424,20 @@ void Room5::Update()
 
 	//// 기본 시스템 ////
 
-	if (start && LantenAlpha <= 250) {
-		//LantenAlpha += 0.05f;
+	if (start && LantenAlpha <= 240) {
+		LantenAlpha += 0.02f;
+	}
+	else if (start && LantenAlpha > 240 && LantenAlpha <= 250) {
+		LantenAlpha += 0.01f;
+	}
+	else if (LantenAlpha > 250) {
+		gameOverSw = true;
 	}
 
 	if (gameOverSw && gameOverAl <= 254) {
 		gameOverAl+=254;
 	}
+	
 	
 
 	/////////////////////
@@ -466,15 +496,15 @@ void Room5::Update()
 			monsterStart = 2;
 		}
 
-		if (MonsterTime2 >= 50) {
+		if (MonsterTime2 >= 45) {
 			monsterStart2 = 2;
 		}
 
-		if (MonsterTime3 >= 50) {
+		if (MonsterTime3 >= 40) {
 			monsterStart3 = 3;
 		}
 
-		if (MonsterStartTime >= 5 && monsterStart3 != 3) {
+		if (MonsterStartTime >= 10 && monsterStart3 != 3) {
 			monsterStart3 = 2;
 		}
 
@@ -503,6 +533,11 @@ void Room5::Update()
 			textWindow->resetStrLength();
 			textWindow->setActive(false);
 			break;
+		case 9:
+			eventCount = 8;
+			textWindow->resetStrLength();
+			
+			break;
 		default:
 			textWindow->setActive(false);
 			eventCount = 0;
@@ -525,19 +560,25 @@ void Room5::Update()
 		// 기름병들
 		{
 			if (ShadowEventStart == 2 && item[0] != 1 &&
-				(player->p_PosX == 27 && player->p_PosY == 13)) {
+				(player->p_PosX == 26 && player->p_PosY == 13)) {
 				item[0] = 1;
 				LantenAlpha = 0;
+				eventCount = 9;
+				textWindow->setActive(true);
 			}
-			if (ShadowEventStart == 2 && item[1] != 1 &&
+			if (item[1] != 1 &&
 				(player->p_PosX == 62 && player->p_PosY == 14)) {
 				item[1] = 1;
 				LantenAlpha = 0;
+				eventCount = 8;
+				textWindow->setActive(true);
 			}
-			if (ShadowEventStart == 2 && item[2] != 1 &&
-				(player->p_PosX == 118 && player->p_PosY == 27)) {
+			if (item[2] != 1 &&
+				(player->p_PosX == 118 && player->p_PosY == 28)) {
 				item[2] = 1;
 				LantenAlpha = 0;
+				eventCount = 8;
+				textWindow->setActive(true);
 			}
 		}
 
@@ -589,6 +630,14 @@ void Room5::Update()
 	
 	// 위치 기반 이벤트
 	{
+		if (firstlan == false && (
+			(player->p_PosX == 18 && player->p_PosY == 17) ||
+			(player->p_PosX == 18 && player->p_PosY == 18))) {
+			eventCount = 10;
+			textWindow->setActive(true);
+			firstlan = true;
+		}
+
 		if (colEvent == false &&(
 			(player->p_PosX == 18 && player->p_PosY == 25) ||
 			(player->p_PosX == 19 && player->p_PosY == 25) ||
@@ -613,6 +662,7 @@ void Room5::Update()
 			monsterStart2 = 1;
 		}
 
+		// 그림자 몬스터들
 		if (ShadowEventStart == 0 && (
 			(player->p_PosX == 22 && player->p_PosY == 13) ||
 			(player->p_PosX == 22 && player->p_PosY == 14) ||
@@ -630,9 +680,9 @@ void Room5::Update()
 		}
 
 		if (!shadowMonsterEvent && (
-			(player->p_PosX == 47 && player->p_PosY == 21) ||
-			(player->p_PosX == 48 && player->p_PosY == 21) ||
-			(player->p_PosX == 49 && player->p_PosY == 21))) {
+			(player->p_PosX == 47 && player->p_PosY == 23) ||
+			(player->p_PosX == 48 && player->p_PosY == 23) ||
+			(player->p_PosX == 49 && player->p_PosY == 23))) {
 			shadowMonsterEvent = true;
 		}
 
@@ -671,17 +721,59 @@ void Room5::Update()
 		}
 
 		// 게임 오버
-		if ((mop1->m_PosX == player->p_PosX && mop1->m_PosY == player->p_PosY) ||
+		if ((monsterStart != 2 && (mop1->m_PosX == player->p_PosX && mop1->m_PosY == player->p_PosY)) ||
+
+
+			(monsterStart2 != 3 && (mop6->m_PosX == player->p_PosX && mop6->m_PosY == player->p_PosY) ||
+			(mop7->m_PosX == player->p_PosX && mop7->m_PosY == player->p_PosY) ||
+			(mop8->m_PosX == player->p_PosX && mop8->m_PosY == player->p_PosY) ||
+			(mop9->m_PosX == player->p_PosX && mop9->m_PosY == player->p_PosY)) ){
+			gameOverSw = true;
+		}
+
+		if (monsterStart2 != 2 &&
 			(mop2->m_PosX == player->p_PosX && mop2->m_PosY == player->p_PosY) ||
 			(mop3->m_PosX == player->p_PosX && mop3->m_PosY == player->p_PosY) ||
 			(mop4->m_PosX == player->p_PosX && mop4->m_PosY == player->p_PosY) ||
-			(mop5->m_PosX == player->p_PosX && mop5->m_PosY == player->p_PosY) ||
-			(mop6->m_PosX == player->p_PosX && mop6->m_PosY == player->p_PosY) ||
-			(mop7->m_PosX == player->p_PosX && mop7->m_PosY == player->p_PosY) ||
-			(mop8->m_PosX == player->p_PosX && mop8->m_PosY == player->p_PosY) ||
-			(mop9->m_PosX == player->p_PosX && mop9->m_PosY == player->p_PosY) ){
+			(mop5->m_PosX == player->p_PosX && mop5->m_PosY == player->p_PosY)) {
 			gameOverSw = true;
 		}
+
+		if (MonsterAlpha[0]>=253 && (
+			(player->p_PosX == 48 && player->p_PosY == 23) ||
+			(player->p_PosX == 48 && player->p_PosY == 22) ||
+			(player->p_PosX == 47 && player->p_PosY == 22))) {
+			gameOverSw = true;
+		}
+		if (MonsterAlpha[1]>=253 && (
+			(player->p_PosX == 48 && player->p_PosY == 21) ||
+			(player->p_PosX == 48 && player->p_PosY == 20) ||
+			(player->p_PosX == 49 && player->p_PosY == 21))) {
+			gameOverSw = true;
+		}
+		if (MonsterAlpha[2] >= 253 && (
+			(player->p_PosX == 48 && player->p_PosY == 19) ||
+			(player->p_PosX == 48 && player->p_PosY == 18) ||
+			(player->p_PosX == 47 && player->p_PosY == 19))) {
+			gameOverSw = true;
+		}
+
+		//// 동화 내용
+		//if (storyText[0] == 0 && (
+		//	(player->p_PosX == 10 && player->p_PosY == 10) ||
+		//	(player->p_PosX == 11 && player->p_PosY == 9) )) {
+		//	eventCount = 8;
+		//	textWindow->setActive(true);
+		//	storyText[0] = 1;
+		//}
+
+		//if (storyText[1] == 0 && (
+		//	(player->p_PosX == 29 && player->p_PosY == 15) ||
+		//	(player->p_PosX == 28 && player->p_PosY == 16))) {
+		//	eventCount = 9;
+		//	textWindow->setActive(true);
+		//	storyText[1] = 1;
+		//}
 	}
 
 	///////////////////////////
@@ -695,6 +787,7 @@ void Room5::render()
 
 	objectManager->RenderAllObject();
 	player->draw();
+
 	if (monsterStart != 2) mop1->draw();
 	if (monsterStart2 != 2) {
 		mop2->draw();
@@ -717,12 +810,14 @@ void Room5::render()
 	if (shadowMonsterEvent) {
 		Monster3->draw(D3DCOLOR_ARGB((int)MonsterAlpha[0], 255, 255, 255));
 		if (MonsterAlpha[0]<255) MonsterAlpha[0] += 0.5f;
+
 		if (MonsterAlpha[0] >= 27.5f) {
 			Monster2->draw(D3DCOLOR_ARGB((int)MonsterAlpha[1], 255, 255, 255));
 			if (MonsterAlpha[1]<255) MonsterAlpha[1] += 0.5f;
+
 			if (MonsterAlpha[1] >= 27.5f) {
 				Monster1->draw(D3DCOLOR_ARGB((int)MonsterAlpha[2], 255, 255, 255));
-				if (MonsterAlpha[1]<255) MonsterAlpha[2] += 0.5f;
+				if (MonsterAlpha[2]<255) MonsterAlpha[2] += 0.5f;
 			}
 		}
 	}
@@ -755,8 +850,20 @@ void Room5::render()
 		if (tmpSw) {
 			Sleep(1000);
 			tmpSw = false;
+			player->setLoop(true);
+			player->setAnimation(24, 29, 24, 0.2f);
+			filter->setRadians(-90 * D3DX_PI / 180);
 		}
 		textWindow->TextWindowRender("..? 무언가가 있어", 0);
+		break;
+	case 8:
+		textWindow->TextWindowRender("기름으로 불을 밝혔다.", 0);
+		break;
+	case 9:
+		textWindow->TextWindowRender("기름병이다...\n이걸로 불을 밝힐수 있겠어...", 0);
+		break; 
+	case 10:
+		textWindow->TextWindowRender("불이 점점 어두워지고 있어...", 0);
 		break;
 	}
 
@@ -765,6 +872,19 @@ void Room5::render()
 
 	if (start) fade->draw(D3DCOLOR_ARGB((int)LantenAlpha, 255, 255, 255));
 	else fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
+
+	if (ShadowEventStart == 2 && item[0] != 1) {
+		itemSprite[0]->draw();
+		itemSprite[0]->update((float)1/60);
+	}
+	if (HouseEvent && item[1] != 1) {
+		itemSprite[1]->draw();
+		itemSprite[1]->update((float)1 / 60);
+	}
+	if (item[2] != 1) {
+		itemSprite[2]->draw();
+		itemSprite[2]->update((float)1 / 60);
+	}
 
 	gameOver->draw(D3DCOLOR_ARGB(gameOverAl, 255, 255, 255));
 

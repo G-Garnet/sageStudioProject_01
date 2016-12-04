@@ -39,7 +39,7 @@ bool Junk2DFont::initialize(Graphics *g, int height, bool bold, bool italic,
 	return true;
 }
 
-int Junk2DFont::print(const std::string &str, int x, int y)
+int Junk2DFont::print(const std::string &str, int x, int y, int alpha)
 {
 	if (dxFont == NULL)
 		return 0;

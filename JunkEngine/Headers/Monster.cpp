@@ -199,7 +199,7 @@ void Monster::MonseterSetting(Graphics * graphics, int tag)
 		this->setActive(true);
 		this->setScale(2);
 		this->setCollisionType(Junk2DentityNS::BOX);
-		this->setAnimation(0, 9, 0, 0.2f);
+		this->setAnimation(0, 8, 0, 0.2f);
 	}
 
 	//this->getplayerWidth();

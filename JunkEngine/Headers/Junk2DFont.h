@@ -25,7 +25,7 @@ public:
 
 	virtual bool initialize(Graphics *g, int height, bool bold, bool italic, const std::string &fontName);
 
-	virtual int print(const std::string &str, int x, int y);
+	virtual int print(const std::string &str, int x, int y, int alpha = 255);
 	virtual int print(const std::string &str, RECT &rect, UINT format);
 
 	virtual float getDegrees() { return angle*(180.0f / (float)PI); }
