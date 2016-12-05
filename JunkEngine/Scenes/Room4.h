@@ -10,31 +10,17 @@ class Room4 : public Game
 private:
 	ObjectManager* objectManager;
 
-	//// 씬의 기본 구성 요소들 ////
-	Player* player;
-	ItemSlot* itemSlot;
-	Cursor* cursor;
-	Junk2DFont *font;
-	TextWindow *textWindow;
+	Junk2DSprite* CutScene[6];
+	Junk2DSprite* select;
+	Junk2DSprite* newGame;
+	Junk2DSprite* LoadGame;
+	Junk2DSprite* Exit;
 	Fade* fade;
 
-	Junk2DSprite* filter;
-	////////////////////////////////
+	int scene = 0;
+	int select_ = 1;
 
-	Junk2DSprite* Door1;
-	Junk2DSprite* Door2;
-	Junk2DSprite* Blood;
-	Junk2DSprite* Carpet;
-	Junk2DSprite* Pictures;
-
-	Junk2DSprite* CutScene;
-
-
-	// 게임 요소들
-	Junk2DMap* Map;
-
-	bool eventStart = false;
-	int eventCount = -1;
+	float timeCount = 0;
 
 public:
 	Room4();

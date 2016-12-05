@@ -132,51 +132,71 @@ void Monster::findPlayer(int playerX, int playerY)
 		case 3: Dir_ = 4;  break;
 		case 0: Dir_ = 1; break;
 		}
+
+		if (tag == 1) {
+
+			if (Dir_ == 3) {
+				this->setLoop(true);
+				this->setAnimation(0, 7, 0, 0.2f);
+			}
+
+			if (Dir_ == 4 ) {
+				this->setLoop(true);
+				this->setAnimation(8, 15, 0, 0.2f);
+			}
+		}
 	}
 	
 	this->map->getMapX();
 	switch (Dir_) {
 	case 1:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 64/ Movespeed) {
 			m_PosY--;
 			moveCounter = 0;
 			break;
 		}
+		
 		setXY(this->getX(), this->getY() - Movespeed);
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	case 2:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 64 / Movespeed) {
 			m_PosY++;
 			moveCounter = 0;
 			break;
 		}
 		setXY(this->getX(), this->getY() + Movespeed);
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	case 3:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 64 / Movespeed) {
 			m_PosX--;
 			moveCounter = 0;
 			break;
 		}
 		setXY(this->getX() - Movespeed, this->getY());
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	case 4:
-		if (moveCounter >= 64) {
+		if (moveCounter >= 64 / Movespeed) {
 			m_PosX++;
 			moveCounter = 0;
+
 			break;
 		}
 		setXY(this->getX() + Movespeed, this->getY());
 		moveCounter++;
+		this->update((float)1 / 60);
 		break;
 	}
 
 	if (moveCounter == 0) {
 		Dir_ = 0;
 	}
+
 	
 }
 
@@ -184,7 +204,7 @@ void Monster::MonseterSetting(Graphics * graphics, int tag)
 {
 	this->tag = tag;
 	if (tag == 1) {
-		this->initialize(graphics, "..\\Resources\\char\\enemy1.jpg", 256, 256, 8);
+		this->initialize(graphics, "..\\Resources\\char\\enemy1.png", 256, 256, 8);
 		this->setXY(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 		this->setLoop(true);
 		this->setActive(true);
@@ -206,3 +226,4 @@ void Monster::MonseterSetting(Graphics * graphics, int tag)
 
 	this->setXY(0, 0);
 }
+

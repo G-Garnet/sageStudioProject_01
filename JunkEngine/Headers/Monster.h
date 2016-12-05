@@ -15,7 +15,7 @@ const int dir = 4;
 class Monster : public Junk2DEntity
 {
 private:
-	const int Movespeed = 1;
+	const float Movespeed = 1;
 
 	int mapSize;
 	int motionSW;
@@ -60,6 +60,7 @@ public:
 	node(int xp, int yp, int d, int p) {
 		xPos = xp; yPos = yp; level = d; priority = p;
 	}
+
 
 	int getxPos() const { return xPos; }
 	int getyPos() const { return yPos; }

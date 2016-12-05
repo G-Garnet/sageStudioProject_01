@@ -74,6 +74,11 @@ Room5::Room5()
 	itemSprite[1] = new Junk2DSprite();
 	itemSprite[2] = new Junk2DSprite();
 	itemSprite[3] = new Junk2DSprite();
+
+	backfance = new Junk2DSprite();
+	frontfance = new Junk2DSprite();
+	House0 = new Junk2DSprite();
+	Tree0 = new Junk2DSprite();
 }
 
 Room5::~Room5()
@@ -185,8 +190,12 @@ void Room5::initialize(HWND hwnd)
 	player->setMapszie(1);
 
 	// 오브젝트 //
+	backfance->settingTexture(graphics, "..\\Resources\\Object\\back_fence.png", 644, 350, 1);
+	frontfance->settingTexture(graphics, "..\\Resources\\Object\\front_fence.png", 656, 374, 1);
+	Tree0->settingTexture(graphics, "..\\Resources\\Object\\red house_tree.png", 294, 616, 1);
+	House0->settingTexture(graphics, "..\\Resources\\Object\\red_house.png", 395, 418, 1);
 
-	Lanten1->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 64, 128, 1);
+	Lanten1->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 95, 131, 1);
 	Tree1->settingTexture(graphics, "..\\Resources\\Object\\lot_tree.png", 64*5, 128*3, 1);
 	animalDeath1->settingTexture(graphics, "..\\Resources\\Object\\lot_bird carcass.png", 64, 64, 1);
 	animalDeath2->settingTexture(graphics, "..\\Resources\\Object\\lot_cat carcass.png", 64, 64, 1);
@@ -205,10 +214,10 @@ void Room5::initialize(HWND hwnd)
 	Monster2->settingTexture(graphics, "..\\Resources\\Object\\wolfshadow_r.png", 64 * 4, 64 * 2, 1);
 	Monster3->settingTexture(graphics, "..\\Resources\\Object\\wolfshadow_l.png", 64 * 4, 64 * 2, 1);
 	Tree6->settingTexture(graphics, "..\\Resources\\Object\\dog_tree.png", 64 * 3, 64 * 4, 1);
-	House1->settingTexture(graphics, "..\\Resources\\Object\\hunter_house.png", 64 * 14, 64 * 15, 1);
+	House1->settingTexture(graphics, "..\\Resources\\Object\\hunter_house.png", 733, 849, 1);
 
 	Tree7->settingTexture(graphics, "..\\Resources\\Object\\bamboo spear_tree.png", 64 * 3, 64 * 4, 1);
-	DeadMen->settingTexture(graphics, "..\\Resources\\Object\\corpse.png", 64 * 3, 64 * 3, 1);
+	DeadMen->settingTexture(graphics, "..\\Resources\\Object\\corpse.png", 111, 90, 1);
 
 	Lanten2->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 64 * 1, 64 * 2, 1);
 	Totem1->settingTexture(graphics, "..\\Resources\\Object\\totem_l_N.png", 64 * 3, 64 * 7, 1);
@@ -220,7 +229,7 @@ void Room5::initialize(HWND hwnd)
 	fake2->settingTexture(graphics, "..\\Resources\\Object\\fake_1.png", 64 * 1, 64 * 1, 1);
 	sign3->settingTexture(graphics, "..\\Resources\\Object\\caution_sign.png", 64 * 1, 64 * 2, 1);
 
-	graves->settingTexture(graphics, "..\\Resources\\Object\\headstone party.png", 64 * 10, 64 * 3, 1);
+	graves->settingTexture(graphics, "..\\Resources\\Object\\headstone party.png", 367, 130, 1);
 	
 	Lanten3->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 64 * 1, 64 * 2, 1);
 	Lanten4->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 64 * 1, 64 * 2, 1);
@@ -233,10 +242,15 @@ void Room5::initialize(HWND hwnd)
 	shadows->settingTexture(graphics, "..\\Resources\\Player\\shadow.png", 64 * 1, 64 * 2, 1);
 	gameOver->settingTexture(graphics, "..\\Resources\\UI\\gameOver.png", 1280,720, 1);
 
-	Lanten1->setXY(64 * 12, 64 * 11);
-	shadows->setXY(64 * 22, 64 * 11);
+	backfance->setXY(256, 162);
+	frontfance->setXY(251, 423);
+	House0->setXY(420, 168);
+	Tree0->setXY(262, 99);
 
-	Tree1->setXY(64 * 3, 64 * 19);
+	Lanten1->setXY(64*12, 64*11-32);
+	shadows->setXY(64 * 22, 64 * 10);
+
+	Tree1->setXY(267, 1218);
 	animalDeath1->setXY(64 * 8, 64 * 24);
 	animalDeath2->setXY(64 * 5, 64 * 26);
 	animalDeath3->setXY(64 * 10, 64 * 26);
@@ -256,9 +270,9 @@ void Room5::initialize(HWND hwnd)
 
 	Tree6->setXY(64 * 50, 64 * 10);
 	House1->setXY(64 * 54, 64 * 4);
-	Tree7->setXY(64 * 69, 64 * 9);
+	Tree7->setXY(4431, 576);
 
-	DeadMen->setXY(64 * 66, 64 * 21);
+	DeadMen->setXY(4248, 1382);
 
 	Lanten2->setXY(64 * 34, 64 * 18);
 	Totem1->setXY(64 * 83, 64 * 6);
@@ -270,7 +284,7 @@ void Room5::initialize(HWND hwnd)
 	fake2->setXY(64 * 112, 64 * 19);
 	sign3->setXY(64 * 110, 64 * 22);
 
-	graves->setXY(64 * 111, 64 * 25);
+	graves->setXY(7157, 1634);
 
 	Lanten3->setXY(64 * 78, 64 * 2);
 	Lanten4->setXY(64 * 128, 64 * 12);
@@ -280,31 +294,47 @@ void Room5::initialize(HWND hwnd)
 
 	knife->setXY(64 * 136, 64 * 20);
 
-
-	objectManager->AddObject(Lanten1, "Lanten1");
+	objectManager->AddObject(backfance, "backfance");
+	objectManager->AddObject(Tree0, "Tree0");
+	objectManager->AddObject(House0, "House0");
 	objectManager->AddObject(Tree1, "Tree1");
 	objectManager->AddObject(animalDeath1, "animalDeath1");
 	objectManager->AddObject(animalDeath2, "animalDeath2");
 	objectManager->AddObject(animalDeath3, "animalDeath3");
 	objectManager->AddObject(animalDeath4, "animalDeath4");
 
-	objectManager->AddObject(player, "player");
-
 	objectManager->AddObject(signPost, "signPost");
+
+	objectManager->AddObject(shadows, "shadows");
+	shadows->drawable = false;
+
 	objectManager->AddObject(Tree2, "Tree2");
 	objectManager->AddObject(Tree3, "Tree3");
 	objectManager->AddObject(Tree4, "Tree4");
+
+	objectManager->AddObject(graves, "graves");
+	objectManager->AddObject(knife, "knife");
+	objectManager->AddObject(House2, "House2");
+	objectManager->AddObject(House3, "House3");
+	objectManager->AddObject(Tree6, "Tree6");
+	objectManager->AddObject(House1, "House1");
+	objectManager->AddObject(Tree7, "Tree7");
+
+	objectManager->AddObject(Lanten1, "Lanten1");
+	objectManager->AddObject(Lanten2, "Lanten2");
+	objectManager->AddObject(Lanten3, "Lanten3");
+	objectManager->AddObject(Lanten4, "Lanten4");
+
+	objectManager->AddObject(player, "player");
+
 	objectManager->AddObject(Tree5, "Tree5");
+	objectManager->AddObject(frontfance, "frontfance");
 
 	//objectManager->AddObject(Monster1, "Monster1");
 	//objectManager->AddObject(Monster2, "Monster2");
 	//objectManager->AddObject(Monster3, "Monster3");
-	objectManager->AddObject(Tree6, "Tree6");
-	objectManager->AddObject(House1, "House1");
-	objectManager->AddObject(Tree7, "Tree7");
 	objectManager->AddObject(DeadMen, "DeadMen");
 
-	objectManager->AddObject(Lanten2, "Lanten2");
 	objectManager->AddObject(Totem1, "Totem1");
 	objectManager->AddObject(Totem2, "Totem2");
 
@@ -313,13 +343,12 @@ void Room5::initialize(HWND hwnd)
 	objectManager->AddObject(fake1, "fake1");
 	objectManager->AddObject(fake2, "fake2");
 	objectManager->AddObject(sign3, "sign3");
-	objectManager->AddObject(graves, "graves");
-	objectManager->AddObject(Lanten3, "Lanten3");
-	objectManager->AddObject(Lanten4, "Lanten4");
-	objectManager->AddObject(House2, "House2");
-	objectManager->AddObject(House3, "House3");
-	objectManager->AddObject(knife, "knife");
 
+
+	Map->MapAddObject(objectManager->getCGameObject("House0"), "House0");
+	Map->MapAddObject(objectManager->getCGameObject("Tree0"), "Tree0");
+	Map->MapAddObject(objectManager->getCGameObject("frontfance"), "frontfance");
+	Map->MapAddObject(objectManager->getCGameObject("backfance"), "backfance");
 
 	Map->MapAddObject(objectManager->getCGameObject("Lanten1"), "Lanten1");
 	Map->MapAddObject(objectManager->getCGameObject("Tree1"), "Tree1");
@@ -428,7 +457,7 @@ void Room5::Update()
 		LantenAlpha += 0.02f;
 	}
 	else if (start && LantenAlpha > 240 && LantenAlpha <= 250) {
-		LantenAlpha += 0.01f;
+		LantenAlpha += 0.015f;
 	}
 	else if (LantenAlpha > 250) {
 		gameOverSw = true;
@@ -437,48 +466,31 @@ void Room5::Update()
 	if (gameOverSw && gameOverAl <= 254) {
 		gameOverAl+=254;
 	}
-	
-	
-
 	/////////////////////
 
 
 	////// 이벤트 발동문 //////
 	{
+		// 몬스터 추적
 		if (monsterStart == 1) {
-			mop1->update((float)1 / 60);
-			mop1->findPlayer(player->p_PosX, player->p_PosY);
+			HuntPlayer(mop1);
 			MonsterTime += (float)1 / 60;
 		}
 
 		if (monsterStart2) {
-			mop2->update((float)1 / 60);
-			mop2->findPlayer(player->p_PosX, player->p_PosY);
-
-			mop3->update((float)1 / 60);
-			mop3->findPlayer(player->p_PosX, player->p_PosY);
-
-			mop4->update((float)1 / 60);
-			mop4->findPlayer(player->p_PosX, player->p_PosY);
-
-			mop5->update((float)1 / 60);
-			mop5->findPlayer(player->p_PosX, player->p_PosY);
+			HuntPlayer(mop2);
+			HuntPlayer(mop3);
+			HuntPlayer(mop4);
+			HuntPlayer(mop5);
 
 			MonsterTime2 += (float)1 / 60;
 		}
 
 		if (monsterStart3 == 2) {
-			mop6->update((float)1 / 60);
-			mop6->findPlayer(player->p_PosX, player->p_PosY);
-
-			mop7->update((float)1 / 60);
-			mop7->findPlayer(player->p_PosX, player->p_PosY);
-
-			mop8->update((float)1 / 60);
-			mop8->findPlayer(player->p_PosX, player->p_PosY);
-
-			mop9->update((float)1 / 60);
-			mop9->findPlayer(player->p_PosX, player->p_PosY);
+			HuntPlayer(mop6);
+			HuntPlayer(mop7);
+			HuntPlayer(mop8);
+			HuntPlayer(mop9);
 
 			MonsterTime3 += (float)1 / 60;
 		}
@@ -492,16 +504,22 @@ void Room5::Update()
 			MonsterStartTime += (float)1 / 60;
 		}
 
-		if (MonsterTime >= 60) {
-			monsterStart = 2;
+		// 몬스터 실종 시간
+		if (MonsterTime >= 50) {
+			if(MonsterTime >= 60) {
+				monsterStart = 2;
+			}
+			MonsterAlpha1 -= 25;
 		}
 
 		if (MonsterTime2 >= 45) {
 			monsterStart2 = 2;
+			MonsterAlpha2 -= 25;
 		}
 
 		if (MonsterTime3 >= 40) {
 			monsterStart3 = 3;
+			MonsterAlpha3 -= 25;
 		}
 
 		if (MonsterStartTime >= 10 && monsterStart3 != 3) {
@@ -591,16 +609,16 @@ void Room5::Update()
 			eventCount = 4;
 			switch (player->p_PosX) {
 			case 12:
-				Lanten1->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 64, 128, 1);
+				Lanten1->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 95, 131, 1);
 				break;
 			case 34:
-				Lanten2->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 64, 128, 1);
+				Lanten2->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 95, 131, 1);
 				break;
 			case 78:
-				Lanten3->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 64, 128, 1);
+				Lanten3->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 95, 131, 1);
 				break;
 			case 128:
-				Lanten4->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 64, 128, 1);
+				Lanten4->settingTexture(graphics, "..\\Resources\\Object\\save_point_Y.png", 95, 131, 1);
 				break;
 			}
 			textWindow->setActive(true);
@@ -624,7 +642,8 @@ void Room5::Update()
 
 		// 게임오버
 		if (gameOverAl >= 254) {
-			exit(0);
+			Game *temp = new Room5;
+			ChangeScene(temp);
 		}
 	}
 	
@@ -776,6 +795,13 @@ void Room5::Update()
 		//}
 	}
 
+	if (ShadowEventStart == 1) {
+		shadows->drawable = true;
+	}
+	else {
+		shadows->drawable = false;
+	}
+
 	///////////////////////////
 }
 
@@ -786,26 +812,25 @@ void Room5::render()
 	Map->getMapBG2()->draw();
 
 	objectManager->RenderAllObject();
-	player->draw();
+	//player->draw();
 
-	if (monsterStart != 2) mop1->draw();
+	if (monsterStart != 2) mop1->draw(D3DCOLOR_ARGB(MonsterAlpha1, 255, 255, 255));
 	if (monsterStart2 != 2) {
-		mop2->draw();
-		mop3->draw();
-		mop4->draw();
-		mop5->draw();
+		mop2->draw(D3DCOLOR_ARGB(MonsterAlpha2, 255, 255, 255));
+		mop3->draw(D3DCOLOR_ARGB(MonsterAlpha2, 255, 255, 255));
+		mop4->draw(D3DCOLOR_ARGB(MonsterAlpha2, 255, 255, 255));
+		mop5->draw(D3DCOLOR_ARGB(MonsterAlpha2, 255, 255, 255));
 	}
 	if (monsterStart3 != 3) {
-		mop6->draw();
-		mop7->draw();
-		mop8->draw();
-		mop9->draw();
+		mop6->draw(D3DCOLOR_ARGB(MonsterAlpha3, 255, 255, 255));
+		mop7->draw(D3DCOLOR_ARGB(MonsterAlpha3, 255, 255, 255));
+		mop8->draw(D3DCOLOR_ARGB(MonsterAlpha3, 255, 255, 255));
+		mop9->draw(D3DCOLOR_ARGB(MonsterAlpha3, 255, 255, 255));
 	}
 
-	// 이벤트 //
-	if (ShadowEventStart == 1) {
-		shadows->draw();
-	}
+	//Tree2->draw();
+	//Tree3->draw();
+	//Tree4->draw();
 
 	if (shadowMonsterEvent) {
 		Monster3->draw(D3DCOLOR_ARGB((int)MonsterAlpha[0], 255, 255, 255));
@@ -853,8 +878,9 @@ void Room5::render()
 			player->setLoop(true);
 			player->setAnimation(24, 29, 24, 0.2f);
 			filter->setRadians(-90 * D3DX_PI / 180);
+			Sleep(200);
 		}
-		textWindow->TextWindowRender("..? 무언가가 있어", 0);
+		textWindow->TextWindowRender("..? 무언가가 있어...", 0);
 		break;
 	case 8:
 		textWindow->TextWindowRender("기름으로 불을 밝혔다.", 0);
@@ -863,7 +889,10 @@ void Room5::render()
 		textWindow->TextWindowRender("기름병이다...\n이걸로 불을 밝힐수 있겠어...", 0);
 		break; 
 	case 10:
-		textWindow->TextWindowRender("불이 점점 어두워지고 있어...", 0);
+		textWindow->TextWindowRender("불이 점점 어두워지고 있어...\n불을 밝힐것이 필요해...", 0);
+		break;
+	case 11:
+		textWindow->TextWindowRender("기름이 정말 많이 들어있다...!\n이정도면 기름을 채우지 않아도 될것 같아.", 0);
 		break;
 	}
 
@@ -895,5 +924,58 @@ void Room5::Save()
 {
 	std::ofstream out("save.ini");
 	out << player->p_PosX << " " << player->p_PosY;
+}
+
+void Room5::HuntPlayer(Monster* monster)
+{
+	if (player->nowDir_ == 1 &&
+		(monster->m_PosY == player->p_PosY - 1 || monster->m_PosY == player->p_PosY - 2) &&
+		monster->m_PosX == player->p_PosX) {
+		LantenAlpha += 0.1f;
+	}
+	else if (player->nowDir_ == 2 &&
+		(monster->m_PosY == player->p_PosY + 1 || monster->m_PosY == player->p_PosY + 2) &&
+		monster->m_PosX == player->p_PosX) {
+		LantenAlpha += 0.1f;
+	}
+	else if (player->nowDir_ == 3 &&
+		(monster->m_PosX == player->p_PosX - 1 || monster->m_PosX == player->p_PosX - 2) &&
+		monster->m_PosY == player->p_PosY) {
+		LantenAlpha += 0.1f;
+	}
+	else if (player->nowDir_ == 4 &&
+		(monster->m_PosY == player->p_PosX + 1 || monster->m_PosY == player->p_PosX + 2) &&
+		monster->m_PosX == player->p_PosX) {
+		LantenAlpha += 0.1f;
+	}
+
+	else if (player->nowDir_ == 5 &&
+		(monster->m_PosY == player->p_PosY - 1 || monster->m_PosY == player->p_PosY - 2) &&
+		(monster->m_PosX == player->p_PosX + 1 || monster->m_PosX == player->p_PosX + 2)) {
+		LantenAlpha += 0.1f;
+	}
+
+	else if (player->nowDir_ == 6 &&
+		(monster->m_PosY == player->p_PosY - 1 || monster->m_PosY == player->p_PosY - 2) &&
+		(monster->m_PosX == player->p_PosX - 1 || monster->m_PosX == player->p_PosX - 2)) {
+		LantenAlpha += 0.1f;
+	}
+
+	else if (player->nowDir_ == 7 &&
+		(monster->m_PosY == player->p_PosY + 1 || monster->m_PosY == player->p_PosY + 2) &&
+		(monster->m_PosX == player->p_PosX + 1 || monster->m_PosX == player->p_PosX + 2)) {
+		LantenAlpha += 0.1f;
+	}
+
+	else if (player->nowDir_ == 8 &&
+		(monster->m_PosY == player->p_PosY + 1 || monster->m_PosY == player->p_PosY + 2) &&
+		(monster->m_PosX == player->p_PosX - 1 || monster->m_PosX == player->p_PosX - 2)) {
+		LantenAlpha += 0.1f;
+	}
+
+	else {
+		monster->update((float)1 / 60);
+		monster->findPlayer(player->p_PosX, player->p_PosY);
+	}
 }
 

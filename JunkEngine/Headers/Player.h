@@ -14,13 +14,14 @@ private:
 	int motionSW;
 	bool inputSW;
 
-	int moveCounter = 0;
-
 	int Dir_;
+
+	int moveCounter = 0;
 
 	Junk2DSprite* lanten;
 
 public:
+	int nowDir_;
 
 	// 게임 데이터들
 	static int inCounter[100];

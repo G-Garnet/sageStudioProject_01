@@ -46,20 +46,6 @@ void TextWindow::TextWindowRender(const std::string &s, int select)
 		//window1->draw();
 
 		font->print(s, (1280 / 2) - (s.length() * 8) / 2, 575);
-		/*else if (select == 1) font->print(s, 32, 32, fontAlpha);
-
-		if (fontAlpha <= 254 && alpha == false) {
-			fontAlpha++;
-		}
-		else if (fontAlpha >= 254) {
-			fontAlpha--;
-			alpha = true;
-		}
-
-		if (fontAlpha <= 2 && !alpha) {
-			alpha = false;
-			this->active = false;
-		}*/
 	}
 	
 }

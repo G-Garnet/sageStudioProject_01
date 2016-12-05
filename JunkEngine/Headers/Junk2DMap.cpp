@@ -134,30 +134,22 @@ bool Junk2DMap::MapCollision(int playerX, int playerY, int dir)
 		}
 		break;
 	case 5:
-		if (mapData[playerY - 1][playerX + 1] == 1 ||
-			mapData[playerY - 1][playerX] == 1 || 
-			mapData[playerY][playerX + 1] == 1) {
+		if (mapData[playerY - 1][playerX + 1] == 1) {
 			return false;
 		}
 		break;
 	case 6:
-		if (mapData[playerY - 1][playerX - 1] == 11 ||
-			mapData[playerY - 1][playerX] == 1 ||
-			mapData[playerY][playerX - 1] == 1) {
+		if (mapData[playerY - 1][playerX - 1] == 1) {
 			return false;
 		}
 		break;
 	case 7:
-		if (mapData[playerY + 1][playerX + 1] == 11 ||
-			mapData[playerY + 1][playerX] == 1 ||
-			mapData[playerY][playerX + 1] == 1) {
+		if (mapData[playerY + 1][playerX + 1] == 1) {
 			return false;
 		}
 		break;
 	case 8:
-		if (mapData[playerY + 1][playerX - 1] == 11 ||
-			mapData[playerY + 1][playerX] == 1 ||
-			mapData[playerY][playerX - 1] == 1) {
+		if (mapData[playerY + 1][playerX - 1] == 1) {
 			return false;
 		}
 		break;

@@ -4,34 +4,27 @@ Room4::Room4()
 {
 	objectManager = new ObjectManager;
 
-	Map = new Junk2DMap;
-
-	player = new Player();
-	itemSlot = new ItemSlot();
-	cursor = new Cursor();
-	font = new Junk2DFont();
+	for (int i = 0; i < 6; i++) {
+		CutScene[i] = new Junk2DSprite();
+	}
+	select = new Junk2DSprite();
+	newGame = new Junk2DSprite();
+	LoadGame = new Junk2DSprite();
+	Exit = new Junk2DSprite();
 	fade = new Fade();
-	textWindow = new TextWindow();
-
-	Door1 = new Junk2DSprite();
-	Door2 = new Junk2DSprite();
-	Blood = new Junk2DSprite();
-	Carpet = new Junk2DSprite();
-	Pictures = new Junk2DSprite();
-	CutScene = new Junk2DSprite();
-
-	filter = new Junk2DSprite();
 }
 
 Room4::~Room4()
 {
-	SAFE_DELETE(Map);
 	objectManager->RemoveAllObject();
-	SAFE_DELETE(itemSlot);
-	SAFE_DELETE(cursor);
-	SAFE_DELETE(font);
+	for (int i = 0; i < 6; i++) {
+		SAFE_DELETE(CutScene[i]);
+	}
+	SAFE_DELETE(select);
+	SAFE_DELETE(newGame);
+	SAFE_DELETE(LoadGame);
+	SAFE_DELETE(Exit);
 	SAFE_DELETE(fade);
-	SAFE_DELETE(textWindow);
 }
 
 void Room4::initialize(HWND hwnd)
@@ -40,152 +33,115 @@ void Room4::initialize(HWND hwnd)
 
 	// Input객체 초기화
 	input->initialize(hwnd, false);
-	// 타이머 사용
-	if (QueryPerformanceFrequency(&timerFreq) == false)
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
 
-	// 이미지 정보름 미리 선언
-	Map->settingBGSprite(graphics, "..\\Resources\\\Floor1\\Room4\\Room4_bg.png");
+	CutScene[0]->settingTexture(graphics, "..\\Resources\\Main\\0.png", 1280, 720, 1);
+	CutScene[1]->settingTexture(graphics, "..\\Resources\\Main\\1.png", 1280, 720, 1);
+	CutScene[2]->settingTexture(graphics, "..\\Resources\\Main\\1-1.png", 1280, 720, 1);
+	CutScene[3]->settingTexture(graphics, "..\\Resources\\Main\\1-3.png", 1280, 720, 1);
+	CutScene[4]->settingTexture(graphics, "..\\Resources\\Main\\2-1.png", 1280, 720, 1);
+	CutScene[5]->settingTexture(graphics, "..\\Resources\\Main\\2-2.png", 1280, 720, 1);
+	
+	for (int i = 0; i < 5; i++) {
+		CutScene[0]->setXY(0, 0);
+	}
 
-	Door1->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_LeftDoor.png", 220, 457, 1);
-	Door1->setXY(370, 68);
-	Door2->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_RightDoor.png", 220, 457, 1);
-	Door2->setXY(1495, 68);
+	select->settingTexture(graphics, "..\\Resources\\Main\\menu_E.png", 154, 49, 1);
+	newGame->settingTexture(graphics, "..\\Resources\\Main\\new game.png", 154, 50, 1);
+	LoadGame->settingTexture(graphics, "..\\Resources\\Main\\load game.png", 154, 49, 1);
+	Exit->settingTexture(graphics, "..\\Resources\\Main\\ext.png", 309, 53, 1);
 
-	Pictures->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Pictures.png", 668, 269, 1);
-	Pictures->setXY(712, 50);
+	select->setXY(954, 392);
+	newGame->setXY(1039, 394);
+	LoadGame->setXY(1039, 472);
+	Exit->setXY(1039, 556);
 
-	Blood->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Blood.png", 650, 480, 7);
-	Blood->setLoop(false);
-	Blood->setAnimation(0, 27, 0, 0.1f);
-	Blood->setXY(731, 91);
-
-	Carpet->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\Room4_Carpet.png", 1437, 170, 1);
-	Carpet->setXY(360, 533);
-
-	CutScene->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\CutScene.png", 1280, 720, 1);
-	CutScene->setXY(0, 0);
-
-	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room4\\4_roomd.png", 2100, 720, 1);
-	filter->setXY(0, 0);
-
-	// Scene의 기본 요소들 //
-	player->playerSetting(graphics);
-	itemSlot->ItemSlotSetting(graphics);
-	cursor->CursorSetting(graphics);
-	textWindow->TextWindowSetting(graphics);
-	textWindow->setActive(false);
-	font->initialize(graphics, 15, true, false, "굴림체"); 
 	fade->fadeSetting(graphics);
 	fade->setAlpha(255);
-	/////////////////////////
 
-	Map->mapMove(0, 0);
+	//audio->playCue("");
 
-	// 태그 설정
-	objectManager->AddObject(Door1, "Door1");
-	objectManager->AddObject(Door2, "Door2");
-	objectManager->AddObject(Pictures, "Pictures");
-	objectManager->AddObject(Blood, "Blood");
-	objectManager->AddObject(Carpet, "Carpet");
-
-	objectManager->AddObject(player, "Player");
-	objectManager->AddObject(filter, "filter");
-
-	Map->MapAddObject(objectManager->getCGameObject("Door1"), "Door1");
-	Map->MapAddObject(objectManager->getCGameObject("Door2"), "Door2");
-	Map->MapAddObject(objectManager->getCGameObject("Blood"), "Blood");
-	Map->MapAddObject(objectManager->getCGameObject("Carpet"), "Carpet");
-	Map->MapAddObject(objectManager->getCGameObject("Pictures"), "Pictures");
-	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
-
-	player->setMapszie(1076-256);
-
-	Map->mapMove(-1076+256, 0);
-
-	if (Player::p_PosScene == 3) {
-		player->setX(495+256);
-		player->setY(156);
-	}
-	else if (Player::p_PosScene == 5) {
-		player->setX(1080);
-	}
-	Player::p_PosScene = 4;
-
-	initialized = true;
-
-	audio->playCue("door close");
 	return;
 }
 
 void Room4::Update()
 {
-	if (!textWindow->getActive()) {
-		player->playerInput(input, Map);
-	}
-	itemSlot->ItemSlotInput(input);
-	cursor->CursorInput(input);
-
 	if (fade->getalphaStart()) {
 		fade->setAlpha(fade->getAlpha() + 1.75f);
 	}
 	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f) {
 		fade->setAlpha(fade->getAlpha() - 1.75f);
 	}
-	else if (fade->getAlpha() <= 1.5f) {
-		player->setInputSW(true);
-	}
 
 	if (fade->getAlpha() >= 255) {
-		Game *temp = new Room5;
+		if (select_ == 1) {
+			Game *temp = new Room5;
+			ChangeScene(temp);
+		}
 
-		ChangeScene(temp);
+		if (select_ == 2) {
+			Game *temp = new Room5;
+			ChangeScene(temp);
+		}
+
 	}
 
-	if (eventCount == 0 && !eventStart) {
-		Sleep(1500);
-		eventCount = 1;
-		textWindow->resetStrLength();
-		eventStart = true;
+
+	timeCount += 0.1f; 
+	if (timeCount >= 40) {
+		scene = 0;
+		timeCount = 0;
+	}
+	else if (timeCount >= 38) {
+		scene = 5;
+	}
+	else if (timeCount >= 36) {
+		scene = 4;
+	}
+	else if (timeCount >= 32) {
+		scene = 3;
+	}
+	else if (timeCount >= 31) {
+		scene = 2;
+	}
+	else if (timeCount >= 30) {
+		scene = 1;
 	}
 
-	if (eventCount == 2 && eventStart) {
-		Sleep(1500);
-		eventCount = 3;
-		textWindow->resetStrLength();
-
-		audio->playCue("whispher ver.3sec");
-	}
-
-	if (textWindow->getActive() && (input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
-
-		switch (eventCount) {
-		case 1:
-			eventCount = 2;
-			textWindow->resetStrLength();
-			textWindow->setActive(false);
-			break;
-		default:
-			textWindow->setActive(false);
-			eventCount = 0;
-			textWindow->resetStrLength();
-			break;
+	if (input->isKeyUp(VK_UP)) {
+		select_--;
+		if (select_ == 0) {
+			select_ = 3;
 		}
 	}
 
-	
+	if (input->isKeyUp(VK_DOWN)) {
+		select_++;
+		if (select_ == 4) {
+			select_ = 1;
+		}
+	}
 
-	if (player->getX() >= 630 && Map->getMapX() >= -480 && !eventStart) {
-		eventCount = 0;
-		textWindow->resetStrLength();
-		textWindow->setActive(true);
+	if (input->isKeyUp(VK_ESCAPE)) {
+		exit(0);
+	}
+
+	switch (select_) {
+	case 1: select->setXY(954, 392); break;
+	case 2: select->setXY(954, 470); break;
+	case 3: select->setXY(954, 554); break;
 	}
 
 	if (input->isKeyUp(VK_RETURN)) {
-		audio->playCue("open_door_1");
-		fade->setalphaStart(true);
-	}
 
+		//audio->stopCue("");
+		//audio->playCue("");
+
+		switch (select_) {
+		case 1: fade->setalphaStart(true); break;
+		case 2: fade->setalphaStart(true); break;
+		case 3: exit(0); break;
+		}
+	}
 
 	//exitGame();
 }
@@ -194,28 +150,12 @@ void Room4::render()
 {
 	graphics->spriteBegin();
 
-	Map->getMapBG()->draw();
-	objectManager->RenderAllObject();
+	CutScene[scene]->draw();
+	newGame->draw();
+	LoadGame->draw();
+	Exit->draw();
+	select->draw();
 
-	switch (eventCount) {
-	case 0:
-		// 컷신 드로우
-		CutScene->draw();
-		break;
-	case 1:
-		CutScene->draw();
-		textWindow->TextWindowRender("기분 나쁘게 생긴 그림들 사이로 글귀가 보인다.\nFaith had ended in betrayal.\n믿음은 배신으로 끝나버렸다.", 0);
-		break;
-	case 2:
-		CutScene->draw();
-		break;
-	case 3:
-		Blood->update(1.0f / 60.0f);
-		break;
-	}
-
-	itemSlot->ItemSlotRender();
-	cursor->draw();
 	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	graphics->spriteEnd();

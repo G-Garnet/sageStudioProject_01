@@ -8,7 +8,7 @@ void ObjectManager::AddObject(Junk2DSprite* p_pObject, std::string objecName)
 void ObjectManager::RenderAllObject()
 {
 	for (auto &i : ObjectList) {
-		i.first->draw();
+		if (i.first->drawable) i.first->draw();
 	}
 }
 

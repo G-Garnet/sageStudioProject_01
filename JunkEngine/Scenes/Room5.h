@@ -25,6 +25,12 @@ private:
 	Junk2DSprite* shadows;
 	Junk2DSprite* gameOver;
 	////////////////////////////////
+	Junk2DSprite* backfance;
+	Junk2DSprite* frontfance;
+
+	Junk2DSprite* House0;
+	Junk2DSprite* Tree0;
+
 	Monster* mop1;
 	Monster* mop2;
 	Monster* mop3;
@@ -116,6 +122,11 @@ private:
 	float MonsterTime = 0;
 	float MonsterTime2 = 0;
 	float MonsterTime3 = 0;
+
+	int MonsterAlpha1 = 255;
+	int MonsterAlpha2 = 255;
+	int MonsterAlpha3 = 255;
+
 	float MonsterStartTime = 0;
 	float TotemTime = 0;
 	
@@ -143,6 +154,8 @@ public:
 	void render();      // "
 
 	void Save();
+
+	void HuntPlayer(Monster* monster);
 
 	//void GameOver();
 						/*void releaseAll();

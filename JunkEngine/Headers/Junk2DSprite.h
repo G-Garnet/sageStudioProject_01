@@ -31,6 +31,8 @@ public:
 	Junk2DSprite();			// 생성자
 	virtual ~Junk2DSprite();	// 소멸자
 
+	bool drawable = true;
+
 	//-----------Get 함수들---------------//
 
 	// SpriteData 구조체의 참조형을 반환

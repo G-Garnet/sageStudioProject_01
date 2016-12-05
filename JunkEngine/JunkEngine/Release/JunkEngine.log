@@ -1,15 +1,8 @@
-﻿  winmain.cpp
-  SecondScene.cpp
-..\Scenes\SecondScene.cpp(56): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
-  Room5.cpp
-  Room4.cpp
-..\Scenes\Room4.cpp(48): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
-  Room3.cpp
-..\Scenes\Room3.cpp(54): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
-  MainScene.cpp
-..\Scenes\MainScene.cpp(56): warning C4129: 'F': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
-  MainMenu.cpp
-..\Scenes\MainMenu.cpp(33): warning C4129: 'R': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+﻿  Room5.cpp
+  Junk2DMap.cpp
+..\Headers\Junk2DMap.cpp(67): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Headers\Junk2DMap.cpp(68): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Headers\Junk2DMap.cpp(70): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 LINK : warning LNK4075: '/INCREMENTAL'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.
   DShowPlayer.obj : /GL로 컴파일한 MSIL .netmodule 또는 모듈이 있습니다. /LTCG를 지정하여 링크를 다시 시작하십시오. /LTCG를 링크 명령줄에 추가하면 링커 성능이 향상됩니다.
 LINK : warning LNK4075: '/INCREMENTAL'이(가) '/LTCG' 사양으로 인해 무시됩니다.

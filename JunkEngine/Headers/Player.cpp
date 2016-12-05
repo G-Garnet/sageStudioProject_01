@@ -54,6 +54,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 	if (moveCounter==0) {
 		if (input->isKeyDown(VK_UP) && input->isKeyDown(VK_RIGHT)) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 5)) Dir_ = 5;
+			nowDir_ = 5;
 
 			this->setLoop(true);
 			this->setAnimation(42, 47, 42, 0.2f);
@@ -62,6 +63,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		else if (input->isKeyDown(VK_UP) && input->isKeyDown(VK_LEFT) ) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 6)) Dir_ = 6;
+			nowDir_ = 6;
 			
 			this->setLoop(true);
 			this->setAnimation(36, 41, 36, 0.2f);
@@ -70,6 +72,8 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		else if (input->isKeyDown(VK_DOWN) && input->isKeyDown(VK_RIGHT)) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 7)) Dir_ = 7;
+			nowDir_ = 7;
+
 			this->setLoop(true);
 			this->setAnimation(18, 23, 18, 0.2f);
 			lanten->setRadians(45 * D3DX_PI / 180);
@@ -77,6 +81,8 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		else if (input->isKeyDown(VK_DOWN) && input->isKeyDown(VK_LEFT)) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 8)) Dir_ = 8;
+			nowDir_ = 8;
+
 			this->setLoop(true);
 			this->setAnimation(12, 17, 12, 0.2f);
 			lanten->setRadians(135 * D3DX_PI / 180);
@@ -84,6 +90,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		else if (input->isKeyDown(VK_UP)) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 1))  Dir_ = 1;
+			nowDir_ = 1;
 
 			this->setLoop(true);
 			this->setAnimation(24, 29, 24, 0.2f);
@@ -92,6 +99,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		else if (input->isKeyDown(VK_DOWN)) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 2))  Dir_ = 2;
+			nowDir_ = 2;
 
 			this->setLoop(true);
 			this->setAnimation(30, 35, 30, 0.2f);
@@ -100,6 +108,7 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		else if (input->isKeyDown(VK_LEFT) ) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 3))  Dir_ = 3;
+			nowDir_ = 3;
 
 			this->setLoop(true);
 			this->setAnimation(0, 5, 0, 0.2f);
@@ -108,8 +117,9 @@ void Player::playerInput(Input* input, Junk2DMap* Map1)
 
 		else if (input->isKeyDown(VK_RIGHT) ) {
 			if (Map1->MapCollision(p_PosX, p_PosY, 4))  Dir_ = 4;
-			this->setLoop(true);
+			nowDir_ = 4;
 
+			this->setLoop(true);
 			this->setAnimation(6, 11, 6, 0.2f);
 			lanten->setRadians(0 * D3DX_PI / 180);
 		}
