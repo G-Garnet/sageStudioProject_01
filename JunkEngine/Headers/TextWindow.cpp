@@ -21,7 +21,7 @@ TextWindow::~TextWindow()
 
 void TextWindow::TextWindowSetting(Graphics * graphics)
 {
-	font->initialize(graphics, 27, true, false, "THEÈ«Â÷¿ÕÀÚ ¼Ò³âM");
+	font->initialize(graphics, 28, true, false, "THEÈ«Â÷¿ÕÀÚ ¼Ò³âM");
 
 	window1->settingTexture(graphics, "..\\Resources\\UI\\TextWindow_man.png", 1280, 720, 1);
 	window1->setXY(0, 0);
@@ -40,12 +40,70 @@ void TextWindow::TextWindowSetting(Graphics * graphics)
 //const std::string &s1, const std::string &s2
 void TextWindow::TextWindowRender(const std::string &s, int select)
 {
-	int i,x = 0,line = 0;
+	int i,x = 0,line = 0, x_Pos, y_Pos;
+
+	if (select == 1) {
+		x_Pos = (1280 / 2) - (s.length() * 14) / 2 + 28;
+		y_Pos = 576;
+	}
+	else {
+		x_Pos = 355;
+		y_Pos = 535;
+	}
 
 	if (this->active) {
 		//window1->draw();
 
-		font->print(s, (1280 / 2) - (s.length() * 8) / 2, 575);
+		//if (select == 0) font->print(s, (1280 / 2) - (s.length() * 8) / 2, 575);
+		//else if (select == 1) {
+		
+		for (i = 0; i < s_count;) {
+
+			if (s[i] == '!' || s[i] == '.' || s[i] == '?' ||
+				s[i] == ',' || s[i] == ' ' || s[i] == '"' || s[i] == '\'') {
+				char c[2] = { s[i],0 };
+				i++;
+				font->print(&c[0], x_Pos + x * 22, y_Pos + line * 27);
+				x++;
+			}
+			else if (s[i] == '\n') {
+				char c[2] = { s[i],0 };
+				i++;
+				font->print(&c[0], x_Pos + x * 22, y_Pos + line * 27);
+				line++;
+				x = 0;
+			}
+			else {
+				char c[3];
+				c[0] = s[i];
+				c[1] = s[i + 1];
+				c[2] = NULL;
+				i += 2;
+				font->print(&c[0], x_Pos + x * 22, y_Pos + line * 27);
+				x++;
+			}
+
+		}
+
+		if (textSpeed <= 3) {
+			textSpeed++;
+		}
+		else {
+			if (s_count < s.length()) {
+				if (s[i] == '!' || s[i] == '.' || s[i] == '?' ||
+					s[i] == ',' || s[i] == ' ' || s[i] == '"' || s[i] == '\'') {
+
+					s_count++;
+				}
+				else {
+					s_count += 2;
+				}
+			}
+
+			textSpeed = 0;
+		}
+		
+		//}
 	}
 	
 }

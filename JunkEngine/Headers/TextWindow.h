@@ -22,6 +22,8 @@ private:
 	bool charActive = false;
 	bool alpha = false;
 
+	int textSpeed = 0;
+
 public:
 	TextWindow();
 	virtual ~TextWindow();

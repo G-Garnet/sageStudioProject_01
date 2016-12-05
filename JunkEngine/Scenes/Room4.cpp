@@ -33,6 +33,9 @@ void Room4::initialize(HWND hwnd)
 
 	// Input객체 초기화
 	input->initialize(hwnd, false);
+	// 타이머 사용
+	if (QueryPerformanceFrequency(&timerFreq) == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
 
 	CutScene[0]->settingTexture(graphics, "..\\Resources\\Main\\0.png", 1280, 720, 1);
 	CutScene[1]->settingTexture(graphics, "..\\Resources\\Main\\1.png", 1280, 720, 1);
@@ -59,6 +62,7 @@ void Room4::initialize(HWND hwnd)
 	fade->setAlpha(255);
 
 	//audio->playCue("");
+	initialized = true;
 
 	return;
 }
@@ -74,7 +78,7 @@ void Room4::Update()
 
 	if (fade->getAlpha() >= 255) {
 		if (select_ == 1) {
-			Game *temp = new Room5;
+			Game *temp = new Room3;
 			ChangeScene(temp);
 		}
 

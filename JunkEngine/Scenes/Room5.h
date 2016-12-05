@@ -94,6 +94,8 @@ private:
 	Junk2DSprite* knife;
 	////////////////////////////////
 
+	Junk2DSprite* Trees[9];
+
 	Junk2DSprite* itemSprite[4];
 
 	bool start = false;
@@ -129,6 +131,7 @@ private:
 
 	float MonsterStartTime = 0;
 	float TotemTime = 0;
+	float Dark = 0.02f;
 	
 	int gameOverAl = 0;
 	bool gameOverSw = false;

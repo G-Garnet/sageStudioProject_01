@@ -2,42 +2,26 @@
 
 Room3::Room3()
 {
-	objectManager = new ObjectManager;
-
-	Map = new Junk2DMap;
-
-	player = new Player();
-	itemSlot = new ItemSlot();
-	cursor = new Cursor();
-	font = new Junk2DFont();
 	textWindow = new TextWindow();
 	fade = new Fade();
 
-	Door1 = new Junk2DSprite();
-	Door2 = new Junk2DSprite();
-	Candle1 = new Junk2DSprite();
-	Candle2 = new Junk2DSprite();
+	for (int i = 0; i < 10; i++) {
+		cutScene[i] = new Junk2DSprite;
+	}
 
-	fireDeck = new Junk2DSprite();
-	Box = new Junk2DSprite();
-	Picture = new Junk2DSprite();
-	Desk = new Junk2DSprite();
-	Bear = new Junk2DSprite();
-
-	filter = new Junk2DSprite();
-	fire1 = new Junk2DSprite();
-	fire2 = new Junk2DSprite();
+	sideCut1 = new Junk2DSprite;
+	sideCut2 = new Junk2DSprite;
 }
 
 Room3::~Room3()
 {
-	SAFE_DELETE(Map);
-	objectManager->RemoveAllObject();
-	SAFE_DELETE(itemSlot);
-	SAFE_DELETE(cursor);
-	SAFE_DELETE(font);
 	SAFE_DELETE(fade);
 	SAFE_DELETE(textWindow);
+	for (int i = 0; i < 10; i++) {
+		SAFE_DELETE(cutScene[i]);
+	}
+	SAFE_DELETE(sideCut1);
+	SAFE_DELETE(sideCut2);
 }
 
 void Room3::initialize(HWND hwnd)
@@ -50,126 +34,51 @@ void Room3::initialize(HWND hwnd)
 	if (QueryPerformanceFrequency(&timerFreq) == false)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
 
-	// 이미지 정보름 미리 선언
-	Map->settingBGSprite(graphics, "..\\Resources\\\Floor1\\Room3\\Room3_bg.png");
+	cutScene[0]->settingTexture(graphics, "..\\Resources\\openning\\1.png", 1280, 720, 1);
+	cutScene[1]->settingTexture(graphics, "..\\Resources\\openning\\2.png", 1280, 720, 1);
+	cutScene[2]->settingTexture(graphics, "..\\Resources\\openning\\3.png", 1280, 720, 1);
+	cutScene[3]->settingTexture(graphics, "..\\Resources\\openning\\4.png", 1280, 720, 1);
+	cutScene[4]->settingTexture(graphics, "..\\Resources\\openning\\5.png", 1280, 720, 1);
+	cutScene[5]->settingTexture(graphics, "..\\Resources\\openning\\6.png", 1280, 720, 1);
+	cutScene[6]->settingTexture(graphics, "..\\Resources\\openning\\7.png", 1280, 720, 1);
+	cutScene[7]->settingTexture(graphics, "..\\Resources\\openning\\8.png", 1280, 720, 1);
+	cutScene[8]->settingTexture(graphics, "..\\Resources\\openning\\9.png", 1280, 720, 1);
+	cutScene[9]->settingTexture(graphics, "..\\Resources\\openning\\10.png", 1280, 720, 1);
 
-	Door1->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\Room3_LeftDoor.png", 163, 532, 1);
-	Door1->setXY(85, 130);
-	Door2->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\Room3_RightDoor.png", 220, 457, 1);
-	Door2->setXY(1400, 70);
-
-	Candle1->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\candle1.png", 35, 69, 1);
-	Candle1->setXY(507, 160);
-	Candle2->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\candle2.png", 35, 69, 1);
-	Candle2->setXY(1296, 160);
-
-	fireDeck->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire1.png", 469, 552, 1);
-	fireDeck->setXY(680, 0);
-	Box->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\box.png", 242, 250, 1);
-	Box->setXY(348, 300);
-	Picture->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\Picture.png", 223, 168, 1);
-	Picture->setXY(810, 28);
-	Desk->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\Desk.png", 169, 215, 1);
-	Desk->setXY(1237, 333);
-
-	Bear->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\Bear.png", 91, 101, 1);
-	Bear->setXY(1264, 247);
-
-	filter->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\3_roomd.png", 2000, 720, 1);
-	filter->setXY(0, 0);
-
-	fire1->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
-	fire1->setXY(507+12, 135);
-	fire1->setLoop(true);
-	fire1->setAnimation(0,8,0,0.4f);
-
-	fire2->settingTexture(graphics, "..\\Resources\\Floor1\\Room3\\fire.png", 10, 30, 5);
-	fire2->setXY(1296+12, 135);
-	fire1->setLoop(true);
-	fire2->setAnimation(0,8, 0, 0.4f);
+	sideCut1->settingTexture(graphics, "..\\Resources\\openning\\3-1.png", 1280, 720, 1);
+	sideCut2->settingTexture(graphics, "..\\Resources\\openning\\4-1.png", 1280, 720, 1);
 
 	// Scene의 기본 요소들 //
-	player->playerSetting(graphics);
-	itemSlot->ItemSlotSetting(graphics);
-	cursor->CursorSetting(graphics);
 	textWindow->TextWindowSetting(graphics);
 	textWindow->setActive(false);
-	font->initialize(graphics, 15, true, false, "굴림체");
+	//font->initialize(graphics, 12, true, false, "굴림체");
 	fade->fadeSetting(graphics);
 	fade->setAlpha(255);
 	/////////////////////////
 
-	Map->mapMove(0, 0);
 
-	// 태그 설정
-	objectManager->AddObject(Door1, "Door1");
-	objectManager->AddObject(Door2, "Door2");
-	objectManager->AddObject(Candle1, "Candle1");
-	objectManager->AddObject(Candle2, "Candle2");
-	objectManager->AddObject(fire1, "fire1");
-	objectManager->AddObject(fire2, "fire2");
-	objectManager->AddObject(fireDeck, "fireDeck");
-	objectManager->AddObject(Box, "Box");
-	objectManager->AddObject(Picture, "Picture");
-	objectManager->AddObject(Desk, "Desk");
-	objectManager->AddObject(Bear, "Bear");
-
-	objectManager->AddObject(player, "Player");
-	objectManager->AddObject(filter, "filter");
-
-	Map->MapAddObject(objectManager->getCGameObject("Door1"), "Door1");
-	Map->MapAddObject(objectManager->getCGameObject("Door2"), "Door2");
-	Map->MapAddObject(objectManager->getCGameObject("Candle1"), "Candle1");
-	Map->MapAddObject(objectManager->getCGameObject("Candle2"), "Candle2");
-	Map->MapAddObject(objectManager->getCGameObject("fireDeck"), "fireDeck");
-	Map->MapAddObject(objectManager->getCGameObject("fire1"), "fire1");
-	Map->MapAddObject(objectManager->getCGameObject("fire2"), "fire2");
-	Map->MapAddObject(objectManager->getCGameObject("Box"), "Box");
-	Map->MapAddObject(objectManager->getCGameObject("Picture"), "Picture");
-	Map->MapAddObject(objectManager->getCGameObject("Desk"), "Desk");
-	Map->MapAddObject(objectManager->getCGameObject("Bear"), "Bear");
-	Map->MapAddObject(objectManager->getCGameObject("filter"), "filter");
-
-	Map->mapMove(-976+256, 0);
-	player->setMapszie(976-256);
-
-	if (Player::p_PosScene == 2) {
-		player->setX(424+256);
-		player->setY(156);
-	}
-	else if (Player::p_PosScene == 4) {
-		player->setX(1080);
-	}
-	Player::p_PosScene = 3;
+	//audio->playCue("knock and rattle");
 
 	initialized = true;
-
-	audio->playCue("knock and rattle");
 
 	return;
 }
 
 void Room3::Update()
 {
-	player->playerInput(input, Map);
-	itemSlot->ItemSlotInput(input);
-	cursor->CursorInput(input);
-
-	fire1->update((float)1 / 60);
-	fire2->update((float)1 / 60);
-
 	if (fade->getalphaStart()) {
-		fade->setAlpha(fade->getAlpha() + 1.75f);
+		fade->setAlpha(fade->getAlpha() + 1.0f);
 	}
 	else if (fade->getAlpha() <= 255 && fade->getAlpha() >= 1.5f) {
 		fade->setAlpha(fade->getAlpha() - 1.75f);
 	}
-	else if (fade->getAlpha() <= 1.5f) {
-		player->setInputSW(true);
-	}
 
 	if (fade->getAlpha() >= 255) {
-		Game *temp = new Room4;
+		std::ofstream out("save.ini");
+		out << 10 << " " << 9;
+
+
+		Game *temp = new Room5;
 
 		ChangeScene(temp);
 	}
@@ -186,91 +95,54 @@ void Room3::Update()
 			textWindow->resetStrLength();
 			eventCount = 3;
 			break;
-		default:
+		case 3:
+			textWindow->resetStrLength();
+			eventCount = 4;
+			break;
+		case 4:
+			textWindow->resetStrLength();
+			eventCount = 5;
+			break;
+		case 5:
+			textWindow->resetStrLength();
+			eventCount = 6;
+			break;
+		case 6:
+			textWindow->resetStrLength();
+			eventCount = 7;
+			break;
+		case 7:
+			textWindow->resetStrLength();
+			eventCount = 8;
+			break;
+		case 8:
+			textWindow->resetStrLength();
+			eventCount = 9;
+			break;
+		case 9:
+			textWindow->resetStrLength();
+			eventCount = 10;
+			break;
+		case 10:
 			textWindow->setActive(false);
-			eventCount = 0;
+			fade->setalphaStart(true);
+			break;
+		default:
 			break;
 		}
 
+		sceneNum = eventCount - 1;
 	}
 
-	else if (!textWindow->getActive() && input->getMouseLButtonDown()) {
-		// 곰
-		if (Bear != NULL) {
-			if ((input->getMouseX() >= Bear->getX() && input->getMouseX() <= Bear->getX() + Bear->getWidth()) &&
-				(input->getMouseY() >= Bear->getY() && input->getMouseY() <= Bear->getY() + Bear->getHeight())) {
-				textWindow->setActive(true);
-				textWindow->resetStrLength();
-				eventCount = 1;
-			}
-		}
-
-		// 상자
-		if ((input->getMouseX() >= Box->getX() && input->getMouseX() <= Box->getX() + Box->getWidth()) &&
-			(input->getMouseY() >= Box->getY() && input->getMouseY() <= Box->getY() + Box->getHeight())) {
-			textWindow->setActive(true);
-			textWindow->resetStrLength();
-			eventCount = 4;
-		}
-
-		// 벽난로
-		if ((input->getMouseX() >= fireDeck->getX() && input->getMouseX() <= fireDeck->getX() + fireDeck->getWidth()) &&
-			(input->getMouseY() >= fireDeck->getY() && input->getMouseY() <= fireDeck->getY() + fireDeck->getHeight())) {
-			textWindow->setActive(true);
-			textWindow->resetStrLength();
-			eventCount = 5;
-		}
+	if (eventCount == 0 &&
+		(input->isKeyUp(VK_RETURN) || input->getMouseLButtonDown())) {
+		eventCount = 1;
+		textWindow->resetStrLength();
+		textWindow->setActive(true);
 	}
-
-	else if (!textWindow->getActive()) {
-		bool sw = false;
-		// 곰
-		if (Bear != NULL) {
-			if ((input->getMouseX() >= Bear->getX() && input->getMouseX() <= Bear->getX() + Bear->getWidth()) &&
-				(input->getMouseY() >= Bear->getY() && input->getMouseY() <= Bear->getY() + Bear->getHeight())) {
-				sw = true;
-			}
-		}
-
-		// 상자
-		if ((input->getMouseX() >= Box->getX() && input->getMouseX() <= Box->getX() + Box->getWidth()) &&
-			(input->getMouseY() >= Box->getY() && input->getMouseY() <= Box->getY() + Box->getHeight())) {
-			sw = true;
-		}
-
-		// 벽난로
-		if ((input->getMouseX() >= fireDeck->getX() && input->getMouseX() <= fireDeck->getX() + fireDeck->getWidth()) &&
-			(input->getMouseY() >= fireDeck->getY() && input->getMouseY() <= fireDeck->getY() + fireDeck->getHeight())) {
-			sw = true;
-		}
-
-		if (sw) {
-			cursor->Cursorchange(true);
-		}
-		else {
-			cursor->Cursorchange(false);
-		}
+	if (input->isKeyUp(VK_ESCAPE)) {
+		exit(0);
 	}
-
-	if (input->isKeyUp(VK_RETURN) ) {
-		/*Game *temp = new Room4;
-
-		ChangeScene(temp);*/
-		if (player->getX() <= 210 && player->getY() >= 160) {
-			fade->setalphaStart(true);
-			audio->playCue("open_door_1");
-
-		}
-		else  if (player->getX() >= 640 && player->getY() >= 160) {
-
-			textWindow->setActive(true);
-			textWindow->resetStrLength();
-			eventCount = 6;
-		}
-	}
-	
-	
-
 	//exitGame();
 }
 
@@ -278,38 +150,49 @@ void Room3::render()
 {
 	graphics->spriteBegin();
 
-	Map->getMapBG()->draw();
-	objectManager->RenderAllObject();
+	cutScene[sceneNum]->draw();
 
-	itemSlot->ItemSlotRender();
-	cursor->draw();
+	if (scenetime > 4 && (sceneNum == 3 || sceneNum == 4)){
+		if (sceneNum == 3) sideCut1->draw();
+		else if (sceneNum == 4) sideCut2->draw();
+
+		if (scenetime > 4.5f) scenetime = 0;
+	}
+	scenetime += 0.01f;
+
+
 	fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	switch (eventCount) {
 	case 1:
-		textWindow->TextWindowRender("낡은 곰인형이다.\n어딘지 모르게 친근한 느낌이 든다.", 0);
+		textWindow->TextWindowRender("옛날 옛적, 아주 깊은 산 속 마을에...", 1);
 		break;
 	case 2:
-		textWindow->TextWindowRender("\"그래도 가장 덜 끔찍하네.\"", 0);
+		textWindow->TextWindowRender("착한 소녀와 어머니가 살고 있었어요.", 1);
 		break; 
 	case 3:
-		if (Bear) {
-			audio->playCue("item");
-		}
-		objectManager->RemoveObject("Bear");
-		Map->RemoveObject("Bear");
-		SAFE_DELETE(Bear);
-		textWindow->TextWindowRender("곰인형을 획득했다.", 0);
-		player->playerItemIn(2);
+		textWindow->TextWindowRender("소녀는 어머니의...", 1);
 		break;
 	case 4:
-		textWindow->TextWindowRender("...덜컹 거리는 것 같다.\n건드리지 않는게 좋을 것 같다.", 0);
+		textWindow->TextWindowRender("사랑과...", 1);
 		break;
 	case 5:
-		textWindow->TextWindowRender("벽난로다.\n별로 들여다보고 싶지는 않다.", 0);
+		textWindow->TextWindowRender("보살핌을 받으며...", 1);
 		break;
 	case 6:
-		textWindow->TextWindowRender("도저히 다시 돌아갈 엄두가 나지 않는다.", 0);
+		textWindow->TextWindowRender("무럭무럭 자랐답니다.", 1);
+		break;
+	case 7:
+		textWindow->TextWindowRender("그러나 어느 날, 어머니가 눈을 뜨지 않게 되었어요.", 1);
+		break;
+	case 8:
+		textWindow->TextWindowRender("\'할머니에게 찾아가자.\' 소녀는 생각했어요.", 1);
+		break;
+	case 9:
+		textWindow->TextWindowRender("밖은 어둡고 무섭지만, 전등과 빨간 망토가 있다면 소녀는 두려울 게 없었지요.", 1);
+		break;
+	case 10:
+		textWindow->TextWindowRender("소녀는 할머니를 만나기 위해 긴 여정을 떠나게 됩니다.", 1);
 		break;
 	}
 

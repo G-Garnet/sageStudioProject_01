@@ -75,6 +75,10 @@ Room5::Room5()
 	itemSprite[2] = new Junk2DSprite();
 	itemSprite[3] = new Junk2DSprite();
 
+	for (int i = 0; i < 10; i++) {
+		Trees[i] = new Junk2DSprite();
+	}
+
 	backfance = new Junk2DSprite();
 	frontfance = new Junk2DSprite();
 	House0 = new Junk2DSprite();
@@ -137,7 +141,7 @@ void Room5::initialize(HWND hwnd)
 	itemSprite[0]->setXY(64 * 26, 64 * 12);
 	itemSprite[1]->setXY(64 * 62, 64 * 14);
 	itemSprite[2]->setXY(64 * 118, 64 * 27);
-	itemSprite[3]->setXY(1000, 64);
+	itemSprite[3]->setXY(64 * 66, 64 * 23);
 
 
 	mop1->MonseterSetting(graphics,1);
@@ -232,7 +236,8 @@ void Room5::initialize(HWND hwnd)
 	graves->settingTexture(graphics, "..\\Resources\\Object\\headstone party.png", 367, 130, 1);
 	
 	Lanten3->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 64 * 1, 64 * 2, 1);
-	Lanten4->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 64 * 1, 64 * 2, 1);
+	Lanten4->settingTexture(graphics, "..\\Resources\\Object\\save_point_N.png", 95 , 131, 1);
+	Lanten4->flipHorizontal(true);
 
 	House2->settingTexture(graphics, "..\\Resources\\Object\\gm_housefence.png", 576, 576, 1);
 	House3->settingTexture(graphics, "..\\Resources\\Object\\gm_storage.png", 64 * 4, 64 * 6, 1);
@@ -241,6 +246,16 @@ void Room5::initialize(HWND hwnd)
 	
 	shadows->settingTexture(graphics, "..\\Resources\\Player\\shadow.png", 64 * 1, 64 * 2, 1);
 	gameOver->settingTexture(graphics, "..\\Resources\\UI\\gameOver.png", 1280,720, 1);
+
+	Trees[0]->settingTexture(graphics, "..\\Resources\\Map1\\Tree1.png", 1945, 1157, 1);
+	Trees[1]->settingTexture(graphics, "..\\Resources\\Map1\\Tree2.png", 958, 1537, 1);
+	Trees[2]->settingTexture(graphics, "..\\Resources\\Map1\\Tree3.png", 1260, 1087, 1);
+	Trees[3]->settingTexture(graphics, "..\\Resources\\Map1\\Tree4.png", 8045, 1943, 1);
+	Trees[4]->settingTexture(graphics, "..\\Resources\\Map1\\Tree5.png", 1448, 1282, 1);
+	Trees[5]->settingTexture(graphics, "..\\Resources\\Map1\\Tree6.png", 905, 937, 1);
+	Trees[6]->settingTexture(graphics, "..\\Resources\\Map1\\Tree7.png", 462, 513, 1);
+	Trees[7]->settingTexture(graphics, "..\\Resources\\Map1\\Tree8.png", 6817, 1739, 1);
+	Trees[8]->settingTexture(graphics, "..\\Resources\\Map1\\Tree10.png", 2206, 1659, 1);
 
 	backfance->setXY(256, 162);
 	frontfance->setXY(251, 423);
@@ -287,24 +302,35 @@ void Room5::initialize(HWND hwnd)
 	graves->setXY(7157, 1634);
 
 	Lanten3->setXY(64 * 78, 64 * 2);
-	Lanten4->setXY(64 * 128, 64 * 12);
+	Lanten4->setXY(8201-48, 768-32);
 
 	House2->setXY(64 * 129, 64 * 5);
 	House3->setXY(64 * 134, 64 * 14);
 
 	knife->setXY(64 * 136, 64 * 20);
 
-	objectManager->AddObject(backfance, "backfance");
-	objectManager->AddObject(Tree0, "Tree0");
+	Trees[0]->setXY(399,0);
+	Trees[1]->setXY(0, 0);
+	Trees[2]->setXY(0, 1152);
+	Trees[3]->setXY(1043, 297);
+	Trees[4]->setXY(1788, 522);
+	Trees[5]->setXY(1865, 722);
+	Trees[6]->setXY(4735, 646);
+	Trees[7]->setXY(2268, 0);
+	Trees[8]->setXY(6878, 84);
+
+	objectManager->AddObject(Trees[0], "Trees1");
+
+	objectManager->AddObject(Totem1, "Totem1");
+	objectManager->AddObject(Totem2, "Totem2");
+	objectManager->AddObject(Trees[5], "Trees6");
+	objectManager->AddObject(Trees[7], "Trees8");
+
+	//objectManager->AddObject(backfance, "backfance");
+	//objectManager->AddObject(Tree0, "Tree0");
 	objectManager->AddObject(House0, "House0");
 	objectManager->AddObject(Tree1, "Tree1");
-	objectManager->AddObject(animalDeath1, "animalDeath1");
-	objectManager->AddObject(animalDeath2, "animalDeath2");
-	objectManager->AddObject(animalDeath3, "animalDeath3");
-	objectManager->AddObject(animalDeath4, "animalDeath4");
-
-	objectManager->AddObject(signPost, "signPost");
-
+	
 	objectManager->AddObject(shadows, "shadows");
 	shadows->drawable = false;
 
@@ -327,16 +353,28 @@ void Room5::initialize(HWND hwnd)
 
 	objectManager->AddObject(player, "player");
 
+	objectManager->AddObject(Trees[3], "Trees4");
+	objectManager->AddObject(Trees[4], "Trees5");
+	objectManager->AddObject(Trees[6], "Trees7");
+
+	objectManager->AddObject(animalDeath1, "animalDeath1");
+	objectManager->AddObject(animalDeath2, "animalDeath2");
+	objectManager->AddObject(animalDeath3, "animalDeath3");
+	objectManager->AddObject(animalDeath4, "animalDeath4");
+
+	objectManager->AddObject(Trees[2], "Trees3");
+
+	objectManager->AddObject(Trees[1], "Trees2");
+
+	objectManager->AddObject(signPost, "signPost");
 	objectManager->AddObject(Tree5, "Tree5");
-	objectManager->AddObject(frontfance, "frontfance");
+	//objectManager->AddObject(frontfance, "frontfance");
 
 	//objectManager->AddObject(Monster1, "Monster1");
 	//objectManager->AddObject(Monster2, "Monster2");
 	//objectManager->AddObject(Monster3, "Monster3");
 	objectManager->AddObject(DeadMen, "DeadMen");
 
-	objectManager->AddObject(Totem1, "Totem1");
-	objectManager->AddObject(Totem2, "Totem2");
 
 	objectManager->AddObject(sign1, "sign1");
 	objectManager->AddObject(sign2, "sign2");
@@ -344,11 +382,23 @@ void Room5::initialize(HWND hwnd)
 	objectManager->AddObject(fake2, "fake2");
 	objectManager->AddObject(sign3, "sign3");
 
+	objectManager->AddObject(Trees[8], "Trees9");
+
+
+	Map->MapAddObject(objectManager->getCGameObject("Trees1"), "Trees1");
+	Map->MapAddObject(objectManager->getCGameObject("Trees2"), "Trees2");
+	Map->MapAddObject(objectManager->getCGameObject("Trees3"), "Trees3");
+	Map->MapAddObject(objectManager->getCGameObject("Trees4"), "Trees4");
+	Map->MapAddObject(objectManager->getCGameObject("Trees5"), "Trees5");
+	Map->MapAddObject(objectManager->getCGameObject("Trees6"), "Trees6");
+	Map->MapAddObject(objectManager->getCGameObject("Trees7"), "Trees7");
+	Map->MapAddObject(objectManager->getCGameObject("Trees8"), "Trees8");
+	Map->MapAddObject(objectManager->getCGameObject("Trees9"), "Trees9");
 
 	Map->MapAddObject(objectManager->getCGameObject("House0"), "House0");
-	Map->MapAddObject(objectManager->getCGameObject("Tree0"), "Tree0");
-	Map->MapAddObject(objectManager->getCGameObject("frontfance"), "frontfance");
-	Map->MapAddObject(objectManager->getCGameObject("backfance"), "backfance");
+	//Map->MapAddObject(objectManager->getCGameObject("Tree0"), "Tree0");
+	//Map->MapAddObject(objectManager->getCGameObject("frontfance"), "frontfance");
+	//Map->MapAddObject(objectManager->getCGameObject("backfance"), "backfance");
 
 	Map->MapAddObject(objectManager->getCGameObject("Lanten1"), "Lanten1");
 	Map->MapAddObject(objectManager->getCGameObject("Tree1"), "Tree1");
@@ -449,22 +499,29 @@ void Room5::Update()
 		player->setInputSW(true);
 		start = true;
 	}
+
+	if (fade->getAlpha() >= 254) {
+		Game *temp = new Room3;
+		ChangeScene(temp);
+		
+	}
 	///////////////////
 
 	//// 기본 시스템 ////
+	{
+		if (start && LantenAlpha <= 240) {
+			LantenAlpha += Dark;
+		}
+		else if (start && LantenAlpha > 240 && LantenAlpha <= 250) {
+			LantenAlpha += 0.015f;
+		}
+		else if (LantenAlpha > 250) {
+			gameOverSw = true;
+		}
 
-	if (start && LantenAlpha <= 240) {
-		LantenAlpha += 0.02f;
-	}
-	else if (start && LantenAlpha > 240 && LantenAlpha <= 250) {
-		LantenAlpha += 0.015f;
-	}
-	else if (LantenAlpha > 250) {
-		gameOverSw = true;
-	}
-
-	if (gameOverSw && gameOverAl <= 254) {
-		gameOverAl+=254;
+		if (gameOverSw && gameOverAl <= 254) {
+			gameOverAl += 254;
+		}
 	}
 	/////////////////////
 
@@ -575,6 +632,14 @@ void Room5::Update()
 			textWindow->setActive(true);
 		}
 
+		// 엔딩
+		if ((player->p_PosX == 132 && player->p_PosY == 8) ||
+			(player->p_PosX == 133 && player->p_PosY == 9) ) {
+			Dark = 0;
+			fade->setalphaStart(true);
+			ending = true;
+		}
+
 		// 기름병들
 		{
 			if (ShadowEventStart == 2 && item[0] != 1 &&
@@ -596,6 +661,14 @@ void Room5::Update()
 				item[2] = 1;
 				LantenAlpha = 0;
 				eventCount = 8;
+				textWindow->setActive(true);
+			}
+			if (item[3] != 1 &&
+				(player->p_PosX == 66 && player->p_PosY == 24)) {
+				item[3] = 1;
+				LantenAlpha = 0;
+				Dark = 0;
+				eventCount = 11;
 				textWindow->setActive(true);
 			}
 		}
@@ -894,12 +967,10 @@ void Room5::render()
 	case 11:
 		textWindow->TextWindowRender("기름이 정말 많이 들어있다...!\n이정도면 기름을 채우지 않아도 될것 같아.", 0);
 		break;
+
 	}
 
-	Map->Line1->draw();
-	Map->Line2->draw();
-
-	if (start) fade->draw(D3DCOLOR_ARGB((int)LantenAlpha, 255, 255, 255));
+	if (start && !ending) fade->draw(D3DCOLOR_ARGB((int)LantenAlpha, 255, 255, 255));
 	else fade->draw(D3DCOLOR_ARGB((int)fade->getAlpha(), 255, 255, 255));
 
 	if (ShadowEventStart == 2 && item[0] != 1) {
@@ -913,6 +984,10 @@ void Room5::render()
 	if (item[2] != 1) {
 		itemSprite[2]->draw();
 		itemSprite[2]->update((float)1 / 60);
+	}
+	if (item[3] != 1) {
+		itemSprite[3]->draw();
+		itemSprite[3]->update((float)1 / 60);
 	}
 
 	gameOver->draw(D3DCOLOR_ARGB(gameOverAl, 255, 255, 255));

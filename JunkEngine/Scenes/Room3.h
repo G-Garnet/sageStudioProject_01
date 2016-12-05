@@ -8,34 +8,18 @@
 class Room3 : public Game
 {
 private:
-	ObjectManager* objectManager;
-
 	//// 씬의 기본 구성 요소들 ////
-	Player* player;
-	ItemSlot* itemSlot;
-	Cursor* cursor;
-	Junk2DFont *font;
 	Fade* fade;
 	TextWindow *textWindow;
 
-	Junk2DSprite* filter;
+	Junk2DSprite *cutScene[10];
+	Junk2DSprite *sideCut1;
+	Junk2DSprite *sideCut2;
+
 	////////////////////////////////
 
-	Junk2DSprite* Door1;
-	Junk2DSprite* Door2;
-	Junk2DSprite* Candle1;
-	Junk2DSprite* Candle2;
-	Junk2DSprite* fireDeck;
-	Junk2DSprite* Box;
-	Junk2DSprite* Picture;
-	Junk2DSprite* Desk;
-	Junk2DSprite* Bear;
-
-	Junk2DSprite* fire1;
-	Junk2DSprite* fire2;
-
-	// 게임 요소들
-	Junk2DMap* Map;
+	float scenetime = 0;
+	int sceneNum = 0;
 
 	int eventCount = 0;
 
